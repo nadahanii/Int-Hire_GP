@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:history_feature/widgets/main_drawer.dart';
 
 
 
@@ -19,15 +20,7 @@ class _MyHomePageState extends State<HistoryHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: SafeArea(
-        child: Drawer(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text('Settings')
-            ],
-          ),
-        ),
+        child: MainDrawer(),
       ),
       appBar: AppBar(
         title: Text('History'),

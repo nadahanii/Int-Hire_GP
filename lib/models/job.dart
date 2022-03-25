@@ -9,7 +9,7 @@ enum Education {
 }
 
 enum Career {
-  Undergraduate,
+  Student,
   Fresh_Junior,
   Senior,
   Manager,
@@ -38,7 +38,7 @@ class Job {
   final Education educationLevel;
   final Career careerLevel;
   final JobType typeOfJob;
-  int applicants;
+  int applicantsCount;
 
   Job(
       {required this.id,
@@ -56,5 +56,5 @@ class Job {
       required this.careerLevel,
       required this.typeOfJob,
       required this.salary,
-      this.applicants = 0});
+      this.applicantsCount = 0});
 }

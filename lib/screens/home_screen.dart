@@ -4,6 +4,7 @@ import 'package:history_feature/widgets/jobs_list.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/jobs.dart';
+import '../widgets/main_drawer.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,12 +12,13 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: MainDrawer(),
         appBar: AppBar(
           actions: [
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (ctx){
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
                   return JobOperations();
                 }));
               },
@@ -25,10 +27,13 @@ class Home extends StatelessWidget {
           leading: Center(
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 0),
-              child: Text('Home',style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),),
+              child: Text(
+                'Home',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
           title: Container(
