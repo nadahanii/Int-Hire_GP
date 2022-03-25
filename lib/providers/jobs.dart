@@ -9,7 +9,7 @@ class Jobs with ChangeNotifier {
     Job(
       id: DateFormat.yMd().format(DateTime.now()),
       isNeedCV: true,
-      careerLevel: Career.Undergraduate,
+      careerLevel: Career.Student,
       educationLevel: Education.High_School,
       requirements:
       'cfls;lfjdslkfcjsfdklfjds dl;fdjsf;lskjf;osdfsdfsdfsdfks sdkfsdojfosdj fo '
@@ -40,6 +40,111 @@ class Jobs with ChangeNotifier {
       salary: '25,000 \$',
       title: '.Net developer',
       typeOfJob: JobType.Work_From_Home,
+      test: Test(),
+    ),
+    Job(
+      id: DateFormat.yMd().format(DateTime.now()),
+      isNeedCV: false,
+      careerLevel: Career.Fresh_Junior,
+      educationLevel: Education.Bachelors,
+      requirements:
+      'cfls;lfjdslkfcjsfdklfjds dl;fdjsf;lskjf;osdfsdfsdfsdfks sdkfsdojfosdj fo '
+          'dkls;adksa;dkas;dkaopdfkspkdasd'
+          'asldkaspodkasp[dkasp[aks[pdaskdpa'
+          'oasdkjaposdjkaopdkaposdkjaspodkasd'
+          'osapd[kasodkoapsdkpas',
+      description: 'aso;ajd oasjdf aspof jsf'
+          'fdsjf posdfjopf jopdsg fjsdf'
+          'sdofpjsdopfsajop opdfkdspofjkdsopf ofsjkdfposdkjf dsfds'
+          'f ojfk ospdjop j jdpo fjspod fjdsop jo jsdpo fjsdpof jsdpo jsdpo fdfknlsfljk '
+          ' kljsf  dofjks dojspod jopdjf opsdj fopj pods jpdso jpo jds',
+      publishDate:
+      DateFormat.yMd().format(DateTime.now().subtract(Duration(
+        days: 36,
+      ))),
+      endDate: DateFormat.yMd().format(DateTime.now().add(Duration(
+        days: 70,
+      ))),
+      experience: '1',
+      tags: [
+        'fhhhdf',
+        'dddfghfddd',
+        'dfhdhdddd',
+        'dddhhhhdd',
+        'errer',
+      ],
+      salary: '10,000 \$',
+      title: 'flutter developer',
+      typeOfJob: JobType.Part_Time,
+      test: Test(),
+    ),
+    Job(
+      id: DateFormat.yMd().format(DateTime.now()),
+      isNeedCV: true,
+      careerLevel: Career.Manager,
+      educationLevel: Education.Luxurious,
+      requirements:
+      'cfls;lfjdslkfcjsfdklfjds dl;fdjsf;lskjf;osdfsdfsdfsdfks sdkfsdojfosdj fo '
+          'dkls;adksa;dkas;dkaopdfkspkdasd'
+          'asldkaspodkasp[dkasp[aks[pdaskdpa'
+          'oasdkjaposdjkaopdkaposdkjaspodkasd'
+          'osapd[kasodkoapsdkpas',
+      description: 'aso;ajd oasjdf aspof jsf'
+          'fdsjf posdfjopf jopdsg fjsdf'
+          'sdofpjsdopfsajop opdfkdspofjkdsopf ofsjkdfposdkjf dsfds'
+          'f ojfk ospdjop j jdpo fjspod fjdsop jo jsdpo fjsdpof jsdpo jsdpo fdfknlsfljk '
+          ' kljsf  dofjks dojspod jopdjf opsdj fopj pods jpdso jpo jds',
+      publishDate:
+      DateFormat.yMd().format(DateTime.now().subtract(Duration(
+        days: 66,
+      ))),
+      endDate: DateFormat.yMd().format(DateTime.now().add(Duration(
+        days: 12,
+      ))),
+      experience: '10 to 12',
+      tags: [
+        'gdfgdfg',
+        'gfg',
+        'sdasd',
+        'ddddd',
+      ],
+      salary: '100,000 \$',
+      title: 'CEO',
+      typeOfJob: JobType.Part_Time,
+      test: Test(),
+    ),
+    Job(
+      id: DateFormat.yMd().format(DateTime.now()),
+      isNeedCV: false,
+      careerLevel: Career.Senior,
+      educationLevel: Education.Masters,
+      requirements:
+      'cfls;lfjdslkfcjsfdklfjds dl;fdjsf;lskjf;osdfsdfsdfsdfks sdkfsdojfosdj fo '
+          'dkls;adksa;dkas;dkaopdfkspkdasd'
+          'asldkaspodkasp[dkasp[aks[pdaskdpa'
+          'oasdkjaposdjkaopdkaposdkjaspodkasd'
+          'osapd[kasodkoapsdkpas',
+      description: 'aso;ajd oasjdf aspof jsf'
+          'fdsjf posdfjopf jopdsg fjsdf'
+          'sdofpjsdopfsajop opdfkdspofjkdsopf ofsjkdfposdkjf dsfds'
+          'f ojfk ospdjop j jdpo fjspod fjdsop jo jsdpo fjsdpof jsdpo jsdpo fdfknlsfljk '
+          ' kljsf  dofjks dojspod jopdjf opsdj fopj pods jpdso jpo jds',
+      publishDate:
+      DateFormat.yMd().format(DateTime.now().subtract(Duration(
+        days: 30,
+      ))),
+      endDate: DateFormat.yMd().format(DateTime.now().add(Duration(
+        days: 165,
+      ))),
+      experience: '8',
+      tags: [
+        'qewdfsad',
+        'ghjkhjyth',
+        'dfsd',
+      ],
+      salary: '20,000 \$',
+      title: 'frontend developer',
+      typeOfJob: JobType.Internship,
       test: Test(),
     ),
   ];

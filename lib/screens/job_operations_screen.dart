@@ -3,15 +3,9 @@ import 'package:history_feature/models/job.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/pair.dart';
 import '../models/test.dart';
 import '../providers/jobs.dart';
-
-class Pair<T1, T2> {
-  final T1 item1;
-  final T2 item2;
-
-  const Pair(this.item1, this.item2);
-}
 
 class JobOperations extends StatefulWidget {
   final Job? job;
@@ -37,7 +31,7 @@ class _JobOperationsState extends State<JobOperations> {
     Pair('Luxurious Degree', Education.Luxurious),
   ];
   final List<Pair<String, Career>> _careerList = const [
-    Pair('Undergraduate', Career.Undergraduate),
+    Pair('Student', Career.Student),
     Pair('Fresh & Junior', Career.Fresh_Junior),
     Pair('Senior', Career.Senior),
     Pair('Manager', Career.Manager),
@@ -382,7 +376,7 @@ class _JobOperationsState extends State<JobOperations> {
                           listen: false,
                         ).updateJob(job);
                       }
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(job);
                     },
                     child: const Text('Add test'),
                   ),
