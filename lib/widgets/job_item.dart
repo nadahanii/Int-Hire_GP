@@ -204,7 +204,7 @@ class JobItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.grey.shade200),
                         child: Text(
-                          job.typeOfJob.name.replaceAll('_', ' '),
+                          job.typeOfJob.toString().replaceAll('_', ' '),
                           style: TextStyle(color: Colors.black, fontSize: 12.0),
                         ),
                       ),
@@ -218,7 +218,7 @@ class JobItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                             color: Colors.grey.shade200),
                         child: Text(
-                          job.careerLevel.name.replaceFirst('_', '&'),
+                          job.careerLevel.toString().replaceFirst('_', '&'),
                           style: TextStyle(color: Colors.black, fontSize: 12.0),
                         ),
                       ),

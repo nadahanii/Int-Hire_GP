@@ -221,7 +221,7 @@ class _JobDetailsState extends State<JobDetails> {
                               ),
                             ),
                             Text(
-                                widget.job.typeOfJob.name.replaceAll('_', ' ')),
+                                widget.job.typeOfJob.toString().replaceAll('_', ' ')),
                           ],
                         ),
                         const SizedBox(
@@ -236,7 +236,7 @@ class _JobDetailsState extends State<JobDetails> {
                                 color: Colors.blueGrey,
                               ),
                             ),
-                            Text(widget.job.careerLevel.name
+                            Text(widget.job.careerLevel.toString()
                                 .replaceAll('_', '&')),
                           ],
                         ),
@@ -373,10 +373,10 @@ class _JobDetailsState extends State<JobDetails> {
               SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
+              /*ElevatedButton(
                 onPressed: () {},
                 child: Text('Apply'),
-              ),
+              ),*/
             ],
           ),
         ),
