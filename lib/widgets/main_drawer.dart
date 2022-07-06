@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/screens/home_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../HistoryHomePage.dart';
+import '../providers/auth.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon, void Function()? tapHandler) {
@@ -45,30 +47,21 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTile('Home', Icons.home, () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
-              return Home();
-            }));
+            Navigator.of(context).pushReplacementNamed('/home');
           }),
           buildListTile('History', Icons.history, () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
-              return HistoryHomePage();
-            }));
+            Navigator.of(context).pushReplacementNamed('/history');
           }),
           buildListTile('Notification', Icons.notifications, () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
-              return Home();
-            }));
+            Navigator.of(context).pushReplacementNamed('/home');
           }),
           buildListTile('Settings', Icons.settings, () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
-              return Home();
-            }));
+            Navigator.of(context).pushReplacementNamed('/home');
           }),
           Spacer(),
           buildListTile('logout', Icons.logout, () {
-            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
-              return Home();
-            }));
+            Navigator.of(context).pushReplacementNamed('/');
+            Provider.of<Auth>(context, listen: false).logout();
           }),
         ],
       ),

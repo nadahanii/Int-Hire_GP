@@ -11,6 +11,7 @@ import 'job_operations_screen.dart';
 
 class JobDetails extends StatefulWidget {
   JobDetails({Key? key, required this.job}) : super(key: key);
+  static const routeName = '/job_details';
 
   Job job;
 

@@ -8,6 +8,7 @@ import '../models/test.dart';
 import '../providers/jobs.dart';
 
 class JobOperations extends StatefulWidget {
+  static const routeName = '/job_operations';
   final Job? job;
   const JobOperations({Key? key, this.job}) : super(key: key);
 

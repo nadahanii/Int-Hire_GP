@@ -6,7 +6,7 @@ import 'package:history_feature/widgets/main_drawer.dart';
 import 'History/HistoryListItem.dart';
 
 class HistoryHomePage extends StatefulWidget {
-
+  static const routeName = '/history';
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
