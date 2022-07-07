@@ -106,6 +106,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   Text(
                     'Register',
                     style: TextStyle(
