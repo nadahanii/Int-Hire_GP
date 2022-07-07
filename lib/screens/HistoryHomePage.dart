@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/widgets/main_drawer.dart';
+import 'package:provider/provider.dart';
 
 
 
-import '../helpers/HistoryListItem.dart';
+import '../providers/jobs.dart';
+import '../widgets/HistoryListItem.dart';
 
 class HistoryHomePage extends StatefulWidget {
   static const routeName = '/history';
@@ -18,6 +20,7 @@ class _MyHomePageState extends State<HistoryHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final jobs = Provider.of<Jobs>(context).items;
     return Scaffold(
       drawer: SafeArea(
         child: MainDrawer(),
@@ -45,20 +48,16 @@ class _MyHomePageState extends State<HistoryHomePage> {
       ),
       body: Container(
         padding: EdgeInsets.only(top: 15),
-          child: ListView(
-
+          child: ListView.builder(
             scrollDirection: Axis.vertical,
-            children: [
-
-              HistoryListItem('Software Developer','Solving problems along with good communication are required , graduate with at least '
-                  '1 year experience'),
-              HistoryListItem('Mobile App Developer','Flutter knowledge along with 3 years experience'),
-              HistoryListItem('Accountant','Experienced · 2 - 4 Yrs of Exp · Accounting/Finance· Accounting· Finance· '
-                  'Financial Management· Cash Flow· Business Administration· '
-                  'Commerce· Financial Analysis· Financial Statements'),
-              HistoryListItem('Showroom sales representative','Entry Level · 1 - 3 Yrs of Exp · Sales/Retail· '
-                  'Sales· Showroom Sales· Customer Service'),
-            ],
+            itemCount: jobs.length,
+            itemBuilder: (ctx, index) {
+              return Column(
+                children: [
+                  HistoryListItem(job: jobs[index])
+                ],
+              );
+            },
           ),
 
       ),

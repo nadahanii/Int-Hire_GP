@@ -1,4 +1,4 @@
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:history_feature/providers/auth.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Personal Expenses',
+          title: 'Inte-Hire',
           theme: theme.copyWith(
             primaryColor: Color(0xFFc7e6ff),
             colorScheme: theme.colorScheme.copyWith(secondary: Color(0xFFc7e6ff)),
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
             authResultSnapshot.connectionState ==
                 ConnectionState.waiting
                 ? SplashScreen()
-                : LoginScreen(),
+                : HistoryHomePage(),
           ),
           routes: {
             LoginScreen.routeName: (ctx) => LoginScreen(),
