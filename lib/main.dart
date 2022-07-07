@@ -11,7 +11,7 @@ import 'package:history_feature/screens/register.dart';
 import 'package:history_feature/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'HistoryHomePage.dart';
+import 'screens/HistoryHomePage.dart';
 import 'screens/job_details.dart';
 
 void main() {

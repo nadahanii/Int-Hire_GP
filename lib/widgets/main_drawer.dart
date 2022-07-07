@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:history_feature/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
-import '../HistoryHomePage.dart';
+import '../screens/HistoryHomePage.dart';
 import '../providers/auth.dart';
 
 class MainDrawer extends StatelessWidget {
