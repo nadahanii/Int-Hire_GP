@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:history_feature/screens/register.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +43,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
-
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +154,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacementNamed('/register');
+                          Navigator.of(context).pushReplacementNamed('/Register_Screen');
                         },
                         child: Text(
                           'Register Now',

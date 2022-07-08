@@ -1,4 +1,4 @@
-import 'dart:html';
+
 
 import 'package:flutter/material.dart';
 import 'package:history_feature/providers/auth.dart';
@@ -7,11 +7,14 @@ import 'package:history_feature/screens/add_test.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
 import 'package:history_feature/screens/home_screen.dart';
 import 'package:history_feature/screens/login.dart';
-import 'package:history_feature/screens/register.dart';
+import 'package:history_feature/screens/Register_Screen.dart';
 import 'package:history_feature/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
+
 import 'HistoryHomePage.dart';
+
+
 import 'screens/job_details.dart';
 
 void main() {
