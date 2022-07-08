@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
+import 'package:history_feature/screens/notification_page.dart';
+import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
 import 'package:history_feature/screens/home_screen.dart';
 import 'package:history_feature/screens/login.dart';
@@ -46,7 +48,7 @@ class MyApp extends StatelessWidget {
             authResultSnapshot.connectionState ==
                 ConnectionState.waiting
                 ? SplashScreen()
-                : LoginScreen(),
+                : Home(),
           ),
           routes: {
             LoginScreen.routeName: (ctx) => LoginScreen(),
@@ -56,6 +58,8 @@ class MyApp extends StatelessWidget {
             add_test.routeName: (ctx) => add_test(),
             JobOperations.routeName: (ctx) => JobOperations(),
             HistoryHomePage.routeName: (ctx) => HistoryHomePage(),
+            Settings_page.routeName: (ctx)=>Settings_page(),
+            Notification_page.routeName:(ctx)=>Notification_page(),
           },
         ),
     );
