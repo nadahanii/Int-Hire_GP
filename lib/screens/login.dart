@@ -44,7 +44,6 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
         //appBar: AppBar(),
@@ -155,7 +154,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).pushReplacementNamed('/register');
+                          Navigator.of(context).pushReplacementNamed('/Register_Screen');
                         },
                         child: Text(
                           'Register Now',
