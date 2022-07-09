@@ -9,6 +9,7 @@ class recruiter_register_screen extends StatefulWidget {
 }
 
 class _recruiter_register_screenState extends State<recruiter_register_screen> {
+
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

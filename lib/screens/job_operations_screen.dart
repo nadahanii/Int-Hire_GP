@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../helpers/pair.dart';
 import '../models/test.dart';
+import '../providers/auth.dart';
 import '../providers/jobs.dart';
 
 class JobOperations extends StatefulWidget {
@@ -83,7 +84,7 @@ class _JobOperationsState extends State<JobOperations> {
         return;
       }
       setState(() {
-        _endDateController.text = DateFormat.yMd().format(pickedDate);
+        _endDateController.text = DateFormat('dd-MM-yyyy hh:mm a').format(pickedDate);
       });
     });
   }
@@ -187,7 +188,7 @@ class _JobOperationsState extends State<JobOperations> {
                       Expanded(
                         child: TextFormField(
                           controller: _experienceController,
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             labelText: 'experience',
                             border: OutlineInputBorder(),
@@ -201,7 +202,7 @@ class _JobOperationsState extends State<JobOperations> {
                       Expanded(
                         child: TextFormField(
                           controller: _salaryController,
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             labelText: 'salary',
                             border: OutlineInputBorder(),
@@ -351,13 +352,13 @@ class _JobOperationsState extends State<JobOperations> {
                   TextButton(
                     onPressed: () {
                       final job = Job(
-                        id: DateFormat.yMd().format(DateTime.now()),
+                        id: DateFormat('dd-MM-yyyy  hh:mm a').format(DateTime.now()),
                         isNeedCV: _isAddCV,
                         careerLevel: _career,
                         educationLevel: _education,
                         requirements: _requirementsController.text,
                         description: _descriptionController.text,
-                        publishDate: DateFormat.yMd().format(DateTime.now()),
+                        publishDate: DateFormat('dd-MM-yyyy hh:mm a').format(DateTime.now()),
                         endDate: _endDateController.text,
                         experience: _experienceController.text,
                         tags: _tags,
@@ -370,16 +371,16 @@ class _JobOperationsState extends State<JobOperations> {
                         Provider.of<Jobs>(
                           context,
                           listen: false,
-                        ).addJob(job);
+                        ).addJob(job,Provider.of<Auth>(context, listen: false).token);
                       } else {
                         Provider.of<Jobs>(
                           context,
                           listen: false,
-                        ).updateJob(job);
+                        ).updateJob(job,Provider.of<Auth>(context, listen: false).token);
                       }
                       Navigator.of(context).pop(job);
                     },
-                    child: const Text('Add test'),
+                    child: widget.job == null ? const Text('Add Job') : const Text('Update Job'),
                   ),
                 ],
               ),

@@ -11,7 +11,6 @@ class applicant_register_screen extends StatefulWidget {
 class _applicant_register_screenState extends State<applicant_register_screen> {
   var twitterUsernameController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

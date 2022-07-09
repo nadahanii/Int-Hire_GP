@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 import '../providers/jobs.dart';
 import '../widgets/main_drawer.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class JobView extends StatelessWidget {
+  const JobView({Key? key}) : super(key: key);
   static const routeName = '/home';
 
   @override
@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 0),
               child: Text(
-                'Home',
+                'Jobs',
                 style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
@@ -41,6 +41,10 @@ class Home extends StatelessWidget {
             height: 40.0,
             child: TextField(
               decoration: InputDecoration(
+                constraints: BoxConstraints(
+                  minHeight: 40.0,
+                  maxHeight: 40.0,
+                ),
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 filled: true,

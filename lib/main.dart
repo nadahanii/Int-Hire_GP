@@ -7,7 +7,7 @@ import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
-import 'package:history_feature/screens/home_screen.dart';
+import 'package:history_feature/screens/job_view.dart';
 import 'package:history_feature/screens/login.dart';
 import 'package:history_feature/screens/Register_Screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
@@ -15,11 +15,6 @@ import 'package:history_feature/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/HistoryHomePage.dart';
-
-import 'HistoryHomePage.dart';
-
-
-import 'screens/job_details.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -45,21 +40,21 @@ class MyApp extends StatelessWidget {
             primaryColor: Color(0xFFc7e6ff),
             colorScheme: theme.colorScheme.copyWith(secondary: Color(0xFFc7e6ff)),
           ),
-          home: auth.isAuth
-              ? Home()
+          home: JobView(),/*auth.isAuth
+              ? JobView()
               : FutureBuilder(
             future: auth.tryAutoLogin(),
             builder: (_, authResultSnapshot) =>
             authResultSnapshot.connectionState ==
                 ConnectionState.waiting
                 ? SplashScreen()
-                : Home(),
-          ),
+                : JobView(),
+          ),*/
           routes: {
             LoginScreen.routeName: (ctx) => LoginScreen(),
             SplashScreen.routeName: (ctx) => SplashScreen(),
             RegisterScreen.routeName: (ctx) => RegisterScreen(),
-            Home.routeName: (ctx) => Home(),
+            JobView.routeName: (ctx) => JobView(),
             add_test.routeName: (ctx) => add_test(),
             JobOperations.routeName: (ctx) => JobOperations(),
             HistoryHomePage.routeName: (ctx) => HistoryHomePage(),
@@ -67,7 +62,6 @@ class MyApp extends StatelessWidget {
             Notification_page.routeName:(ctx)=>Notification_page(),
             applicant_register_screen.routeName: (ctx) => applicant_register_screen(),
             recruiter_register_screen.routeName: (ctx) => recruiter_register_screen(),
-
           },
         ),
     );

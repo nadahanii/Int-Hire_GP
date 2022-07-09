@@ -1,15 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:history_feature/screens/register.dart';
 import 'package:provider/provider.dart';
-
 import '../providers/auth.dart';
-import 'home_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final Color facebookColor = const Color(0xff39579A);
   final Color googleColor = const Color(0xffDF4A32);
 

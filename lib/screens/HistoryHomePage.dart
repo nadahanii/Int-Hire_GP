@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:history_feature/widgets/main_drawer.dart';
 import 'package:provider/provider.dart';
 
-
-
-import 'widgets/HistoryListItem.dart';
+import '../providers/jobs.dart';
+import '../widgets/HistoryListItem.dart';
 
 class HistoryHomePage extends StatefulWidget {
   static const routeName = '/history';
@@ -53,7 +52,7 @@ class _MyHomePageState extends State<HistoryHomePage> {
             itemBuilder: (ctx, index) {
               return Column(
                 children: [
-                  HistoryListItem(job: jobs[index])
+                  HistoryListItem(jobs[index].title,jobs[index].description)
                 ],
               );
             },

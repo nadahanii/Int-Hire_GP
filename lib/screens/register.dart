@@ -1,16 +1,12 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:history_feature/models/applicant_user.dart';
 import 'package:history_feature/models/job.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
 import '../helpers/pair.dart';
 import '../providers/auth.dart';
-import 'home_screen.dart';
-import 'login.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);

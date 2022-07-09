@@ -13,8 +13,9 @@ class JobItem extends StatelessWidget {
   const JobItem({Key? key, required this.job}) : super(key: key);
 
   String formatDate(String date) {
+    print("sdddddddddddddddddddddddddddddddddddddddd" + date);
     int time =
-        DateTime.now().difference(DateFormat.yMd().parse(date)).inMinutes;
+        DateTime.now().difference(DateFormat('dd-MM-yyyy hh:mm a').parse(date)).inMinutes;
     print(time);
     String out = '';
     if (time < 43200) {
@@ -40,7 +41,7 @@ class JobItem extends StatelessWidget {
           margin: EdgeInsets.only(bottom: 15),
           decoration: BoxDecoration(
               border: Border.all(
-                color: DateFormat.yMd()
+                color: DateFormat('dd-MM-yyyy hh:mm a')
                             .parse(job.endDate)
                             .difference(DateTime.now())
                             .inDays >=
