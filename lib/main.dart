@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Inte-Hire',
+          title: 'Int-Hire',
           theme: theme.copyWith(
             primaryColor: Color(0xFFc7e6ff),
             colorScheme: theme.colorScheme.copyWith(secondary: Color(0xFFc7e6ff)),

@@ -1,2 +1,3 @@
-class Test {
+class Test{
+
 }
