@@ -26,11 +26,15 @@ class _add_testState extends State<add_test> {
     });
   }
 
-  initState() {
-    super.initState();
-    _loadCSV();
 
+  @override
+  void initState() {
+    super.initState();
+    //WidgetsBinding.instance.addPostFrameCallback((_) => _loadCSV());
+    _loadCSV();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
