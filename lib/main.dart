@@ -12,6 +12,7 @@ import 'package:history_feature/screens/login.dart';
 import 'package:history_feature/screens/Register_Screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
 import 'package:history_feature/screens/splash_screen.dart';
+import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/HistoryHomePage.dart';
@@ -62,6 +63,7 @@ class MyApp extends StatelessWidget {
             Notification_page.routeName:(ctx)=>Notification_page(),
             applicant_register_screen.routeName: (ctx) => applicant_register_screen(),
             recruiter_register_screen.routeName: (ctx) => recruiter_register_screen(),
+            ProfileScreen.routeName: (ctx) => ProfileScreen(),
           },
         ),
     );
