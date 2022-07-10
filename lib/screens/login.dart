@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import 'home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginnScreen extends StatelessWidget {
   static const routeName = '/login';
   var emailController = TextEditingController();
   var passwordController = TextEditingController();

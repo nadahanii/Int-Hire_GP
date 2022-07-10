@@ -116,19 +116,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               return null;
                           }
                       ), //phone
-                      /*controller: nameController,
-                  keyboardType: TextInputType.name,
-                  onFieldSubmitted: (String value) {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'name',
-                    prefixIcon: Icon(
-                      Icons.person,
-                    ),
-                    border: OutlineInputBorder(),
-                  ),
-                ),*/
                       SizedBox(
                         height: 15.0,
                       ),
@@ -153,21 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                           return null;
                         },
-                      ),   //email
-                      /*  TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  onFieldSubmitted: (String value) {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Email Address',
-                    prefixIcon: Icon(
-                      Icons.email,
-                    ),
-                    border: OutlineInputBorder(),
-                  ),
-                ),*/
+                      ),   //mail
                       SizedBox(
                         height: 15.0,
                       ),
@@ -203,21 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           }
                           return null;
                         },
-                      ),   //password
-                      /*  TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  onFieldSubmitted: (String value) {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Email Address',
-                    prefixIcon: Icon(
-                      Icons.email,
-                    ),
-                    border: OutlineInputBorder(),
-                  ),
-                ),*/
+                      ),   //pass
                       SizedBox(
                         height: 15.0,
                       ),
@@ -255,21 +214,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return 'Password doesnot match';
                           return null;
                         },
-                      ),   //ConfirmPassword
-                      /*  TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  onFieldSubmitted: (String value) {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Email Address',
-                    prefixIcon: Icon(
-                      Icons.email,
-                    ),
-                    border: OutlineInputBorder(),
-                  ),
-                ),*/
+                      ),   //confirm
                       SizedBox(
                         height: 15.0,
                       ),
@@ -362,7 +307,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           TextButton(
                             onPressed: () {
 
-                              Navigator.of(context).pushReplacementNamed('/login');
+                              Navigator.of(context).pushReplacementNamed('/Login_Screen');
                             },
                             child: Text(
                               'Login Now',
