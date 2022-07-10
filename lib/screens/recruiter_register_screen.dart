@@ -5,15 +5,118 @@ class recruiter_register_screen extends StatefulWidget {
   const recruiter_register_screen({Key? key}) : super(key: key);
 
   @override
-  State<recruiter_register_screen> createState() => _recruiter_register_screenState();
+  State<recruiter_register_screen> createState() =>
+      _recruiter_register_screenState();
 }
 
 class _recruiter_register_screenState extends State<recruiter_register_screen> {
+  final _formKey = GlobalKey<FormState>();
+  late String companyName, companyLocation, companyDescription;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('recruiter'),
+          child: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.only(top: 70, right: 25, left: 25, bottom: 25),
+          child: Stack(
+            children: [
+              Column(
+                children: <Widget>[
+                  Text(
+                    'Recruiter Register',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.location_city_outlined),
+                      hintText: 'Company Name ',
+                    ),
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter valid company name';
+                      }
+                    },
+                    onFieldSubmitted: (val) {
+                      setState(() {
+                        companyName = val;
+                        //print(companyName);
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.location_on),
+                      hintText: 'Company Address (block no. , street , city)',
+                    ),
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter valid company address';
+                      }
+                    },
+                    onFieldSubmitted: (val) {
+                      setState(() {
+                        companyLocation = val;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.description_outlined),
+                      hintText: 'Company Description/Field ',
+                    ),
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter valid company description';
+                      }
+                    },
+                    onFieldSubmitted: (val) {
+                      setState(() {
+                        companyDescription = val;
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: OutlinedButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    fixedSize: Size(160, 55),
+                    primary: Colors.indigo,
+                    backgroundColor: Colors.indigo,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      )
       ),
     );
   }

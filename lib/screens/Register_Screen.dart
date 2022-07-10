@@ -1,19 +1,19 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/models/job.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:history_feature/models/applicant_user.dart';
+// import 'package:history_feature/models/job.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+// import 'package:provider/provider.dart';
+// import 'package:flutter/material.dart';
 
 import '../helpers/pair.dart';
-import '../providers/auth.dart';
-import 'home_screen.dart';
-import 'login.dart';
+// import '../providers/auth.dart';
+// import 'home_screen.dart';
+// import 'login.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -225,7 +225,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           MaterialPageRoute(
                               builder: (context) => applicant_register_screen())
                       );
-                      //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
+
                     }
                     else if(_role==1)
                     {
@@ -233,7 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           MaterialPageRoute(
                               builder: (context) => recruiter_register_screen())
                       );
-                      // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
+
                     }
                   },
                   child: Text(
