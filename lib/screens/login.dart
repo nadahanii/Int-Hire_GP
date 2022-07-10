@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginnScreen extends StatelessWidget {
   static const routeName = '/login';
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

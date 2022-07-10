@@ -268,7 +268,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     readOnly: true,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'please enter product price';
+                        return 'please enter a valid birthday';
                       }
                       return null;
                     },
