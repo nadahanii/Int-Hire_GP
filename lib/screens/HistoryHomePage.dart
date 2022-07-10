@@ -52,7 +52,7 @@ class _MyHomePageState extends State<HistoryHomePage> {
             itemBuilder: (ctx, index) {
               return Column(
                 children: [
-                  HistoryListItem(jobs[index].title,jobs[index].description)
+                  HistoryListItem(jobs[index].title,jobs[index].description, job: jobs[0],)
                 ],
               );
             },

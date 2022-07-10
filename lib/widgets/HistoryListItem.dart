@@ -8,7 +8,7 @@ import '../screens/job_details.dart';
 
 class HistoryListItem extends StatelessWidget {
   final Job job;
-  const HistoryListItem({Key? key,required this.job}) : super(key: key);
+  const HistoryListItem(String title, String description, {Key? key,required this.job}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

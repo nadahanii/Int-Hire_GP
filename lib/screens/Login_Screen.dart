@@ -1,19 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/models/job.dart';
-import 'package:history_feature/models/test.dart';
-import 'package:history_feature/screens/applicant_register_screen.dart';
-import 'package:history_feature/screens/recruiter_register_screen.dart';
-import 'package:history_feature/screens/Register_Screen.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
-import '../helpers/pair.dart';
-import '../providers/auth.dart';
-import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
