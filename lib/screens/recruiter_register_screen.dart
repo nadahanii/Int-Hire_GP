@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class recruiter_register_screen extends StatefulWidget {
+  final ThemeData registerTheme;
   static const routeName = '/recruiter_register_screen';
-  const recruiter_register_screen({Key? key}) : super(key: key);
+  const recruiter_register_screen({Key? key,required this.registerTheme}) : super(key: key);
 
   @override
   State<recruiter_register_screen> createState() =>
@@ -16,6 +18,7 @@ class _recruiter_register_screenState extends State<recruiter_register_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: widget.registerTheme.backgroundColor,
       body: Center(
           child: Form(
         key: _formKey,
@@ -27,10 +30,7 @@ class _recruiter_register_screenState extends State<recruiter_register_screen> {
                 children: <Widget>[
                   Text(
                     'Recruiter Register',
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                      style: GoogleFonts.secularOne(fontSize: 50 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                   ),
                   SizedBox(
                     height: 25,
@@ -108,8 +108,8 @@ class _recruiter_register_screenState extends State<recruiter_register_screen> {
                   ),
                   style: OutlinedButton.styleFrom(
                     fixedSize: Size(160, 55),
-                    primary: Colors.indigo,
-                    backgroundColor: Colors.indigo,
+                    primary: Color.fromRGBO(4, 88, 125,1),
+                    backgroundColor: Color.fromRGBO(4, 88, 125,1),
                   ),
                 ),
               )

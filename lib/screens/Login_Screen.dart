@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(255, 198, 196,2),
+        backgroundColor: widget.loginTheme.backgroundColor,
       //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -73,10 +73,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       TextFormField(
                         decoration: InputDecoration(labelText: 'Email Address',
+
                           prefixIcon: Icon (
                             Icons.email,
                           ),
                         ),
+
+                        //style: widget.loginTheme.textTheme.labelMedium,
                         keyboardType: TextInputType.emailAddress,
                         onFieldSubmitted: (value) {
                           //Validator
@@ -112,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Icons.lock,
                           ),
                         ),
+                        //style: widget.loginTheme.textTheme.labelMedium,
                         keyboardType: TextInputType.visiblePassword,
                         onFieldSubmitted: (password) {
                           //Validator
@@ -132,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       Container(
                         width: double.infinity,
-                        color: Colors.blue,
+                        color: Color.fromRGBO(4, 88, 125,1),
                         child: MaterialButton(
 
                           onPressed: (){
@@ -145,6 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             'LOGIN',
                             style: TextStyle(
                               color: Colors.white,
+                              fontSize: 17
                             ),
                           ),
                         ),
@@ -156,7 +161,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {},
                         child: Text(
                           'Forgot your Password?',
-                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                          style: widget.loginTheme.textTheme.bodyText2
+                          /*TextStyle(color: Colors.grey, fontSize: 13)*/,
                         ),
                       ),
 
@@ -166,17 +172,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             socialButtonRect(
-                                'Login with Facebook ', facebookColor, Icons.facebook),
+                                'Login with Facebook ',
+                                facebookColor,
+                                Icons.facebook),
                             socialButtonRect('Login with Google ', googleColor, Icons.android),
                           ],
                         ),
                       ),
+
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Don\'t have an account?',
+                            style: widget.loginTheme.textTheme.labelMedium,
                           ),
                           TextButton(
                             onPressed: () {
@@ -184,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: Text(
                               'Register Now',
+                              style: widget.loginTheme.textTheme.bodyText2,
                             ),
                           ),
                         ],

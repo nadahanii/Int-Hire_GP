@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../helpers/pair.dart';
 import '../models/applicant_user.dart';
 import '../models/job.dart';
 
 class applicant_register_screen extends StatefulWidget {
+  final ThemeData registerTheme;
   static const routeName = '/applicant_register_screen';
-  const applicant_register_screen({Key? key}) : super(key: key);
+  const applicant_register_screen({Key? key,required this.registerTheme}) : super(key: key);
 
   @override
   State<applicant_register_screen> createState() => _applicant_register_screenState();
@@ -43,7 +45,7 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
         const Divider(),
         Text(
           text,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(14, 30, 80, 1)),
         ),
         ...list,
       ],
@@ -54,6 +56,7 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: widget.registerTheme.backgroundColor,
       body: Center(
           child: SingleChildScrollView(
             child: Form(
@@ -65,10 +68,7 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                       children: <Widget>[
                         Text(
                           'Applicant Register',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                            style: GoogleFonts.secularOne(fontSize: 50 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                         ),
                         SizedBox(
                           height: 25,
@@ -222,8 +222,8 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                           ),
                           style: OutlinedButton.styleFrom(
                             fixedSize: Size(160, 55),
-                            primary: Colors.indigo,
-                            backgroundColor: Colors.indigo,
+                            primary: Color.fromRGBO(4, 88, 125,1),
+                            backgroundColor: Color.fromRGBO(4, 88, 125,1),
                           ),
                         ),
                       ],

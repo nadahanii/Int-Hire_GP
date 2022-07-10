@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
 import '../helpers/pair.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
   static const routeName = '/Register_Screen';
+  final ThemeData registerTheme;
+  RegisterScreen({Key? key ,  required this.registerTheme}) : super(key: key);
+
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -34,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         const Divider(),
         Text(
           text,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(14, 30, 80, 1)),
         ),
         ...list,
       ],
@@ -45,6 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: widget.registerTheme.backgroundColor,
       //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -59,10 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       Text(
                         'Register',
-                        style: TextStyle(
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                          style: GoogleFonts.secularOne(fontSize: 50 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                       ),
                       SizedBox(
                         height: 40.0,
@@ -159,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if ( password!.isEmpty ||
                               !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                                   .hasMatch(password)) {
-                            return 'Enter a valid Password!'
+                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')'
                             ;
                           }
                           return null;
@@ -195,11 +196,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if ( value!.isEmpty ||
                               !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                                   .hasMatch(value) ) {
-                            return 'Enter a valid Password!'
+                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')'
                             ;
                           }
                           if (passwordController.text != value)
-                            return 'Password doesnot match';
+                            return 'Password does not match';
                           return null;
                         },
                       ),   //confirm
@@ -229,6 +230,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 15.0),
                       _radioButtonGroup(
                         text: 'Role',
+
                         list: _roleList.map((pair){
                           return ListTile(
                             title: Text(pair.item1),
@@ -257,7 +259,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => applicant_register_screen())
+                                      builder: (context) => applicant_register_screen(registerTheme: widget.registerTheme,))
                               );
                               //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
                             }
@@ -265,7 +267,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => recruiter_register_screen())
+                                      builder: (context) => recruiter_register_screen(registerTheme: widget.registerTheme,))
                               );
                               // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
                             }
@@ -282,15 +284,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                         style: OutlinedButton.styleFrom(
                           fixedSize: Size(160,55),
-                          primary: Colors.indigo,
-                          backgroundColor: Colors.indigo,
+                          primary: Color.fromRGBO(4, 88, 125,1),
+                          backgroundColor: Color.fromRGBO(4, 88, 125,1),
                         ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'have an account?',
+                            style: widget.registerTheme.textTheme.labelMedium,
                           ),
                           TextButton(
                             onPressed: () {
@@ -299,6 +305,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: Text(
                               'Login Now',
+                              style: widget.registerTheme.textTheme.bodyText2,
                             ),
                           ),
                         ],
