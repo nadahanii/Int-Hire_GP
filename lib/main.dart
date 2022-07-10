@@ -9,6 +9,7 @@ import 'package:history_feature/screens/home_screen.dart';
 import 'package:history_feature/screens/login.dart';
 import 'package:history_feature/screens/register.dart';
 import 'package:history_feature/screens/splash_screen.dart';
+import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/HistoryHomePage.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
             add_test.routeName: (ctx) => add_test(),
             JobOperations.routeName: (ctx) => JobOperations(),
             HistoryHomePage.routeName: (ctx) => HistoryHomePage(),
+            ProfileScreen.routeName: (ctx) => ProfileScreen(),
           },
         ),
     );
