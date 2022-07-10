@@ -1,17 +1,24 @@
-//import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
+import 'package:history_feature/screens/notification_page.dart';
+import 'package:history_feature/screens/settings_page.dart';
+import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
 import 'package:history_feature/screens/home_screen.dart';
 import 'package:history_feature/screens/login.dart';
-import 'package:history_feature/screens/register.dart';
+import 'package:history_feature/screens/Register_Screen.dart';
+import 'package:history_feature/screens/recruiter_register_screen.dart';
 import 'package:history_feature/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/HistoryHomePage.dart';
+
+import 'HistoryHomePage.dart';
+
+
 import 'screens/job_details.dart';
 
 void main() {
@@ -33,7 +40,7 @@ class MyApp extends StatelessWidget {
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Inte-Hire',
+          title: 'Int-Hire',
           theme: theme.copyWith(
             primaryColor: Color(0xFFc7e6ff),
             colorScheme: theme.colorScheme.copyWith(secondary: Color(0xFFc7e6ff)),
@@ -46,7 +53,7 @@ class MyApp extends StatelessWidget {
             authResultSnapshot.connectionState ==
                 ConnectionState.waiting
                 ? SplashScreen()
-                : LoginScreen(),
+                : Home(),
           ),
           routes: {
             LoginScreen.routeName: (ctx) => LoginScreen(),
@@ -56,6 +63,11 @@ class MyApp extends StatelessWidget {
             add_test.routeName: (ctx) => add_test(),
             JobOperations.routeName: (ctx) => JobOperations(),
             HistoryHomePage.routeName: (ctx) => HistoryHomePage(),
+            Settings_page.routeName: (ctx)=>Settings_page(),
+            Notification_page.routeName:(ctx)=>Notification_page(),
+            applicant_register_screen.routeName: (ctx) => applicant_register_screen(),
+            recruiter_register_screen.routeName: (ctx) => recruiter_register_screen(),
+
           },
         ),
     );

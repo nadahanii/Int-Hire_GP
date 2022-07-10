@@ -4,8 +4,7 @@ import 'package:provider/provider.dart';
 
 
 
-import '../providers/jobs.dart';
-import '../widgets/HistoryListItem.dart';
+import 'widgets/HistoryListItem.dart';
 
 class HistoryHomePage extends StatefulWidget {
   static const routeName = '/history';

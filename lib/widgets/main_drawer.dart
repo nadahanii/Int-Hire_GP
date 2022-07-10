@@ -53,10 +53,10 @@ class MainDrawer extends StatelessWidget {
             Navigator.of(context).pushReplacementNamed('/history');
           }),
           buildListTile('Notification', Icons.notifications, () {
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed('/Notifications');
           }),
           buildListTile('Settings', Icons.settings, () {
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed('/Settings');
           }),
           Spacer(),
           buildListTile('logout', Icons.logout, () {
