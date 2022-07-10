@@ -23,22 +23,22 @@ enum JobType {
 }
 
 class Job {
-  final String id;
-  final String title;
-  final String description;
-  final String requirements;
-  final String experience;
-  final String salary;
-  final String endDate;
-  final String publishDate;
-  final List<String> tags;
-  final bool isEnded;
-  final bool isNeedCV;
-  final Test test;
-  final Education educationLevel;
-  final Career careerLevel;
-  final JobType typeOfJob;
-  int applicantsCount;
+  late int id;
+  late String title;
+  late String description;
+  late String requirements;
+  late String experience;
+  late String salary;
+  late String endDate;
+  late String publishDate;
+  late List<String> tags;
+  late bool isEnded;
+  late bool isNeedCV;
+  late Test test;
+  late Education educationLevel;
+  late Career careerLevel;
+  late JobType typeOfJob;
+  late int applicantsCount;
 
   Job(
       {required this.id,
@@ -57,4 +57,23 @@ class Job {
       required this.typeOfJob,
       required this.salary,
       this.applicantsCount = 0});
+
+  Job.fromJson(Map<String, dynamic> json) {
+    id = json['id'] as int;
+    title = json['title'];
+    description = json['description'];
+    requirements = json['requirements'];
+    experience = json['expLevel'].toString();
+    salary = json['salary'].toString();
+    endDate = json['deadline'];
+    publishDate = json['postingTime'];
+    tags = json['tags'].cast<String>();
+    isEnded = json['active'] as bool;
+    isNeedCV = false;
+    test = Test();
+    educationLevel = Education.values[json['educationLevel']];
+    careerLevel = Career.values[json['career']];
+    typeOfJob = JobType.values[json['jobType']];
+    applicantsCount = json['numberOfApplicants'];
+  }
 }

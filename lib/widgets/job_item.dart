@@ -13,10 +13,8 @@ class JobItem extends StatelessWidget {
   const JobItem({Key? key, required this.job}) : super(key: key);
 
   String formatDate(String date) {
-    print("sdddddddddddddddddddddddddddddddddddddddd" + date);
     int time =
         DateTime.now().difference(DateFormat('dd-MM-yyyy hh:mm a').parse(date)).inMinutes;
-    print(time);
     String out = '';
     if (time < 43200) {
       out = '${(time / (60 * 24)).floor()} days ago';

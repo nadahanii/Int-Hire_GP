@@ -24,7 +24,7 @@ class _JobOperationsState extends State<JobOperations> {
   Career _career = Career.Fresh_Junior;
   Education _education = Education.Bachelors;
 
-  List<String> _tags = [];
+  Set<String> _tags = {};
   final List<Pair<String, Education>> _educationList = const [
     Pair('High School', Education.High_School),
     Pair('Bachelor\'s Degree', Education.Bachelors),
@@ -60,7 +60,7 @@ class _JobOperationsState extends State<JobOperations> {
     super.initState();
     if (widget.job != null) {
       _jobType = widget.job!.typeOfJob;
-      _tags = widget.job!.tags;
+      _tags = widget.job!.tags.toSet();
       _titleController.text = widget.job!.title;
       _salaryController.text = widget.job!.salary;
       _experienceController.text = widget.job!.experience;
@@ -352,7 +352,7 @@ class _JobOperationsState extends State<JobOperations> {
                   TextButton(
                     onPressed: () {
                       final job = Job(
-                        id: DateFormat('dd-MM-yyyy  hh:mm a').format(DateTime.now()),
+                        id: widget.job != null ? widget.job!.id : 0,
                         isNeedCV: _isAddCV,
                         careerLevel: _career,
                         educationLevel: _education,
@@ -361,7 +361,7 @@ class _JobOperationsState extends State<JobOperations> {
                         publishDate: DateFormat('dd-MM-yyyy hh:mm a').format(DateTime.now()),
                         endDate: _endDateController.text,
                         experience: _experienceController.text,
-                        tags: _tags,
+                        tags: _tags.toList(),
                         salary: _salaryController.text,
                         title: _titleController.text,
                         typeOfJob: _jobType,

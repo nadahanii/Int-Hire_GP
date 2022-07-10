@@ -30,8 +30,7 @@ class _JobDetailsState extends State<JobDetails> {
 
   String formatDate(String date) {
     int time =
-        DateTime.now().difference(DateFormat.yMd().parse(date)).inMinutes;
-    print(time);
+        DateTime.now().difference(DateFormat('dd-MM-yyyy hh:mm a').parse(date)).inMinutes;
     String out = '';
     if (time < 43200) {
       out = '${(time / (60 * 24)).floor()} days ago';
@@ -64,7 +63,7 @@ class _JobDetailsState extends State<JobDetails> {
   @override
   Widget build(BuildContext context) {
     String endDate = '';
-    int time = DateFormat.yMd()
+    int time = DateFormat('dd-MM-yyyy hh:mm a')
         .parse(widget.job.endDate)
         .difference(DateTime.now())
         .inDays;
@@ -73,7 +72,6 @@ class _JobDetailsState extends State<JobDetails> {
     } else {
       endDate = 'closed';
     }
-    print('xx $time');
     return Scaffold(
       appBar: AppBar(
         actions: [
