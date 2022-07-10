@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
             authResultSnapshot.connectionState ==
                 ConnectionState.waiting
                 ? SplashScreen()
-                : LoginScreen(),
+                : RegisterScreen(),
           ),
           routes: {
             LoginScreen.routeName: (ctx) => LoginScreen(),

@@ -24,28 +24,21 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
-  var nameController = TextEditingController();
-  var phoneNumberController = TextEditingController();
-  var confirmPasswordController = TextEditingController();
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-
-
-
+  var passwordController = TextEditingController();
+  bool _isObscure = true;
 
   int _role = 1;
   final List<Pair<String, int>> _roleList = const [
     Pair('Applicant', 0),
     Pair('Recruiter', 1),
   ];
-
-  int _gender = 1;
-
+  int _gender=1;
   final List<Pair<String, int>> _genderList = const [
     Pair('female', 0),
     Pair('male', 1),
   ];
+
   Widget _radioButtonGroup({required String text, required List<Widget> list}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,13 +52,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ],
     );
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Center(
+        child: Form(
+          key: _form,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,8 +79,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(
                   height: 40.0,
                 ),
+
+               TextFormField(
+                 decoration: InputDecoration(
+                   labelText: 'name',
+                   prefixIcon: Icon(
+                     Icons.person,
+                   ),
+                 ),
+                   validator: (value)
+                     {
+                      if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                        return "Enter correct name";
+                      else
+                        return null;
+                     }
+                 ),  //name
+                SizedBox(
+                  height: 15.0,
+                ),
+
+
                 TextFormField(
-                  controller: nameController,
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      labelText: 'phone number',
+                      prefixIcon: Icon(
+                        Icons.phone,
+                      ),
+                    ),
+                    validator: (value)
+                    {
+                      if (value!.isEmpty || !RegExp(r'^(01)[0-9]{9}$').hasMatch(value))
+                        return "Enter correct phone";
+                      else
+                        return null;
+                    }
+                ), //phone
+                /*controller: nameController,
                   keyboardType: TextInputType.name,
                   onFieldSubmitted: (String value) {
                     print(value);
@@ -96,31 +128,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     border: OutlineInputBorder(),
                   ),
-                ),
+                ),*/
                 SizedBox(
                   height: 15.0,
                 ),
-                SizedBox(
-                  height: 15.0,
-                ),
+
+
                 TextFormField(
-                  controller: phoneNumberController,
-                  keyboardType: TextInputType.phone,
-                  onFieldSubmitted: (String value) {
-                    print(value);
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'phone number',
-                    prefixIcon: Icon(
-                      Icons.phone,
-                    ),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(labelText: 'Email Address',
+                    prefixIcon: Icon (
+                    Icons.email,
                   ),
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                TextFormField(
+
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                  onFieldSubmitted: (value) {
+                    //Validator
+                  },
+                  validator: (value) {
+                    if ( value!.isEmpty ||
+                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                            .hasMatch(value)) {
+                      return 'Enter a valid email!';
+                    }
+                    return null;
+                  },
+                ),   //email
+              /*  TextFormField(
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   onFieldSubmitted: (String value) {
@@ -133,49 +167,114 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     border: OutlineInputBorder(),
                   ),
-                ),
+                ),*/
                 SizedBox(
                   height: 15.0,
                 ),
+
+
                 TextFormField(
                   controller: passwordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: Icon(
-                      Icons.lock,
-                    ),
-                    suffixIcon: Icon(
-                      Icons.remove_red_eye,
-                    ),
-                    border: OutlineInputBorder(),
+                  decoration: InputDecoration(labelText: 'Password',
+                  suffixIcon: IconButton(
+                      icon: Icon(
+                           _isObscure ? Icons.visibility : Icons.visibility_off,
+                                     ),
+                    onPressed: () {
+                    setState(() {
+                    _isObscure = !_isObscure;
+                      })
+    ; }
+    ),
+                 prefixIcon: Icon (
+                    Icons.lock,
                   ),
-                ),
-                SizedBox(
-                  height: 15.0),
-                TextFormField(
-                  controller: confirmPasswordController,
+                  ),
                   keyboardType: TextInputType.visiblePassword,
-                  validator: (val){
-                    if(val != passwordController.text)
-                      return 'Not Match';
+                  onFieldSubmitted: (password) {
+                    //Validator
+                  },
+                  validator: (password) {
+                    if ( password!.isEmpty ||
+                        !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                            .hasMatch(password)) {
+                      return 'Enter a valid Password!'
+                          ;
+                    }
                     return null;
                   },
-                  obscureText: true,
+                ),   //password
+                /*  TextFormField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  onFieldSubmitted: (String value) {
+                    print(value);
+                  },
                   decoration: InputDecoration(
-                    labelText: 'Confirm Password',
+                    labelText: 'Email Address',
                     prefixIcon: Icon(
-                      Icons.lock,
-                    ),
-                    suffixIcon: Icon(
-                      Icons.remove_red_eye,
+                      Icons.email,
                     ),
                     border: OutlineInputBorder(),
                   ),
-                ),
+                ),*/
                 SizedBox(
-                    height: 15.0),
+                  height: 15.0,
+                ),
+
+
+
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Confirm Password',
+                    suffixIcon: IconButton(
+                        icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          })
+                          ; }
+                    ),
+                    prefixIcon: Icon (
+                      Icons.lock,
+                    ),
+                  ),
+                  keyboardType: TextInputType.visiblePassword,
+                  onFieldSubmitted: (value) {
+                    //Validator
+                  },
+                  validator: (value) {
+                    if ( value!.isEmpty ||
+                        !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                            .hasMatch(value) ) {
+                      return 'Enter a valid Password!'
+                      ;
+                    }
+                    if (passwordController.text != value)
+                       return 'Password doesnot match';
+                    return null;
+                  },
+                ),   //ConfirmPassword
+                /*  TextFormField(
+                  controller: emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  onFieldSubmitted: (String value) {
+                    print(value);
+                  },
+                  decoration: InputDecoration(
+                    labelText: 'Email Address',
+                    prefixIcon: Icon(
+                      Icons.email,
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                ),*/
+                SizedBox(
+                  height: 15.0,
+                ),
+
+
                 _radioButtonGroup(
                   text: 'Gender',
                   list: _genderList.map((pair) {
@@ -219,22 +318,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: 15.0),
                 OutlinedButton(
                   onPressed: (){
-                    if(_role==0)
-                    {
-                      Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) => applicant_register_screen())
-                      );
-                      //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
-                    }
-                    else if(_role==1)
-                    {
-                      Navigator.push(context,
-                          MaterialPageRoute(
-                              builder: (context) => recruiter_register_screen())
-                      );
-                      // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
-                    }
+                    if(_form.currentState!.validate())
+                      {
+                        if(_role==0)
+                        {
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context) => applicant_register_screen())
+                          );
+                          //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
+                        }
+                        else if(_role==1)
+                        {
+                          Navigator.push(context,
+                              MaterialPageRoute(
+                                  builder: (context) => recruiter_register_screen())
+                          );
+                          // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
+                        }
+                      }
+
                   },
                   child: Text(
                     'Register',
