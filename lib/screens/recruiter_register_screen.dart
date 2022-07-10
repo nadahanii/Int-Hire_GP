@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class recruiter_register_screen extends StatefulWidget {
+class RecruiterRegisterScreen extends StatefulWidget {
   static const routeName = '/recruiter_register_screen';
-  const recruiter_register_screen({Key? key}) : super(key: key);
+  const RecruiterRegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<recruiter_register_screen> createState() =>
-      _recruiter_register_screenState();
+  State<RecruiterRegisterScreen> createState() =>
+      RecruiterRegisterScreenState();
 }
 
-class _recruiter_register_screenState extends State<recruiter_register_screen> {
+class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   late String companyName, companyLocation, companyDescription;
 

@@ -5,15 +5,15 @@ import '../helpers/pair.dart';
 import '../models/applicant_user.dart';
 import '../models/job.dart';
 
-class applicant_register_screen extends StatefulWidget {
+class ApplicantRegisterScreen extends StatefulWidget {
   static const routeName = '/applicant_register_screen';
-  const applicant_register_screen({Key? key}) : super(key: key);
+  const ApplicantRegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<applicant_register_screen> createState() => _applicant_register_screenState();
+  State<ApplicantRegisterScreen> createState() => _ApplicantRegisterScreenState();
 }
 
-class _applicant_register_screenState extends State<applicant_register_screen> {
+class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   late String twitterUsername, skills,interestedIn,applicantCity,applicantCountry;
 

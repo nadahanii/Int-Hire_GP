@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'complain_form.dart';
-class Notification_page extends StatelessWidget{
-  const Notification_page({Key? key}) : super(key: key);
+class NotificationPage extends StatelessWidget{
+  const NotificationPage({Key? key}) : super(key: key);
   static const routeName = '/Notifications';
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class Notification_page extends StatelessWidget{
     );
   }
   Widget message(int index){
-    double Textsize=14;
+    double textSize=14;
     return Container(
       child:RichText(
         maxLines: 3,
@@ -96,7 +96,7 @@ class Notification_page extends StatelessWidget{
         text:TextSpan(
           text: 'Message  ',
           style: TextStyle(
-            fontSize:Textsize,
+            fontSize:textSize,
             color:Colors.black,
             fontWeight: FontWeight.bold,
           ),

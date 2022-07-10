@@ -10,11 +10,14 @@ import '../screens/job_operations_screen.dart';
 
 class JobItem extends StatelessWidget {
   final Job job;
-  const JobItem({Key? key, required this.job}) : super(key: key);
+  final bool history;
+  const JobItem({Key? key, required this.job, this.history = false})
+      : super(key: key);
 
   String formatDate(String date) {
-    int time =
-        DateTime.now().difference(DateFormat('dd-MM-yyyy hh:mm a').parse(date)).inMinutes;
+    int time = DateTime.now()
+        .difference(DateFormat('dd-MM-yyyy hh:mm a').parse(date))
+        .inMinutes;
     String out = '';
     if (time < 43200) {
       out = '${(time / (60 * 24)).floor()} days ago';
@@ -97,74 +100,77 @@ class JobItem extends StatelessWidget {
                   true
                       ? Row(
                           children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .push(MaterialPageRoute(builder: (ctx) {
-                                  return JobOperations(
-                                    job: job,
-                                  );
-                                }));
-                              },
-                              child: Container(
-                                  height: 35,
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color: Colors.green.shade100,
-                                      )),
-                                  child: Center(
-                                      child: Icon(
-                                    Icons.edit,
-                                    color: Colors.green,
-                                  ))),
-                            ),
+                            if (history != false)
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context)
+                                      .push(MaterialPageRoute(builder: (ctx) {
+                                    return JobOperations(
+                                      job: job,
+                                    );
+                                  }));
+                                },
+                                child: Container(
+                                    height: 35,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: Colors.green.shade100,
+                                        )),
+                                    child: Center(
+                                        child: Icon(
+                                      Icons.edit,
+                                      color: Colors.green,
+                                    ))),
+                              ),
                             SizedBox(
                               width: 6.0,
                             ),
-                            InkWell(
-                              onTap: () async {
-                                await showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: const Text("Delete Confirmation"),
-                                      content: const Text(
-                                          "Are you sure you want to delete this item?"),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Provider.of<Jobs>(context,
-                                                      listen: false)
-                                                  .removeJob(job);
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text("Delete")),
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.of(context).pop(),
-                                          child: const Text("Cancel"),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              },
-                              child: Container(
-                                  height: 35,
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color: Colors.red.shade100,
-                                      )),
-                                  child: Center(
-                                      child: Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ))),
-                            ),
+                            if (history != false)
+                              InkWell(
+                                onTap: () async {
+                                  await showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title:
+                                            const Text("Delete Confirmation"),
+                                        content: const Text(
+                                            "Are you sure you want to delete this item?"),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Provider.of<Jobs>(context,
+                                                        listen: false)
+                                                    .removeJob(job);
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text("Delete")),
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.of(context).pop(),
+                                            child: const Text("Cancel"),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                    height: 35,
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: Colors.red.shade100,
+                                        )),
+                                    child: Center(
+                                        child: Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    ))),
+                              ),
                           ],
                         )
                       : InkWell(

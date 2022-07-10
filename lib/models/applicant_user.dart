@@ -1,5 +1,3 @@
-import 'package:history_feature/models/test.dart';
-
 import 'job.dart';
 
 enum MilitaryStatus { Postponed, Exempted, Completed, NotApplicable }

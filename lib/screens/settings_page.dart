@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-class Settings_page extends StatefulWidget{
+class SettingsPage extends StatefulWidget{
   static const routeName = '/Settings';
 
   @override
-  State<Settings_page> createState() => _Settings_pageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _Settings_pageState extends State<Settings_page> {
+class _SettingsPageState extends State<SettingsPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(

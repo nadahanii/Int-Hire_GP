@@ -5,8 +5,8 @@ import '../providers/jobs.dart';
 import 'job_item.dart';
 
 class JobsList extends StatelessWidget {
-  const JobsList({Key? key}) : super(key: key);
-
+  const JobsList({Key? key, this.history = false}) : super(key: key);
+  final bool history;
   @override
   Widget build(BuildContext context) {
     final jobs = Provider.of<Jobs>(context).items;
@@ -15,7 +15,7 @@ class JobsList extends StatelessWidget {
       itemBuilder: (ctx, i) {
         return Column(
         children: [
-          JobItem(job: jobs[i],),
+          JobItem(job: jobs[i],history: history),
           SizedBox(height: 10.0),
             ],
         );

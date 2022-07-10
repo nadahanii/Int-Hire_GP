@@ -2,15 +2,15 @@ import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class add_test extends StatefulWidget {
-  const add_test({Key? key}) : super(key: key);
+class AddTest extends StatefulWidget {
+  const AddTest({Key? key}) : super(key: key);
   static const routeName = '/add_test';
 
   @override
-  State<add_test> createState() => _add_testState();
+  State<AddTest> createState() => _AddTestState();
 }
 
-class _add_testState extends State<add_test> {
+class _AddTestState extends State<AddTest> {
   static List<List<dynamic>> _csvData = [
    /* ['hey', '1', '0'],
     ['hello','2','1']*/

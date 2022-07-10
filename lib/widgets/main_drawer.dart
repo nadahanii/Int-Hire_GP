@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:history_feature/screens/job_view.dart';
 import 'package:provider/provider.dart';
-
-import '../screens/HistoryHomePage.dart';
 import '../providers/auth.dart';
 
 class MainDrawer extends StatelessWidget {

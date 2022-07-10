@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
-class Settings_Page extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   @override
-  State<Settings_Page> createState() => _Settings_PageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _Settings_PageState extends State<Settings_Page> {
+class _SettingsPageState extends State<SettingsPage> {
   late bool isDark;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
-        title: Text('Settings',
+        title: Text(
+          'Settings',
           textAlign: TextAlign.start,
           style: TextStyle(
             fontSize: 30,
@@ -26,7 +26,7 @@ class _Settings_PageState extends State<Settings_Page> {
         elevation: 0.0,
       ),
       body: Container(
-        child:Stack(
+        child: Stack(
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -34,7 +34,7 @@ class _Settings_PageState extends State<Settings_Page> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                  child:InkWell(
+                  child: InkWell(
                     child: Row(
                       children: [
                         Padding(
@@ -45,14 +45,12 @@ class _Settings_PageState extends State<Settings_Page> {
                         ),
                         Text(
                           'Language',
-                          style: TextStyle(
-                              fontSize: 22),
+                          style: TextStyle(fontSize: 22),
                           textAlign: TextAlign.start,
                         ),
-
                       ],
                     ),
-                    onTap: Languagechange,
+                    onTap: languageChange,
                   ),
                 ),
                 Padding(
@@ -63,7 +61,6 @@ class _Settings_PageState extends State<Settings_Page> {
                         padding: const EdgeInsets.fromLTRB(7.0, 0, 8.0, 0),
                         child: Image.asset(
                           'assets/night_mode.png',
-
                         ),
                       ),
                       Text(
@@ -71,7 +68,6 @@ class _Settings_PageState extends State<Settings_Page> {
                         style: TextStyle(fontSize: 22),
                         textAlign: TextAlign.start,
                       ),
-
                     ],
                   ),
                 ),
@@ -81,7 +77,7 @@ class _Settings_PageState extends State<Settings_Page> {
                       padding: const EdgeInsets.fromLTRB(7.0, 0, 8.0, 0),
                       child: Image.asset(
                         'assets/help-.png',
-                        scale:0.6,
+                        scale: 0.6,
                       ),
                     ),
                     Text(
@@ -92,52 +88,51 @@ class _Settings_PageState extends State<Settings_Page> {
                   ],
                 )
               ],
-
             )
           ],
         ),
       ),
     );
   }
-  void Languagechange(){
+
+  void languageChange() {
     showModalBottomSheet(
         context: context,
         builder: (context) => Container(
-          height: MediaQuery.of(context).size.height * 0.25,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(70),
-                topRight: Radius.circular(70)),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: InkWell(
-                  child: Text(
-                    ' اللغة العربية',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.normal),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+              height: MediaQuery.of(context).size.height * 0.25,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(70),
+                    topRight: Radius.circular(70)),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: InkWell(
-                  child: Text(
-                    'English language',
-                    style: TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.normal),
-                    textAlign: TextAlign.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: InkWell(
+                      child: Text(
+                        ' اللغة العربية',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.normal),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
-
-                ),
-              )
-            ],
-          ),
-
-        ));
-  }}
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: InkWell(
+                      child: Text(
+                        'English language',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.normal),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ));
+  }
+}

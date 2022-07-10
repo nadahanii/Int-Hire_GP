@@ -257,7 +257,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => applicant_register_screen())
+                                      builder: (context) => ApplicantRegisterScreen())
                               );
                               //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
                             }
@@ -265,7 +265,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => recruiter_register_screen())
+                                      builder: (context) => RecruiterRegisterScreen())
                               );
                               // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
                             }

@@ -4,6 +4,7 @@ import 'package:history_feature/models/job.dart';
 import 'package:http/http.dart' as http;
 
 class Jobs with ChangeNotifier {
+  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXIyMkBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzUwOTg1OSwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.LOfkCA-sS2C6Sm4Th7orASMTGVy_LRIFXnJbRBx5LuQ";
   List<Job> _items = [];
 
   List<Job> get items {
@@ -15,14 +16,65 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobs() async {
+    print("ff");
     final url =
         Uri.parse('http://hossam348-001-site1.etempurl.com/api/Job/getAllJobs');
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $token',
+          "Accept": "application/json",
+        },
+      );
+      final extractedData = json.decode(response.body) as List<dynamic>;
+      if (extractedData.isEmpty) {
+        return;
+      }
+      final List<Job> loadedJobs = [];
+      for (var obj in extractedData) {
+        loadedJobs.add(Job.fromJson(obj));
+      }
+      _items = loadedJobs.reversed.toList();
+      notifyListeners();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> fetchAndSetHistoryJobsOfApplicant() async {
+    final url = Uri.parse(
+        'http://hossam348-001-site1.etempurl.com/api/Job/getApplicantJobs');
     final response = await http.get(
       url,
       headers: {
         "content-type": "application/json",
-        'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXIyMkBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzQ3OTQyNiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.UMkQZBVoWdqHgV3sJHIy7_xcAaC-h_YjY2o4S74uFUI',
+        'Authorization': 'Bearer $token',
+        "Accept": "application/json",
+      },
+    );
+    final extractedData = json.decode(response.body) as List<dynamic>;
+    if (extractedData.isEmpty) {
+      return;
+    }
+    final List<Job> loadedJobs = [];
+    for (var obj in extractedData) {
+      loadedJobs.add(Job.fromJson(obj));
+    }
+    _items = loadedJobs.reversed.toList();
+    notifyListeners();
+  }
+
+  Future<void> fetchAndSetJobsOfRecruiter() async {
+    print("dd");
+    final url = Uri.parse(
+        'http://hossam348-001-site1.etempurl.com/api/Job/getRecruiterJobs');
+    final response = await http.get(
+      url,
+      headers: {
+        "content-type": "application/json",
+        'Authorization': 'Bearer $token',
         "Accept": "application/json",
       },
     );
@@ -63,8 +115,7 @@ class Jobs with ChangeNotifier {
         body: encode,
         headers: {
           "content-type": "application/json",
-          'Authorization':
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXIyMkBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzQ3OTQyNiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.UMkQZBVoWdqHgV3sJHIy7_xcAaC-h_YjY2o4S74uFUI',
+          'Authorization': 'Bearer $token',
           "Accept": "application/json",
         },
       );
@@ -89,13 +140,12 @@ class Jobs with ChangeNotifier {
         'http://hossam348-001-site1.etempurl.com/api/Job/deleteJob?id=${job.id}');
     notifyListeners();
     final response = await http.delete(
-        url,
-        headers: {
-          "content-type": "application/json",
-          'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXIyMkBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzQ3OTQyNiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.UMkQZBVoWdqHgV3sJHIy7_xcAaC-h_YjY2o4S74uFUI',
-          "Accept": "application/json",
-        },
+      url,
+      headers: {
+        "content-type": "application/json",
+        'Authorization': 'Bearer $token',
+        "Accept": "application/json",
+      },
     );
     if (response.statusCode >= 400) {
       _items.add(job);
@@ -133,8 +183,7 @@ class Jobs with ChangeNotifier {
         body: encode,
         headers: {
           "content-type": "application/json",
-          'Authorization':
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXIyMkBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzQ3OTQyNiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.UMkQZBVoWdqHgV3sJHIy7_xcAaC-h_YjY2o4S74uFUI',
+          'Authorization': 'Bearer $token',
           "Accept": "application/json",
         },
       );
