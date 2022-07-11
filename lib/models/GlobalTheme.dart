@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class GlobalTheme with ChangeNotifier {
   final globalTheme = ThemeData(
     primarySwatch: Colors.blueGrey,
-    backgroundColor: Color.fromRGBO(255,198,196,1),
+    backgroundColor: /*Color.fromRGBO(199, 231, 255, 1)*/Color.fromRGBO(255,198,196,1),
     textTheme: const TextTheme(
       labelMedium: TextStyle(
         fontWeight: FontWeight.bold,
