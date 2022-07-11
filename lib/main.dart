@@ -9,7 +9,6 @@ import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
 import 'package:history_feature/screens/job_view.dart';
-import 'package:history_feature/screens/login.dart';
 import 'package:history_feature/screens/Register_Screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
 import 'package:history_feature/screens/splash_screen.dart';
@@ -44,21 +43,14 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Int-Hire',
           theme: globalTheme,
-          home: auth.isAuth
-              ? JobView()
-              : FutureBuilder(
-            future: auth.tryAutoLogin(),
-            builder: (_, authResultSnapshot) =>
-            authResultSnapshot.connectionState ==
-                ConnectionState.waiting
-                ? SplashScreen()
-                : LoginScreen(
-              loginTheme: globalTheme,
-            ),
-          ),
+          home: SplashScreen
+            (
+            SplashTheme: globalTheme,
+          )
+          ,
           routes: {
             LoginScreen.routeName: (ctx) => LoginScreen(loginTheme: globalTheme,),
-            SplashScreen.routeName: (ctx) => SplashScreen(),
+            SplashScreen.routeName: (ctx) => SplashScreen(SplashTheme: globalTheme,),
             RegisterScreen.routeName: (ctx) => RegisterScreen(registerTheme: globalTheme,),
             JobView.routeName: (ctx) => JobView(),
             add_test.routeName: (ctx) => add_test(),

@@ -43,10 +43,10 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(),
+        const Divider(),  //(4,88,125,1)
         Text(
           text,
-          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(14, 30, 80, 1)),
+          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(4,88,125,1)),
         ),
         ...list,
       ],
@@ -68,12 +68,14 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                     Column(
                       children: <Widget>[
                         Text(
-                          'Applicant Register',
-                            style: GoogleFonts.secularOne(fontSize: 50 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
+                          'Applicant Registeration',
+                            style: GoogleFonts.sourceCodePro(fontSize: 20 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                         ),
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: FaIcon(FontAwesomeIcons.twitter),
@@ -91,10 +93,12 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                               //print(companyName);
                             });
                           },
-                        ),
+                        ),   //twitter
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: FaIcon(FontAwesomeIcons.boltLightning),
@@ -111,10 +115,12 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                               skills = val;
                             });
                           },
-                        ),
+                        ),   //skills
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: Icon(Icons.interests_rounded),
@@ -131,10 +137,12 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                               interestedIn = val;
                             });
                           },
-                        ),
+                        ),   //interested
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: FaIcon(FontAwesomeIcons.city),
@@ -142,19 +150,23 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                           ),
                           keyboardType: TextInputType.name,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid city';
-                            }
+                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct name";
+                            else
+                              return null;
                           },
                           onFieldSubmitted: (val) {
                             setState(() {
                               applicantCity = val;
                             });
                           },
-                        ),
+                        ),    //city
                         SizedBox(
                           height: 25,
                         ),
+
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: Icon(Icons.map_rounded),
@@ -162,19 +174,24 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                           ),
                           keyboardType: TextInputType.name,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid country';
-                            }
+                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct name";
+                            else
+                              return null;
                           },
                           onFieldSubmitted: (val) {
                             setState(() {
                               applicantCountry = val;
                             });
                           },
-                        ),
+                        ),   //country
                         SizedBox(
                           height: 25,
                         ),
+
+
+
+
                         _radioButtonGroup(
                           text: 'Military status',
                           list: _militaryStatusList.map((pair) {
@@ -215,16 +232,33 @@ class _applicant_register_screenState extends State<applicant_register_screen> {
                         SizedBox(
                           height: 25,
                         ),
-                        OutlinedButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                        TextButton.icon(
+                          onPressed: (() {
+
+                            if(_formKey.currentState!.validate())
+                            {
+                              Navigator.of(context).pushReplacementNamed('/HisHistoryHomePage');
+                            }
+                          }),
+                          icon: const Icon(
+                            Icons.app_registration,
+                            size: 28,
                           ),
-                          style: OutlinedButton.styleFrom(
-                            fixedSize: Size(160, 55),
-                            primary: Color.fromRGBO(4, 88, 125,1),
-                            backgroundColor: Color.fromRGBO(4, 88, 125,1),
+                          label: Container(
+                            alignment: Alignment.center,
+                            width: 150,
+                            height: 35,
+                            child: const Text(
+                              'Submit',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(4, 88, 125,1),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
                           ),
                         ),
                       ],

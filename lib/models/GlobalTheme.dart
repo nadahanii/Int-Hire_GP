@@ -6,19 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 class GlobalTheme with ChangeNotifier {
   final globalTheme = ThemeData(
     primarySwatch: Colors.blueGrey,
-    backgroundColor: Color.fromRGBO(199, 231, 255,1),
+    backgroundColor: Color.fromRGBO(255,198,196,1),
     textTheme: const TextTheme(
       labelMedium: TextStyle(
         fontWeight: FontWeight.bold,
-
-        color: Color.fromRGBO(4, 88, 125,1),
-        fontSize: 17
+        fontStyle: FontStyle.normal,
+        color: Colors.white,
+        fontSize: 10
 
       ),
       bodyText2: TextStyle(
-        color: Color.fromRGBO(70, 155, 196,1),
-        //Color.fromRGBO(64, 191, 197, 1),
-        fontSize: 15,
+        //color: Colors.,
+        color: Color.fromRGBO(4,88,125,1),
+        fontSize: 10,
         fontWeight: FontWeight.bold,
       ),
       caption: TextStyle(

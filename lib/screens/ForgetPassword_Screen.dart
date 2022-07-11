@@ -36,7 +36,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       Text(
                           'Enter your email to send an reset link',
-                          style: GoogleFonts.secularOne(fontSize: 30 , fontWeight: FontWeight.bold, color: Color.fromRGBO(4, 88, 125,4))
+                          style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromRGBO(4, 88, 125,4))
                       ),
                       SizedBox(
                         height: 40.0,
@@ -100,10 +100,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                       TextButton.icon(
                         onPressed: (() {
-                          if(_form.currentState!.validate())
-                          {
+
                             Navigator.pushNamed(context, '/Login_Screen');
-                          }
+
                           //Navigator.pushNamed(context, '/Login_Screen');
                         }),
                         icon: const Icon(
