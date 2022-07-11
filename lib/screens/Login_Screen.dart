@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+
+  final ThemeData loginTheme;
+  LoginScreen({Key? key, required this.loginTheme}) : super(key: key);
   static const routeName = '/Login_Screen';
 
   @override
@@ -48,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: widget.loginTheme.backgroundColor,
       //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -60,22 +64,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                               height: 20.0, ),
                       Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        'LOGIN',
+                        style: GoogleFonts.sourceCodePro(fontSize:35 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                       ),
                       SizedBox(
-                        height: 40.0,
+                        height: 30.0,
                       ),
 
                       TextFormField(
                         decoration: InputDecoration(labelText: 'Email Address',
+
                           prefixIcon: Icon (
                             Icons.email,
                           ),
                         ),
+
+                        //style: widget.loginTheme.textTheme.labelMedium,
                         keyboardType: TextInputType.emailAddress,
                         onFieldSubmitted: (value) {
                           //Validator
@@ -90,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),   //mail
                       SizedBox(
-                        height: 15.0,
+                        height: 10.0,
                       ),
 
 
@@ -111,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Icons.lock,
                           ),
                         ),
+                        //style: widget.loginTheme.textTheme.labelMedium,
                         keyboardType: TextInputType.visiblePassword,
                         onFieldSubmitted: (password) {
                           //Validator
@@ -125,66 +130,134 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                       ),   //pass
+
                       SizedBox(
-                        height: 15.0,
+                        height: 10.0,
                       ),
 
-                      Container(
-                        width: double.infinity,
-                        color: Colors.blue,
-                        child: MaterialButton(
+                      TextButton.icon(
+                        onPressed: (() {
+                          if(_form.currentState!.validate())
+                          {
+                            Navigator.pushNamed(context, '/profile_Screen');
+                          }
 
-                          onPressed: (){
-                            if(_form.currentState!.validate())
-                            {
-                              final snackbar = SnackBar(content: Text('Logging..'));
-                            }
-                          },
-                          child: Text(
-                            'LOGIN',
+                        }),
+                        icon: const Icon(
+                          Icons.login,
+                          size: 28,
+                        ),
+                        label: Container(
+                          alignment: Alignment.center,
+                          width: 150,
+                          height: 35,
+                          child: const Text(
+                            'Login',
                             style: TextStyle(
+                              fontSize: 12,
                               color: Colors.white,
                             ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(4, 88, 125,1),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                         ),
                       ),
                       SizedBox(
-                        height: 10.0,
+                        height: 5.0,
                       ),
-                      MaterialButton(
-                        onPressed: () {},
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed('/ForgetPassword_Screen');
+                        },
                         child: Text(
-                          'Forgot your Password?',
-                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                          'Forgot My Password',
+                          style: widget.loginTheme.textTheme.labelMedium,
                         ),
                       ),
 
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            socialButtonRect(
-                                'Login with Facebook ', facebookColor, Icons.facebook),
-                            socialButtonRect('Login with Google ', googleColor, Icons.android),
+                            socialButtonRect('Facebook', Color.fromRGBO(4, 88, 125,1), Icons.facebook),
+                            SizedBox( height:10.0),
+                            socialButtonRect('Google', Color.fromRGBO(4, 88, 125,1), Icons.android),
                           ],
                         ),
                       ),
+                     SizedBox(height: 20.0,),
 
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Don\'t have an account?',
+                            style: widget.loginTheme.textTheme.labelMedium,
                           ),
+                          SizedBox(height: 5.0,),
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacementNamed('/Register_Screen');
                             },
                             child: Text(
                               'Register Now',
+                              style: widget.loginTheme.textTheme.bodyText2,
                             ),
                           ),
+                        /*  TextButton.icon(
+                            onPressed: (() {
+                              Navigator.of(context).pushReplacementNamed('/Register_Screen');
+                            }),
+                            icon: const Icon(
+                              Icons.app_registration,
+                              size: 28,
+                            ),
+                            label: Container(
+                              alignment: Alignment.center,
+                              width: 150,
+                              height: 35,
+                              child: const Text(
+                                'Register',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(4, 88, 125,1),
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                            ),
+                          ),*/
+                         /* TextButton.icon(
+                            onPressed: (() {
+                              Navigator.pushNamed(context, '/ForgetPassword_Screen');
+
+                            }),
+                            icon: const Icon(
+                              Icons.password_sharp,
+                              size: 28,
+                            ),
+                            label: Container(
+                              alignment: Alignment.center,
+                              width: 200,
+                              height: 40,
+                              child: const Text(
+                                'I forgot my password',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(4, 88, 125,1),
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                            ),
+                          ),*/
                         ],
                       ),
                     ]

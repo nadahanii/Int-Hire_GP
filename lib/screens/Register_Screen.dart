@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
 import '../helpers/pair.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
   static const routeName = '/Register_Screen';
+  final ThemeData registerTheme;
+  RegisterScreen({Key? key ,  required this.registerTheme}) : super(key: key);
+
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -34,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         const Divider(),
         Text(
           text,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(4,88,125,1)),
         ),
         ...list,
       ],
@@ -45,6 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: widget.registerTheme.backgroundColor,
       //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -59,10 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       Text(
                         'Register',
-                        style: TextStyle(
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                          style: GoogleFonts.sourceCodePro(fontSize: 30 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                       ),
                       SizedBox(
                         height: 40.0,
@@ -70,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       TextFormField(
                           decoration: InputDecoration(
-                            labelText: 'name',
+                            labelText: 'First name',
                             prefixIcon: Icon(
                               Icons.person,
                             ),
@@ -82,7 +83,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             else
                               return null;
                           }
-                      ),  //name
+                      ),  //first name
+                      SizedBox(
+                        height: 15.0,
+                      ),
+
+                      TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Second name',
+                            prefixIcon: Icon(
+                              Icons.person,
+                            ),
+                          ),
+                          validator: (value)
+                          {
+                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct name";
+                            else
+                              return null;
+                          }
+                      ),  //second name
                       SizedBox(
                         height: 15.0,
                       ),
@@ -91,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
-                            labelText: 'phone number',
+                            labelText: 'Phone number',
                             prefixIcon: Icon(
                               Icons.phone,
                             ),
@@ -136,7 +156,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       TextFormField(
                         controller: passwordController,
+
                         decoration: InputDecoration(labelText: 'Password',
+                          hintText: "Min 1 UpperCase,1 LowerCase,1 Digit,1 SpecialChar ",
                           suffixIcon: IconButton(
                               icon: Icon(
                                 _isObscure ? Icons.visibility : Icons.visibility_off,
@@ -159,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if ( password!.isEmpty ||
                               !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                                   .hasMatch(password)) {
-                            return 'Enter a valid Password!'
+                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')'
                             ;
                           }
                           return null;
@@ -195,11 +217,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if ( value!.isEmpty ||
                               !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                                   .hasMatch(value) ) {
-                            return 'Enter a valid Password!'
+                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')'
                             ;
                           }
                           if (passwordController.text != value)
-                            return 'Password doesnot match';
+                            return 'Password does not match';
                           return null;
                         },
                       ),   //confirm
@@ -229,6 +251,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           height: 15.0),
                       _radioButtonGroup(
                         text: 'Role',
+
                         list: _roleList.map((pair){
                           return ListTile(
                             title: Text(pair.item1),
@@ -249,15 +272,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       SizedBox(
                           height: 15.0),
-                      OutlinedButton(
-                        onPressed: (){
+                      TextButton.icon(
+                        onPressed: (() {
+
                           if(_form.currentState!.validate())
                           {
                             if(_role==0)
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => ApplicantRegisterScreen())
+                                      builder: (context) => ApplicantRegisterScreen(registerTheme: widget.registerTheme,))
                               );
                               //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
                             }
@@ -265,32 +289,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => RecruiterRegisterScreen())
+                                      builder: (context) => RecruiterRegisterScreen(registerTheme: widget.registerTheme,))
                               );
                               // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
                             }
                           }
-
-                        },
-                        child: Text(
-                          'Register',
-                          style: TextStyle(
+                        }),
+                        icon: const Icon(
+                          Icons.app_registration,
+                          size: 28,
+                        ),
+                        label: Container(
+                          alignment: Alignment.center,
+                          width: 150,
+                          height: 35,
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(
+                              fontSize: 15,
                               color: Colors.white,
-                              fontSize: 20
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(4, 88, 125,1),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-
-                        style: OutlinedButton.styleFrom(
-                          fixedSize: Size(160,55),
-                          primary: Colors.indigo,
-                          backgroundColor: Colors.indigo,
-                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'have an account?',
+                            style: widget.registerTheme.textTheme.labelMedium,
                           ),
                           TextButton(
                             onPressed: () {
@@ -299,10 +333,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: Text(
                               'Login Now',
+                              style: widget.registerTheme.textTheme.bodyText2,
                             ),
                           ),
                         ],
                       ),
+                    /*  Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'have an account?',
+                            style: widget.registerTheme.textTheme.labelMedium,
+                          ),
+                         TextButton.icon(
+                            onPressed: (() {
+
+                                Navigator.of(context).pushReplacementNamed('/Login_Screen');
+
+                            }),
+                            icon: const Icon(
+                              Icons.login_outlined,
+                              size: 28,
+                            ),
+                            label: Container(
+                              alignment: Alignment.center,
+                              width: 150,
+                              height: 35,
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(4, 88, 125,1),
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                            ),
+                          ),
+
+                        ],
+                      ),*/
                     ],
                   ),
                 )

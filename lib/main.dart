@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/providers/Notifications.dart';
+import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
@@ -14,9 +15,12 @@ import 'package:history_feature/screens/splash_screen.dart';
 import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/Login_Screen.dart';
+import 'package:history_feature/models/GlobalTheme.dart';
+import 'package:history_feature/screens/ForgetPassword_Screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => GlobalTheme()),
     ChangeNotifierProvider(create: (_) => Auth()),
     ChangeNotifierProvider(create: (_) => Jobs(), ),
     ChangeNotifierProvider(create: (_) => Notifications()),
@@ -28,40 +32,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
+    final ThemeData globalTheme = Provider.of<GlobalTheme>(context).globalTheme;
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Int-Hire',
-        theme: theme.copyWith(
-          primaryColor: Color(0xFFc7e6ff),
-          colorScheme: theme.colorScheme.copyWith(secondary: Color(0xFFc7e6ff)),
+          debugShowCheckedModeBanner: false,
+          title: 'Int-Hire',
+          theme: globalTheme,
+          home: SplashScreen
+            (
+            SplashTheme: globalTheme,
+          )
+          ,
+          routes: {
+            LoginScreen.routeName: (ctx) => LoginScreen(loginTheme: globalTheme,),
+            SplashScreen.routeName: (ctx) => SplashScreen(SplashTheme: globalTheme,),
+            RegisterScreen.routeName: (ctx) => RegisterScreen(registerTheme: globalTheme,),
+            JobView.routeName: (ctx) => JobView(jobTheme: globalTheme,),
+            add_test.routeName: (ctx) => add_test(),
+            JobOperations.routeName: (ctx) => JobOperations(),
+            HistoryHomePage.routeName: (ctx) => HistoryHomePage(historyTheme: globalTheme,),
+            Settings_page.routeName: (ctx)=>Settings_page(settingsTheme: globalTheme,),
+            Notification_page.routeName:(ctx)=>Notification_page(notificationTheme: globalTheme,),
+            ForgotPassword.routeName:(ctx)=>ForgotPassword(registerTheme: globalTheme),
+          //  ForgotPassword.id: (context) => ForgotPassword(),
+            applicant_register_screen.routeName: (ctx) => applicant_register_screen(registerTheme: globalTheme,),
+            recruiter_register_screen.routeName: (ctx) => recruiter_register_screen(registerTheme: globalTheme,),
+            ProfileScreen.routeName: (ctx) => ProfileScreen(),
+          },
         ),
-        home: NotificationPage(),
-        /*auth.isAuth
-              ? JobView()
-              : FutureBuilder(
-            future: auth.tryAutoLogin(),
-            builder: (_, authResultSnapshot) =>
-            authResultSnapshot.connectionState ==
-                ConnectionState.waiting
-                ? SplashScreen()
-                : JobView(),
-          ),*/
-        routes: {
-          LoginScreen.routeName: (ctx) => LoginScreen(),
-          SplashScreen.routeName: (ctx) => SplashScreen(),
-          RegisterScreen.routeName: (ctx) => RegisterScreen(),
-          JobView.routeNameForView: (ctx) => JobView(history: false),
-          JobView.routeNameForHistory: (ctx) => JobView(history: true),
-          AddTest.routeName: (ctx) => AddTest(),
-          JobOperations.routeName: (ctx) => JobOperations(),
-          SettingsPage.routeName: (ctx) => SettingsPage(),
-          NotificationPage.routeName: (ctx) => NotificationPage(),
-          ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(),
-          RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
-          ProfileScreen.routeName: (ctx) => ProfileScreen(),
-        },
-      ),
     );
   }
 }

@@ -10,7 +10,8 @@ import '../widgets/notifications_list.dart';
 import 'complain_form.dart';
 
 class NotificationPage extends StatelessWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+    final ThemeData notificationTheme;
+  const NotificationPage({Key? key,required this.notificationTheme}) : super(key: key);
   static const routeName = '/Notifications';
   @override
   Widget build(BuildContext context) {

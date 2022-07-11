@@ -7,14 +7,16 @@ import '../providers/jobs.dart';
 import '../widgets/main_drawer.dart';
 
 class JobView extends StatelessWidget {
-  JobView({Key? key,this.history = false}) : super(key: key);
+  JobView({Key? key,this.history = false, required this.jobTheme}) : super(key: key);
   static const routeNameForView = '/home';
   static const routeNameForHistory = '/history';
+  final ThemeData jobTheme;
   final bool history;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(),
+      backgroundColor: this.jobTheme.backgroundColor,
+      drawer: MainDrawer(this.jobTheme),
       appBar: AppBar(
         actions: [
           IconButton(

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'ComplaintForm_Page.dart';
 
 class NotificationPage extends StatefulWidget {
+  final ThemeData notificationTheme;
+
+  const NotificationPage({Key? key,required this.notificationTheme}) : super(key: key);
   @override
   State<NotificationPage> createState() => _NotificationPageState();
 }
@@ -13,7 +16,7 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
 
       appBar: AppBar(
-        backgroundColor: Colors.blue[400],
+        backgroundColor: widget.notificationTheme.appBarTheme.backgroundColor,
         title: Text('Notifications',
           textAlign: TextAlign.start,
           style: TextStyle(
@@ -58,10 +61,10 @@ class _NotificationPageState extends State<NotificationPage> {
           Navigator.of(context).push(MaterialPageRoute(builder:
               (context)=>ComplaintForm()));
         },
-        backgroundColor: Colors.blue[400],
+        backgroundColor: widget.notificationTheme.backgroundColor,
         child:Image.asset(
           'assets/compose.png',
-          scale:1.2,
+          scale:1.0,
           color: Colors.white,
         ),
       ),

@@ -3,19 +3,19 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 
 class MainDrawer extends StatelessWidget {
+  final ThemeData drawerTheme;
+  MainDrawer( this.drawerTheme);
   Widget buildListTile(String title, IconData icon, void Function()? tapHandler) {
     return ListTile(
       leading: Icon(
         icon,
         size: 26,
+        color: Colors.black,
       ),
       title: Text(
         title,
-        style: TextStyle(
-          fontFamily: 'RobotoCondensed',
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
+        style: this.drawerTheme.textTheme.headline2
+
       ),
       onTap: tapHandler,
     );
@@ -31,7 +31,7 @@ class MainDrawer extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
-            color: Theme.of(context).primaryColor,
+            color: this.drawerTheme.appBarTheme.backgroundColor,
             child: Text(
               'Profile',
               style: TextStyle(
@@ -44,16 +44,16 @@ class MainDrawer extends StatelessWidget {
             height: 20,
           ),
           buildListTile('Home', Icons.home, () {
-            Navigator.of(context).pushReplacementNamed('/home');
+            Navigator.of(context).pushReplacementNamed('/home'); ///job_view
           }),
           buildListTile('History', Icons.history, () {
             Navigator.of(context).pushReplacementNamed('/history');
           }),
           buildListTile('Notification', Icons.notifications, () {
-            Navigator.of(context).pushReplacementNamed('/Notifications');
+            Navigator.of(context).pushReplacementNamed('/Notifications'); ///notification_page
           }),
           buildListTile('Settings', Icons.settings, () {
-            Navigator.of(context).pushReplacementNamed('/Settings');
+            Navigator.of(context).pushReplacementNamed('/Settings'); ///settings_page
           }),
           Spacer(),
           buildListTile('logout', Icons.logout, () {

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../helpers/pair.dart';
 import '../models/applicant_user.dart';
 import '../models/job.dart';
 
 class ApplicantRegisterScreen extends StatefulWidget {
+  final ThemeData registerTheme;
   static const routeName = '/applicant_register_screen';
-  const ApplicantRegisterScreen({Key? key}) : super(key: key);
+  const ApplicantRegisterScreen({Key? key, required this.registerTheme}) : super(key: key);
 
   @override
   State<ApplicantRegisterScreen> createState() => _ApplicantRegisterScreenState();
@@ -15,7 +17,8 @@ class ApplicantRegisterScreen extends StatefulWidget {
 
 class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String twitterUsername, skills,interestedIn,applicantCity,applicantCountry;
+  late String twitterUsername, skills,interestedIn,applicantCity,applicantCountry, birthday;
+
 
   Education _education = Education.Bachelors;
 
@@ -40,10 +43,10 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(),
+        const Divider(),  //(4,88,125,1)
         Text(
           text,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(4,88,125,1)),
         ),
         ...list,
       ],
@@ -54,6 +57,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: widget.registerTheme.backgroundColor,
       body: Center(
           child: SingleChildScrollView(
             child: Form(
@@ -64,15 +68,14 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                     Column(
                       children: <Widget>[
                         Text(
-                          'Applicant Register',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          'Applicant Registeration',
+                            style: GoogleFonts.sourceCodePro(fontSize: 20 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                         ),
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: FaIcon(FontAwesomeIcons.twitter),
@@ -90,10 +93,12 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                               //print(companyName);
                             });
                           },
-                        ),
+                        ),   //twitter
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: FaIcon(FontAwesomeIcons.boltLightning),
@@ -110,10 +115,12 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                               skills = val;
                             });
                           },
-                        ),
+                        ),   //skills
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: Icon(Icons.interests_rounded),
@@ -130,10 +137,12 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                               interestedIn = val;
                             });
                           },
-                        ),
+                        ),   //interested
                         SizedBox(
                           height: 25,
                         ),
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: FaIcon(FontAwesomeIcons.city),
@@ -141,19 +150,23 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                           ),
                           keyboardType: TextInputType.name,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid city';
-                            }
+                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct name";
+                            else
+                              return null;
                           },
                           onFieldSubmitted: (val) {
                             setState(() {
                               applicantCity = val;
                             });
                           },
-                        ),
+                        ),    //city
                         SizedBox(
                           height: 25,
                         ),
+
+
+
                         TextFormField(
                           decoration: InputDecoration(
                             icon: Icon(Icons.map_rounded),
@@ -161,19 +174,24 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                           ),
                           keyboardType: TextInputType.name,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid country';
-                            }
+                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct name";
+                            else
+                              return null;
                           },
                           onFieldSubmitted: (val) {
                             setState(() {
                               applicantCountry = val;
                             });
                           },
-                        ),
+                        ),   //country
                         SizedBox(
                           height: 25,
                         ),
+
+
+
+
                         _radioButtonGroup(
                           text: 'Military status',
                           list: _militaryStatusList.map((pair) {
@@ -214,16 +232,33 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                         SizedBox(
                           height: 25,
                         ),
-                        OutlinedButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Submit',
-                            style: TextStyle(color: Colors.white, fontSize: 20),
+                        TextButton.icon(
+                          onPressed: (() {
+
+                            if(_formKey.currentState!.validate())
+                            {
+                              Navigator.of(context).pushReplacementNamed('/history');
+                            }
+                          }),
+                          icon: const Icon(
+                            Icons.app_registration,
+                            size: 28,
                           ),
-                          style: OutlinedButton.styleFrom(
-                            fixedSize: Size(160, 55),
-                            primary: Colors.indigo,
-                            backgroundColor: Colors.indigo,
+                          label: Container(
+                            alignment: Alignment.center,
+                            width: 150,
+                            height: 35,
+                            child: const Text(
+                              'Submit',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                              ),
+                            ),
+                            decoration: BoxDecoration(
+                              color: Color.fromRGBO(4, 88, 125,1),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
                           ),
                         ),
                       ],
