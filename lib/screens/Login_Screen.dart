@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 20.0, ),
                       Text(
                         'LOGIN',
-                        style: GoogleFonts.secularOne(fontSize: 50 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
+                        style: GoogleFonts.secularOne(fontSize: 40 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                       ),
                       SizedBox(
                         height: 40.0,
@@ -157,8 +157,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 10.0,
                       ),
-                      MaterialButton(
-                        onPressed: () {},
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacementNamed('/ForgetPassword_Screen');
+                        },
                         child: Text(
                           'Forgot your Password?',
                           style: widget.loginTheme.textTheme.bodyText2
@@ -193,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.of(context).pushReplacementNamed('/Register_Screen');
                             },
                             child: Text(
-                              'Register Now',
+                                  'Register Now',
                               style: widget.loginTheme.textTheme.bodyText2,
                             ),
                           ),

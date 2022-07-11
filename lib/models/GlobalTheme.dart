@@ -16,7 +16,7 @@ class GlobalTheme with ChangeNotifier {
 
       ),
       bodyText2: TextStyle(
-        color: Color.fromRGBO(14, 30, 80, 1),
+        color: Color.fromRGBO(70, 155, 196,1),
         //Color.fromRGBO(64, 191, 197, 1),
         fontSize: 15,
         fontWeight: FontWeight.bold,

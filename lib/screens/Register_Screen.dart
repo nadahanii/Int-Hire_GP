@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       TextFormField(
                           decoration: InputDecoration(
-                            labelText: 'name',
+                            labelText: 'First name',
                             prefixIcon: Icon(
                               Icons.person,
                             ),
@@ -83,7 +83,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             else
                               return null;
                           }
-                      ),  //name
+                      ),  //first name
+                      SizedBox(
+                        height: 15.0,
+                      ),
+
+                      TextFormField(
+                          decoration: InputDecoration(
+                            labelText: 'Second name',
+                            prefixIcon: Icon(
+                              Icons.person,
+                            ),
+                          ),
+                          validator: (value)
+                          {
+                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct name";
+                            else
+                              return null;
+                          }
+                      ),  //second name
                       SizedBox(
                         height: 15.0,
                       ),
@@ -92,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       TextFormField(
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
-                            labelText: 'phone number',
+                            labelText: 'Phone number',
                             prefixIcon: Icon(
                               Icons.phone,
                             ),

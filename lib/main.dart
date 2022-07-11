@@ -17,6 +17,7 @@ import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/Login_Screen.dart';
 import 'package:history_feature/models/GlobalTheme.dart';
+import 'package:history_feature/screens/ForgetPassword_Screen.dart';
 
 import 'screens/HistoryHomePage.dart';
 
@@ -65,6 +66,8 @@ class MyApp extends StatelessWidget {
             HistoryHomePage.routeName: (ctx) => HistoryHomePage(),
             Settings_page.routeName: (ctx)=>Settings_page(),
             Notification_page.routeName:(ctx)=>Notification_page(),
+            ForgotPassword.routeName:(ctx)=>ForgotPassword(registerTheme: globalTheme),
+          //  ForgotPassword.id: (context) => ForgotPassword(),
             applicant_register_screen.routeName: (ctx) => applicant_register_screen(registerTheme: globalTheme,),
             recruiter_register_screen.routeName: (ctx) => recruiter_register_screen(registerTheme: globalTheme,),
             ProfileScreen.routeName: (ctx) => ProfileScreen(),

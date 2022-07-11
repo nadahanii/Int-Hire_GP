@@ -17,7 +17,8 @@ class applicant_register_screen extends StatefulWidget {
 
 class _applicant_register_screenState extends State<applicant_register_screen> {
   final _formKey = GlobalKey<FormState>();
-  late String twitterUsername, skills,interestedIn,applicantCity,applicantCountry;
+  late String twitterUsername, skills,interestedIn,applicantCity,applicantCountry, birthday;
+
 
   Education _education = Education.Bachelors;
 
