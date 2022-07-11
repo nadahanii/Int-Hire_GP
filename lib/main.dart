@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:history_feature/providers/Notifications.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
@@ -17,7 +18,8 @@ import 'package:history_feature/screens/Login_Screen.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => Auth()),
-    ChangeNotifierProvider(create: (_) => Jobs(),),
+    ChangeNotifierProvider(create: (_) => Jobs(), ),
+    ChangeNotifierProvider(create: (_) => Notifications()),
   ], child: MyApp()));
 }
 
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFFc7e6ff),
           colorScheme: theme.colorScheme.copyWith(secondary: Color(0xFFc7e6ff)),
         ),
-        home: JobView(),
+        home: NotificationPage(),
         /*auth.isAuth
               ? JobView()
               : FutureBuilder(
@@ -55,10 +57,8 @@ class MyApp extends StatelessWidget {
           JobOperations.routeName: (ctx) => JobOperations(),
           SettingsPage.routeName: (ctx) => SettingsPage(),
           NotificationPage.routeName: (ctx) => NotificationPage(),
-          ApplicantRegisterScreen.routeName: (ctx) =>
-              ApplicantRegisterScreen(),
-          RecruiterRegisterScreen.routeName: (ctx) =>
-              RecruiterRegisterScreen(),
+          ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(),
+          RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(),
         },
       ),
