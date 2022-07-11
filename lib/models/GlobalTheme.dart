@@ -12,45 +12,51 @@ class GlobalTheme with ChangeNotifier {
         fontWeight: FontWeight.bold,
         fontStyle: FontStyle.normal,
         color: Colors.white,
-        fontSize: 10
+        fontSize: 15
 
       ),
       bodyText2: TextStyle(
         //color: Colors.,
         color: Color.fromRGBO(4,88,125,1),
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: FontWeight.bold,
       ),
-      caption: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.italic,
+      caption: TextStyle( ///items in settings_page
+          fontWeight: FontWeight.bold,
+          fontFamily: 'RobotoCondensed',
+          color: Colors.black,
+          fontSize: 20
       ),
-      headline1: TextStyle(
-        color: Colors.deepPurple,
-        fontSize: 50,
-        fontFamily: 'Allison',
+      headline1: TextStyle( ///title in appBar
+        color: Colors.white/*Color.fromRGBO(4,88,125,1)*/,
+        fontSize: 35,
+        //fontFamily: 'Allison',
       ),
-      headline2: TextStyle(
-        color: Colors.deepOrange,
-        fontSize: 30,
-        fontWeight: FontWeight.bold,
+      headline2: TextStyle( ///style for items in drawer
+          fontWeight: FontWeight.bold,
+          fontFamily: 'RobotoCondensed',
+          color: Colors.black,
+          fontSize: 24
       ),
     ),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.amber,
+      backgroundColor: Color.fromRGBO(4, 88, 125, 1),
       // This will control the "back" icon
-      iconTheme: IconThemeData(color: Colors.red),
+      iconTheme: IconThemeData(color: Colors.white),
       // This will control action icon buttons that locates on the right
-      actionsIconTheme: IconThemeData(color: Colors.blue),
+      actionsIconTheme: IconThemeData(color: Color.fromRGBO(4, 88, 125, 1)),
       centerTitle: false,
       elevation: 15,
-      titleTextStyle: TextStyle(
+     /* titleTextStyle: TextStyle(
         color: Colors.deepPurple,
         fontWeight: FontWeight.bold,
         fontFamily: 'Allison',
         fontSize: 40,
-      ),
+      ),*/
     ),
+    drawerTheme: const DrawerThemeData(
+      backgroundColor: Color.fromRGBO(199, 231, 255, 1),
+
+    )
   );
 }

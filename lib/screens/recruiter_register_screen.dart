@@ -112,7 +112,7 @@ class _recruiter_register_screenState extends State<recruiter_register_screen> {
 
                   if(_formKey.currentState!.validate())
                   {
-                    Navigator.of(context).pushReplacementNamed('/HistoryHomePage');
+                    Navigator.of(context).pushReplacementNamed('/history');
                   }
                 }),
                 icon: const Icon(
@@ -126,7 +126,7 @@ class _recruiter_register_screenState extends State<recruiter_register_screen> {
                   child: const Text(
                     'Submit',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 15,
                       color: Colors.white,
                     ),
                   ),

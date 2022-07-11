@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           child: const Text(
                             'Login',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Colors.white,
                             ),
                           ),
@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           child: const Text(
                             'Register',
                             style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               color: Colors.white,
                             ),
                           ),

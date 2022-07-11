@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class Settings_page extends StatefulWidget{
+  final ThemeData settingsTheme;
+  const Settings_page({Key? key,required this.settingsTheme}) : super(key: key);
   static const routeName = '/Settings';
 
   @override
@@ -11,8 +13,9 @@ class _Settings_pageState extends State<Settings_page> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: widget.settingsTheme.backgroundColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 1,
         leading: IconButton(
           onPressed: (){
@@ -20,7 +23,7 @@ class _Settings_pageState extends State<Settings_page> {
           },
           icon:Icon(
             Icons.arrow_back,
-            color:Colors.green,
+            color:Colors.white,
           )
         ),
       ),
@@ -43,10 +46,7 @@ class _Settings_pageState extends State<Settings_page> {
                       builder: (BuildContext context){
                        return AlertDialog(
                          title:Text("Language",
-                           style:TextStyle(
-                               fontSize: 20,
-                               fontWeight: FontWeight.bold
-                           ),
+                           style: widget.settingsTheme.textTheme.caption,
                          ),
                          content:Column(
                            mainAxisSize: MainAxisSize.min,
@@ -81,15 +81,12 @@ class _Settings_pageState extends State<Settings_page> {
                   children: [
                     Text(
                       "Language",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600],
-                      ),
+                      style: widget.settingsTheme.textTheme.caption,
                     ),
                     Icon(
                       Icons.arrow_forward_ios,
-                      color: Colors.grey,
+                      color: Colors.black,
+                      size: 24,
                     )
                   ],
                 ),
@@ -102,11 +99,7 @@ class _Settings_pageState extends State<Settings_page> {
                 children: [
                   Text(
                     "Theme",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey[600],
-                    ),
+                    style: widget.settingsTheme.textTheme.caption,
                   ),
                   Transform.scale(
                     scale:0.7,

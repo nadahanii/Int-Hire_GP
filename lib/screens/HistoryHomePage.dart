@@ -6,7 +6,9 @@ import '../providers/jobs.dart';
 import '../widgets/HistoryListItem.dart';
 
 class HistoryHomePage extends StatefulWidget {
+  final ThemeData historyTheme;
   static const routeName = '/history';
+  const HistoryHomePage({Key? key,required this.historyTheme}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -20,11 +22,13 @@ class _MyHomePageState extends State<HistoryHomePage> {
   Widget build(BuildContext context) {
     final jobs = Provider.of<Jobs>(context).items;
     return Scaffold(
+      backgroundColor: widget.historyTheme.backgroundColor,
       drawer: SafeArea(
-        child: MainDrawer(),
+        child: MainDrawer(widget.historyTheme),
       ),
       appBar: AppBar(
-        title: Text('History'),
+        backgroundColor: widget.historyTheme.appBarTheme.backgroundColor,
+        title: Text('History',style: widget.historyTheme.textTheme.headline1,),
         centerTitle: true,
         actions: <Widget>[
           IconButton(

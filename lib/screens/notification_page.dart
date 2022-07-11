@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'complain_form.dart';
 class Notification_page extends StatelessWidget{
-  const Notification_page({Key? key}) : super(key: key);
+  final ThemeData notificationTheme;
+  const Notification_page({Key? key,required this.notificationTheme}) : super(key: key);
   static const routeName = '/Notifications';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: this.notificationTheme.backgroundColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
         elevation: 1,
         leading: IconButton(
             onPressed: (){
@@ -16,23 +18,24 @@ class Notification_page extends StatelessWidget{
             },
             icon:Icon(
               Icons.arrow_back,
-              color:Colors.blue,
+              color:Colors.white,
             )
         ),
         title: Text("Notifications",
-          style:TextStyle(fontSize: 25,fontWeight: FontWeight.w500,color:Colors.black),
+          style: this.notificationTheme.textTheme.headline1,
+
         ),
       ),
       body:listview(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder:
-              (context)=>ComplaintForm()));
+              (context)=>ComplaintForm(complaintTheme: this.notificationTheme,)));
         },
-        backgroundColor: Colors.blue[400],
+        backgroundColor: this.notificationTheme.appBarTheme.backgroundColor,
         child:Image.asset(
           'assets/compose.png',
-           scale:1.2,
+           scale:1.6,
           color: Colors.white,
         ),
       ),
@@ -45,7 +48,7 @@ class Notification_page extends StatelessWidget{
         return listviewitem(index);
       },
       separatorBuilder: (context, index) {
-        return Divider(height: 0,);
+        return Divider(height: 3,);
       },
       itemCount: 15,
     );
@@ -82,9 +85,9 @@ class Notification_page extends StatelessWidget{
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Colors.grey.shade300,
+        color: Colors.white,
       ),
-      child: Icon(Icons.notifications,size: 25,color: Colors.grey.shade700),
+      child: Icon(Icons.notifications,size: 25,color: this.notificationTheme.appBarTheme.backgroundColor),
     );
   }
   Widget message(int index){
