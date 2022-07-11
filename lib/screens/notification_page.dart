@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/widgets/notification_item.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/Notifications.dart';
 import '../widgets/main_drawer.dart';
-import '../widgets/notifications_list.dart';
 import 'complain_form.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -16,7 +14,7 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MainDrawer(),
+      drawer: MainDrawer(notificationTheme),
       appBar: AppBar(
         actions: [
           IconButton(
@@ -25,7 +23,7 @@ class NotificationPage extends StatelessWidget {
             tooltip: "complaint",
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ComplaintForm()));
+                  .push(MaterialPageRoute(builder: (context) => ComplaintForm(complaintTheme: notificationTheme,)));
             },
           )
         ],

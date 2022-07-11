@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class SettingsPage extends StatefulWidget{
   final ThemeData settingsTheme;
-  const Settings_page({Key? key,required this.settingsTheme}) : super(key: key);
+  const SettingsPage({Key? key,required this.settingsTheme}) : super(key: key);
   static const routeName = '/Settings';
 
   @override

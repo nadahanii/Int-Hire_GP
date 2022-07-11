@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:history_feature/screens/applicant_register_screen.dart';
-import 'package:history_feature/screens/recruiter_register_screen.dart';
-import '../helpers/pair.dart';
 
 class ForgotPassword extends StatefulWidget {
   //const ForgotPassword({Key? key}) : super(key: key);

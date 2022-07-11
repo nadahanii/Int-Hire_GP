@@ -15,14 +15,15 @@ import 'package:history_feature/screens/splash_screen.dart';
 import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/Login_Screen.dart';
-import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/screens/ForgetPassword_Screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => GlobalTheme()),
     ChangeNotifierProvider(create: (_) => Auth()),
-    ChangeNotifierProvider(create: (_) => Jobs(), ),
+    ChangeNotifierProvider(
+      create: (_) => Jobs(),
+    ),
     ChangeNotifierProvider(create: (_) => Notifications()),
   ], child: MyApp()));
 }
@@ -31,35 +32,48 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = ThemeData();
     final ThemeData globalTheme = Provider.of<GlobalTheme>(context).globalTheme;
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Int-Hire',
-          theme: globalTheme,
-          home: SplashScreen
-            (
-            SplashTheme: globalTheme,
-          )
-          ,
-          routes: {
-            LoginScreen.routeName: (ctx) => LoginScreen(loginTheme: globalTheme,),
-            SplashScreen.routeName: (ctx) => SplashScreen(SplashTheme: globalTheme,),
-            RegisterScreen.routeName: (ctx) => RegisterScreen(registerTheme: globalTheme,),
-            JobView.routeName: (ctx) => JobView(jobTheme: globalTheme,),
-            add_test.routeName: (ctx) => add_test(),
-            JobOperations.routeName: (ctx) => JobOperations(),
-            HistoryHomePage.routeName: (ctx) => HistoryHomePage(historyTheme: globalTheme,),
-            Settings_page.routeName: (ctx)=>Settings_page(settingsTheme: globalTheme,),
-            Notification_page.routeName:(ctx)=>Notification_page(notificationTheme: globalTheme,),
-            ForgotPassword.routeName:(ctx)=>ForgotPassword(registerTheme: globalTheme),
-
-            applicant_register_screen.routeName: (ctx) => applicant_register_screen(registerTheme: globalTheme,),
-            recruiter_register_screen.routeName: (ctx) => recruiter_register_screen(registerTheme: globalTheme,),
-            ProfileScreen.routeName: (ctx) => ProfileScreen(profileTheme: globalTheme,),
-          },
-        ),
+        debugShowCheckedModeBanner: false,
+        title: 'Int-Hire',
+        theme: globalTheme,
+        home: JobView(jobTheme: globalTheme,),
+        routes: {
+          LoginScreen.routeName: (ctx) => LoginScreen(
+                loginTheme: globalTheme,
+              ),
+          SplashScreen.routeName: (ctx) => SplashScreen(
+                SplashTheme: globalTheme,
+              ),
+          RegisterScreen.routeName: (ctx) => RegisterScreen(
+                registerTheme: globalTheme,
+              ),
+          JobView.routeNameForView: (ctx) =>
+              JobView(history: false, jobTheme: globalTheme),
+          JobView.routeNameForHistory: (ctx) =>
+              JobView(history: true, jobTheme: globalTheme),
+          AddTest.routeName: (ctx) => AddTest(),
+          JobOperations.routeName: (ctx) => JobOperations(),
+          SettingsPage.routeName: (ctx) => SettingsPage(
+                settingsTheme: globalTheme,
+              ),
+          NotificationPage.routeName: (ctx) => NotificationPage(
+                notificationTheme: globalTheme,
+              ),
+          ForgotPassword.routeName: (ctx) =>
+              ForgotPassword(registerTheme: globalTheme),
+          ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(
+                registerTheme: globalTheme,
+              ),
+          RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(
+                registerTheme: globalTheme,
+              ),
+          ProfileScreen.routeName: (ctx) => ProfileScreen(
+                profileTheme: globalTheme,
+              ),
+        },
+      ),
     );
   }
 }

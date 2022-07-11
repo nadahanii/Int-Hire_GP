@@ -1,4 +1,3 @@
-import 'package:history_feature/models/test.dart';
 
 class Notification {
   late int id;

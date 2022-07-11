@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ComplaintForm extends StatefulWidget{
+class ComplaintForm extends StatefulWidget {
   final ThemeData complaintTheme;
-  const ComplaintForm({Key? key,required this.complaintTheme}) : super(key: key);
+  const ComplaintForm({Key? key, required this.complaintTheme})
+      : super(key: key);
   @override
   State<ComplaintForm> createState() => _ComplaintFormState();
 }
@@ -23,12 +24,11 @@ class _ComplaintFormState extends State<ComplaintForm> {
             },
             icon: Icon(
               Icons.arrow_back,
-              color:Colors.white,
-            )
-        ),
+              color: Colors.white,
+            )),
         title: Text(
-            'Complaint Form',
-          style:widget.complaintTheme.textTheme.headline1,
+          'Complaint Form',
+          style: widget.complaintTheme.textTheme.headline1,
         ),
         centerTitle: true,
       ),
@@ -66,6 +66,38 @@ class _ComplaintFormState extends State<ComplaintForm> {
             height: 20.0,
           ),
           Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Prossesing Data')),
+                  );
+                }
+              },
+              child: Text("test"),
+            ),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Expanded(
+            child: TextFormField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Reason of Complaint'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please Enter Some Text';
+                }
+                return null;
+              },
+            ),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: ElevatedButton(
                 onPressed: () {
@@ -75,55 +107,21 @@ class _ComplaintFormState extends State<ComplaintForm> {
                     );
                   }
                 },
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Expanded(
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Reason of Complaint'
-                  ),
-                  validator: (value){
-                    if(value==null ||value.isEmpty){
-                      return'Please Enter Some Text';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16.0),
-                  child:ElevatedButton(
-                    onPressed: (){
-                      if(_formKey.currentState!.validate()){
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Prossesing Data')),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(4, 88, 125,1),
-                      fixedSize: Size(150,35)
-
-                    ),
-                    /*style: ElevatedButtonTheme(
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(4, 88, 125, 1),
+                    fixedSize: Size(150, 35)),
+                /*style: ElevatedButtonTheme(
 
                     ),*/
-                    child: Text('Submit',
-                    style: TextStyle(
-                      fontSize: 17,
-                      color: Colors.white,
-                    ),
-                    ),
-                  )
-              )
-            ]
-        ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                  ),
+                ),
+              ))
+        ]),
       ),
     );
   }

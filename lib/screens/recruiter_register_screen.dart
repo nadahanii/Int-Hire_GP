@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:history_feature/screens/profile_screen.dart';
-import 'package:history_feature/screens/HistoryHomePage.dart';
 
 class RecruiterRegisterScreen extends StatefulWidget {
   static const routeName = '/recruiter_register_screen';
