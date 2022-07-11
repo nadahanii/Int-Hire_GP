@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
@@ -15,11 +16,13 @@ import 'package:history_feature/screens/splash_screen.dart';
 import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/Login_Screen.dart';
+import 'package:history_feature/models/GlobalTheme.dart';
 
 import 'screens/HistoryHomePage.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => GlobalTheme()),
     ChangeNotifierProvider(create: (_) => Auth()),
     ChangeNotifierProvider(
       create: (BuildContext context) {
@@ -34,15 +37,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
+    final ThemeData globalTheme = Provider.of<GlobalTheme>(context).globalTheme;
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Int-Hire',
-          theme: theme.copyWith(
-            primaryColor: Color(0xFFc7e6ff),
-            colorScheme: theme.colorScheme.copyWith(secondary: Color(0xFFc7e6ff)),
-          ),
-          home: JobView(),/*auth.isAuth
+          theme: globalTheme,
+          home: auth.isAuth
               ? JobView()
               : FutureBuilder(
             future: auth.tryAutoLogin(),
@@ -50,10 +51,12 @@ class MyApp extends StatelessWidget {
             authResultSnapshot.connectionState ==
                 ConnectionState.waiting
                 ? SplashScreen()
-                : JobView(),
-          ),*/
+                : LoginScreen(
+              loginTheme: globalTheme,
+            ),
+          ),
           routes: {
-            LoginScreen.routeName: (ctx) => LoginScreen(),
+            LoginScreen.routeName: (ctx) => LoginScreen(loginTheme: globalTheme,),
             SplashScreen.routeName: (ctx) => SplashScreen(),
             RegisterScreen.routeName: (ctx) => RegisterScreen(),
             JobView.routeName: (ctx) => JobView(),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+
+  final ThemeData loginTheme;
+  LoginScreen({Key? key, required this.loginTheme}) : super(key: key);
   static const routeName = '/Login_Screen';
 
   @override
@@ -48,6 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(255, 198, 196,2),
       //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -60,11 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                               height: 20.0, ),
                       Text(
-                        'Login',
-                        style: TextStyle(
-                          fontSize: 40.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        'LOGIN',
+                        style: GoogleFonts.secularOne(fontSize: 50 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
                       ),
                       SizedBox(
                         height: 40.0,
