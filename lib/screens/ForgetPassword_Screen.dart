@@ -84,9 +84,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           child: const Text(
                             'Send Reset Link',
                             style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.normal,
+                                color: Colors.white,
+                                fontSize: 15
+
                             ),
+
                           ),
                           decoration: BoxDecoration(
                             color: Color.fromRGBO(4, 88, 125,1),
@@ -103,7 +107,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
                             Navigator.pushNamed(context, '/Login_Screen');
 
-                          //Navigator.pushNamed(context, '/Login_Screen');
+
                         }),
                         icon: const Icon(
                           Icons.home,
@@ -116,8 +120,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           child: const Text(
                             'Return Login',
                             style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontStyle: FontStyle.normal,
+                                color: Colors.white,
+                                fontSize: 15
+
                             ),
                           ),
                           decoration: BoxDecoration(

@@ -54,10 +54,10 @@ class MyApp extends StatelessWidget {
             Settings_page.routeName: (ctx)=>Settings_page(settingsTheme: globalTheme,),
             Notification_page.routeName:(ctx)=>Notification_page(notificationTheme: globalTheme,),
             ForgotPassword.routeName:(ctx)=>ForgotPassword(registerTheme: globalTheme),
-          //  ForgotPassword.id: (context) => ForgotPassword(),
+
             applicant_register_screen.routeName: (ctx) => applicant_register_screen(registerTheme: globalTheme,),
             recruiter_register_screen.routeName: (ctx) => recruiter_register_screen(registerTheme: globalTheme,),
-            ProfileScreen.routeName: (ctx) => ProfileScreen(),
+            ProfileScreen.routeName: (ctx) => ProfileScreen(profileTheme: globalTheme,),
           },
         ),
     );
