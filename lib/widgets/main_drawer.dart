@@ -43,17 +43,20 @@ class MainDrawer extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
+          buildListTile('Profile', Icons.person_rounded, () {
+            Navigator.of(context).pushReplacementNamed('/profile_Screen');
+          }),
           buildListTile('Home', Icons.home, () {
-            Navigator.of(context).pushReplacementNamed('/home'); ///job_view
+            Navigator.of(context).pushReplacementNamed('/home');
           }),
           buildListTile('History', Icons.history, () {
             Navigator.of(context).pushReplacementNamed('/history');
           }),
           buildListTile('Notification', Icons.notifications, () {
-            Navigator.of(context).pushReplacementNamed('/Notifications'); ///notification_page
+            Navigator.of(context).pushReplacementNamed('/Notifications');
           }),
           buildListTile('Settings', Icons.settings, () {
-            Navigator.of(context).pushReplacementNamed('/Settings'); ///settings_page
+            Navigator.of(context).pushReplacementNamed('/Settings');
           }),
           Spacer(),
           buildListTile('logout', Icons.logout, () {

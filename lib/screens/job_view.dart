@@ -32,7 +32,7 @@ class JobView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 8.0, right: 0),
             child: Text(
-              'Jobs',
+              history ? 'History' : 'Jobs',
               style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,

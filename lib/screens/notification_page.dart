@@ -14,6 +14,7 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: notificationTheme.backgroundColor,
       drawer: MainDrawer(notificationTheme),
       appBar: AppBar(
         actions: [

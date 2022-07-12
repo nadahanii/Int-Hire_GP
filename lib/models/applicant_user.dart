@@ -3,18 +3,19 @@ import 'job.dart';
 enum MilitaryStatus { Postponed, Exempted, Completed, NotApplicable }
 
 class ApplicantUser {
-  final String name;
-  final String email;
-  final String phoneNumber;
-  final String password;
-  final String street;
-  final String city;
-  final String country;
-  final Education educationLevel;
-  final MilitaryStatus militaryStatus;
-  final String twitterUsername;
-  final String birthDay;
-  final bool isMale;
+  late String name;
+  late String email;
+  late String phoneNumber;
+  late String password;
+  late String street;
+  late String city;
+  late String country;
+  late Education educationLevel;
+  late MilitaryStatus militaryStatus;
+  late String twitterUsername;
+  late String birthDay;
+  late bool isMale;
+  late List<String> tags;
 
   ApplicantUser(
       {required this.name,
@@ -28,5 +29,22 @@ class ApplicantUser {
       required this.militaryStatus,
       this.twitterUsername = "",
       required this.birthDay,
-      required this.isMale});
+      required this.isMale,
+      required this.tags});
+
+  ApplicantUser.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    email = json['email'];
+    phoneNumber = json['phoneNumber'];
+    password = '';
+    street = json['street'];
+    city = json['city'];
+    country = json['country'];
+    educationLevel = Education.values[json['educationLevel']];
+    militaryStatus = MilitaryStatus.values[json['militaryStatus']];
+    twitterUsername = json['twitterUsername'] ?? "";
+    birthDay = json['birthDay'];
+    isMale = ((json['gender'] as int) == 1) ? true : false;
+    tags = json['tags'].cast<String>();
+  }
 }

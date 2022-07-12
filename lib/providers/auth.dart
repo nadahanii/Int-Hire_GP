@@ -1,16 +1,27 @@
 import 'dart:convert';
 import 'dart:async';
 
-
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/applicant_user.dart';
+
 class Auth with ChangeNotifier {
-  String? _token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXIyMkBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzQ3OTQyNiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.UMkQZBVoWdqHgV3sJHIy7_xcAaC-h_YjY2o4S74uFUI";
+  String? _token;
   DateTime? _expiryDate;
   Timer? _authTimer;
+  String? _userType;
+  ApplicantUser? _applicant;
+
+  String? get userType {
+    return _userType;
+  }
+
+  Object? get userObject {
+    return _applicant;
+  }
 
   bool get isAuth {
     return token != null;
@@ -26,23 +37,26 @@ class Auth with ChangeNotifier {
   }
 
   Future<String> _authenticate(String encode, String method) async {
-    final url = Uri.parse(
-        'http://hossam348-001-site1.etempurl.com/api/account/$method');
+    final url = Uri.parse('https://localhost:44324/api/account/$method');
+    print(url);
     try {
       final response = await http.post(
         url,
         body: encode,
         headers: {
           "content-type": "application/json",
+          "Accept": "application/json",
         },
       );
-      if(response.statusCode == 400 || response.statusCode == 401){
-        return response.body;
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body);
       }
       final responseData = json.decode(response.body);
       _token = responseData['token'];
       _expiryDate =
           DateFormat('dd-MM-yyyy hh:mm aaa').parse(responseData['expiration']);
+      _userType = responseData['userType'];
+      _applicant = ApplicantUser.fromJson(responseData["userDate"]);
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -50,7 +64,7 @@ class Auth with ChangeNotifier {
         {
           'token': _token,
           'expiration': _expiryDate!.toIso8601String(),
-          'userType' : responseData['userType'],
+          'userType': responseData['userType'],
         },
       );
       prefs.setString('userData', userData);
@@ -61,17 +75,12 @@ class Auth with ChangeNotifier {
     }
   }
 
-  Future<String> signup(
-      String data) async {
-    return _authenticate(
-        data,
-        "registerApplicant");
+  Future<String> signup(String data) async {
+    return _authenticate(data, "registerApplicant");
   }
 
   Future<String> login(String data) async {
-    return _authenticate(
-        data,
-        "Login");
+    return _authenticate(data, "Login");
   }
 
   Future<bool> tryAutoLogin() async {

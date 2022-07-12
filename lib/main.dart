@@ -9,21 +9,19 @@ import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
 import 'package:history_feature/screens/job_view.dart';
-import 'package:history_feature/screens/Register_Screen.dart';
+import 'package:history_feature/screens/register_screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
 import 'package:history_feature/screens/splash_screen.dart';
 import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:history_feature/screens/Login_Screen.dart';
-import 'package:history_feature/screens/ForgetPassword_Screen.dart';
+import 'package:history_feature/screens/login_screen.dart';
+import 'package:history_feature/screens/forget_password_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => GlobalTheme()),
     ChangeNotifierProvider(create: (_) => Auth()),
-    ChangeNotifierProvider(
-      create: (_) => Jobs(),
-    ),
+    ChangeNotifierProvider(create: (_) => Jobs()),
     ChangeNotifierProvider(create: (_) => Notifications()),
   ], child: MyApp()));
 }
@@ -38,7 +36,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Int-Hire',
         theme: globalTheme,
-        home: JobView(jobTheme: globalTheme,),
+        home: auth.token != null ? JobView(jobTheme: globalTheme) :LoginScreen(
+          loginTheme: globalTheme,
+        ),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(
                 loginTheme: globalTheme,
@@ -55,23 +55,18 @@ class MyApp extends StatelessWidget {
               JobView(history: true, jobTheme: globalTheme),
           AddTest.routeName: (ctx) => AddTest(),
           JobOperations.routeName: (ctx) => JobOperations(),
-          SettingsPage.routeName: (ctx) => SettingsPage(
-                settingsTheme: globalTheme,
-              ),
-          NotificationPage.routeName: (ctx) => NotificationPage(
-                notificationTheme: globalTheme,
-              ),
+          SettingsPage.routeName: (ctx) =>
+              SettingsPage(settingsTheme: globalTheme),
+          NotificationPage.routeName: (ctx) =>
+              NotificationPage(notificationTheme: globalTheme),
           ForgotPassword.routeName: (ctx) =>
               ForgotPassword(registerTheme: globalTheme),
-          ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(
-                registerTheme: globalTheme,
-              ),
-          RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(
-                registerTheme: globalTheme,
-              ),
-          ProfileScreen.routeName: (ctx) => ProfileScreen(
-                profileTheme: globalTheme,
-              ),
+          ApplicantRegisterScreen.routeName: (ctx) =>
+              ApplicantRegisterScreen(registerTheme: globalTheme),
+          RecruiterRegisterScreen.routeName: (ctx) =>
+              RecruiterRegisterScreen(registerTheme: globalTheme),
+          ProfileScreen.routeName: (ctx) =>
+              ProfileScreen(profileTheme: globalTheme),
         },
       ),
     );

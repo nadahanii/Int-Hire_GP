@@ -7,8 +7,7 @@ import '../helpers/pair.dart';
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/Register_Screen';
   final ThemeData registerTheme;
-  RegisterScreen({Key? key ,  required this.registerTheme}) : super(key: key);
-
+  RegisterScreen({Key? key, required this.registerTheme}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -17,14 +16,15 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   var passwordController = TextEditingController();
-  bool _isObscure = true;
+  bool _isObscure1 = true;
+  bool _isObscure2 = true;
 
   int _role = 1;
   final List<Pair<String, int>> _roleList = const [
     Pair('Applicant', 0),
     Pair('Recruiter', 1),
   ];
-  int _gender=1;
+  int _gender = 1;
   final List<Pair<String, int>> _genderList = const [
     Pair('female', 0),
     Pair('male', 1),
@@ -37,19 +37,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
         const Divider(),
         Text(
           text,
-          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(4,88,125,1)),
+          style: const TextStyle(
+              fontSize: 20, color: Color.fromRGBO(4, 88, 125, 1)),
         ),
         ...list,
       ],
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.registerTheme.backgroundColor,
-      //appBar: AppBar(),
+        backgroundColor: widget.registerTheme.backgroundColor,
+        //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -61,10 +61,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Text(
-                        'Register',
-                          style: GoogleFonts.sourceCodePro(fontSize: 30 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
-                      ),
+                      Text('Register',
+                          style: GoogleFonts.sourceCodePro(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w800,
+                              color: Color.fromRGBO(4, 88, 125, 4))),
                       SizedBox(
                         height: 40.0,
                       ),
@@ -76,14 +77,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Icons.person,
                             ),
                           ),
-                          validator: (value)
-                          {
-                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
                               return "Enter correct name";
                             else
                               return null;
-                          }
-                      ),  //first name
+                          }), //first name
                       SizedBox(
                         height: 15.0,
                       ),
@@ -95,18 +95,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Icons.person,
                             ),
                           ),
-                          validator: (value)
-                          {
-                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
                               return "Enter correct name";
                             else
                               return null;
-                          }
-                      ),  //second name
+                          }), //second name
                       SizedBox(
                         height: 15.0,
                       ),
-
 
                       TextFormField(
                           keyboardType: TextInputType.phone,
@@ -116,60 +114,60 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Icons.phone,
                             ),
                           ),
-                          validator: (value)
-                          {
-                            if (value!.isEmpty || !RegExp(r'^(01)[0-9]{9}$').hasMatch(value))
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                !RegExp(r'^(01)[0-9]{9}$').hasMatch(value))
                               return "Enter correct phone";
                             else
                               return null;
-                          }
-                      ), //phone
+                          }), //phone
                       SizedBox(
                         height: 15.0,
                       ),
 
-
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Email Address',
-                          prefixIcon: Icon (
+                        decoration: InputDecoration(
+                          labelText: 'Email Address',
+                          prefixIcon: Icon(
                             Icons.email,
                           ),
-
                         ),
                         keyboardType: TextInputType.emailAddress,
                         onFieldSubmitted: (value) {
                           //Validator
                         },
                         validator: (value) {
-                          if ( value!.isEmpty ||
+                          if (value!.isEmpty ||
                               !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                             return 'Enter a valid email!';
                           }
                           return null;
                         },
-                      ),   //mail
+                      ), //mail
                       SizedBox(
                         height: 15.0,
                       ),
 
-
                       TextFormField(
                         controller: passwordController,
-
-                        decoration: InputDecoration(labelText: 'Password',
-                          hintText: "Min 1 UpperCase,1 LowerCase,1 Digit,1 SpecialChar ",
+                        obscureText: _isObscure1,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          hintText:
+                              "Min 1 UpperCase,1 LowerCase,1 Digit,1 SpecialChar ",
                           suffixIcon: IconButton(
                               icon: Icon(
-                                _isObscure ? Icons.visibility : Icons.visibility_off,
+                                _isObscure1
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
                               ),
                               onPressed: () {
                                 setState(() {
-                                  _isObscure = !_isObscure;
-                                })
-                                ; }
-                          ),
-                          prefixIcon: Icon (
+                                  _isObscure1 = !_isObscure1;
+                                });
+                              }),
+                          prefixIcon: Icon(
                             Icons.lock,
                           ),
                         ),
@@ -178,34 +176,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           //Validator
                         },
                         validator: (password) {
-                          if ( password!.isEmpty ||
+                          if (password!.isEmpty ||
                               !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
                                   .hasMatch(password)) {
-                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')'
-                            ;
+                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')';
                           }
                           return null;
                         },
-                      ),   //pass
+                      ), //pass
                       SizedBox(
                         height: 15.0,
                       ),
 
-
-
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Confirm Password',
+                        obscureText: _isObscure2,
+                        decoration: InputDecoration(
+                          labelText: 'Confirm Password',
                           suffixIcon: IconButton(
                               icon: Icon(
-                                _isObscure ? Icons.visibility : Icons.visibility_off,
+                                _isObscure2
+                                    ? Icons.visibility
+                                    : Icons.visibility_off,
                               ),
                               onPressed: () {
                                 setState(() {
-                                  _isObscure = !_isObscure;
-                                })
-                                ; }
-                          ),
-                          prefixIcon: Icon (
+                                  _isObscure2 = !_isObscure2;
+                                });
+                              }),
+                          prefixIcon: Icon(
                             Icons.lock,
                           ),
                         ),
@@ -214,21 +212,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           //Validator
                         },
                         validator: (value) {
-                          if ( value!.isEmpty ||
+                          if (value!.isEmpty ||
                               !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                                  .hasMatch(value) ) {
-                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')'
-                            ;
+                                  .hasMatch(value)) {
+                            return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')';
                           }
                           if (passwordController.text != value)
                             return 'Password does not match';
                           return null;
                         },
-                      ),   //confirm
+                      ), //confirm
                       SizedBox(
                         height: 15.0,
                       ),
-
 
                       _radioButtonGroup(
                         text: 'Gender',
@@ -247,12 +243,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           );
                         }).toList(),
                       ),
-                      SizedBox(
-                          height: 15.0),
+                      SizedBox(height: 15.0),
                       _radioButtonGroup(
                         text: 'Role',
-
-                        list: _roleList.map((pair){
+                        list: _roleList.map((pair) {
                           return ListTile(
                             title: Text(pair.item1),
                             leading: Radio<int>(
@@ -262,35 +256,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 setState(() {
                                   _role = value!;
                                 });
-
                               },
                             ),
                           );
-
                         }).toList(),
                       ),
 
-                      SizedBox(
-                          height: 15.0),
+                      SizedBox(height: 15.0),
                       TextButton.icon(
                         onPressed: (() {
-
-                          if(_form.currentState!.validate())
-                          {
-                            if(_role==0)
-                            {
-                              Navigator.push(context,
+                          if (_form.currentState!.validate()) {
+                            if (_role == 0) {
+                              Navigator.push(
+                                  context,
                                   MaterialPageRoute(
-                                      builder: (context) => ApplicantRegisterScreen(registerTheme: widget.registerTheme,))
-                              );
+                                      builder: (context) =>
+                                          ApplicantRegisterScreen(
+                                            registerTheme: widget.registerTheme,
+                                          )));
                               //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
-                            }
-                            else if(_role==1)
-                            {
-                              Navigator.push(context,
+                            } else if (_role == 1) {
+                              Navigator.push(
+                                  context,
                                   MaterialPageRoute(
-                                      builder: (context) => RecruiterRegisterScreen(registerTheme: widget.registerTheme,))
-                              );
+                                      builder: (context) =>
+                                          RecruiterRegisterScreen(
+                                            registerTheme: widget.registerTheme,
+                                          )));
                               // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
                             }
                           }
@@ -311,7 +303,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(4, 88, 125,1),
+                            color: Color.fromRGBO(4, 88, 125, 1),
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
@@ -328,8 +320,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-
-                              Navigator.of(context).pushReplacementNamed('/Login_Screen');
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/Login_Screen');
                             },
                             child: Text(
                               'Login Now',
@@ -338,7 +330,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ],
                       ),
-                    /*  Column(
+                      /*  Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -377,9 +369,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),*/
                     ],
                   ),
-                )
-            )
-        )
-    );
+                ))));
   }
 }
