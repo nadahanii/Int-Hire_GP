@@ -1,2 +1,2 @@
-# history_feature_GP
-Flutter implementation of a history page for the graduation project's application
+# Int-Hire
+Flutter implementation of our graduation project.
