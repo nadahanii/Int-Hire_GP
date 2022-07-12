@@ -6,9 +6,8 @@ import 'package:provider/provider.dart';
 import '../providers/Notifications.dart';
 import '../widgets/main_drawer.dart';
 import 'complain_form.dart';
-
-class NotificationPage extends StatelessWidget {
-    final ThemeData notificationTheme;
+class NotificationPage extends StatelessWidget{
+  final ThemeData notificationTheme;
   const NotificationPage({Key? key,required this.notificationTheme}) : super(key: key);
   static const routeName = '/Notifications';
   @override

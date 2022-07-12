@@ -4,6 +4,7 @@ import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
+import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
@@ -15,7 +16,10 @@ import 'package:history_feature/screens/splash_screen.dart';
 import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/login_screen.dart';
+import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
+
+import 'screens/history_home_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [

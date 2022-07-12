@@ -8,14 +8,12 @@ import '../helpers/components.dart';
 import '../providers/auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  final ThemeData loginTheme;
-  LoginScreen({Key? key, required this.loginTheme}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
   static const routeName = '/Login_Screen';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
-
 class _LoginScreenState extends State<LoginScreen> {
   static const routeName = '/login';
   final Color facebookColor = const Color(0xff39579A);
@@ -258,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),*/
-                        /* TextButton.icon(
+                         /* TextButton.icon(
                             onPressed: (() {
                               Navigator.pushNamed(context, '/ForgetPassword_Screen');
 

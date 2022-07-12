@@ -6,8 +6,9 @@ import '../helpers/pair.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/Register_Screen';
-  final ThemeData registerTheme;
-  RegisterScreen({Key? key, required this.registerTheme}) : super(key: key);
+  //final ThemeData registerTheme;
+  RegisterScreen({Key? key , /* required this.registerTheme*/}) : super(key: key);
+
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -48,8 +49,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: widget.registerTheme.backgroundColor,
-        //appBar: AppBar(),
+      backgroundColor: Theme.of(context).backgroundColor,
+      //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -316,7 +317,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Text(
                             'have an account?',
-                            style: widget.registerTheme.textTheme.labelMedium,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                           TextButton(
                             onPressed: () {
@@ -325,7 +326,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: Text(
                               'Login Now',
-                              style: widget.registerTheme.textTheme.bodyText2,
+                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                           ),
                         ],

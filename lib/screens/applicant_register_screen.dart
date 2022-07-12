@@ -7,9 +7,8 @@ import '../models/applicant_user.dart';
 import '../models/job.dart';
 
 class ApplicantRegisterScreen extends StatefulWidget {
-  final ThemeData registerTheme;
   static const routeName = '/applicant_register_screen';
-  const ApplicantRegisterScreen({Key? key, required this.registerTheme}) : super(key: key);
+  const ApplicantRegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<ApplicantRegisterScreen> createState() => _ApplicantRegisterScreenState();
@@ -57,7 +56,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      backgroundColor: widget.registerTheme.backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
           child: SingleChildScrollView(
             child: Form(

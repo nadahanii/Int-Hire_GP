@@ -18,7 +18,7 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.registerTheme.backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
           child: Form(
         key: _formKey,
