@@ -14,7 +14,7 @@ class NavbarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> _pages = <Widget>[
-      ProfileScreen(),
+      //ProfileScreen(),
       SettingsPage(),
       NotificationPage(),
       JobView(),

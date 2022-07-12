@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Int-Hire',
         theme: globalTheme,
-        home: auth.isAuth
+        home: //ProfileScreen(isApplicant: true,)
+        auth.isAuth
             ? JobView(
                 history: false,
               )
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
           ForgotPassword.routeName: (ctx) => ForgotPassword(),
           ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(),
           RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
-          ProfileScreen.routeName: (ctx) => ProfileScreen(),
+          ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
         },
       ),
     );

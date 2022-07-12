@@ -29,6 +29,7 @@ class GlobalTheme with ChangeNotifier {
           ///title in appBar
           color: Colors.white,
           fontSize: 35,
+          fontWeight: FontWeight.bold,
           //fontFamily: 'Allison',
         ),
         headline2: TextStyle(

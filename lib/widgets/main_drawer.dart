@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 
 class MainDrawer extends StatelessWidget {
-  // final ThemeData drawerTheme;
-  MainDrawer(/*this.drawerTheme*/);
+
+  MainDrawer();
   Widget buildListTile(String title, IconData icon, void Function()? tapHandler,
       BuildContext context) {
     return ListTile(

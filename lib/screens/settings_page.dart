@@ -160,7 +160,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
+                 /* Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -175,7 +175,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       )
                     ],
-                  )
+                  )*/
                 ],
               ),
             ],
