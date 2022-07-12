@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'complain_form.dart';
-class Notification_page extends StatelessWidget{
+class NotificationPage extends StatelessWidget{
   final ThemeData notificationTheme;
-  const Notification_page({Key? key,required this.notificationTheme}) : super(key: key);
+  const NotificationPage({Key? key,required this.notificationTheme}) : super(key: key);
   static const routeName = '/Notifications';
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class Notification_page extends StatelessWidget{
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(builder:
-              (context)=>ComplaintForm(complaintTheme: this.notificationTheme,)));
+              (context)=>ComplaintForm()));
         },
         backgroundColor: this.notificationTheme.appBarTheme.backgroundColor,
         child:Image.asset(

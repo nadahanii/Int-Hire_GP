@@ -6,8 +6,8 @@ import '../helpers/pair.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/Register_Screen';
-  final ThemeData registerTheme;
-  RegisterScreen({Key? key ,  required this.registerTheme}) : super(key: key);
+  //final ThemeData registerTheme;
+  RegisterScreen({Key? key , /* required this.registerTheme*/}) : super(key: key);
 
 
   @override
@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.registerTheme.backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -281,7 +281,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => applicant_register_screen(registerTheme: widget.registerTheme,))
+                                      builder: (context) => applicant_register_screen())
                               );
                               //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
                             }
@@ -289,7 +289,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             {
                               Navigator.push(context,
                                   MaterialPageRoute(
-                                      builder: (context) => recruiter_register_screen(registerTheme: widget.registerTheme,))
+                                      builder: (context) => recruiter_register_screen())
                               );
                               // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
                             }
@@ -324,7 +324,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Text(
                             'have an account?',
-                            style: widget.registerTheme.textTheme.labelMedium,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                           TextButton(
                             onPressed: () {
@@ -333,7 +333,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             child: Text(
                               'Login Now',
-                              style: widget.registerTheme.textTheme.bodyText2,
+                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                           ),
                         ],

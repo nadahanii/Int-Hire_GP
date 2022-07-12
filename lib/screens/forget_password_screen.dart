@@ -7,8 +7,8 @@ import '../helpers/pair.dart';
 class ForgotPassword extends StatefulWidget {
   //const ForgotPassword({Key? key}) : super(key: key);
   static const routeName = '/ForgetPassword_Screen';
-  final ThemeData registerTheme;
-  ForgotPassword({Key? key , required this.registerTheme}) : super(key: key);
+  //final ThemeData registerTheme;
+  ForgotPassword({Key? key , }) : super(key: key);
 
 
   @override
@@ -21,7 +21,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: widget.registerTheme.backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),

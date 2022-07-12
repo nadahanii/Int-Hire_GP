@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:history_feature/screens/job_view.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/HistoryHomePage.dart';
+import '../screens/history_home_screen.dart';
 import '../providers/auth.dart';
 
 class MainDrawer extends StatelessWidget {
-  final ThemeData drawerTheme;
-  MainDrawer( this.drawerTheme);
-  Widget buildListTile(String title, IconData icon, void Function()? tapHandler) {
+ // final ThemeData drawerTheme;
+  MainDrawer( /*this.drawerTheme*/);
+  Widget buildListTile(String title, IconData icon, void Function()? tapHandler,BuildContext context) {
     return ListTile(
       leading: Icon(
         icon,
@@ -17,7 +17,7 @@ class MainDrawer extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: this.drawerTheme.textTheme.headline2
+        style: Theme.of(context).textTheme.headline2
 
       ),
       onTap: tapHandler,
@@ -34,7 +34,7 @@ class MainDrawer extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
-            color: this.drawerTheme.appBarTheme.backgroundColor,
+            color: Theme.of(context).appBarTheme.backgroundColor,
             child: Text(
               'Profile',
               style: TextStyle(
@@ -48,21 +48,21 @@ class MainDrawer extends StatelessWidget {
           ),
           buildListTile('Home', Icons.home, () {
             Navigator.of(context).pushReplacementNamed('/home'); ///job_view
-          }),
+          },context),
           buildListTile('History', Icons.history, () {
             Navigator.of(context).pushReplacementNamed('/history');
-          }),
+          },context),
           buildListTile('Notification', Icons.notifications, () {
             Navigator.of(context).pushReplacementNamed('/Notifications'); ///notification_page
-          }),
+          },context),
           buildListTile('Settings', Icons.settings, () {
             Navigator.of(context).pushReplacementNamed('/Settings'); ///settings_page
-          }),
+          },context),
           Spacer(),
           buildListTile('logout', Icons.logout, () {
             Navigator.of(context).pushReplacementNamed('/');
             Provider.of<Auth>(context, listen: false).logout();
-          }),
+          },context),
         ],
       ),
     );

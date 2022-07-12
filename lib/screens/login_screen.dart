@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
 
-  final ThemeData loginTheme;
-  LoginScreen({Key? key, required this.loginTheme}) : super(key: key);
+  //final ThemeData loginTheme;
+  LoginScreen({Key? key,/* required this.loginTheme*/}) : super(key: key);
   static const routeName = '/Login_Screen';
 
   @override
@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: widget.loginTheme.backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
       //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
@@ -173,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text(
                           'Forgot My Password',
-                          style: widget.loginTheme.textTheme.labelMedium,
+                          style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ),
 
@@ -195,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text(
                             'Don\'t have an account?',
-                            style: widget.loginTheme.textTheme.labelMedium,
+                            style: Theme.of(context).textTheme.labelMedium,
                           ),
                           SizedBox(height: 5.0,),
                           TextButton(
@@ -204,7 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             },
                             child: Text(
                               'Register Now',
-                              style: widget.loginTheme.textTheme.bodyText2,
+                              style: Theme.of(context).textTheme.bodyText2,
                             ),
                           ),
                         /*  TextButton.icon(

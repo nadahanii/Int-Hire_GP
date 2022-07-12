@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatefulWidget {
 
   static const routeName = '/splash_screen';
-  final ThemeData SplashTheme;
-  SplashScreen({Key? key, required this.SplashTheme}) : super(key: key);
+  //final ThemeData SplashTheme;
+  SplashScreen({Key? key, /*required this.SplashTheme*/}) : super(key: key);
 
 @override
 State<SplashScreen> createState() => _SplashScreenState();
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(255,198,196,1),
+      backgroundColor: Color.fromRGBO(255,198,196, 1),
         body: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Form(

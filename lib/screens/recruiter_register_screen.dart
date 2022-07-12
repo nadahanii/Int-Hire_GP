@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:history_feature/screens/profile_screen.dart';
-import 'package:history_feature/screens/HistoryHomePage.dart';
+import 'package:history_feature/screens/history_home_screen.dart';
 
 class recruiter_register_screen extends StatefulWidget {
-  final ThemeData registerTheme;
+  //final ThemeData registerTheme;
   static const routeName = '/recruiter_register_screen';
-  const recruiter_register_screen({Key? key,required this.registerTheme}) : super(key: key);
+  const recruiter_register_screen({Key? key,/*required this.registerTheme*/}) : super(key: key);
 
   @override
   State<recruiter_register_screen> createState() =>
@@ -20,7 +20,7 @@ class _recruiter_register_screenState extends State<recruiter_register_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.registerTheme.backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
           child: Form(
         key: _formKey,

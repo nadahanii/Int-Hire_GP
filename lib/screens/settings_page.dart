@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-class Settings_page extends StatefulWidget{
-  final ThemeData settingsTheme;
-  const Settings_page({Key? key,required this.settingsTheme}) : super(key: key);
+class SettingsPage extends StatefulWidget{
+  //final ThemeData settingsTheme;
+  const SettingsPage({Key? key,}) : super(key: key);
   static const routeName = '/Settings';
 
   @override
-  State<Settings_page> createState() => _Settings_pageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _Settings_pageState extends State<Settings_page> {
+class _SettingsPageState extends State<SettingsPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.settingsTheme.backgroundColor,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 1,
@@ -46,7 +46,7 @@ class _Settings_pageState extends State<Settings_page> {
                       builder: (BuildContext context){
                        return AlertDialog(
                          title:Text("Language",
-                           style: widget.settingsTheme.textTheme.caption,
+                           style: Theme.of(context).textTheme.caption,
                          ),
                          content:Column(
                            mainAxisSize: MainAxisSize.min,
@@ -81,7 +81,7 @@ class _Settings_pageState extends State<Settings_page> {
                   children: [
                     Text(
                       "Language",
-                      style: widget.settingsTheme.textTheme.caption,
+                      style: Theme.of(context).textTheme.caption,
                     ),
                     Icon(
                       Icons.arrow_forward_ios,
@@ -99,7 +99,7 @@ class _Settings_pageState extends State<Settings_page> {
                 children: [
                   Text(
                     "Theme",
-                    style: widget.settingsTheme.textTheme.caption,
+                    style: Theme.of(context).textTheme.caption,
                   ),
                   Transform.scale(
                     scale:0.7,

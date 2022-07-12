@@ -6,7 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 class GlobalTheme with ChangeNotifier {
   final globalTheme = ThemeData(
     primarySwatch: Colors.blueGrey,
-    backgroundColor: /*Color.fromRGBO(199, 231, 255, 1)*/Color.fromRGBO(255,198,196,1),
+    backgroundColor: Color.fromRGBO(199, 231, 255,1),
+
+    //buttonColor: Color.fromRGBO(4,88,125,1) ,
     textTheme: const TextTheme(
       labelMedium: TextStyle(
         fontWeight: FontWeight.bold,
@@ -28,7 +30,7 @@ class GlobalTheme with ChangeNotifier {
           fontSize: 20
       ),
       headline1: TextStyle( ///title in appBar
-        color: Colors.white/*Color.fromRGBO(4,88,125,1)*/,
+        color: Colors.white,
         fontSize: 35,
         //fontFamily: 'Allison',
       ),
@@ -38,6 +40,7 @@ class GlobalTheme with ChangeNotifier {
           color: Colors.black,
           fontSize: 24
       ),
+
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Color.fromRGBO(4, 88, 125, 1),
