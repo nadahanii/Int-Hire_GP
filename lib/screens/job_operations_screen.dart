@@ -107,6 +107,7 @@ class _JobOperationsState extends State<JobOperations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Add new job"),
