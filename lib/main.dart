@@ -21,8 +21,11 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => GlobalTheme()),
     ChangeNotifierProvider(create: (_) => Auth()),
-    ChangeNotifierProvider(create: (_) => Jobs()),
     ChangeNotifierProvider(create: (_) => Notifications()),
+    ChangeNotifierProxyProvider<Auth, Jobs>(
+      update: (context, value, previous) => Jobs(value),
+      create: (context) => Jobs(Provider.of<Auth>(context, listen: false)),
+    ),
   ], child: MyApp()));
 }
 
@@ -36,9 +39,15 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Int-Hire',
         theme: globalTheme,
-        home: auth.token != null ? JobView(jobTheme: globalTheme) :LoginScreen(
-          loginTheme: globalTheme,
-        ),
+        home: auth.isAuth
+            ? JobView(jobTheme: globalTheme,history: false,)
+            : FutureBuilder(
+                future: auth.tryAutoLogin(),
+                builder: (ctx, authResultSnapshot) =>
+                    authResultSnapshot.connectionState ==
+                            ConnectionState.waiting
+                        ? SplashScreen(SplashTheme: globalTheme)
+                        : LoginScreen(loginTheme: globalTheme)),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(
                 loginTheme: globalTheme,

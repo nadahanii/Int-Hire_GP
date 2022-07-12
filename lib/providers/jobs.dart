@@ -1,11 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/job.dart';
+import 'package:history_feature/providers/auth.dart';
 import 'package:http/http.dart' as http;
 
 class Jobs with ChangeNotifier {
-  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXIyMkBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzUwOTg1OSwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.LOfkCA-sS2C6Sm4Th7orASMTGVy_LRIFXnJbRBx5LuQ";
   List<Job> _items = [];
+  late String token;
+  late String userType;
+
+  Jobs(Auth auth) {
+    token = auth.token!;
+    userType = auth.userType!;
+  }
 
   List<Job> get items {
     return [..._items];
@@ -16,9 +23,9 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobs() async {
-    print("ff");
+    print(token);
     final url =
-        Uri.parse('http://hossam348-001-site1.etempurl.com/api/Job/getAllJobs');
+        Uri.parse('https://localhost:44324/api/Job/getAllJobs');
     try {
       final response = await http.get(
         url,
@@ -45,7 +52,7 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetHistoryJobsOfApplicant() async {
     final url = Uri.parse(
-        'http://hossam348-001-site1.etempurl.com/api/Job/getApplicantJobs');
+        'https://localhost:44324/api/Job/getApplicantJobs');
     final response = await http.get(
       url,
       headers: {
@@ -69,7 +76,7 @@ class Jobs with ChangeNotifier {
   Future<void> fetchAndSetJobsOfRecruiter() async {
     print("dd");
     final url = Uri.parse(
-        'http://hossam348-001-site1.etempurl.com/api/Job/getRecruiterJobs');
+        'https://localhost:44324/api/Job/getRecruiterJobs');
     final response = await http.get(
       url,
       headers: {
@@ -92,7 +99,7 @@ class Jobs with ChangeNotifier {
 
   Future<String> addJob(Job job, String? token) async {
     final url =
-        Uri.parse('http://hossam348-001-site1.etempurl.com/api/Job/addJob');
+        Uri.parse('https://localhost:44324/api/Job/addJob');
     var encode = json.encode({
       "id": 0,
       "title": job.title,
@@ -137,7 +144,7 @@ class Jobs with ChangeNotifier {
   Future<String> removeJob(Job job) async {
     _items.remove(job);
     var url = Uri.parse(
-        'http://hossam348-001-site1.etempurl.com/api/Job/deleteJob?id=${job.id}');
+        'https://localhost:44324/api/Job/deleteJob?id=${job.id}');
     notifyListeners();
     final response = await http.delete(
       url,
@@ -160,7 +167,7 @@ class Jobs with ChangeNotifier {
       return element.id == job.id;
     });
     final url =
-        Uri.parse('http://hossam348-001-site1.etempurl.com/api/Job/updateJob');
+        Uri.parse('https://localhost:44324/api/Job/updateJob');
     var encode = json.encode({
       "id": job.id,
       "title": job.title,
