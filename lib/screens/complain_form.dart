@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ComplaintForm extends StatefulWidget {
-  const ComplaintForm({Key? key})
-      : super(key: key);
+  const ComplaintForm({Key? key}) : super(key: key);
   @override
   State<ComplaintForm> createState() => _ComplaintFormState();
 }
@@ -15,7 +14,6 @@ class _ComplaintFormState extends State<ComplaintForm> {
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-
         elevation: 1,
         leading: IconButton(
             onPressed: () {
@@ -26,8 +24,8 @@ class _ComplaintFormState extends State<ComplaintForm> {
               color: Colors.white,
             )),
         title: Text(
-            'Complaint Form',
-          style:Theme.of(context).textTheme.headline1,
+          'Complaint Form',
+          style: Theme.of(context).textTheme.headline1,
         ),
         centerTitle: true,
       ),

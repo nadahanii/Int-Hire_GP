@@ -84,7 +84,8 @@ class _JobOperationsState extends State<JobOperations> {
         return;
       }
       setState(() {
-        _endDateController.text = DateFormat('dd-MM-yyyy hh:mm a').format(pickedDate);
+        _endDateController.text =
+            DateFormat('dd-MM-yyyy hh:mm a').format(pickedDate);
       });
     });
   }
@@ -358,7 +359,8 @@ class _JobOperationsState extends State<JobOperations> {
                         educationLevel: _education,
                         requirements: _requirementsController.text,
                         description: _descriptionController.text,
-                        publishDate: DateFormat('dd-MM-yyyy hh:mm a').format(DateTime.now()),
+                        publishDate: DateFormat('dd-MM-yyyy hh:mm a')
+                            .format(DateTime.now()),
                         endDate: _endDateController.text,
                         experience: _experienceController.text,
                         tags: _tags.toList(),
@@ -371,16 +373,20 @@ class _JobOperationsState extends State<JobOperations> {
                         Provider.of<Jobs>(
                           context,
                           listen: false,
-                        ).addJob(job,Provider.of<Auth>(context, listen: false).token);
+                        ).addJob(job,
+                            Provider.of<Auth>(context, listen: false).token);
                       } else {
                         Provider.of<Jobs>(
                           context,
                           listen: false,
-                        ).updateJob(job,Provider.of<Auth>(context, listen: false).token);
+                        ).updateJob(job,
+                            Provider.of<Auth>(context, listen: false).token);
                       }
                       Navigator.of(context).pop(job);
                     },
-                    child: widget.job == null ? const Text('Add Job') : const Text('Update Job'),
+                    child: widget.job == null
+                        ? const Text('Add Job')
+                        : const Text('Update Job'),
                   ),
                 ],
               ),

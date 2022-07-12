@@ -12,7 +12,7 @@ class AddTest extends StatefulWidget {
 
 class _AddTestState extends State<AddTest> {
   static List<List<dynamic>> _csvData = [
-   /* ['hey', '1', '0'],
+    /* ['hey', '1', '0'],
     ['hello','2','1']*/
   ];
 
@@ -26,15 +26,12 @@ class _AddTestState extends State<AddTest> {
     });
   }
 
-
   @override
   void initState() {
     super.initState();
     //WidgetsBinding.instance.addPostFrameCallback((_) => _loadCSV());
     _loadCSV();
   }
-
-
 
   @override
   Widget build(BuildContext context) {

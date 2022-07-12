@@ -5,8 +5,9 @@ class ForgotPassword extends StatefulWidget {
   //const ForgotPassword({Key? key}) : super(key: key);
   static const routeName = '/ForgetPassword_Screen';
   //final ThemeData registerTheme;
-  ForgotPassword({Key? key , }) : super(key: key);
-
+  ForgotPassword({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
@@ -31,44 +32,44 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Text(
-                          'Enter your email to send an reset link',
-                          style: GoogleFonts.montserrat(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromRGBO(4, 88, 125,4))
-                      ),
+                      Text('Enter your email to send an reset link',
+                          style: GoogleFonts.montserrat(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(4, 88, 125, 4))),
                       SizedBox(
                         height: 40.0,
                       ),
 
                       TextFormField(
-                        decoration: InputDecoration(labelText: 'Email Address',
-                          prefixIcon: Icon (
+                        decoration: InputDecoration(
+                          labelText: 'Email Address',
+                          prefixIcon: Icon(
                             Icons.email,
                           ),
-
                         ),
                         keyboardType: TextInputType.emailAddress,
                         onFieldSubmitted: (value) {
                           //Validator
                         },
                         validator: (value) {
-                          if ( value!.isEmpty ||
+                          if (value!.isEmpty ||
                               !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                             return 'Enter a valid email!';
                           }
                           return null;
                         },
-                      ),   //mail
+                      ), //mail
                       SizedBox(
                         height: 15.0,
                       ),
 
                       TextButton.icon(
                         onPressed: (() {
-                          if(_form.currentState!.validate())
-                            {
-                              Navigator.pushNamed(context, '/Login_Screen');
-                            }
+                          if (_form.currentState!.validate()) {
+                            Navigator.pushNamed(context, '/Login_Screen');
+                          }
                         }),
                         icon: const Icon(
                           Icons.read_more,
@@ -84,27 +85,21 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
                                 color: Colors.white,
-                                fontSize: 15
-
-                            ),
-
+                                fontSize: 15),
                           ),
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(4, 88, 125,1),
+                            color: Color.fromRGBO(4, 88, 125, 1),
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                      ),   //send link
+                      ), //send link
                       SizedBox(
                         height: 15.0,
                       ),
 
                       TextButton.icon(
                         onPressed: (() {
-
-                            Navigator.pushNamed(context, '/Login_Screen');
-
-
+                          Navigator.pushNamed(context, '/Login_Screen');
                         }),
                         icon: const Icon(
                           Icons.home,
@@ -120,26 +115,16 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.normal,
                                 color: Colors.white,
-                                fontSize: 15
-
-                            ),
+                                fontSize: 15),
                           ),
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(4, 88, 125,1),
+                            color: Color.fromRGBO(4, 88, 125, 1),
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
-                      ),    //back to login
-
-
+                      ), //back to login
                     ],
                   ),
-                )
-            )
-        )
-    );
-
-
-
+                ))));
   }
-  }
+}

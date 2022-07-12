@@ -28,8 +28,9 @@ class _JobDetailsState extends State<JobDetails> {
   ];
 
   String formatDate(String date) {
-    int time =
-        DateTime.now().difference(DateFormat('dd-MM-yyyy hh:mm a').parse(date)).inMinutes;
+    int time = DateTime.now()
+        .difference(DateFormat('dd-MM-yyyy hh:mm a').parse(date))
+        .inMinutes;
     String out = '';
     if (time < 43200) {
       out = '${(time / (60 * 24)).floor()} days ago';
@@ -218,8 +219,9 @@ class _JobDetailsState extends State<JobDetails> {
                                 color: Colors.blueGrey,
                               ),
                             ),
-                            Text(
-                                widget.job.typeOfJob.toString().replaceAll('_', ' ')),
+                            Text(widget.job.typeOfJob
+                                .toString()
+                                .replaceAll('_', ' ')),
                           ],
                         ),
                         const SizedBox(
@@ -234,7 +236,8 @@ class _JobDetailsState extends State<JobDetails> {
                                 color: Colors.blueGrey,
                               ),
                             ),
-                            Text(widget.job.careerLevel.toString()
+                            Text(widget.job.careerLevel
+                                .toString()
                                 .replaceAll('_', '&')),
                           ],
                         ),

@@ -11,13 +11,18 @@ class ApplicantRegisterScreen extends StatefulWidget {
   const ApplicantRegisterScreen({Key? key}) : super(key: key);
 
   @override
-  State<ApplicantRegisterScreen> createState() => _ApplicantRegisterScreenState();
+  State<ApplicantRegisterScreen> createState() =>
+      _ApplicantRegisterScreenState();
 }
 
 class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String twitterUsername, skills,interestedIn,applicantCity,applicantCountry, birthday;
-
+  late String twitterUsername,
+      skills,
+      interestedIn,
+      applicantCity,
+      applicantCountry,
+      birthday;
 
   Education _education = Education.Bachelors;
 
@@ -42,232 +47,220 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Divider(),  //(4,88,125,1)
+        const Divider(), //(4,88,125,1)
         Text(
           text,
-          style: const TextStyle(fontSize: 20,color: Color.fromRGBO(4,88,125,1)),
+          style: const TextStyle(
+              fontSize: 20, color: Color.fromRGBO(4, 88, 125, 1)),
         ),
         ...list,
       ],
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       body: Center(
           child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.only(top: 70, right: 25, left: 25, bottom: 25),
-                child:
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          'Applicant Registeration',
-                            style: GoogleFonts.sourceCodePro(fontSize: 20 , fontWeight: FontWeight.w800, color: Color.fromRGBO(4, 88, 125,4))
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.only(top: 70, right: 25, left: 25, bottom: 25),
+            child: Column(
+              children: <Widget>[
+                Text('Applicant Registeration',
+                    style: GoogleFonts.sourceCodePro(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: Color.fromRGBO(4, 88, 125, 4))),
+                SizedBox(
+                  height: 25,
+                ),
 
+                TextFormField(
+                  decoration: InputDecoration(
+                    icon: FaIcon(FontAwesomeIcons.twitter),
+                    hintText: 'Twitter username ',
+                  ),
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter valid twitter username';
+                    }
+                  },
+                  onFieldSubmitted: (val) {
+                    setState(() {
+                      twitterUsername = val;
+                      //print(companyName);
+                    });
+                  },
+                ), //twitter
+                SizedBox(
+                  height: 25,
+                ),
 
-                        TextFormField(
-                          decoration: InputDecoration(
-                            icon: FaIcon(FontAwesomeIcons.twitter),
-                            hintText: 'Twitter username ',
-                          ),
-                          keyboardType: TextInputType.name,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid twitter username';
-                            }
-                          },
-                          onFieldSubmitted: (val) {
-                            setState(() {
-                              twitterUsername = val;
-                              //print(companyName);
-                            });
-                          },
-                        ),   //twitter
-                        SizedBox(
-                          height: 25,
-                        ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    icon: FaIcon(FontAwesomeIcons.boltLightning),
+                    hintText: 'skills (separated by a comma)',
+                  ),
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter valid skills';
+                    }
+                  },
+                  onFieldSubmitted: (val) {
+                    setState(() {
+                      skills = val;
+                    });
+                  },
+                ), //skills
+                SizedBox(
+                  height: 25,
+                ),
 
+                TextFormField(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.interests_rounded),
+                    hintText: 'Interested in (if any, separated by comma)',
+                  ),
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter valid values of jobs you are interested in';
+                    }
+                  },
+                  onFieldSubmitted: (val) {
+                    setState(() {
+                      interestedIn = val;
+                    });
+                  },
+                ), //interested
+                SizedBox(
+                  height: 25,
+                ),
 
-                        TextFormField(
-                          decoration: InputDecoration(
-                            icon: FaIcon(FontAwesomeIcons.boltLightning),
-                            hintText: 'skills (separated by a comma)',
-                          ),
-                          keyboardType: TextInputType.name,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid skills';
-                            }
-                          },
-                          onFieldSubmitted: (val) {
-                            setState(() {
-                              skills = val;
-                            });
-                          },
-                        ),   //skills
-                        SizedBox(
-                          height: 25,
-                        ),
+                TextFormField(
+                  decoration: InputDecoration(
+                    icon: FaIcon(FontAwesomeIcons.city),
+                    hintText: 'City',
+                  ),
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                      return "Enter correct name";
+                    else
+                      return null;
+                  },
+                  onFieldSubmitted: (val) {
+                    setState(() {
+                      applicantCity = val;
+                    });
+                  },
+                ), //city
+                SizedBox(
+                  height: 25,
+                ),
 
+                TextFormField(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.map_rounded),
+                    hintText: 'Country',
+                  ),
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                      return "Enter correct name";
+                    else
+                      return null;
+                  },
+                  onFieldSubmitted: (val) {
+                    setState(() {
+                      applicantCountry = val;
+                    });
+                  },
+                ), //country
+                SizedBox(
+                  height: 25,
+                ),
 
-                        TextFormField(
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.interests_rounded),
-                            hintText: 'Interested in (if any, separated by comma)',
-                          ),
-                          keyboardType: TextInputType.name,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter valid values of jobs you are interested in';
-                            }
-                          },
-                          onFieldSubmitted: (val) {
-                            setState(() {
-                              interestedIn = val;
-                            });
-                          },
-                        ),   //interested
-                        SizedBox(
-                          height: 25,
-                        ),
-
-
-                        TextFormField(
-                          decoration: InputDecoration(
-                            icon: FaIcon(FontAwesomeIcons.city),
-                            hintText: 'City',
-                          ),
-                          keyboardType: TextInputType.name,
-                          validator: (value) {
-                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                              return "Enter correct name";
-                            else
-                              return null;
-                          },
-                          onFieldSubmitted: (val) {
-                            setState(() {
-                              applicantCity = val;
-                            });
-                          },
-                        ),    //city
-                        SizedBox(
-                          height: 25,
-                        ),
-
-
-
-                        TextFormField(
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.map_rounded),
-                            hintText: 'Country',
-                          ),
-                          keyboardType: TextInputType.name,
-                          validator: (value) {
-                            if (value!.isEmpty || !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                              return "Enter correct name";
-                            else
-                              return null;
-                          },
-                          onFieldSubmitted: (val) {
-                            setState(() {
-                              applicantCountry = val;
-                            });
-                          },
-                        ),   //country
-                        SizedBox(
-                          height: 25,
-                        ),
-
-
-
-
-                        _radioButtonGroup(
-                          text: 'Military status',
-                          list: _militaryStatusList.map((pair) {
-                            return ListTile(
-                              title: Text(pair.item1),
-                              leading: Radio<MilitaryStatus>(
-                                value: pair.item2,
-                                groupValue: _militaryStatus,
-                                onChanged: (MilitaryStatus? value) {
-                                  setState(() {
-                                    _militaryStatus = value!;
-                                  });
-                                },
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        _radioButtonGroup(
-                          text: 'Education',
-                          list: _educationList.map((pair) {
-                            return ListTile(
-                              title: Text(pair.item1),
-                              leading: Radio<Education>(
-                                value: pair.item2,
-                                groupValue: _education,
-                                onChanged: (Education? value) {
-                                  setState(() {
-                                    _education = value!;
-                                  });
-                                },
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        TextButton.icon(
-                          onPressed: (() {
-
-                            if(_formKey.currentState!.validate())
-                            {
-                              Navigator.of(context).pushReplacementNamed('/history');
-                            }
-                          }),
-                          icon: const Icon(
-                            Icons.app_registration,
-                            size: 28,
-                          ),
-                          label: Container(
-                            alignment: Alignment.center,
-                            width: 150,
-                            height: 35,
-                            child: const Text(
-                              'Submit',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(4, 88, 125,1),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                          ),
-                        ),
-                      ],
+                _radioButtonGroup(
+                  text: 'Military status',
+                  list: _militaryStatusList.map((pair) {
+                    return ListTile(
+                      title: Text(pair.item1),
+                      leading: Radio<MilitaryStatus>(
+                        value: pair.item2,
+                        groupValue: _militaryStatus,
+                        onChanged: (MilitaryStatus? value) {
+                          setState(() {
+                            _militaryStatus = value!;
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                _radioButtonGroup(
+                  text: 'Education',
+                  list: _educationList.map((pair) {
+                    return ListTile(
+                      title: Text(pair.item1),
+                      leading: Radio<Education>(
+                        value: pair.item2,
+                        groupValue: _education,
+                        onChanged: (Education? value) {
+                          setState(() {
+                            _education = value!;
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                TextButton.icon(
+                  onPressed: (() {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.of(context).pushReplacementNamed('/history');
+                    }
+                  }),
+                  icon: const Icon(
+                    Icons.app_registration,
+                    size: 28,
+                  ),
+                  label: Container(
+                    alignment: Alignment.center,
+                    width: 150,
+                    height: 35,
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                      ),
                     ),
-
-              ),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(4, 88, 125, 1),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          )
-      ),
-
+          ),
+        ),
+      )),
     );
   }
 }

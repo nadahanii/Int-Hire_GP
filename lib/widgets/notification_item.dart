@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import '../models/notification.dart' as n;
 
-
 class NotificationItem extends StatelessWidget {
   final n.Notification notification;
-  const NotificationItem({Key? key, required this.notification,})
-      : super(key: key);
+  const NotificationItem({
+    Key? key,
+    required this.notification,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

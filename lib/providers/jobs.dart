@@ -24,8 +24,7 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetJobs() async {
     print(token);
-    final url =
-        Uri.parse('https://localhost:44324/api/Job/getAllJobs');
+    final url = Uri.parse('https://localhost:44324/api/Job/getAllJobs');
     try {
       final response = await http.get(
         url,
@@ -51,8 +50,7 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetHistoryJobsOfApplicant() async {
-    final url = Uri.parse(
-        'https://localhost:44324/api/Job/getApplicantJobs');
+    final url = Uri.parse('https://localhost:44324/api/Job/getApplicantJobs');
     final response = await http.get(
       url,
       headers: {
@@ -75,8 +73,7 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetJobsOfRecruiter() async {
     print("dd");
-    final url = Uri.parse(
-        'https://localhost:44324/api/Job/getRecruiterJobs');
+    final url = Uri.parse('https://localhost:44324/api/Job/getRecruiterJobs');
     final response = await http.get(
       url,
       headers: {
@@ -98,8 +95,7 @@ class Jobs with ChangeNotifier {
   }
 
   Future<String> addJob(Job job, String? token) async {
-    final url =
-        Uri.parse('https://localhost:44324/api/Job/addJob');
+    final url = Uri.parse('https://localhost:44324/api/Job/addJob');
     var encode = json.encode({
       "id": 0,
       "title": job.title,
@@ -143,8 +139,8 @@ class Jobs with ChangeNotifier {
 
   Future<String> removeJob(Job job) async {
     _items.remove(job);
-    var url = Uri.parse(
-        'https://localhost:44324/api/Job/deleteJob?id=${job.id}');
+    var url =
+        Uri.parse('https://localhost:44324/api/Job/deleteJob?id=${job.id}');
     notifyListeners();
     final response = await http.delete(
       url,
@@ -166,8 +162,7 @@ class Jobs with ChangeNotifier {
     _items.removeWhere((element) {
       return element.id == job.id;
     });
-    final url =
-        Uri.parse('https://localhost:44324/api/Job/updateJob');
+    final url = Uri.parse('https://localhost:44324/api/Job/updateJob');
     var encode = json.encode({
       "id": job.id,
       "title": job.title,

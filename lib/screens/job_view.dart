@@ -7,7 +7,7 @@ import '../providers/jobs.dart';
 import '../widgets/main_drawer.dart';
 
 class JobView extends StatelessWidget {
-  JobView({Key? key,this.history = false}) : super(key: key);
+  JobView({Key? key, this.history = false}) : super(key: key);
   static const routeNameForView = '/home';
   static const routeNameForHistory = '/history';
   final bool history;
@@ -62,7 +62,10 @@ class JobView extends StatelessWidget {
         leadingWidth: 70.0,
       ),
       body: FutureBuilder(
-        future: history ? Provider.of<Jobs>(context, listen: false).fetchAndSetJobsOfRecruiter() : Provider.of<Jobs>(context, listen: false).fetchAndSetJobs(),
+        future: history
+            ? Provider.of<Jobs>(context, listen: false)
+                .fetchAndSetJobsOfRecruiter()
+            : Provider.of<Jobs>(context, listen: false).fetchAndSetJobs(),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -73,7 +76,9 @@ class JobView extends StatelessWidget {
               );
             } else {
               return Consumer<Jobs>(
-                builder: (_, cart, ch) => JobsList(history: history,),
+                builder: (_, cart, ch) => JobsList(
+                  history: history,
+                ),
               );
             }
           }

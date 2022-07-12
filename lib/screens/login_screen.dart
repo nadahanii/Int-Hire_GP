@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
+
 class _LoginScreenState extends State<LoginScreen> {
   static const routeName = '/login';
   final Color facebookColor = const Color(0xff39579A);
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: widget.loginTheme.backgroundColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
@@ -150,11 +151,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               .login(json.encode({
                             "email": emailController.text,
                             "password": passwordController.text,
-                          })).then((value) {
+                          }))
+                              .then((value) {
                             if (value != 'login successfully') {
                               showToast(text: value, state: ToastStates.ERROR);
-                            }else{
-                              showToast(text: value, state: ToastStates.SUCCESS);
+                            } else {
+                              showToast(
+                                  text: value, state: ToastStates.SUCCESS);
                             }
                           });
                         }
@@ -190,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text(
                         'Forgot My Password',
-                        style: widget.loginTheme.textTheme.labelMedium,
+                        style: Theme.of(context).textTheme.labelMedium,
                       ),
                     ),
 
@@ -216,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           'Don\'t have an account?',
-                          style: widget.loginTheme.textTheme.labelMedium,
+                          style: Theme.of(context).textTheme.labelMedium,
                         ),
                         SizedBox(
                           height: 5.0,
@@ -228,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                           child: Text(
                             'Register Now',
-                            style: widget.loginTheme.textTheme.bodyText2,
+                            style: Theme.of(context).textTheme.bodyText2,
                           ),
                         ),
                         /*  TextButton.icon(
@@ -256,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),*/
-                         /* TextButton.icon(
+                        /* TextButton.icon(
                             onPressed: (() {
                               Navigator.pushNamed(context, '/ForgetPassword_Screen');
 

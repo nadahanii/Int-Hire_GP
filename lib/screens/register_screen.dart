@@ -7,8 +7,10 @@ import '../helpers/pair.dart';
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/Register_Screen';
   //final ThemeData registerTheme;
-  RegisterScreen({Key? key , /* required this.registerTheme*/}) : super(key: key);
-
+  RegisterScreen({
+    Key? key,
+    /* required this.registerTheme*/
+  }) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -49,8 +51,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      //appBar: AppBar(),
+        backgroundColor: Theme.of(context).backgroundColor,
+        //appBar: AppBar(),
         body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Form(
@@ -272,18 +274,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          ApplicantRegisterScreen(
-                                            registerTheme: widget.registerTheme,
-                                          )));
+                                          ApplicantRegisterScreen()));
                               //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
                             } else if (_role == 1) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          RecruiterRegisterScreen(
-                                            registerTheme: widget.registerTheme,
-                                          )));
+                                          RecruiterRegisterScreen()));
                               // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
                             }
                           }

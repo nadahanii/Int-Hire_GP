@@ -6,15 +6,15 @@ import 'package:provider/provider.dart';
 import '../providers/Notifications.dart';
 import '../widgets/main_drawer.dart';
 import 'complain_form.dart';
-class NotificationPage extends StatelessWidget{
-  final ThemeData notificationTheme;
-  const NotificationPage({Key? key,required this.notificationTheme}) : super(key: key);
+
+class NotificationPage extends StatelessWidget {
+  const NotificationPage({Key? key}) : super(key: key);
   static const routeName = '/Notifications';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: notificationTheme.backgroundColor,
-      drawer: MainDrawer(notificationTheme),
+      backgroundColor: Theme.of(context).backgroundColor,
+      drawer: MainDrawer(),
       appBar: AppBar(
         actions: [
           IconButton(
@@ -22,8 +22,8 @@ class NotificationPage extends StatelessWidget{
             padding: EdgeInsets.only(right: 5.0),
             tooltip: "complaint",
             onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ComplaintForm(complaintTheme: notificationTheme,)));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => ComplaintForm()));
             },
           )
         ],
@@ -43,7 +43,10 @@ class NotificationPage extends StatelessWidget{
           height: 40.0,
           child: TextField(
             decoration: InputDecoration(
-              constraints: BoxConstraints(maxHeight: 40, minHeight: 40,),
+              constraints: BoxConstraints(
+                maxHeight: 40,
+                minHeight: 40,
+              ),
               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               filled: true,
               fillColor: Colors.grey.shade200,
@@ -59,7 +62,8 @@ class NotificationPage extends StatelessWidget{
         leadingWidth: 130.0,
       ),
       body: FutureBuilder(
-        future: Provider.of<Notifications>(context, listen: false).fetchAndSetNotifications(),
+        future: Provider.of<Notifications>(context, listen: false)
+            .fetchAndSetNotifications(),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -71,10 +75,13 @@ class NotificationPage extends StatelessWidget{
             } else {
               return Consumer<Notifications>(
                 builder: (_, cart, ch) {
-                  final notifications = Provider.of<Notifications>(context, listen: false).items;
+                  final notifications =
+                      Provider.of<Notifications>(context, listen: false).items;
                   return ListView.separated(
                     itemBuilder: (context, index) {
-                      return NotificationItem(notification: notifications[index],);
+                      return NotificationItem(
+                        notification: notifications[index],
+                      );
                     },
                     separatorBuilder: (context, index) {
                       return Divider(

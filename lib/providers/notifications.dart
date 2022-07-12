@@ -4,7 +4,8 @@ import 'package:history_feature/models/notification.dart' as n;
 import 'package:http/http.dart' as http;
 
 class Notifications with ChangeNotifier {
-  String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXI1NUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzU4MjEyMiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.9YbM2TTG43ARm3Kpuw_64XusVx9jM2nvTc9ux4tg_6s";
+  String token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXI1NUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzU4MjEyMiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.9YbM2TTG43ARm3Kpuw_64XusVx9jM2nvTc9ux4tg_6s";
   List<n.Notification> _items = [];
 
   List<n.Notification> get items {
@@ -38,7 +39,6 @@ class Notifications with ChangeNotifier {
       final List<n.Notification> loadedJobs = [];
       print("test notification");
       for (var obj in extractedData) {
-
         loadedJobs.add(n.Notification.fromJson(obj));
       }
       _items = loadedJobs.reversed.toList();

@@ -14,10 +14,10 @@ class JobsList extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       itemBuilder: (ctx, i) {
         return Column(
-        children: [
-          JobItem(job: jobs[i],history: history),
-          SizedBox(height: 10.0),
-            ],
+          children: [
+            JobItem(job: jobs[i], history: history),
+            SizedBox(height: 10.0),
+          ],
         );
       },
       itemCount: jobs.length,

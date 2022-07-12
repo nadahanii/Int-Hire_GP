@@ -1,4 +1,3 @@
-
 class Notification {
   late int id;
   late String title;

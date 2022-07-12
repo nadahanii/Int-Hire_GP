@@ -5,13 +5,17 @@ import '../providers/notifications.dart';
 import 'notification_item.dart';
 
 class NotificationsList extends StatelessWidget {
-  const NotificationsList({Key? key,}) : super(key: key);
+  const NotificationsList({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final notifications = Provider.of<Notifications>(context).items;
     return ListView.separated(
       itemBuilder: (context, index) {
-        return NotificationItem(notification: notifications[index],);
+        return NotificationItem(
+          notification: notifications[index],
+        );
       },
       separatorBuilder: (context, index) {
         return Divider(
