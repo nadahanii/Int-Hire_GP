@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
+import 'package:history_feature/models/recruiter_user.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,13 +15,20 @@ class Auth with ChangeNotifier {
   Timer? _authTimer;
   String? _userType;
   ApplicantUser? _applicant;
+  RecruiterUser? _recruiter;
 
   String? get userType {
     return _userType;
   }
 
   Object? get userObject {
-    return _applicant;
+    if(_userType == "Applicant"){
+      return _applicant;
+    }else if(_userType == "Recruiter"){
+      return _recruiter;
+    }else{
+      return null;
+    }
   }
 
   bool get isAuth {
@@ -56,7 +64,13 @@ class Auth with ChangeNotifier {
       _expiryDate =
           DateFormat('dd-MM-yyyy hh:mm aaa').parse(responseData['expiration']);
       _userType = responseData['userType'];
-      _applicant = ApplicantUser.fromJson(responseData["userDate"]);
+      if(_userType == "Applicant"){
+        _applicant = ApplicantUser.fromJson(responseData["userDate"]);
+      }else if(_userType == "Recruiter"){
+        _recruiter = RecruiterUser.fromJson(responseData["userDate"]);
+      }else{
+
+      }
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -65,6 +79,7 @@ class Auth with ChangeNotifier {
           'token': _token,
           'expiration': _expiryDate!.toIso8601String(),
           'userType': responseData['userType'],
+          'user' : responseData["userDate"],
         },
       );
       prefs.setString('userData', userData);
@@ -86,6 +101,7 @@ class Auth with ChangeNotifier {
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
+      print("auto f");
       return false;
     }
     final extractedUserData =
@@ -93,12 +109,21 @@ class Auth with ChangeNotifier {
     final expiryDate =
         DateTime.parse(extractedUserData['expiryDate'] as String);
     if (expiryDate.isBefore(DateTime.now())) {
+      print("auto ff");
       return false;
     }
     _token = extractedUserData['token'] as String;
+    print("fddd" + _token!);
     _expiryDate = expiryDate;
-    print("test10 : " + _token.toString());
-    print("test10 : " + _expiryDate.toString());
+    _userType = extractedUserData['userType'] as String;
+
+    if(_userType == "Applicant"){
+      _applicant = ApplicantUser.fromJson(extractedUserData["userDate"] as Map<String, dynamic>);
+    }else if(_userType == "Recruiter"){
+      _recruiter = RecruiterUser.fromJson(extractedUserData["userDate"] as Map<String, dynamic>);
+    }else{
+
+    }
     notifyListeners();
     _autoLogout();
     return true;

@@ -13,7 +13,6 @@ class GlobalTheme with ChangeNotifier {
             color: Colors.red,
             fontSize: 15),
         bodyText2: TextStyle(
-          //color: Colors.,
           color: Color.fromRGBO(4, 88, 125, 1),
           fontSize: 15,
           fontWeight: FontWeight.w700

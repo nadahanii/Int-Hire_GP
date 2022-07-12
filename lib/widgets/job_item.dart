@@ -100,7 +100,7 @@ class JobItem extends StatelessWidget {
                   true
                       ? Row(
                           children: [
-                            if (history != false)
+                            if (history != false && Provider.of<Jobs>(context, listen: false).userType != "Applicant")
                               InkWell(
                                 onTap: () {
                                   Navigator.of(context)
@@ -127,7 +127,7 @@ class JobItem extends StatelessWidget {
                             SizedBox(
                               width: 6.0,
                             ),
-                            if (history != false)
+                            if (history != false && Provider.of<Jobs>(context, listen: false).userType != "Applicant")
                               InkWell(
                                 onTap: () async {
                                   await showDialog(

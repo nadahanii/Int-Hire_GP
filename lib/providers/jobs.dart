@@ -6,12 +6,13 @@ import 'package:http/http.dart' as http;
 
 class Jobs with ChangeNotifier {
   List<Job> _items = [];
-  late String token;
-  late String userType;
+  late String? token;
+  late String? userType;
 
   Jobs(Auth auth) {
-    token = auth.token!;
-    userType = auth.userType!;
+    print(auth.token);
+    token = auth.token;
+    userType = auth.userType;
   }
 
   List<Job> get items {
@@ -95,6 +96,8 @@ class Jobs with ChangeNotifier {
   }
 
   Future<String> addJob(Job job, String? token) async {
+    print(" add job");
+    print(token);
     final url = Uri.parse('https://localhost:44324/api/Job/addJob');
     var encode = json.encode({
       "id": 0,
@@ -113,6 +116,7 @@ class Jobs with ChangeNotifier {
     _items.add(job);
     notifyListeners();
     try {
+      print(encode + " befor job");
       final response = await http.post(
         url,
         body: encode,
@@ -122,17 +126,21 @@ class Jobs with ChangeNotifier {
           "Accept": "application/json",
         },
       );
+      print(encode + " after job");
       if (response.statusCode == 400 || response.statusCode == 401) {
         _items.remove(job);
         notifyListeners();
         return response.body;
       }
+      print(response.statusCode.toString() + "add job ");
+      print(response.body + "add job ");
       final responseData = json.decode(response.body) as Map<String, dynamic>;
-      _items.where((element) => element.id == 0).first.id = responseData['id'];
+      print(responseData);
+      _items.where((element) => element.id == 0).first.id = (responseData['id'] as int);
 
       return 'add job successfully';
     } catch (error) {
-      print("test2 :" + error.toString());
+      print("test2 add job:" + error.toString());
       rethrow;
     }
   }

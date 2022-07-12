@@ -18,14 +18,16 @@ class JobView extends StatelessWidget {
       drawer: MainDrawer(),
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-                return JobOperations();
-              }));
-            },
-          )
+          if (history && Provider.of<Jobs>(context, listen: false).userType != "Applicant")
+            IconButton(
+              icon: Icon(Icons.add),
+              color: Theme.of(context).bottomAppBarColor,
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                  return JobOperations();
+                }));
+              },
+            )
         ],
         leading: Center(
           child: Padding(
@@ -59,13 +61,16 @@ class JobView extends StatelessWidget {
             ),
           ),
         ),
-        leadingWidth: 70.0,
+        leadingWidth: 80.0,
       ),
       body: FutureBuilder(
-        future: history
-            ? Provider.of<Jobs>(context, listen: false)
-                .fetchAndSetJobsOfRecruiter()
-            : Provider.of<Jobs>(context, listen: false).fetchAndSetJobs(),
+        future: !history
+            ? Provider.of<Jobs>(context, listen: false).fetchAndSetJobs()
+            : Provider.of<Jobs>(context, listen: false).userType == "Applicant"
+                ? Provider.of<Jobs>(context, listen: false)
+                    .fetchAndSetHistoryJobsOfApplicant()
+                : Provider.of<Jobs>(context, listen: false)
+                    .fetchAndSetJobsOfRecruiter(),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
