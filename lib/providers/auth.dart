@@ -46,7 +46,6 @@ class Auth with ChangeNotifier {
 
   Future<String> _authenticate(String encode, String method) async {
     final url = Uri.parse('https://localhost:44324/api/account/$method');
-    print(url);
     try {
       final response = await http.post(
         url,
@@ -99,32 +98,33 @@ class Auth with ChangeNotifier {
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
-      print("auto f");
       return false;
     }
-    final extractedUserData =
-        json.decode(prefs.getString('userData')!) as Map<String, Object>;
-    final expiryDate =
-        DateTime.parse(extractedUserData['expiryDate'] as String);
-    if (expiryDate.isBefore(DateTime.now())) {
-      print("auto ff");
-      return false;
-    }
-    _token = extractedUserData['token'] as String;
-    print("fddd" + _token!);
-    _expiryDate = expiryDate;
-    _userType = extractedUserData['userType'] as String;
+    try {
+      final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+      final expiryDate =
+          DateTime.parse(extractedUserData['expiration'] as String);
+      if (expiryDate.isBefore(DateTime.now())) {
+        return false;
+      }
+      _token = extractedUserData['token']  as String;
+      _expiryDate = expiryDate;
+      _userType = extractedUserData['userType']  as String;
 
-    if (_userType == "Applicant") {
-      _applicant = ApplicantUser.fromJson(
-          extractedUserData["userDate"] as Map<String, dynamic>);
-    } else if (_userType == "Recruiter") {
-      _recruiter = RecruiterUser.fromJson(
-          extractedUserData["userDate"] as Map<String, dynamic>);
-    } else {}
-    notifyListeners();
-    _autoLogout();
-    return true;
+      if (_userType == "Applicant") {
+        _applicant = ApplicantUser.fromJson(
+            extractedUserData["user"] as Map<String, dynamic>);
+      } else if (_userType == "Recruiter") {
+        _recruiter = RecruiterUser.fromJson(
+            extractedUserData["user"] as Map<String, dynamic>);
+      } else {}
+      notifyListeners();
+      _autoLogout();
+      return true;
+    } catch (e) {
+      print("auto " + e.toString());
+      return false;
+    }
   }
 
   Future<void> logout() async {

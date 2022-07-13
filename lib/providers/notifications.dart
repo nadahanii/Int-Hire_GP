@@ -9,7 +9,6 @@ class Notifications with ChangeNotifier {
   List<n.Notification> _items = [];
 
   List<n.Notification> get items {
-    print("object");
     return [..._items];
   }
 
@@ -18,7 +17,6 @@ class Notifications with ChangeNotifier {
   }
 
   Future<void> fetchAndSetNotifications() async {
-    print("notification test");
     final url =
         Uri.parse('https://localhost:44324/api/Notification/getAllMessage');
     try {
@@ -30,14 +28,11 @@ class Notifications with ChangeNotifier {
           "Accept": "application/json",
         },
       );
-      print("notification test2");
       final extractedData = json.decode(response.body) as List<dynamic>;
-      print(extractedData);
       if (extractedData.isEmpty) {
         return;
       }
       final List<n.Notification> loadedJobs = [];
-      print("test notification");
       for (var obj in extractedData) {
         loadedJobs.add(n.Notification.fromJson(obj));
       }

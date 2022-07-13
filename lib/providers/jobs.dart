@@ -10,7 +10,6 @@ class Jobs with ChangeNotifier {
   late String? userType;
 
   Jobs(Auth auth) {
-    print(auth.token);
     token = auth.token;
     userType = auth.userType;
   }
@@ -24,7 +23,6 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobs() async {
-    print(token);
     _items = [];
     final url = Uri.parse('https://localhost:44324/api/Job/getAllJobs');
     try {
@@ -36,7 +34,9 @@ class Jobs with ChangeNotifier {
           "Accept": "application/json",
         },
       );
+      print("get jobs " + response.statusCode.toString());
       final extractedData = json.decode(response.body) as List<dynamic>;
+      print("get jobs ");
       if (extractedData.isEmpty) {
         return;
       }
@@ -47,13 +47,12 @@ class Jobs with ChangeNotifier {
       _items = loadedJobs.reversed.toList();
       notifyListeners();
     } catch (e) {
-      print(e.toString());
+      print("get jobs " + e.toString());
     }
   }
 
   Future<void> fetchAndSetHistoryJobsOfApplicant() async {
     final url = Uri.parse('https://localhost:44324/api/Job/getApplicantJobs');
-    print("test fetch");
     _items = [];
     final response = await http.get(
       url,
@@ -63,12 +62,10 @@ class Jobs with ChangeNotifier {
         "Accept": "application/json",
       },
     );
-    print(response.statusCode.toString());
     final extractedData = json.decode(response.body) as List<dynamic>;
     if (extractedData.isEmpty) {
       return;
     }
-    print("test " + response.body);
     final List<Job> loadedJobs = [];
     for (var obj in extractedData) {
       loadedJobs.add(Job.fromJson(obj));
@@ -78,7 +75,6 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobsOfRecruiter() async {
-    print("dd");
     _items = [];
     final url = Uri.parse('https://localhost:44324/api/Job/getRecruiterJobs');
     final response = await http.get(
@@ -102,8 +98,6 @@ class Jobs with ChangeNotifier {
   }
 
   Future<String> addJob(Job job, String? token) async {
-    print(" add job");
-    print(token);
     final url = Uri.parse('https://localhost:44324/api/Job/addJob');
     var encode = json.encode({
       "id": 0,
@@ -122,7 +116,6 @@ class Jobs with ChangeNotifier {
     _items.add(job);
     notifyListeners();
     try {
-      print(encode + " befor job");
       final response = await http.post(
         url,
         body: encode,
@@ -132,16 +125,12 @@ class Jobs with ChangeNotifier {
           "Accept": "application/json",
         },
       );
-      print(encode + " after job");
       if (response.statusCode == 400 || response.statusCode == 401) {
         _items.remove(job);
         notifyListeners();
         return response.body;
       }
-      print(response.statusCode.toString() + "add job ");
-      print(response.body + "add job ");
       final responseData = json.decode(response.body) as Map<String, dynamic>;
-      print(responseData);
       _items.where((element) => element.id == 0).first.id = (responseData['id'] as int);
 
       return 'add job successfully';
@@ -204,12 +193,10 @@ class Jobs with ChangeNotifier {
         },
       );
       if (response.statusCode == 400 || response.statusCode == 401) {
-        print("update test 2");
         _items.remove(job);
         notifyListeners();
         return response.body;
       }
-      print("update test 3" + response.statusCode.toString());
       return 'update job successfully';
     } catch (error) {
       print("test2 :" + error.toString());
