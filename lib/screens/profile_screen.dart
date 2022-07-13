@@ -65,8 +65,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      //drawer: MainDrawer(),
+
       appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: returnAppBarActions(context),
         title: Text(
           "Profile",
