@@ -148,7 +148,7 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                       onPressed: (() {
                         if (_formKey.currentState!.validate()) {
                           Navigator.of(context)
-                              .pushReplacementNamed('/history');
+                              .pushReplacementNamed('/navbar_screen');
                         }
                       }),
                       icon: const Icon(
