@@ -190,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                      SizedBox(height: 20.0,),
 
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
@@ -259,8 +259,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),*/
                         ],
-                      ),
-                    ]
+                      )
+                   ]
             )
         )
     ),

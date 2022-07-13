@@ -82,21 +82,12 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     icon: FaIcon(FontAwesomeIcons.twitter),
-                    hintText: 'Twitter username ',
+                    labelText: 'Twitter username',
+                    hintText: 'if you have',
                   ),
                   keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter valid twitter username';
-                    }
-                  },
-                  onFieldSubmitted: (val) {
-                    setState(() {
-                      twitterUsername = val;
-                      //print(companyName);
-                    });
-                  },
-                ), //twitter
+                ),
+                //twitter
                 SizedBox(
                   height: 25,
                 ),
@@ -104,7 +95,8 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     icon: FaIcon(FontAwesomeIcons.boltLightning),
-                    hintText: 'skills (separated by a comma)',
+                    labelText: 'Skills',
+                    hintText: 'separated by a comma',
                   ),
                   keyboardType: TextInputType.name,
                   validator: (value) {
@@ -125,7 +117,8 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 TextFormField(
                   decoration: InputDecoration(
                     icon: Icon(Icons.interests_rounded),
-                    hintText: 'Interested in (if any, separated by comma)',
+                    labelText: 'Interested in',
+                    hintText: 'separated by comma',
                   ),
                   keyboardType: TextInputType.name,
                   validator: (value) {
@@ -142,53 +135,6 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 SizedBox(
                   height: 25,
                 ),
-
-                TextFormField(
-                  decoration: InputDecoration(
-                    icon: FaIcon(FontAwesomeIcons.city),
-                    hintText: 'City',
-                  ),
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                      return "Enter correct name";
-                    else
-                      return null;
-                  },
-                  onFieldSubmitted: (val) {
-                    setState(() {
-                      applicantCity = val;
-                    });
-                  },
-                ), //city
-                SizedBox(
-                  height: 25,
-                ),
-
-                TextFormField(
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.map_rounded),
-                    hintText: 'Country',
-                  ),
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                      return "Enter correct name";
-                    else
-                      return null;
-                  },
-                  onFieldSubmitted: (val) {
-                    setState(() {
-                      applicantCountry = val;
-                    });
-                  },
-                ), //country
-                SizedBox(
-                  height: 25,
-                ),
-
                 _radioButtonGroup(
                   text: 'Military status',
                   list: _militaryStatusList.map((pair) {

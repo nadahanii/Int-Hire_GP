@@ -36,7 +36,7 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  Future<String> _authenticate(String encode, String method) async {
+  /*Future<String> _authenticate(String encode, String method) async {
     final url = Uri.parse('https://localhost:44324/api/account/$method');
     print(url);
     try {
@@ -82,7 +82,7 @@ class Auth with ChangeNotifier {
   Future<String> login(String data) async {
     return _authenticate(data, "Login");
   }
-
+*/
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {

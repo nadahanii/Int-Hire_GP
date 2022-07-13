@@ -13,6 +13,9 @@ class RecruiterRegisterScreen extends StatefulWidget {
 class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   late String companyName, companyLocation, companyDescription;
+  var streetController = TextEditingController();
+  var countryController = TextEditingController();
+  var cityController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -58,26 +61,62 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                     ),
 
                     TextFormField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.location_on),
-                        hintText: 'Company Address (253 Cherry St. giza)',
-                      ),
-                      keyboardType: TextInputType.name,
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^\d{1,5}\s(\b\w*\b\s){1,2}\w*\.\s\w*$')
-                                .hasMatch(
-                                    value)) //This allows 1-5 digits for the house number, a space, a character followed by a period (for N. or S.), 1-2 words for the street name, finished with an abbreviation (like st. or rd.).
-                          return "Enter correct Address (num streetname st. giza)";
-                        else
-                          return null;
-                      },
-                      onFieldSubmitted: (val) {
-                        setState(() {
-                          companyLocation = val;
-                        });
-                      },
-                    ), //address
+                        controller: streetController,
+                        decoration: InputDecoration(
+                          labelText: 'Company Street name',
+                          prefixIcon: Icon(
+                            Icons.streetview,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                            return "Enter correct Street name";
+                          else
+                            return null;
+                        }), //street
+                    SizedBox(
+                      height: 15.0,
+                    ),
+
+                    TextFormField(
+                        controller: cityController,
+                        decoration: InputDecoration(
+                          labelText: 'Company City name',
+                          prefixIcon: Icon(
+                            Icons.location_city,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                            return "Enter correct city name";
+                          else
+                            return null;
+                        }), //city
+                    SizedBox(
+                      height: 15.0,
+                    ),
+
+
+                    TextFormField(
+                        controller: countryController,
+                        decoration: InputDecoration(
+                          labelText: 'Company Country name',
+                          prefixIcon: Icon(
+                            Icons.map_rounded,
+                          ),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty ||
+                              !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                            return "Enter correct country name";
+                          else
+                            return null;
+                        }), //country
+                    SizedBox(
+                      height: 15.0,
+                    ),
                     SizedBox(
                       height: 25,
                     ),

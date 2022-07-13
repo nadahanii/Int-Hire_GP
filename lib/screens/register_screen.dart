@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
 import '../helpers/pair.dart';
+import 'package:intl/intl.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/Register_Screen';
@@ -19,8 +20,20 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   var passwordController = TextEditingController();
+  var emailController = TextEditingController();
+  var nameController = TextEditingController();
+  var phoneNumberController = TextEditingController();
+  var streetController = TextEditingController();
+  var countryController = TextEditingController();
+  var cityController = TextEditingController();
+
   bool _isObscure1 = true;
   bool _isObscure2 = true;
+  bool isDateSelected = false;
+  TextEditingController _birthdayController = TextEditingController();
+  //DateTime selectedDate = DateTime.now();
+  String birthDateInString ="";
+  DateTime birthDate=DateTime.now();
 
   int _role = 1;
   final List<Pair<String, int>> _roleList = const [
@@ -32,7 +45,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Pair('female', 0),
     Pair('male', 1),
   ];
-
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now().subtract(Duration(days: 365 * 100,)),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _birthdayController.text = DateFormat.yMd().format(pickedDate);
+      });
+    });
+  }
   Widget _radioButtonGroup({required String text, required List<Widget> list}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,8 +101,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
 
                       TextFormField(
+                        controller: nameController,
                           decoration: InputDecoration(
-                            labelText: 'First name',
+                            labelText: 'Name',
                             prefixIcon: Icon(
                               Icons.person,
                             ),
@@ -86,30 +114,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               return "Enter correct name";
                             else
                               return null;
-                          }), //first name
+                          }), //name
                       SizedBox(
                         height: 15.0,
                       ),
 
-                      TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Second name',
-                            prefixIcon: Icon(
-                              Icons.person,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                              return "Enter correct name";
-                            else
-                              return null;
-                          }), //second name
-                      SizedBox(
-                        height: 15.0,
-                      ),
 
                       TextFormField(
+                        controller: phoneNumberController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             labelText: 'Phone number',
@@ -129,6 +141,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
 
                       TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
                           labelText: 'Email Address',
                           prefixIcon: Icon(
@@ -156,9 +169,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         controller: passwordController,
                         obscureText: _isObscure1,
                         decoration: InputDecoration(
-                          labelText: 'Password',
+                          labelText: 'Password (at least 8)',
                           hintText:
-                              "Min 1 UpperCase,1 LowerCase,1 Digit,1 SpecialChar ",
+                              "1Upper 1Lower 1Dig 1Spec",
                           suffixIcon: IconButton(
                               icon: Icon(
                                 _isObscure1
@@ -228,6 +241,89 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: 15.0,
                       ),
+
+                      TextFormField(
+                        controller: streetController,
+                          decoration: InputDecoration(
+                            labelText: 'Street name',
+                            prefixIcon: Icon(
+                              Icons.streetview,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct Street name";
+                            else
+                              return null;
+                          }), //street
+                      SizedBox(
+                        height: 15.0,
+                      ),
+
+                      TextFormField(
+                          controller: cityController,
+                          decoration: InputDecoration(
+                            labelText: 'City name',
+                            prefixIcon: Icon(
+                              Icons.location_city,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct city name";
+                            else
+                              return null;
+                          }), //city
+                      SizedBox(
+                        height: 15.0,
+                      ),
+
+
+                      TextFormField(
+                        controller: countryController,
+                          decoration: InputDecoration(
+                            labelText: 'Country name',
+                            prefixIcon: Icon(
+                              Icons.map_rounded,
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                              return "Enter correct country name";
+                            else
+                              return null;
+                          }), //country
+                      SizedBox(
+                        height: 15.0,
+                      ),
+
+
+                      TextFormField(
+                        controller: _birthdayController,
+                        readOnly: true,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please enter a valid birthday';
+                          }
+                          return null;
+                        },
+                        onTap: _presentDatePicker,
+                        decoration: const InputDecoration(
+                          labelText: 'Birthday',
+                           prefixIcon: Icon(
+                            Icons.date_range,
+                          ),
+
+                       //   border: OutlineInputBorder(),
+                        ),
+                      ),  //birthday
+                      SizedBox(
+                        height: 15.0,
+                      ),
+
 
                       _radioButtonGroup(
                         text: 'Gender',
@@ -310,7 +406,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Row(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
