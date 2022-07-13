@@ -158,10 +158,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 } else {
                                   showToast(
                                       text: value, state: ToastStates.SUCCESS);
+                                  Navigator.of(context)
+                                      .pushReplacementNamed('/navbar_screen');
                                 }
                               });
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/navbar_screen');
                             }
                           }),
                           icon: const Icon(

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
 
-import '../helpers/pair.dart';
 import '../models/job.dart';
-import '../widgets/main_drawer.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key, required this.isApplicant}) : super(key: key);

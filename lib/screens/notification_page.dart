@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/notifications.dart';
-import '../widgets/main_drawer.dart';
 import '../widgets/notifications_list.dart';
 import 'complain_form.dart';
 
@@ -13,7 +12,6 @@ class NotificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      //drawer: MainDrawer(),
       appBar: AppBar(
         actions: [
             IconButton(

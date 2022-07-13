@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/main_drawer.dart';
-
 class SettingsPage extends StatefulWidget {
   //final ThemeData settingsTheme;
   const SettingsPage({
@@ -19,7 +17,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      drawer: MainDrawer(),
       appBar: AppBar(
         title: Text(
           'Settings',
@@ -66,7 +63,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushReplacementNamed('/Login_Screen');
+                  Navigator.of(context).pushReplacementNamed('/splash_screen');
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

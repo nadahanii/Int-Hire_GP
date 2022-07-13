@@ -25,12 +25,12 @@ class ApplicantUser {
       required this.street,
       required this.city,
       required this.country,
-      required this.educationLevel,
-      required this.militaryStatus,
+      this.educationLevel = Education.High_School,
+      this.militaryStatus = MilitaryStatus.NotApplicable,
       this.twitterUsername = "",
       required this.birthDay,
       required this.isMale,
-      required this.tags});
+      this.tags = const []});
 
   ApplicantUser.fromJson(Map<String, dynamic> json) {
     name = json['name'];

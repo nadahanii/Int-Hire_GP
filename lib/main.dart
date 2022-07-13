@@ -25,7 +25,8 @@ void main() {
     ChangeNotifierProvider(create: (_) => Auth()),
     ChangeNotifierProxyProvider<Auth, Notifications>(
       update: (context, value, previous) => Notifications(value),
-      create: (context) => Notifications(Provider.of<Auth>(context, listen: false)),
+      create: (context) =>
+          Notifications(Provider.of<Auth>(context, listen: false)),
     ),
     ChangeNotifierProxyProvider<Auth, Jobs>(
       update: (context, value, previous) => Jobs(value),
@@ -44,18 +45,15 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Int-Hire',
         theme: globalTheme,
-        home: SplashScreen()
-
-
-        /*auth.isAuth
+        home: auth.isAuth
             ? JobView(history: false)
             : FutureBuilder(
                 future: auth.tryAutoLogin(),
                 builder: (ctx, authResultSnapshot) =>
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
-                        ? SplashScreen()
-                        : LoginScreen())*/,
+                        ? CircularProgressIndicator()
+                        : SplashScreen()),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),
@@ -67,9 +65,9 @@ class MyApp extends StatelessWidget {
           SettingsPage.routeName: (ctx) => SettingsPage(),
           NotificationPage.routeName: (ctx) => NotificationPage(),
           ForgotPassword.routeName: (ctx) => ForgotPassword(),
-          ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(),
-          RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
-          ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
+          ProfileScreen.routeName: (ctx) => ProfileScreen(
+                isApplicant: true,
+              ),
           NavbarScreen.routeName: (ctx) => NavbarScreen(),
           EditPasswordScreen.routeName: (ctx) => EditPasswordScreen(),
         },
