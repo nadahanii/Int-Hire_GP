@@ -65,73 +65,20 @@ class _SettingsPageState extends State<SettingsPage> {
                 height: 25,
               ),
               InkWell(
-                onTap: (){
-                  Navigator.of(context).pushNamed('/profile_Screen');
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-
-
-                    Text(
-                      "Profile",
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Icon(
-                        Icons.person_rounded
-                    ),
-
-                  ],
-                ),
-              ),
-              /*SizedBox(
-                height: 25,
-              ),
-              InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.of(context).pushReplacementNamed('/Login_Screen');
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-
-
                     Text(
                       "Logout",
                       style: Theme.of(context).textTheme.caption,
                     ),
-                    Icon(
-                        Icons.logout
-                    ),
-
-                  ],
-                ),
-              ),*/
-              SizedBox(
-                height: 25,
-              ),
-              InkWell(
-                onTap: (){
-                  Navigator.of(context).pushReplacementNamed('/Login_Screen');
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-
-
-                    Text(
-                      "Logout",
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Icon(
-                        Icons.logout
-                    ),
-
+                    Icon(Icons.logout),
                   ],
                 ),
               ),
-
-
             ],
           ),
         ),

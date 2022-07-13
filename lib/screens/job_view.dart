@@ -4,7 +4,7 @@ import 'package:history_feature/widgets/jobs_list.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/jobs.dart';
-import '../widgets/main_drawer.dart';
+
 
 class JobView extends StatelessWidget {
   JobView({Key? key, this.history = false}) : super(key: key);

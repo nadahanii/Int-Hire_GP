@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:history_feature/screens/job_view.dart';
 import 'package:history_feature/screens/notification_page.dart';
+import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
 
 
@@ -32,6 +33,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
       JobView(),
       NotificationPage(),
       JobView(history: true,),
+      ProfileScreen(isApplicant: true),
       SettingsPage(),
     ];
 
@@ -86,6 +88,20 @@ class _NavbarScreenState extends State<NavbarScreen> {
                     size: 30,
                   )),
               label: 'History'),
+          BottomNavigationBarItem(
+              icon: new SizedBox(
+                  height: 30,
+                  child: Icon(
+                    Icons.person,
+                    size: 30,
+                  )),
+              activeIcon: new SizedBox(
+                  height: 30,
+                  child: Icon(
+                    Icons.person_outline,
+                    size: 30,
+                  )),
+              label: 'Profile'),
           BottomNavigationBarItem(
               icon: new SizedBox(
                   height: 30,
