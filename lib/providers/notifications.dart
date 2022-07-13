@@ -7,7 +7,35 @@ import 'package:http/http.dart' as http;
 import '../helpers/components.dart';
 
 class Notifications with ChangeNotifier {
-  List<n.Notification> _items = [];
+  List<n.Notification> _items = [
+    n.Notification(
+      id: 1,
+      title: 'Notification 1',
+      description : 'Notification 1 body',
+      date: '13-07-2022 01:26 PM',
+      viewed : false,
+      senderType: 'Recruiter',
+      receiverEmail: "user@example.com",
+    ),
+    n.Notification(
+      id: 2,
+      title: 'Notification 1',
+      description : 'Notification 1 body',
+      date: '13-07-2022 01:26 PM',
+      viewed : true,
+      senderType: 'Admin',
+      receiverEmail: "user@example.com",
+    ),
+    n.Notification(
+      id: 3,
+      title: 'Notification 1',
+      description : 'Notification 1 body',
+      date: '13-07-2022 01:26 PM',
+      viewed : false,
+      senderType: 'Applicant',
+      receiverEmail: "user@example.com",
+    ),
+  ];
   late String? token;
   late String? userType;
 
@@ -26,57 +54,57 @@ class Notifications with ChangeNotifier {
   }
 
   Future<void> fetchAndSetNotifications() async {
-    final url = Uri.parse('${baseUrl}Notification/getAllMessage');
-    try {
-      final response = await http.get(
-        url,
-        headers: {
-          "content-type": "application/json",
-          'Authorization': 'Bearer $token',
-          "Accept": "application/json",
-        },
-      );
-      final extractedData = json.decode(response.body) as List<dynamic>;
-      if (extractedData.isEmpty) {
-        return;
-      }
-      final List<n.Notification> loadedJobs = [];
-      for (var obj in extractedData) {
-        loadedJobs.add(n.Notification.fromJson(obj));
-      }
-      _items = loadedJobs.reversed.toList();
-      notifyListeners();
-    } catch (e) {
-      print("notification get" + e.toString());
-    }
+    // final url = Uri.parse('${baseUrl}Notification/getAllMessage');
+    // try {
+    //   final response = await http.get(
+    //     url,
+    //     headers: {
+    //       "content-type": "application/json",
+    //       'Authorization': 'Bearer $token',
+    //       "Accept": "application/json",
+    //     },
+    //   );
+    //   final extractedData = json.decode(response.body) as List<dynamic>;
+    //   if (extractedData.isEmpty) {
+    //     return;
+    //   }
+    //   final List<n.Notification> loadedJobs = [];
+    //   for (var obj in extractedData) {
+    //     loadedJobs.add(n.Notification.fromJson(obj));
+    //   }
+    //   _items = loadedJobs.reversed.toList();
+    //   notifyListeners();
+    // } catch (e) {
+    //   print("notification get" + e.toString());
+    // }
   }
 
   Future<void> fetchAndSetComplaint() async {
-    print("complaint ");
-    final url = Uri.parse('${baseUrl}Notification/getAllComplaint');
-    try {
-      final response = await http.get(
-        url,
-        headers: {
-          "content-type": "application/json",
-          'Authorization': 'Bearer $token',
-          "Accept": "application/json",
-        },
-      );
-      print(response.statusCode.toString());
-      final extractedData = json.decode(response.body) as List<dynamic>;
-      if (extractedData.isEmpty) {
-        return;
-      }
-      final List<n.Notification> loadedJobs = [];
-      for (var obj in extractedData) {
-        loadedJobs.add(n.Notification.fromJson(obj));
-      }
-      _items = loadedJobs.reversed.toList();
-      notifyListeners();
-    } catch (e) {
-      print("notification get" + e.toString());
-    }
+    // print("complaint ");
+    // final url = Uri.parse('${baseUrl}Notification/getAllComplaint');
+    // try {
+    //   final response = await http.get(
+    //     url,
+    //     headers: {
+    //       "content-type": "application/json",
+    //       'Authorization': 'Bearer $token',
+    //       "Accept": "application/json",
+    //     },
+    //   );
+    //   print(response.statusCode.toString());
+    //   final extractedData = json.decode(response.body) as List<dynamic>;
+    //   if (extractedData.isEmpty) {
+    //     return;
+    //   }
+    //   final List<n.Notification> loadedJobs = [];
+    //   for (var obj in extractedData) {
+    //     loadedJobs.add(n.Notification.fromJson(obj));
+    //   }
+    //   _items = loadedJobs.reversed.toList();
+    //   notifyListeners();
+    // } catch (e) {
+    //   print("notification get" + e.toString());
+    // }
   }
 
   Future<String> addNotifications(n.Notification notification) async {

@@ -19,6 +19,7 @@ import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/login_screen.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
+import '../models/notification.dart' as n;
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -36,9 +37,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    n.Notification notification= new n.Notification(id: 1, title: 'title', description: 'description');
     final ThemeData globalTheme = Provider.of<GlobalTheme>(context).globalTheme;
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
@@ -73,7 +76,7 @@ class MyApp extends StatelessWidget {
           ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
           NavbarScreen.routeName: (ctx) => NavbarScreen(),
           EditPasswordScreen.routeName: (ctx) => EditPasswordScreen(),
-          //NotificationDetailedScreen.routeName: (ctx) => NotificationDetailedScreen(),
+          NotificationDetailedScreen.routeName: (ctx) => NotificationDetailedScreen(notification: notification,),
         },
       ),
     );
