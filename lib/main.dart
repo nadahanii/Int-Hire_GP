@@ -40,9 +40,7 @@ class MyApp extends StatelessWidget {
         title: 'Int-Hire',
         theme: globalTheme,
         home: auth.isAuth
-            ? JobView(
-                history: false,
-              )
+            ? JobView(history: false)
             : FutureBuilder(
                 future: auth.tryAutoLogin(),
                 builder: (ctx, authResultSnapshot) =>

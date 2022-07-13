@@ -25,6 +25,7 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetJobs() async {
     print(token);
+    _items = [];
     final url = Uri.parse('https://localhost:44324/api/Job/getAllJobs');
     try {
       final response = await http.get(
@@ -52,6 +53,8 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetHistoryJobsOfApplicant() async {
     final url = Uri.parse('https://localhost:44324/api/Job/getApplicantJobs');
+    print("test fetch");
+    _items = [];
     final response = await http.get(
       url,
       headers: {
@@ -60,10 +63,12 @@ class Jobs with ChangeNotifier {
         "Accept": "application/json",
       },
     );
+    print(response.statusCode.toString());
     final extractedData = json.decode(response.body) as List<dynamic>;
     if (extractedData.isEmpty) {
       return;
     }
+    print("test " + response.body);
     final List<Job> loadedJobs = [];
     for (var obj in extractedData) {
       loadedJobs.add(Job.fromJson(obj));
@@ -74,6 +79,7 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetJobsOfRecruiter() async {
     print("dd");
+    _items = [];
     final url = Uri.parse('https://localhost:44324/api/Job/getRecruiterJobs');
     final response = await http.get(
       url,

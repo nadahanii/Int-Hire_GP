@@ -22,11 +22,11 @@ class Auth with ChangeNotifier {
   }
 
   Object? get userObject {
-    if(_userType == "Applicant"){
+    if (_userType == "Applicant") {
       return _applicant;
-    }else if(_userType == "Recruiter"){
+    } else if (_userType == "Recruiter") {
       return _recruiter;
-    }else{
+    } else {
       return null;
     }
   }
@@ -44,7 +44,7 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  /*Future<String> _authenticate(String encode, String method) async {
+  Future<String> _authenticate(String encode, String method) async {
     final url = Uri.parse('https://localhost:44324/api/account/$method');
     print(url);
     try {
@@ -64,13 +64,11 @@ class Auth with ChangeNotifier {
       _expiryDate =
           DateFormat('dd-MM-yyyy hh:mm aaa').parse(responseData['expiration']);
       _userType = responseData['userType'];
-      if(_userType == "Applicant"){
+      if (_userType == "Applicant") {
         _applicant = ApplicantUser.fromJson(responseData["userDate"]);
-      }else if(_userType == "Recruiter"){
+      } else if (_userType == "Recruiter") {
         _recruiter = RecruiterUser.fromJson(responseData["userDate"]);
-      }else{
-
-      }
+      } else {}
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -79,7 +77,7 @@ class Auth with ChangeNotifier {
           'token': _token,
           'expiration': _expiryDate!.toIso8601String(),
           'userType': responseData['userType'],
-          'user' : responseData["userDate"],
+          'user': responseData["userDate"],
         },
       );
       prefs.setString('userData', userData);
@@ -97,7 +95,7 @@ class Auth with ChangeNotifier {
   Future<String> login(String data) async {
     return _authenticate(data, "Login");
   }
-*/
+
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {
@@ -117,13 +115,13 @@ class Auth with ChangeNotifier {
     _expiryDate = expiryDate;
     _userType = extractedUserData['userType'] as String;
 
-    if(_userType == "Applicant"){
-      _applicant = ApplicantUser.fromJson(extractedUserData["userDate"] as Map<String, dynamic>);
-    }else if(_userType == "Recruiter"){
-      _recruiter = RecruiterUser.fromJson(extractedUserData["userDate"] as Map<String, dynamic>);
-    }else{
-
-    }
+    if (_userType == "Applicant") {
+      _applicant = ApplicantUser.fromJson(
+          extractedUserData["userDate"] as Map<String, dynamic>);
+    } else if (_userType == "Recruiter") {
+      _recruiter = RecruiterUser.fromJson(
+          extractedUserData["userDate"] as Map<String, dynamic>);
+    } else {}
     notifyListeners();
     _autoLogout();
     return true;
