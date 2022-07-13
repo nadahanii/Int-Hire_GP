@@ -160,6 +160,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       text: value, state: ToastStates.SUCCESS);
                                 }
                               });
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/navbar_screen');
                             }
                           }),
                           icon: const Icon(
@@ -197,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
 
-                        Padding(
+                        /*Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -209,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Color.fromRGBO(4, 88, 125, 1), Icons.android),
                             ],
                           ),
-                        ),
+                        ),*/
                         SizedBox(
                           height: 20.0,
                         ),

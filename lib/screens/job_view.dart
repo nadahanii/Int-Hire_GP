@@ -15,7 +15,7 @@ class JobView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      drawer: MainDrawer(),
+      //drawer: MainDrawer(),
       appBar: AppBar(
         actions: [
           if (history && Provider.of<Jobs>(context, listen: false).userType != "Applicant")
