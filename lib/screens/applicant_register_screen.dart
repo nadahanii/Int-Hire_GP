@@ -70,7 +70,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
             padding: EdgeInsets.only(top: 70, right: 25, left: 25, bottom: 25),
             child: Column(
               children: <Widget>[
-                Text('Applicant Registeration',
+                Text('Applicant Registration',
                     style: GoogleFonts.sourceCodePro(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
