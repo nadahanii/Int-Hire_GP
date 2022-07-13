@@ -120,6 +120,7 @@ class _JobDetailsState extends State<JobDetails> {
         ],
         title: Text('Job details'),
       ),
+      backgroundColor: Theme.of(context).backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 10.0),

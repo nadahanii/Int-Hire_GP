@@ -33,3 +33,5 @@ Color chooseToastColor(ToastStates state) {
   }
   return color;
 }
+
+final String baseUrl = "https://localhost:44324/api/";

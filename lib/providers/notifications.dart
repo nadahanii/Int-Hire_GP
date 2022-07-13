@@ -1,12 +1,21 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/notification.dart' as n;
+import 'package:history_feature/providers/auth.dart';
 import 'package:http/http.dart' as http;
 
+import '../helpers/components.dart';
+
 class Notifications with ChangeNotifier {
-  String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFbWFpbCI6InVzZXI1NUBleGFtcGxlLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlJlY3J1aXRlciIsImV4cCI6MTY1NzU4MjEyMiwiaXNzIjoidGVzdC5jb20iLCJhdWQiOiJ0ZXN0LmNvbSJ9.9YbM2TTG43ARm3Kpuw_64XusVx9jM2nvTc9ux4tg_6s";
   List<n.Notification> _items = [];
+  late String? token;
+  late String? userType;
+
+  Notifications(Auth auth) {
+    token = auth.token;
+    userType = auth.userType;
+    print("Notifications constructor " + userType.toString() + " " + token.toString());
+  }
 
   List<n.Notification> get items {
     return [..._items];
@@ -17,8 +26,7 @@ class Notifications with ChangeNotifier {
   }
 
   Future<void> fetchAndSetNotifications() async {
-    final url =
-        Uri.parse('https://localhost:44324/api/Notification/getAllMessage');
+    final url = Uri.parse('${baseUrl}Notification/getAllMessage');
     try {
       final response = await http.get(
         url,
@@ -39,22 +47,49 @@ class Notifications with ChangeNotifier {
       _items = loadedJobs.reversed.toList();
       notifyListeners();
     } catch (e) {
-      print(e.toString());
+      print("notification get" + e.toString());
     }
   }
 
-  Future<String> addNotifications(
-      n.Notification notification, String? token) async {
-    final url =
-        Uri.parse('http://hossam348-001-site1.etempurl.com/api/Job/addJob');
+  Future<void> fetchAndSetComplaint() async {
+    print("complaint ");
+    final url = Uri.parse('${baseUrl}Notification/getAllComplaint');
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $token',
+          "Accept": "application/json",
+        },
+      );
+      print(response.statusCode.toString());
+      final extractedData = json.decode(response.body) as List<dynamic>;
+      if (extractedData.isEmpty) {
+        return;
+      }
+      final List<n.Notification> loadedJobs = [];
+      for (var obj in extractedData) {
+        loadedJobs.add(n.Notification.fromJson(obj));
+      }
+      _items = loadedJobs.reversed.toList();
+      notifyListeners();
+    } catch (e) {
+      print("notification get" + e.toString());
+    }
+  }
+
+  Future<String> addNotifications(n.Notification notification) async {
+    var url = Uri.parse('${baseUrl}Notification/PushComplaint');
+    if(userType == "Admin"){
+      url = Uri.parse('${baseUrl}Notification/PushMessage');
+    }
     var encode = json.encode({
       "id": 0,
       "title": notification.title,
       "description": notification.description,
-      "date": notification.date,
-      "receiverEmail": notification.receiverEmail,
+      "receiverEmail": userType == "Admin" ? notification.receiverEmail : 'admin@admin.com',
     });
-    _items.add(notification);
     notifyListeners();
     try {
       final response = await http.post(
@@ -67,13 +102,8 @@ class Notifications with ChangeNotifier {
         },
       );
       if (response.statusCode == 400 || response.statusCode == 401) {
-        _items.remove(notification);
-        notifyListeners();
-        return response.body;
+        return json.decode(response.body) as String;
       }
-      final responseData = json.decode(response.body) as Map<String, dynamic>;
-      _items.where((element) => element.id == 0).first.id = responseData['id'];
-
       return 'add notification successfully';
     } catch (error) {
       print("test2 :" + error.toString());

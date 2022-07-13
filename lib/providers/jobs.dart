@@ -4,6 +4,8 @@ import 'package:history_feature/models/job.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:http/http.dart' as http;
 
+import '../helpers/components.dart';
+
 class Jobs with ChangeNotifier {
   List<Job> _items = [];
   late String? token;
@@ -24,7 +26,7 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetJobs() async {
     _items = [];
-    final url = Uri.parse('https://localhost:44324/api/Job/getAllJobs');
+    final url = Uri.parse('${baseUrl}Job/getAllJobs');
     try {
       final response = await http.get(
         url,
@@ -34,9 +36,7 @@ class Jobs with ChangeNotifier {
           "Accept": "application/json",
         },
       );
-      print("get jobs " + response.statusCode.toString());
       final extractedData = json.decode(response.body) as List<dynamic>;
-      print("get jobs ");
       if (extractedData.isEmpty) {
         return;
       }
@@ -52,7 +52,7 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetHistoryJobsOfApplicant() async {
-    final url = Uri.parse('https://localhost:44324/api/Job/getApplicantJobs');
+    final url = Uri.parse('${baseUrl}Job/getApplicantJobs');
     _items = [];
     final response = await http.get(
       url,
@@ -76,7 +76,7 @@ class Jobs with ChangeNotifier {
 
   Future<void> fetchAndSetJobsOfRecruiter() async {
     _items = [];
-    final url = Uri.parse('https://localhost:44324/api/Job/getRecruiterJobs');
+    final url = Uri.parse('${baseUrl}Job/getRecruiterJobs');
     final response = await http.get(
       url,
       headers: {
@@ -98,7 +98,7 @@ class Jobs with ChangeNotifier {
   }
 
   Future<String> addJob(Job job, String? token) async {
-    final url = Uri.parse('https://localhost:44324/api/Job/addJob');
+    final url = Uri.parse('${baseUrl}Job/addJob');
     var encode = json.encode({
       "id": 0,
       "title": job.title,
@@ -143,7 +143,7 @@ class Jobs with ChangeNotifier {
   Future<String> removeJob(Job job) async {
     _items.remove(job);
     var url =
-        Uri.parse('https://localhost:44324/api/Job/deleteJob?id=${job.id}');
+        Uri.parse('${baseUrl}Job/deleteJob?id=${job.id}');
     notifyListeners();
     final response = await http.delete(
       url,
@@ -165,7 +165,7 @@ class Jobs with ChangeNotifier {
     _items.removeWhere((element) {
       return element.id == job.id;
     });
-    final url = Uri.parse('https://localhost:44324/api/Job/updateJob');
+    final url = Uri.parse('${baseUrl}Job/updateJob');
     var encode = json.encode({
       "id": job.id,
       "title": job.title,

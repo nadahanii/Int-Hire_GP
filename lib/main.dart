@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:history_feature/providers/Notifications.dart';
 import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
+import 'package:history_feature/providers/notifications.dart';
 import 'package:history_feature/screens/add_test.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/settings_page.dart';
@@ -21,7 +21,10 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => GlobalTheme()),
     ChangeNotifierProvider(create: (_) => Auth()),
-    ChangeNotifierProvider(create: (_) => Notifications()),
+    ChangeNotifierProxyProvider<Auth, Notifications>(
+      update: (context, value, previous) => Notifications(value),
+      create: (context) => Notifications(Provider.of<Auth>(context, listen: false)),
+    ),
     ChangeNotifierProxyProvider<Auth, Jobs>(
       update: (context, value, previous) => Jobs(value),
       create: (context) => Jobs(Provider.of<Auth>(context, listen: false)),

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 
 class MainDrawer extends StatelessWidget {
-
   MainDrawer();
   Widget buildListTile(String title, IconData icon, void Function()? tapHandler,
       BuildContext context) {
@@ -48,9 +47,10 @@ class MainDrawer extends StatelessWidget {
 
             ///job_view
           }, context),
-          buildListTile('History', Icons.history, () {
-            Navigator.of(context).pushReplacementNamed('/history');
-          }, context),
+          if (Provider.of<Auth>(context, listen: false).userType != 'Admin')
+            buildListTile('History', Icons.history, () {
+              Navigator.of(context).pushReplacementNamed('/history');
+            }, context),
           buildListTile('Notification', Icons.notifications, () {
             Navigator.of(context).pushReplacementNamed('/Notifications');
 

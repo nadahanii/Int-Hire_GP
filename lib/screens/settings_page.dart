@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/main_drawer.dart';
+
 class SettingsPage extends StatefulWidget {
   //final ThemeData settingsTheme;
   const SettingsPage({
@@ -16,17 +18,18 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
+      drawer: MainDrawer(),
       appBar: AppBar(
-        //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            )),
+        centerTitle: true,
+        title: Container(
+          child: Text(
+            'Settings',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -160,7 +163,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   SizedBox(
                     height: 10,
                   ),
-                 /* Row(
+                  /* Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(

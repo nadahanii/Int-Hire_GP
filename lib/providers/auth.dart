@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../helpers/components.dart';
+import '../models/admin_user.dart';
 import '../models/applicant_user.dart';
 
 class Auth with ChangeNotifier {
@@ -16,6 +18,7 @@ class Auth with ChangeNotifier {
   String? _userType;
   ApplicantUser? _applicant;
   RecruiterUser? _recruiter;
+  AdminUser? _admin;
 
   String? get userType {
     return _userType;
@@ -27,7 +30,7 @@ class Auth with ChangeNotifier {
     } else if (_userType == "Recruiter") {
       return _recruiter;
     } else {
-      return null;
+      return _admin;
     }
   }
 
@@ -45,7 +48,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<String> _authenticate(String encode, String method) async {
-    final url = Uri.parse('https://localhost:44324/api/account/$method');
+    final url = Uri.parse('${baseUrl}account/$method');
     try {
       final response = await http.post(
         url,
@@ -67,7 +70,9 @@ class Auth with ChangeNotifier {
         _applicant = ApplicantUser.fromJson(responseData["userDate"]);
       } else if (_userType == "Recruiter") {
         _recruiter = RecruiterUser.fromJson(responseData["userDate"]);
-      } else {}
+      } else {
+        _admin = AdminUser.fromJson(responseData["userDate"]);
+      }
       _autoLogout();
       notifyListeners();
       final prefs = await SharedPreferences.getInstance();
@@ -101,15 +106,16 @@ class Auth with ChangeNotifier {
       return false;
     }
     try {
-      final extractedUserData = json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
+      final extractedUserData =
+          json.decode(prefs.getString('userData')!) as Map<String, dynamic>;
       final expiryDate =
           DateTime.parse(extractedUserData['expiration'] as String);
       if (expiryDate.isBefore(DateTime.now())) {
         return false;
       }
-      _token = extractedUserData['token']  as String;
+      _token = extractedUserData['token'] as String;
       _expiryDate = expiryDate;
-      _userType = extractedUserData['userType']  as String;
+      _userType = extractedUserData['userType'] as String;
 
       if (_userType == "Applicant") {
         _applicant = ApplicantUser.fromJson(
@@ -117,7 +123,10 @@ class Auth with ChangeNotifier {
       } else if (_userType == "Recruiter") {
         _recruiter = RecruiterUser.fromJson(
             extractedUserData["user"] as Map<String, dynamic>);
-      } else {}
+      } else {
+        _admin = AdminUser.fromJson(
+            extractedUserData["user"] as Map<String, dynamic>);
+      }
       notifyListeners();
       _autoLogout();
       return true;

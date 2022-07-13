@@ -4,15 +4,17 @@ class Notification {
   late String description;
   late String date;
   late String receiverEmail;
+  late String senderType;
   late bool viewed;
 
   Notification(
       {required this.id,
       required this.title,
       required this.description,
-      required this.receiverEmail,
-      required this.date,
-      required this.viewed});
+      this.receiverEmail = "",
+      this.date = "",
+      this.viewed = false,
+      this.senderType = ""});
 
   Notification.fromJson(Map<String, dynamic> json) {
     id = json['id'] as int;
@@ -21,5 +23,6 @@ class Notification {
     date = json['date'];
     receiverEmail = json['sender'];
     viewed = json['viewed'] as bool;
+    senderType = json['senderType'];
   }
 }
