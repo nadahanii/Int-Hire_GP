@@ -4,6 +4,7 @@ import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
+import 'package:history_feature/screens/edit_password_screen.dart';
 import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/settings_page.dart';
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
           RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
           NavbarScreen.routeName: (ctx) => NavbarScreen(),
+          EditPasswordScreen.routeName: (ctx) => EditPasswordScreen(),
         },
       ),
     );

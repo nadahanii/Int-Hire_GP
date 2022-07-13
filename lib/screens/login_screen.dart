@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 30),
           child: Form(
               key: _form,
               child: SingleChildScrollView(
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ), //mail
                         SizedBox(
-                          height: 10.0,
+                          height: 20.0,
                         ),
 
                         TextFormField(
@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ), //pass
 
                         SizedBox(
-                          height: 10.0,
+                          height: 30.0,
                         ),
 
                         TextButton.icon(
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 5.0,
+                          height: 10.0,
                         ),
                         TextButton(
                           onPressed: () {
