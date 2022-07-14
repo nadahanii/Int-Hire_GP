@@ -37,7 +37,7 @@ class _ApplicantResultState extends State<ApplicantResult> {
           child: Column(
             children: [
               Image.asset(
-                'assets/' + _personality_type + '.png',
+                'assets/' + _personality_type.toLowerCase() + '.png',
                 width: 400.0,
                 height: 350.0,
               ),
