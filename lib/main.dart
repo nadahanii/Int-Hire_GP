@@ -17,6 +17,8 @@ import 'package:provider/provider.dart';
 import 'package:history_feature/screens/login_screen.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
 import 'package:history_feature/screens/applicant_result_screen.dart';
+
+import 'models/PersonalityDataClass.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => GlobalTheme()),
@@ -30,6 +32,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // Null obj
+  late PersonalityData personalityData=PersonalityData("","","","","","","");
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -62,7 +66,7 @@ class MyApp extends StatelessWidget {
           ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(),
           RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
-          ApplicantResult.routeName: (ctx) => ApplicantResult(personality_type: 'null',),
+          ApplicantResult.routeName: (ctx) => ApplicantResult(personality_type: 'null', personalityData:personalityData),
         },
       ),
     );

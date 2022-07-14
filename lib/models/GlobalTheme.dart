@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class GlobalTheme with ChangeNotifier {
   final globalTheme = ThemeData(
       primarySwatch: Colors.blueGrey,
-      backgroundColor: Color.fromRGBO(199, 231, 255, 1),
+      backgroundColor: Colors.white,
 
       //buttonColor: Color.fromRGBO(4,88,125,1) ,
       textTheme: const TextTheme(
