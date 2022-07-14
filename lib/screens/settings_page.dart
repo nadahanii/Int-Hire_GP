@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
   //final ThemeData settingsTheme;
-  const SettingsPage({
+  SettingsPage({
     Key? key,
   }) : super(key: key);
   static const routeName = '/Settings';
@@ -18,6 +18,8 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
         title: Text(
           'Settings',
           style: Theme.of(context).textTheme.headline1,
