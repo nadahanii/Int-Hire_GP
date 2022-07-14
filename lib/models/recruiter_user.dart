@@ -11,7 +11,7 @@ class RecruiterUser {
   late String birthDay;
   late bool isMale;
   late String position;
-  late Company company;
+ // late Company company;
 
   RecruiterUser({
     required this.name,
@@ -22,7 +22,7 @@ class RecruiterUser {
     required this.city,
     required this.country,
     required this.position,
-    required this.company,
+   // required this.company,
     required this.birthDay,
     required this.isMale,
   });
@@ -38,6 +38,6 @@ class RecruiterUser {
     birthDay = json['birthDay'];
     isMale = ((json['gender'] as int) == 1) ? true : false;
     position = json['position'];
-    company = Company.fromJson(json['company'] as Map<String, dynamic>);
+  //  company = Company.fromJson(json['company'] as Map<String, dynamic>);
   }
 }

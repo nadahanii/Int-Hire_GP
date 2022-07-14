@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:history_feature/models/applicant_user.dart';
+import 'package:history_feature/models/job.dart';
 import 'package:history_feature/providers/Notifications.dart';
 import 'package:history_feature/models/GlobalTheme.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/screens/add_test.dart';
+import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/notification_page.dart';
+import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
@@ -31,6 +35,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+  final ApplicantUser userr = new ApplicantUser(name: 'magda', email: 'magda@yaho.com', phoneNumber: '01159502557', password: 'Helloworld0@', street: 'shhh', city: 'giza', country: 'cairo', educationLevel: Education.Bachelors, militaryStatus: MilitaryStatus.Postponed, birthDay: '8/13/2000', isMale: false, tags: ['hi' , 'hello']);
+
+
   @override
   Widget build(BuildContext context) {
     final ThemeData globalTheme = Provider.of<GlobalTheme>(context).globalTheme;
@@ -47,7 +55,8 @@ class MyApp extends StatelessWidget {
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
                         ? SplashScreen()
-                        : LoginScreen()),
+                        : ProfileScreen(user: userr)),
+
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),
@@ -61,7 +70,9 @@ class MyApp extends StatelessWidget {
           ForgotPassword.routeName: (ctx) => ForgotPassword(),
           ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(),
           RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
-          ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
+          ProfileScreen.routeName: (ctx) => ProfileScreen(user: userr,),
+          EditProfilePage.routeName: (ctx) => EditProfilePage(),
+          ProfileScreenRec.routeName : (ctx) => ProfileScreenRec()
         },
       ),
     );

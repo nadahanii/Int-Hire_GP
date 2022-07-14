@@ -178,7 +178,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 TextButton.icon(
                   onPressed: (() {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.of(context).pushReplacementNamed('/history');
+                      Navigator.of(context).pushReplacementNamed('/profile_Screen');
                     }
                   }),
                   icon: const Icon(
