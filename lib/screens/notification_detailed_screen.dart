@@ -14,6 +14,42 @@ class NotificationDetailedScreen extends StatelessWidget {
         style: Theme.of(context).textTheme.headline1,
         ),
       ),
+      body: Padding(
+        padding: EdgeInsets.only(left: 20,right: 20,top: 30,bottom: 10),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text('Sent to:  ',style: Theme.of(context).textTheme.headline3,),
+                Text(this.notification.receiverEmail,style: Theme.of(context).textTheme.headline4,)
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Text('Date:  ',style: Theme.of(context).textTheme.headline3,),
+                Text(this.notification.date,style: Theme.of(context).textTheme.headline4,)
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Text('Sent from a(n):  ',style: Theme.of(context).textTheme.headline3,),
+                Text(this.notification.senderType,style: Theme.of(context).textTheme.headline4,)
+              ],
+            ),
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Text('Body:  ',style: Theme.of(context).textTheme.headline3,),
+                Text(this.notification.description,style: Theme.of(context).textTheme.headline4,)
+              ],
+            ),
+            SizedBox(height: 20,),
+
+          ],
+        ),
+      ),
 
     );
   }

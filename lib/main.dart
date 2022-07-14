@@ -6,6 +6,7 @@ import 'package:history_feature/providers/theme_provider.dart';
 import 'package:history_feature/screens/add_test.dart';
 import 'package:history_feature/screens/edit_password_screen.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
+import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/settings_page.dart';

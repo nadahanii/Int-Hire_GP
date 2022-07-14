@@ -52,6 +52,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
         child: _pages.elementAt(widget.selected),
       ),
       bottomNavigationBar: BottomNavigationBar(
+
         type: BottomNavigationBarType.fixed,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         iconSize: 10,
@@ -129,6 +130,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
               label: 'Settings'),
         ],
         fixedColor: Colors.white,
+        unselectedItemColor: Color.fromRGBO(255, 219, 136, 1),
         currentIndex: widget.selected,
         showUnselectedLabels: false,
         onTap: IconTap,
