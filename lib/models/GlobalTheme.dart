@@ -14,10 +14,9 @@ class GlobalTheme with ChangeNotifier {
             color: Colors.red,
             fontSize: 15),
         bodyText2: TextStyle(
-          color: Color.fromRGBO(4, 88, 125, 1),
-          fontSize: 15,
-          fontWeight: FontWeight.w700
-        ),
+            color: Color.fromRGBO(4, 88, 125, 1),
+            fontSize: 15,
+            fontWeight: FontWeight.w700),
         caption: TextStyle(
 
             ///items in settings_page
@@ -39,6 +38,12 @@ class GlobalTheme with ChangeNotifier {
             fontFamily: 'RobotoCondensed',
             color: Colors.black,
             fontSize: 24),
+        headline3: ///labels in profile
+            TextStyle(color: Color.fromRGBO(4, 88, 125, 1), fontSize: 20,fontWeight: FontWeight.bold),
+        headline4: TextStyle(
+          color: Color.fromRGBO(64, 191, 197,1),
+            fontSize: 18,
+        ),
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Color.fromRGBO(4, 88, 125, 1),
