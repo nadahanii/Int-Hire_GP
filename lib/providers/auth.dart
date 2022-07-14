@@ -92,8 +92,12 @@ class Auth with ChangeNotifier {
     }
   }
 
-  Future<String> signup(String data) async {
-    return _authenticate(data, "registerApplicant");
+  Future<String> signup(String data, String userType) async {
+    if(userType == "Recruiter"){
+      return _authenticate(data, "registerRecruiter");
+    }else {
+      return _authenticate(data, "registerApplicant");
+    }
   }
 
   Future<String> login(String data) async {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:history_feature/models/applicant_user.dart';
+import 'package:history_feature/models/recruiter_user.dart';
 import 'package:history_feature/screens/applicant_register_screen.dart';
 import 'package:history_feature/screens/recruiter_register_screen.dart';
 import '../helpers/pair.dart';
@@ -366,19 +368,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: (() {
                           if (_form.currentState!.validate()) {
                             if (_role == 0) {
+                              final applicant  = ApplicantUser(
+                                birthDay: _birthdayController.text,
+                                city: cityController.text,
+                                country: countryController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                phoneNumber: phoneNumberController.text,
+                                name: nameController.text,
+                                street: streetController.text,
+                                isMale: _gender == 1 ? true : false,
+                              );
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          ApplicantRegisterScreen()));
-                              //Navigator.of(context).pushReplacementNamed('/applicant_register_screen');
+                                          ApplicantRegisterScreen(applicantUser: applicant)));
                             } else if (_role == 1) {
+                              final recruiter  = RecruiterUser(
+                                birthDay: _birthdayController.text,
+                                city: cityController.text,
+                                country: countryController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                phoneNumber: phoneNumberController.text,
+                                name: nameController.text,
+                                street: streetController.text,
+                                isMale: _gender == 1 ? true : false,
+                              );
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          RecruiterRegisterScreen()));
-                              // Navigator.of(context).pushReplacementNamed('/recruiter_register_screen');
+                                          RecruiterRegisterScreen(recruiterUser: recruiter,)));
                             }
                           }
                         }),

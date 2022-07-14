@@ -1,9 +1,18 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:history_feature/models/recruiter_user.dart';
+import 'package:provider/provider.dart';
+
+import '../helpers/components.dart';
+import '../providers/auth.dart';
 
 class RecruiterRegisterScreen extends StatefulWidget {
   static const routeName = '/recruiter_register_screen';
-  const RecruiterRegisterScreen({Key? key}) : super(key: key);
+  RecruiterUser recruiterUser;
+  RecruiterRegisterScreen({Key? key, required this.recruiterUser})
+      : super(key: key);
 
   @override
   State<RecruiterRegisterScreen> createState() =>
@@ -12,10 +21,12 @@ class RecruiterRegisterScreen extends StatefulWidget {
 
 class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String companyName, companyLocation, companyDescription;
+  var companyNameController = TextEditingController();
+  var companyDescriptionController = TextEditingController();
   var streetController = TextEditingController();
   var countryController = TextEditingController();
   var cityController = TextEditingController();
+  var positionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +50,38 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                       height: 25,
                     ),
                     TextFormField(
-                        decoration: InputDecoration(
-                          icon: Icon(Icons.location_city_outlined),
-                          hintText: 'Company Name ',
-                        ),
-                        keyboardType: TextInputType.name,
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                            return "Enter correct name of company";
-                          else
-                            return null;
-                        },
-                        onFieldSubmitted: (val) {
-                          setState(() {
-                            companyLocation = val;
-                          });
-                        }), //Company name
+                      controller: positionController,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.person),
+                        hintText: 'Position of Recruiter',
+                      ),
+                      keyboardType: TextInputType.name,
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                          return "Enter correct name of position";
+                        else
+                          return null;
+                      },
+                    ), //Company name
+                    SizedBox(
+                      height: 25,
+                    ),
+                    TextFormField(
+                      controller: companyNameController,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.location_city_outlined),
+                        hintText: 'Company Name ',
+                      ),
+                      keyboardType: TextInputType.name,
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                          return "Enter correct name of company";
+                        else
+                          return null;
+                      },
+                    ), //Company name
                     SizedBox(
                       height: 25,
                     ),
@@ -98,7 +124,6 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                       height: 15.0,
                     ),
 
-
                     TextFormField(
                         controller: countryController,
                         decoration: InputDecoration(
@@ -122,6 +147,7 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                     ),
 
                     TextFormField(
+                      controller: companyDescriptionController,
                       decoration: InputDecoration(
                         icon: Icon(Icons.description_outlined),
                         hintText: 'Company Description/Field ',
@@ -134,12 +160,7 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                         else
                           return null;
                       },
-                      onFieldSubmitted: (val) {
-                        setState(() {
-                          companyDescription = val;
-                        });
-                      },
-                    ), //description
+                    ),
                     SizedBox(
                       height: 25,
                     ),
@@ -147,8 +168,38 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                     TextButton.icon(
                       onPressed: (() {
                         if (_formKey.currentState!.validate()) {
-                          Navigator.of(context)
-                              .pushReplacementNamed('/navbar_screen');
+                          Provider.of<Auth>(context, listen: false)
+                              .signup(json.encode({
+                            "name": widget.recruiterUser.name,
+                            "email": widget.recruiterUser.email,
+                            "phoneNumber": widget.recruiterUser.phoneNumber,
+                            "password": widget.recruiterUser.password,
+                            "street": widget.recruiterUser.street,
+                            "city": widget.recruiterUser.city,
+                            "country": widget.recruiterUser.country,
+                            "birthDay": widget.recruiterUser.birthDay,
+                            "gender":
+                                widget.recruiterUser.isMale == true ? 1 : 0,
+                            "position": positionController.text,
+                            "company": {
+                              "id": 0,
+                              "name": companyNameController.text,
+                              "description": companyDescriptionController.text,
+                              "street": streetController.text,
+                              "city": cityController.text,
+                              "country": countryController.text,
+                            }
+                          }),"Recruiter")
+                              .then((value) {
+                            if (value != 'login successfully') {
+                              showToast(text: value, state: ToastStates.ERROR);
+                            } else {
+                              showToast(
+                                    text: value, state: ToastStates.SUCCESS);
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/navbar_screen');
+                            }
+                          });
                         }
                       }),
                       icon: const Icon(
