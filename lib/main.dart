@@ -6,6 +6,7 @@ import 'package:history_feature/providers/jobs.dart';
 import 'package:history_feature/providers/notifications.dart';
 import 'package:history_feature/providers/theme_provider.dart';
 import 'package:history_feature/screens/add_test.dart';
+import 'package:history_feature/screens/edit_password_screen.dart';
 import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
@@ -19,6 +20,9 @@ import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/login_screen.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
+import 'package:history_feature/models/recruiter_user.dart';
+import 'package:history_feature/models/company.dart';
+import 'package:history_feature/screens/edit_profile_recruiter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +42,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final ApplicantUser userr = new ApplicantUser(
+  final Company _companyy = new Company(id: 1, name: 'Valeo', description: 'hello world ana asmy magda', street: 'ahmed', city: 'alex', country: 'egypt');
+  final ApplicantUser applicant = new ApplicantUser(
       name: 'magda',
       skills: "dsdsa,adsd,asdas",
       email: 'magda@yaho.com',
@@ -51,7 +56,22 @@ class MyApp extends StatelessWidget {
       militaryStatus: MilitaryStatus.Postponed,
       birthDay: '08/12/2000',
       isMale: false,
+      Skills: 'i can read and write',
       tags: ['hi', 'hello']);
+  late  RecruiterUser recruiter = new RecruiterUser(
+      name: 'magda',
+      email: 'magda@yaho.com',
+      phoneNumber: '01159502557',
+      password: 'Helloworld0@',
+      street: 'ahmed orabii',
+      city: 'giza',
+      country: 'cairo',
+      birthDay: '08/12/2000',
+      isMale: false,
+      position: 'HR',
+      company: _companyy,
+
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +92,7 @@ class MyApp extends StatelessWidget {
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
                         ? CircularProgressIndicator()
-                        : SplashScreen()),
+                        : ProfileRecScreen(user: recruiter,)),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),
@@ -86,10 +106,14 @@ class MyApp extends StatelessWidget {
           ForgotPassword.routeName: (ctx) => ForgotPassword(),
           NavbarScreen.routeName: (ctx) => NavbarScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(
-                user: userr,
+                user: applicant,
               ),
           EditProfilePage.routeName: (ctx) => EditProfilePage(),
-          ProfileScreenRec.routeName: (ctx) => ProfileScreenRec()
+          EditPasswordScreen.routeName : (ctx) => EditPasswordScreen(),
+          ProfileRecScreen.routeName: (ctx) => ProfileRecScreen(
+           user: recruiter
+          ),
+          EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(),
         },
       ),
     );

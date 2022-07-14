@@ -12,7 +12,9 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
   bool _isObscure1 = true;
   bool _isObscure2 = true;
-  var passwordController = TextEditingController();
+  bool _isObscure3 = true;
+  var oldpasswordController = TextEditingController();
+  var newpasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +35,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TextFormField(
-                    controller: passwordController,
+                    controller: oldpasswordController,
                     obscureText: _isObscure1,
                     decoration: InputDecoration(
                       labelText: 'Old Password',
@@ -59,10 +61,8 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                       //Validator
                     },
                     validator: (password) {
-                      if (password!.isEmpty ||
-                          !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                              .hasMatch(password)) {
-                        return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')';
+                      if (password!.isEmpty) {
+                        return 'Enter a valid Password';
                       }
                       return null;
                     },
@@ -71,21 +71,21 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                     height: 25,
                   ),
                   TextFormField(
-                    controller: passwordController,
-                    obscureText: _isObscure1,
+                    controller: newpasswordController,
+                    obscureText: _isObscure3,
                     decoration: InputDecoration(
                       labelText: 'new Password',
                       // hintText:
                       // "1Upper 1Lower 1Dig 1Spec",
                       suffixIcon: IconButton(
                           icon: Icon(
-                            _isObscure1
+                            _isObscure3
                                 ? Icons.visibility
                                 : Icons.visibility_off,
                           ),
                           onPressed: () {
                             setState(() {
-                              _isObscure1 = !_isObscure1;
+                              _isObscure3 = !_isObscure1;
                             });
                           }),
                       prefixIcon: Icon(
@@ -137,7 +137,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                               .hasMatch(value)) {
                         return 'Enter a valid Password (8 from \'\'uppercase and lowercase letters, special chars and numbers\'\')';
                       }
-                      if (passwordController.text != value)
+                      if (newpasswordController.text != value)
                         return 'Password does not match';
                       return null;
                     },
