@@ -34,6 +34,7 @@ class TestClass {
   }
   String getLabelB()
   {
+
     return labelB;
   }
   List<Pair<String, int>> getAnswerList()
