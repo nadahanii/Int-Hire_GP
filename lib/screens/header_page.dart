@@ -22,6 +22,7 @@ class HeaderPage extends StatelessWidget {
             IsDark(themeProvider),
             Switch.adaptive(
                 value: themeProvider.isDarkMode,
+
                 onChanged: (value) {
                   final provider =
                       Provider.of<ThemeProvider>(context, listen: false);
