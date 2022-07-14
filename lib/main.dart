@@ -20,12 +20,8 @@ import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/login_screen.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
-import 'package:history_feature/models/recruiter_user.dart';
-import 'package:history_feature/models/company.dart';
-import 'package:history_feature/screens/edit_profile_recruiter.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+import 'package:history_feature/screens/applicant_result_screen.dart';
+void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => ThemeProvider()),
     ChangeNotifierProvider(create: (_) => Auth()),
@@ -114,6 +110,8 @@ class MyApp extends StatelessWidget {
            user: recruiter
           ),
           EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(),
+          ApplicantResult.routeName: (ctx) => ApplicantResult(personality_type: 'null',),
+          //ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
         },
       ),
     );

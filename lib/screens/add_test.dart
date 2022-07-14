@@ -1,6 +1,8 @@
-import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+
+import '../models/testClass.dart';
+import '../models/test.dart';
+import 'applicant_result_screen.dart';
 
 class AddTest extends StatefulWidget {
   const AddTest({Key? key}) : super(key: key);
@@ -11,54 +13,111 @@ class AddTest extends StatefulWidget {
 }
 
 class _AddTestState extends State<AddTest> {
-  static List<List<dynamic>> _csvData = [
-    /* ['hey', '1', '0'],
-    ['hello','2','1']*/
-  ];
-
-  void _loadCSV() async {
-    final _rawData = await rootBundle.loadString("assets/testData.csv");
-    List<List<dynamic>> _listData =
-        const CsvToListConverter().convert(_rawData);
-    setState(() {
-      _csvData = _listData;
-      print(_csvData);
-    });
+  late List<TestClass> _testData1 = Test().testData;
+  List<int> _answers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  late String _testType = "";
+  void setType(int start, String labelA, String labelB, int rest) {
+    if (rest == 1) _testType = "";
+    int labelACount = 0;
+    for (int i = start; i < _answers.length; i += 4) {
+      if (_answers[i] == 0) labelACount++;
+    }
+    if (labelACount > 1) _testType += labelA;
+    //print(_testType);
   }
 
-  @override
-  void initState() {
-    super.initState();
-    //WidgetsBinding.instance.addPostFrameCallback((_) => _loadCSV());
-    _loadCSV();
+  Widget _radioButtonGroup({required String text, required List<Widget> list}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Divider(),
+        Text(
+          text,
+          style: const TextStyle(
+              fontSize: 20, color: Color.fromRGBO(4, 88, 125, 1)),
+        ),
+        ...list,
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Personality Test"),
+        centerTitle: true,
+      ),
       body: Container(
-          child: Center(
-        child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: _csvData.length,
-          itemBuilder: (_, i) {
-            return Card(
-              child: ListTile(
-                leading: Text(
-                  _csvData[i][0].toString(),
-                  style: TextStyle(fontSize: 25),
+          child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: _testData1.length,
+              itemBuilder: (_, i) {
+                return _radioButtonGroup(
+                  text: _testData1[i].getQuestion(),
+                  list: _testData1[i].getAnswerList().map((pair) {
+                    return ListTile(
+                      title: Text(pair.item1),
+                      leading: Radio<int>(
+                        value: pair.item2,
+                        groupValue: _answers[i],
+                        onChanged: (int? value) {
+                          setState(() {
+                            _answers[i] = value!;
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ); // Radio
+              },
+            ),
+            TextButton.icon(
+              onPressed: (() {
+                setType(
+                    0, _testData1[0].getLabelA(), _testData1[0].getLabelB(), 1);
+                setType(
+                    1, _testData1[1].getLabelA(), _testData1[1].getLabelB(), 0);
+                setType(
+                    2, _testData1[2].getLabelA(), _testData1[2].getLabelB(), 0);
+                setType(
+                    3, _testData1[3].getLabelA(), _testData1[3].getLabelB(), 0);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ApplicantResult(
+                              personality_type: _testType,
+                            )));
+              }),
+              icon: const Icon(
+                Icons.app_registration,
+                size: 28,
+              ),
+              label: Container(
+                alignment: Alignment.center,
+                width: 150,
+                height: 35,
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.white,
+                  ),
                 ),
-                title: Text(
-                  _csvData[i][1].toString(),
-                  style: TextStyle(fontSize: 25),
-                ),
-                trailing: Text(
-                  _csvData[i][2].toString(),
-                  style: TextStyle(fontSize: 25),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(4, 88, 125, 1),
+                  borderRadius: BorderRadius.circular(25),
                 ),
               ),
-            );
-          },
+            ),
+            SizedBox(
+              height: 50,
+            )
+          ],
         ),
       )),
     );
