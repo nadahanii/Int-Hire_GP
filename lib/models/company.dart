@@ -1,14 +1,10 @@
-import 'job.dart';
-
-enum MilitaryStatus { Postponed, Exempted, Completed, NotApplicable }
-
 class Company {
-  late int id;
-  late String name;
-  late String description;
-  late String street;
-  late String city;
-  late String country;
+   int? id;
+   String? name;
+   String? description;
+   String? street;
+   String? city;
+   String? country;
 
   Company({
     required this.id,

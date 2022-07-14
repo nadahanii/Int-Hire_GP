@@ -8,7 +8,8 @@ import '../models/job.dart';
 
 class ApplicantRegisterScreen extends StatefulWidget {
   static const routeName = '/applicant_register_screen';
-  const ApplicantRegisterScreen({Key? key}) : super(key: key);
+  ApplicantUser applicantUser;
+  ApplicantRegisterScreen({Key? key, required this.applicantUser}) : super(key: key);
 
   @override
   State<ApplicantRegisterScreen> createState() =>
@@ -178,7 +179,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 TextButton.icon(
                   onPressed: (() {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.of(context).pushReplacementNamed('/history');
+                      Navigator.of(context).pushReplacementNamed('/navbar_screen');
                     }
                   }),
                   icon: const Icon(

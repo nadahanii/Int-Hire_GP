@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:history_feature/screens/notification_detailed_screen.dart';
 import '../models/notification.dart' as n;
 
 class NotificationItem extends StatelessWidget {
@@ -10,26 +11,32 @@ class NotificationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: notification.viewed ? Colors.redAccent : Colors.blue,
-      padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          prefixIcon(),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  message(),
-                  timeAndDate(),
-                ],
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).pushNamed('/notification_detailed_screen',arguments: this.notification);
+
+      },
+      child: Container(
+        color: notification.viewed ? Colors.blue : Colors.green,
+        padding: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            prefixIcon(),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    message(),
+                    timeAndDate(),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

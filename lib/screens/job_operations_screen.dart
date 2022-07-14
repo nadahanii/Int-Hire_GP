@@ -334,7 +334,7 @@ class _JobOperationsState extends State<JobOperations> {
                   const SizedBox(
                     height: 5.0,
                   ),
-                  const Divider(),
+                  /*const Divider(),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Row(
@@ -350,8 +350,8 @@ class _JobOperationsState extends State<JobOperations> {
                             }),
                       ],
                     ),
-                  ),
-                  TextButton(
+                  ),*/
+                  ElevatedButton(
                     onPressed: () {
                       final job = Job(
                         id: widget.job != null ? widget.job!.id : 0,
@@ -385,9 +385,21 @@ class _JobOperationsState extends State<JobOperations> {
                       }
                       Navigator.of(context).pop(job);
                     },
+                    style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).appBarTheme.backgroundColor,
+                        fixedSize: Size(150, 35)),
                     child: widget.job == null
-                        ? const Text('Add Job')
-                        : const Text('Update Job'),
+                        ? const Text(
+                            'Add Job',
+                            style: TextStyle(fontSize: 17),
+                          )
+                        : const Text(
+                            'Update Job',
+                            style: TextStyle(fontSize: 17),
+                          ),
+                  ),
+                  const SizedBox(
+                    height: 5.0,
                   ),
                 ],
               ),
@@ -398,73 +410,3 @@ class _JobOperationsState extends State<JobOperations> {
     );
   }
 }
-
-/*
- Future<dynamic> _dialog() {
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        String title = "";
-        return AlertDialog(
-          title: Text('create_new'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              TextField(
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'create_new',
-                  hintText: "http://passwall.io",
-                ),
-                onChanged: (text) {
-                  title = text;
-                },
-              ),
-              TextField(
-                autocorrect: false,
-                decoration: InputDecoration(labelText: 'username'),
-                onChanged: (text) {},
-              ),
-              TextField(
-                autocorrect: false,
-                decoration: InputDecoration(
-                  labelText: 'password',
-                  helperText: 'leave_blank',
-                ),
-                onChanged: (text) {},
-              )
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            ElevatedButton(
-              child: Text('save'),
-              onPressed: () async {
-                if (title == "") {
-                  title = 'no_title';
-                }
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-TextFormField(
-                  initialValue: widget.user.email,
-                  onSaved: (val) => widget.user.email = val,
-                  validator: (val) =>
-                      val.contains('@') ? null : 'Email is invalid',
-                  decoration: InputDecoration(
-                    labelText: 'Email Address',
-                    hintText: 'Enter your email',
-                    icon: Icon(Icons.email),
-                    isDense: true,
-                  ),
-                ),
- */

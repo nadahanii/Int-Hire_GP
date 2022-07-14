@@ -1,69 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:history_feature/widgets/notification_item.dart';
+
 import 'package:provider/provider.dart';
 
-import '../providers/Notifications.dart';
-import '../widgets/main_drawer.dart';
+import '../providers/notifications.dart';
+import '../widgets/notifications_list.dart';
 import 'complain_form.dart';
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
   static const routeName = '/Notifications';
+
+  @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      drawer: MainDrawer(),
       appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            icon: FaIcon(FontAwesomeIcons.comment),
-            padding: EdgeInsets.only(right: 5.0),
-            tooltip: "complaint",
+            icon: Icon(Icons.add),
+            color: Theme.of(context).bottomAppBarColor,
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => ComplaintForm()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                return ComplaintForm();
+              }));
             },
           )
         ],
-        leading: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 0),
-            child: Text(
-              'Notifications',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ),
-        title: Container(
-          height: 40.0,
-          child: TextField(
-            decoration: InputDecoration(
-              constraints: BoxConstraints(
-                maxHeight: 40,
-                minHeight: 40,
-              ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-              filled: true,
-              fillColor: Colors.grey.shade200,
-              prefixIcon: Icon(Icons.search, color: Colors.grey),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  borderSide: BorderSide.none),
-              hintText: "Search",
-              hintStyle: TextStyle(fontSize: 14),
-            ),
-          ),
-        ),
-        leadingWidth: 130.0,
+        title:
+            Text('Notifications', style: Theme.of(context).textTheme.headline1),
       ),
       body: FutureBuilder(
-        future: Provider.of<Notifications>(context, listen: false)
-            .fetchAndSetNotifications(),
+        future: Provider.of<Notifications>(context, listen: false).userType !=
+                "Admin"
+            ? Provider.of<Notifications>(context, listen: false)
+                .fetchAndSetNotifications()
+            : Provider.of<Notifications>(context, listen: false)
+                .fetchAndSetComplaint(),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -74,23 +53,7 @@ class NotificationPage extends StatelessWidget {
               );
             } else {
               return Consumer<Notifications>(
-                builder: (_, cart, ch) {
-                  final notifications =
-                      Provider.of<Notifications>(context, listen: false).items;
-                  return ListView.separated(
-                    itemBuilder: (context, index) {
-                      return NotificationItem(
-                        notification: notifications[index],
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider(
-                        height: 0,
-                      );
-                    },
-                    itemCount: notifications.length,
-                  );
-                },
+                builder: (_, cart, ch) => NotificationsList(),
               );
             }
           }

@@ -1,17 +1,17 @@
 import 'company.dart';
 
 class RecruiterUser {
-  late String name;
-  late String email;
-  late String phoneNumber;
-  late String password;
-  late String street;
-  late String city;
-  late String country;
-  late String birthDay;
-  late bool isMale;
-  late String position;
-  late Company company;
+   String? name;
+   String? email;
+   String? phoneNumber;
+   String? password;
+   String? street;
+   String? city;
+   String? country;
+   String? birthDay;
+   bool? isMale;
+   String? position;
+  Company? company;
 
   RecruiterUser({
     required this.name,
@@ -21,8 +21,8 @@ class RecruiterUser {
     required this.street,
     required this.city,
     required this.country,
-    required this.position,
-    required this.company,
+    this.position = '',
+    this.company = null,
     required this.birthDay,
     required this.isMale,
   });
@@ -38,6 +38,6 @@ class RecruiterUser {
     birthDay = json['birthDay'];
     isMale = ((json['gender'] as int) == 1) ? true : false;
     position = json['position'];
-    company = Company.fromJson(json['company'] as Map<String, dynamic>);
+  //  company = Company.fromJson(json['company'] as Map<String, dynamic>);
   }
 }
