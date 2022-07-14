@@ -53,6 +53,23 @@ flutter:
   assets:
       - logo.png
       - compose.png
+      - enfj.png
+      - enfp.png
+      - entj.png
+      - entp.png
+      - esfj.png
+      - esfp.png
+      - estj.png
+      - estp.png
+      - infj.png
+      - infp.png
+      - intj.png
+      - intp.png
+      - isfj.png
+      - isfp.png
+      - istj.png
+      - istp.png
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

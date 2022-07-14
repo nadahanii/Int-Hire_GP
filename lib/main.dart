@@ -16,7 +16,7 @@ import 'package:history_feature/screens/profile_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/login_screen.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
-
+import 'package:history_feature/screens/applicant_result_screen.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => GlobalTheme()),
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
                         ? SplashScreen()
-                        : LoginScreen()),
+                        : AddTest()),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),
@@ -62,6 +62,7 @@ class MyApp extends StatelessWidget {
           ApplicantRegisterScreen.routeName: (ctx) => ApplicantRegisterScreen(),
           RecruiterRegisterScreen.routeName: (ctx) => RecruiterRegisterScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
+          ApplicantResult.routeName: (ctx) => ApplicantResult(personality_type: 'null',),
         },
       ),
     );
