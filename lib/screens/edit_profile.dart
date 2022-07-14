@@ -1,12 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/screens/profile_screen_recruiter.dart';
-import 'package:history_feature/widgets/profile_widget.dart';
-import 'package:history_feature/providers/dummy_data.dart';
-import 'package:history_feature/widgets/text_widget.dart';
 import '../helpers/pair.dart';
-import '../models/applicant_user.dart';
 import '../models/job.dart';
 import 'package:intl/intl.dart';
 

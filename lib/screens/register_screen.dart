@@ -383,7 +383,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          ApplicantRegisterScreen()));
+                                          ApplicantRegisterScreen(applicantUser: applicant)));
                             } else if (_role == 1) {
                               final recruiter  = RecruiterUser(
                                 birthDay: _birthdayController.text,

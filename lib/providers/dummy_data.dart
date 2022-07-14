@@ -1,5 +1,4 @@
 import 'package:history_feature/models/job.dart';
-import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/models/applicant_user.dart';
 
 class UserPreferences {

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:history_feature/models/applicant_user.dart';
 
 import 'package:history_feature/screens/job_view.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
+
+import '../models/job.dart';
 
 
 
@@ -29,11 +32,12 @@ class _NavbarScreenState extends State<NavbarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ApplicantUser userr = new ApplicantUser(name: 'magda', email: 'magda@yaho.com', phoneNumber: '01159502557', password: 'Helloworld0@', street: 'shhh', city: 'giza', country: 'cairo', educationLevel: Education.Bachelors, militaryStatus: MilitaryStatus.Postponed, birthDay: '08/12/2000', isMale: false, tags: ['hi' , 'hello']);
     List<Widget> _pages = <Widget>[
       JobView(),
       NotificationPage(),
       JobView(history: true,),
-      ProfileScreen(isApplicant: true),
+      ProfileScreen(user: userr),
       SettingsPage(),
     ];
 

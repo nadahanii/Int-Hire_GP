@@ -1,14 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/widgets/profile_widget.dart';
-import 'package:history_feature/screens/settings_page.dart';
-import '../helpers/pair.dart';
-import '../models/applicant_user.dart';
-import 'package:history_feature/providers/dummy_data.dart';
-import '../helpers/pair.dart';
-import '../models/job.dart';
-import '../widgets/main_drawer.dart';
 import 'package:history_feature/providers/dummydata_recruiter.dart';
 
 class ProfileScreenRec extends StatefulWidget {
@@ -58,28 +48,24 @@ class _ProfileScreenRecState extends State<ProfileScreenRec> {
   void initState() {
     super.initState();
     if (widget.user != null) {
-
-      _nameController.text = widget.user.name;
-      _phoneController.text = widget.user.phoneNumber;
-      _passwordController.text = widget.user.password;
-      _cityController.text = widget.user.city;
-      _streetController.text = widget.user.street;
-      _countryController.text = widget.user.country;
-      _birthdayController.text = widget.user.birthDay;
-      if(widget.user.isMale)
+      _nameController.text = widget.user.name!;
+      _phoneController.text = widget.user.phoneNumber!;
+      _passwordController.text = widget.user.password!;
+      _cityController.text = widget.user.city!;
+      _streetController.text = widget.user.street!;
+      _countryController.text = widget.user.country!;
+      _birthdayController.text = widget.user.birthDay!;
+      if(widget.user.isMale == true)
       {
         _gender = 1;
         _genderController.text = 'Male';
-      }
-
-      if(!widget.user.isMale)
-      {
+      }else {
         _genderController.text= "Female";
         _gender =0;
       }
 
-      _postionController.text = widget.user.position;
-      _emailController.text = widget.user.email;
+      _postionController.text = widget.user.position!;
+      _emailController.text = widget.user.email!;
 
     }
   }
