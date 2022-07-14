@@ -61,6 +61,7 @@ class Auth with ChangeNotifier {
       if (response.statusCode == 400 || response.statusCode == 401) {
         return json.decode(response.body);
       }
+      print(response.body + " register");
       final responseData = json.decode(response.body);
       _token = responseData['token'];
       _expiryDate =
@@ -87,8 +88,8 @@ class Auth with ChangeNotifier {
       prefs.setString('userData', userData);
       return 'login successfully';
     } catch (error) {
-      print("test2 :" + error.toString());
-      rethrow;
+      print("auto catch :" + error.toString());
+      return error.toString();
     }
   }
 
@@ -120,7 +121,7 @@ class Auth with ChangeNotifier {
       _token = extractedUserData['token'] as String;
       _expiryDate = expiryDate;
       _userType = extractedUserData['userType'] as String;
-
+      print(" " + (_userType ?? " test"));
       if (_userType == "Applicant") {
         _applicant = ApplicantUser.fromJson(
             extractedUserData["user"] as Map<String, dynamic>);

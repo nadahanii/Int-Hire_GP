@@ -7,6 +7,7 @@ import 'package:history_feature/providers/notifications.dart';
 import 'package:history_feature/providers/theme_provider.dart';
 import 'package:history_feature/screens/add_test.dart';
 import 'package:history_feature/screens/edit_profile.dart';
+import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/screens/settings_page.dart';
@@ -39,6 +40,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final ApplicantUser userr = new ApplicantUser(
       name: 'magda',
+      skills: "dsdsa,adsd,asdas",
       email: 'magda@yaho.com',
       phoneNumber: '01159502557',
       password: 'Helloworld0@',
@@ -63,7 +65,7 @@ class MyApp extends StatelessWidget {
         theme: MyThemes.lightTheme,
         darkTheme: MyThemes.darkTheme,
         home: auth.isAuth
-            ? JobView(history: false)
+            ? NavbarScreen()
             : FutureBuilder(
                 future: auth.tryAutoLogin(),
                 builder: (ctx, authResultSnapshot) =>
@@ -82,6 +84,7 @@ class MyApp extends StatelessWidget {
           SettingsPage.routeName: (ctx) => SettingsPage(),
           NotificationPage.routeName: (ctx) => NotificationPage(),
           ForgotPassword.routeName: (ctx) => ForgotPassword(),
+          NavbarScreen.routeName: (ctx) => NavbarScreen(),
           ProfileScreen.routeName: (ctx) => ProfileScreen(
                 user: userr,
               ),

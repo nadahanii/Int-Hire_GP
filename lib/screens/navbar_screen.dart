@@ -5,10 +5,10 @@ import 'package:history_feature/screens/job_view.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
+import 'package:provider/provider.dart';
 
 import '../models/job.dart';
-
-
+import '../providers/auth.dart';
 
 class NavbarScreen extends StatefulWidget {
   static const routeName = '/navbar_screen';
@@ -32,11 +32,27 @@ class _NavbarScreenState extends State<NavbarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ApplicantUser userr = new ApplicantUser(name: 'magda', email: 'magda@yaho.com', phoneNumber: '01159502557', password: 'Helloworld0@', street: 'shhh', city: 'giza', country: 'cairo', educationLevel: Education.Bachelors, militaryStatus: MilitaryStatus.Postponed, birthDay: '08/12/2000', isMale: false, tags: ['hi' , 'hello']);
+    final ApplicantUser userr = new ApplicantUser(
+        name: 'magda',
+        email: 'magda@yaho.com',
+        phoneNumber: '01159502557',
+        password: 'Helloworld0@',
+        street: 'shhh',
+        city: 'giza',
+        country: 'cairo',
+        educationLevel: Education.Bachelors,
+        militaryStatus: MilitaryStatus.Postponed,
+        birthDay: '08/12/2000',
+        skills: "dsdsa,adsd,asdas",
+        isMale: false,
+        tags: ['hi', 'hello']);
     List<Widget> _pages = <Widget>[
-      JobView(),
+      JobView(history: false),
       NotificationPage(),
-      JobView(history: true,),
+      if (Provider.of<Auth>(context).userType != 'Admin')
+        JobView(
+          history: true,
+        ),
       ProfileScreen(user: userr),
       SettingsPage(),
     ];
@@ -78,20 +94,21 @@ class _NavbarScreenState extends State<NavbarScreen> {
                     size: 30,
                   )),
               label: 'Notifications'),
-          BottomNavigationBarItem(
-              icon: new SizedBox(
-                  height: 30,
-                  child: Icon(
-                    Icons.history,
-                    size: 30,
-                  )),
-              activeIcon: new SizedBox(
-                  height: 30,
-                  child: Icon(
-                    Icons.history_outlined,
-                    size: 30,
-                  )),
-              label: 'History'),
+          if (Provider.of<Auth>(context).userType != 'Admin')
+            BottomNavigationBarItem(
+                icon: new SizedBox(
+                    height: 30,
+                    child: Icon(
+                      Icons.history,
+                      size: 30,
+                    )),
+                activeIcon: new SizedBox(
+                    height: 30,
+                    child: Icon(
+                      Icons.history_outlined,
+                      size: 30,
+                    )),
+                label: 'History'),
           BottomNavigationBarItem(
               icon: new SizedBox(
                   height: 30,

@@ -58,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         return;
       }
       setState(() {
-        _birthdayController.text = DateFormat.yMd().format(pickedDate);
+        _birthdayController.text =  DateFormat('dd-MM-yyyy').format(pickedDate);
       });
     });
   }
@@ -378,6 +378,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 name: nameController.text,
                                 street: streetController.text,
                                 isMale: _gender == 1 ? true : false,
+                                skills: '',
                               );
                               Navigator.push(
                                   context,

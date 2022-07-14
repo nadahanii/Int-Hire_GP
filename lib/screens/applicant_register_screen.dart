@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../helpers/components.dart';
 import '../helpers/pair.dart';
 import '../models/applicant_user.dart';
 import '../models/job.dart';
+import '../providers/auth.dart';
 
 class ApplicantRegisterScreen extends StatefulWidget {
   static const routeName = '/applicant_register_screen';
@@ -18,12 +23,10 @@ class ApplicantRegisterScreen extends StatefulWidget {
 
 class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  late String twitterUsername,
-      skills,
-      interestedIn,
-      applicantCity,
-      applicantCountry,
-      birthday;
+
+  final _twitterUsernameController = TextEditingController();
+  final _skillsController = TextEditingController();
+  final _interestedInController = TextEditingController();
 
   Education _education = Education.Bachelors;
 
@@ -81,6 +84,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 ),
 
                 TextFormField(
+                  controller: _twitterUsernameController,
                   decoration: InputDecoration(
                     icon: FaIcon(FontAwesomeIcons.twitter),
                     labelText: 'Twitter username',
@@ -94,6 +98,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 ),
 
                 TextFormField(
+                  controller: _skillsController,
                   decoration: InputDecoration(
                     icon: FaIcon(FontAwesomeIcons.boltLightning),
                     labelText: 'Skills',
@@ -104,11 +109,6 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter valid skills';
                     }
-                  },
-                  onFieldSubmitted: (val) {
-                    setState(() {
-                      skills = val;
-                    });
                   },
                 ), //skills
                 SizedBox(
@@ -127,11 +127,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                       return 'Please enter valid values of jobs you are interested in';
                     }
                   },
-                  onFieldSubmitted: (val) {
-                    setState(() {
-                      interestedIn = val;
-                    });
-                  },
+                  controller: _interestedInController,
                 ), //interested
                 SizedBox(
                   height: 25,
@@ -179,7 +175,34 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 TextButton.icon(
                   onPressed: (() {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.of(context).pushReplacementNamed('/navbar_screen');
+                      Provider.of<Auth>(context, listen: false)
+                          .signup(json.encode({
+                        "name": widget.applicantUser.name,
+                        "email": widget.applicantUser.email,
+                        "phoneNumber": widget.applicantUser.phoneNumber,
+                        "password": widget.applicantUser.password,
+                        "street": widget.applicantUser.street,
+                        "city": widget.applicantUser.city,
+                        "country": widget.applicantUser.country,
+                        "birthDay": widget.applicantUser.birthDay,
+                        "gender":
+                        widget.applicantUser.isMale == true ? 1 : 0,
+                        "militaryStatus": _militaryStatus.index,
+                        "twitterUsername": _twitterUsernameController.text,
+                        "educationLevel": _education.index,
+                        "tags": _interestedInController.text.split(','),
+                        "skills": _skillsController.text
+                      }),"Applicant")
+                          .then((value) {
+                        if (value != 'login successfully') {
+                          showToast(text: value, state: ToastStates.ERROR);
+                        } else {
+                          showToast(
+                              text: value, state: ToastStates.SUCCESS);
+                          Navigator.of(context)
+                              .pushReplacementNamed('/navbar_screen');
+                        }
+                      });
                     }
                   }),
                   icon: const Icon(

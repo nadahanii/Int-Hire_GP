@@ -16,6 +16,7 @@ class UserPreferences {
     street: "ahmed orabi",
     city: 'giza',
     country: 'egypt',
+    skills: 'dsds,dsadsa,dasasdas,dsadsad',
     tags: ['hi' , 'hello']
 
   );

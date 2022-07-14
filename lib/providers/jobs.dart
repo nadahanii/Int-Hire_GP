@@ -25,6 +25,7 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobs() async {
+    print("test");
     _items = [];
     final url = Uri.parse('${baseUrl}Job/getAllJobs');
     try {
@@ -36,6 +37,7 @@ class Jobs with ChangeNotifier {
           "Accept": "application/json",
         },
       );
+      print(response.statusCode.toString());
       final extractedData = json.decode(response.body) as List<dynamic>;
       if (extractedData.isEmpty) {
         return;
@@ -44,6 +46,7 @@ class Jobs with ChangeNotifier {
       for (var obj in extractedData) {
         loadedJobs.add(Job.fromJson(obj));
       }
+      print("object");
       _items = loadedJobs.reversed.toList();
       notifyListeners();
     } catch (e) {
@@ -75,6 +78,7 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobsOfRecruiter() async {
+    print("ssssssssss");
     _items = [];
     final url = Uri.parse('${baseUrl}Job/getRecruiterJobs');
     final response = await http.get(
@@ -85,6 +89,8 @@ class Jobs with ChangeNotifier {
         "Accept": "application/json",
       },
     );
+    print(userType ?? "ss");
+    print(response.statusCode.toString() + " " + userType!);
     final extractedData = json.decode(response.body) as List<dynamic>;
     if (extractedData.isEmpty) {
       return;
@@ -136,7 +142,7 @@ class Jobs with ChangeNotifier {
       return 'add job successfully';
     } catch (error) {
       print("test2 add job:" + error.toString());
-      rethrow;
+      return error.toString();
     }
   }
 
@@ -200,7 +206,7 @@ class Jobs with ChangeNotifier {
       return 'update job successfully';
     } catch (error) {
       print("test2 :" + error.toString());
-      rethrow;
+      return error.toString();
     }
   }
 }
