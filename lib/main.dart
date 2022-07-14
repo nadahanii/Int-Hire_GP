@@ -33,7 +33,7 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // Null obj
-  late PersonalityData personalityData=PersonalityData("","","","","","","");
+  late PersonalityData personalityData;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -50,8 +50,8 @@ class MyApp extends StatelessWidget {
                 builder: (ctx, authResultSnapshot) =>
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
-                        ? SplashScreen()
-                        : AddTest()),
+                        ? CircularProgressIndicator()
+                        : SplashScreen()),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),

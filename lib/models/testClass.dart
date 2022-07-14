@@ -1,45 +1,45 @@
 import 'package:history_feature/helpers/pair.dart';
 
 class TestClass {
-  final String question;
-  final String a;
-  final String b;
-  final String labelA;
-  final String labelB;
-  late List<Pair<String, int>> answerList;
+  final String _question;
+  final String _a;
+  final String _b;
+  final String _labelA;
+  final String _labelB;
+  late List<Pair<String, int>> _answerList;
 
-  TestClass(this.question, this.a, this.b, this.labelA, this.labelB)
+  TestClass(this._question, this._a, this._b, this._labelA, this._labelB)
   {
-    this.answerList = [
-      Pair(a, 0),
-      Pair(b, 1),
+    this._answerList = [
+      Pair(_a, 0),
+      Pair(_b, 1),
     ];
   }
   String getQuestion()
   {
-    return question;
+    return _question;
   }
 
   String getChooseA()
   {
-    return a;
+    return _a;
   }
   String getChooseB()
   {
-    return b;
+    return _b;
   }
   String getLabelA()
   {
-    return labelA;
+    return _labelA;
   }
   String getLabelB()
   {
 
-    return labelB;
+    return _labelB;
   }
   List<Pair<String, int>> getAnswerList()
   {
-    return answerList;
+    return _answerList;
   }
 
 }
