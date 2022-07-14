@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
         themeMode: themeProvider.themeMode,
         theme: MyThemes.lightTheme,
         darkTheme: MyThemes.darkTheme,
-        home: //NavbarScreen()
+        home: ///NavbarScreen()
         auth.isAuth
             ? NavbarScreen()
             : FutureBuilder(
