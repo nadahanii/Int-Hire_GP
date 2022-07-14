@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/screens/notification_detailed_screen.dart';
+import 'package:provider/provider.dart';
+import '../helpers/components.dart';
 import '../models/notification.dart' as n;
+import '../providers/notifications.dart';
 
 class NotificationItem extends StatelessWidget {
   final n.Notification notification;
@@ -12,11 +15,20 @@ class NotificationItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        //Navigator.of(context).pushNamed('/notification_detailed_screen',arguments: this.notification);
-        Navigator.push(context, 
-        new MaterialPageRoute(builder: (context)=> new NotificationDetailedScreen(notification: notification))
-        );
+      onTap: () {
+        Provider.of<Notifications>(context, listen: false)
+            .viewNotification(notification)
+            .then((value) {
+          if (value == "view notification successfully") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => new NotificationDetailedScreen(
+                        notification: notification)));
+          } else {
+            showToast(text: value, state: ToastStates.ERROR);
+          }
+        });
       },
       child: Container(
         color: notification.viewed ? Colors.blue : Colors.green,

@@ -3,8 +3,8 @@ import 'package:history_feature/models/recruiter_user.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
 
 class ProfileRecScreen extends StatefulWidget {
-  final RecruiterUser? user;
-  ProfileRecScreen({Key? key, this.user}) : super(key: key);
+  final RecruiterUser user;
+  ProfileRecScreen({Key? key, required this.user}) : super(key: key);
   static const routeName = '/profileRec_Screen';
   @override
   State<ProfileRecScreen> createState() => _ProfileRecScreenState();
@@ -40,9 +40,8 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditProfileRecPage(
-                          user: widget.user,
-                        )));
+                    builder: (context) =>
+                        EditProfileRecPage(user: widget.user)));
           },
         ),
       ],
@@ -53,27 +52,27 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
   void initState() {
     super.initState();
     if (widget.user != null) {
-      _nameController.text = widget.user!.name!;
-      _phoneController.text = widget.user!.phoneNumber!;
-      _emailController.text = widget.user!.email!;
-      _cityController.text = widget.user!.city!;
-      _streetController.text = widget.user!.street!;
-      _countryController.text = widget.user!.country!;
-      _birthdayController.text = widget.user!.birthDay!;
-      _positionController.text = widget.user!.position!;
-      if (widget.user!.isMale!) {
+      _nameController.text = widget.user.name!;
+      _phoneController.text = widget.user.phoneNumber!;
+      _emailController.text = widget.user.email!;
+      _cityController.text = widget.user.city!;
+      _streetController.text = widget.user.street!;
+      _countryController.text = widget.user.country!;
+      _birthdayController.text = widget.user.birthDay!;
+      _positionController.text = widget.user.position!;
+      if (widget.user.isMale!) {
         _genderController.text = 'Male';
       }
-
-      if (!widget.user!.isMale!) {
+      if (!widget.user.isMale!) {
         _genderController.text = "Female";
       }
-      _companyCityController.text = widget.user!.company!.city!;
-      _companyCountryController.text = widget.user!.company!.country!;
-      _companyStreetController.text = widget.user!.company!.street!;
-      _companyDescriptionController.text = widget.user!.company!.description!;
-      _companyNameController.text = widget.user!.company!.name!;
+      _companyCityController.text = widget.user.company!.city!;
+      _companyCountryController.text = widget.user.company!.country!;
+      _companyStreetController.text = widget.user.company!.street!;
+      _companyDescriptionController.text = widget.user.company!.description!;
+      _companyNameController.text = widget.user.company!.name!;
     }
+
   }
 
   @override
@@ -83,7 +82,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
       appBar: buildAppBar(context),
       body: Padding(
         padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
-        /*child: ListView(
+        child: ListView(
           physics: BouncingScrollPhysics(),
           children: [
             Column(
@@ -275,7 +274,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
               ],
             ),
           ],
-        ),*/
+        ),
       ),
     );
   }

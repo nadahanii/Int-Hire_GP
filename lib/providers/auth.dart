@@ -145,6 +145,46 @@ class Auth with ChangeNotifier {
     }
   }
 
+  Future<String> updateRecruiter(String encode) async {
+    final url = Uri.parse('${baseUrl}account/UpdateRecruiterUserInfo');
+    try {
+      final response = await http.post(
+        url,
+        body: encode,
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $_token',
+          "Accept": "application/json",
+        },
+      );
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body);
+      }
+      final responseData = json.decode(response.body);
+      _token = responseData['token'];
+      _expiryDate =
+          DateFormat('dd-MM-yyyy hh:mm aaa').parse(responseData['expiration']);
+      _userType = "Recruiter";
+      _recruiter = RecruiterUser.fromJson(responseData["userDate"]);
+      _autoLogout();
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      final userData = json.encode(
+        {
+          'token': _token,
+          'expiration': _expiryDate!.toIso8601String(),
+          'userType': responseData['userType'],
+          'user': responseData["userDate"],
+        },
+      );
+      prefs.setString('userData', userData);
+      return 'update successfully';
+    } catch (error) {
+      print("update recruiter catch :" + error.toString());
+      return error.toString();
+    }
+  }
+
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
     if (!prefs.containsKey('userData')) {

@@ -97,7 +97,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       }
       setState(() {
         _birthdayController.text =
-            DateFormat('dd-MM-yyyy hh:mm a').format(pickedDate);
+            DateFormat('dd-MM-yyyy').format(pickedDate);
       });
     });
   }
