@@ -37,8 +37,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _genderController = TextEditingController();
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      leading: BackButton(),
-      backgroundColor: Color.fromRGBO(4, 88, 125,1),
+      centerTitle: true,
+      automaticallyImplyLeading: false,
+
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       title: Text("Profile",
           style: Theme.of(context).textTheme.headline1),

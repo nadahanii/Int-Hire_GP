@@ -14,7 +14,7 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) => ElevatedButton(
     style: ElevatedButton.styleFrom(
       shape: StadiumBorder(),
-      onPrimary: Colors.white,
+      onPrimary: Color.fromRGBO(4, 88, 125, 1), ///********************************
       padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
     ),
     child: Text(text),

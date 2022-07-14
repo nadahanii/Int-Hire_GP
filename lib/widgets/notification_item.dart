@@ -13,8 +13,10 @@ class NotificationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.of(context).pushNamed('/notification_detailed_screen',arguments: this.notification);
-
+        //Navigator.of(context).pushNamed('/notification_detailed_screen',arguments: this.notification);
+        Navigator.push(context, 
+        new MaterialPageRoute(builder: (context)=> new NotificationDetailedScreen(notification: notification))
+        );
       },
       child: Container(
         color: notification.viewed ? Colors.blue : Colors.green,
