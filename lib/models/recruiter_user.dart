@@ -11,7 +11,7 @@ class RecruiterUser {
    String? birthDay;
    bool? isMale;
    String? position;
-  Company? company;
+   Company? company;
 
   RecruiterUser({
     required this.name,

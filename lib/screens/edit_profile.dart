@@ -53,7 +53,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _emailController = TextEditingController();
   final _tagsController = TextEditingController();
   final _genderController = TextEditingController();
-
+  final _skillsController = TextEditingController();
 
 
   @override
@@ -62,6 +62,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     if (widget.user != null) {
       _education = widget.user!.educationLevel;
       _taggs = widget.user!.tags.toSet();
+      _tagsController.text =_taggs.toString();
       _nameController.text = widget.user!.name;
       _phoneController.text = widget.user!.phoneNumber;
       _passwordController.text = widget.user!.password;
@@ -72,6 +73,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       _militaryStatus = widget.user!.militaryStatus;
       _twitternameController.text = widget.user!.twitterUsername;
       _emailController.text = widget.user!.email;
+       _skillsController.text= widget.user!.Skills;
       if(widget.user!.isMale)
         {
           _gender = 1;
@@ -140,6 +142,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       controller: _nameController,
                       keyboardType: TextInputType.text,
                   validator: (value) {
+
                     if (value!.isEmpty ||
                         !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
                       return "Enter correct name";
@@ -197,18 +200,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    TextFormField(
-                      controller: _passwordController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(),
 
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
                     TextFormField(
                       controller: _birthdayController,
                       readOnly: true,
@@ -296,7 +288,36 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     const SizedBox(
                       height: 20.0,
                     ),
+                    TextFormField(
+                      controller: _tagsController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelText: 'tags',
+                        border: const OutlineInputBorder(),
 
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    TextFormField(
+                        controller: _skillsController,
+                        keyboardType: TextInputType.text,
+                        decoration: const InputDecoration(
+                          labelText: 'Skills',
+                          alignLabelWithHint: true,
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty)
+                            return "Enter correct phone";
+                          else
+                            return null;
+                        }
+                    ),  //Skills
+                    const SizedBox(
+                      height: 20.0,
+                    ),
                     _radioButtonGroup(
                       text: 'Education Level',
                       list: _educationList.map((pair) {
@@ -356,20 +377,33 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         );
                       }).toList(),
                     ),
-                    TextFormField(
-                      controller: _tagsController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: 'tags',
-                        border: const OutlineInputBorder(),
 
-                      ),
+                    SizedBox(
+                      height: 20.0,
                     ),
-
-
                     TextButton(
                       onPressed: () {
-                        widget.user!.isMale=true;
+                         Navigator.of(context).pushNamed('/edit_password_Screen');
+                      },
+                      child:
+                      Text(
+                        'Change Password',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if(_gender==1)
+                          {
+                            widget.user!.isMale=true;
+                          }
+                        else
+                          {
+                            widget.user!.isMale=false;
+                          }
                         widget.user!.email=_emailController.text;
                         widget.user!.birthDay= _birthdayController.text;
                         widget.user!.twitterUsername = _twitternameController.text;
@@ -382,12 +416,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         widget.user!.city= _cityController.text;
                         widget.user!.phoneNumber= _phoneController.text;
                         widget.user!.militaryStatus = _militaryStatus;
-                        widget.user!.tags= _taggs.toList();
+                        _tagsController.text = _tagsController.text.replaceAll('{','');
+                        _tagsController.text = _tagsController.text.replaceAll('}','');
+                        widget.user!.tags = _tagsController.text.split(',');
+                            widget.user!.Skills = _skillsController.text;
+
+
 
 
                         Navigator.of(context).pushNamed('/profile_Screen',arguments: widget.user);
-                        // Navigator.of(context)
-                        //     .push(context,ProfileScreen(userr));
                       },
                       child:
                       Text(
