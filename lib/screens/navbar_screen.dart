@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
-
+import 'package:history_feature/models/recruiter_user.dart';
 import 'package:history_feature/screens/job_view.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/profile_screen.dart';
+import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:provider/provider.dart';
-
-import '../models/job.dart';
 import '../providers/auth.dart';
 
 class NavbarScreen extends StatefulWidget {
   static const routeName = '/navbar_screen';
-
-  const NavbarScreen({
-    Key? key,
+  int selected;
+  NavbarScreen({
+    Key? key, this.selected = 0
   }) : super(key: key);
 
   @override
@@ -22,17 +21,16 @@ class NavbarScreen extends StatefulWidget {
 }
 
 class _NavbarScreenState extends State<NavbarScreen> {
-  int _selected = 0;
+
 
   void IconTap(int index) {
     setState(() {
-      _selected = index;
+      widget.selected = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final ApplicantUser userr = new ApplicantUser(name: 'magda', email: 'magda@yaho.com', phoneNumber: '01159502557', password: 'Helloworld0@', street: 'shhh', city: 'giza', country: 'cairo', educationLevel: Education.Bachelors, militaryStatus: MilitaryStatus.Postponed, birthDay: '08/12/2000', isMale: false, tags: ['hi' , 'hello'] , Skills: 'i can read');
     List<Widget> _pages = <Widget>[
       JobView(history: false),
       NotificationPage(),
@@ -40,13 +38,18 @@ class _NavbarScreenState extends State<NavbarScreen> {
         JobView(
           history: true,
         ),
-      ProfileScreen(user: userr),
+      if (Provider.of<Auth>(context).userType == 'Applicant')
+        ProfileScreen(
+            user: Provider.of<Auth>(context).userObject as ApplicantUser),
+      if (Provider.of<Auth>(context).userType == 'Recruiter')
+        ProfileRecScreen(
+            user: Provider.of<Auth>(context).userObject as RecruiterUser),
       SettingsPage(),
     ];
 
     return Scaffold(
       body: Center(
-        child: _pages.elementAt(_selected),
+        child: _pages.elementAt(widget.selected),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -126,7 +129,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
               label: 'Settings'),
         ],
         fixedColor: Colors.white,
-        currentIndex: _selected,
+        currentIndex: widget.selected,
         showUnselectedLabels: false,
         onTap: IconTap,
       ),

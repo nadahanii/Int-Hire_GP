@@ -1,13 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/screens/edit_profile.dart';
-import 'package:history_feature/widgets/profile_widget.dart';
-import 'package:history_feature/screens/settings_page.dart';
-import '../helpers/pair.dart';
-import '../models/applicant_user.dart';
-import '../helpers/pair.dart';
-import '../models/job.dart';
 import 'package:history_feature/models/recruiter_user.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
 
@@ -20,13 +11,11 @@ class ProfileRecScreen extends StatefulWidget {
 }
 
 class _ProfileRecScreenState extends State<ProfileRecScreen> {
-  int _gender =1;
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _streetController = TextEditingController();
   final _cityController = TextEditingController();
   final _countryController = TextEditingController();
-  final _passwordController = TextEditingController();
   final _birthdayController = TextEditingController();
   final _emailController = TextEditingController();
   final _genderController = TextEditingController();
@@ -34,10 +23,8 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
   final _companyCityController = TextEditingController();
   final _companyCountryController = TextEditingController();
   final _companyDescriptionController = TextEditingController();
-  final _companyIDController = TextEditingController();
   final _positionController = TextEditingController();
   final _companyNameController = TextEditingController();
-
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -53,18 +40,14 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditProfileRecPage(user: widget.user,))
-            );
+                    builder: (context) => EditProfileRecPage(
+                          user: widget.user,
+                        )));
           },
         ),
       ],
     );
   }
-
-  final List<Pair<String, int>> _genderList = const [
-    Pair('female', 0),
-    Pair('male', 1),
-  ];
 
   @override
   void initState() {
@@ -79,15 +62,12 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
       _birthdayController.text = widget.user!.birthDay!;
       _positionController.text = widget.user!.position!;
       if (widget.user!.isMale!) {
-        _gender = 1;
         _genderController.text = 'Male';
       }
 
       if (!widget.user!.isMale!) {
         _genderController.text = "Female";
-        _gender = 0;
       }
-      _companyIDController.text = widget.user!.company!.id.toString();
       _companyCityController.text = widget.user!.company!.city!;
       _companyCountryController.text = widget.user!.company!.country!;
       _companyStreetController.text = widget.user!.company!.street!;
@@ -95,6 +75,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
       _companyNameController.text = widget.user!.company!.name!;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,15 +83,15 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
       appBar: buildAppBar(context),
       body: Padding(
         padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
-        child: ListView(
+        /*child: ListView(
           physics: BouncingScrollPhysics(),
           children: [
             Column(
               crossAxisAlignment:
-              CrossAxisAlignment.center, //AxisAlignment.center,
+                  CrossAxisAlignment.center, //AxisAlignment.center,
               children: [
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Name : ',
@@ -123,7 +104,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                     ]), //name
                 const SizedBox(height: 15),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Email : ',
@@ -133,10 +114,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                         _emailController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ]),  //email
+                    ]), //email
                 const SizedBox(height: 15),
                 Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
+                    // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Phone number : ',
@@ -146,10 +127,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                         _phoneController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ]),  //phone number
+                    ]), //phone number
                 const SizedBox(height: 15),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Street : ',
@@ -159,10 +140,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                         _streetController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ]),   //street
+                    ]), //street
                 const SizedBox(height: 15),
                 Row(
-                  //    mainAxisAlignment: MainAxisAlignment.center,
+                    //    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'City : ',
@@ -172,10 +153,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                         _cityController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ]),    //city
+                    ]), //city
                 const SizedBox(height: 15),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Country : ',
@@ -185,10 +166,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                         _countryController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ]),  //country
+                    ]), //country
                 const SizedBox(height: 15),
                 Row(
-                  //      mainAxisAlignment: MainAxisAlignment.center,
+                    //      mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Birthday : ',
@@ -198,10 +179,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                         _birthdayController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ]),   //birthday
+                    ]), //birthday
                 const SizedBox(height: 15),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Gender : ',
@@ -211,10 +192,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                         _genderController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
-                    ]),   //gender
+                    ]), //gender
                 const SizedBox(height: 15),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Position : ',
@@ -227,7 +208,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                     ]), //position
                 const SizedBox(height: 15),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Company Name : ',
@@ -240,7 +221,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                     ]), //name company
                 const SizedBox(height: 15),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Description Of Company : ',
@@ -253,7 +234,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                     ]), //des
                 const SizedBox(height: 15),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Street Of Company : ',
@@ -266,7 +247,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                     ]), //street comp
                 const SizedBox(height: 15),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'City Of Company : ',
@@ -279,7 +260,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                     ]), //city comp
                 const SizedBox(height: 15),
                 Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Country Of Company : ',
@@ -291,11 +272,10 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       ),
                     ]), //country comp
                 const SizedBox(height: 15),
-
               ],
             ),
           ],
-        ),
+        ),*/
       ),
     );
   }

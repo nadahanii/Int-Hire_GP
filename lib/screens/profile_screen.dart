@@ -1,16 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
 import 'package:history_feature/screens/edit_profile.dart';
-import 'package:history_feature/widgets/profile_widget.dart';
-import 'package:history_feature/screens/settings_page.dart';
-import '../helpers/pair.dart';
-import '../models/applicant_user.dart';
-import '../helpers/pair.dart';
-import '../models/job.dart';
 
 class ProfileScreen extends StatefulWidget {
-  final ApplicantUser? user;
+  ApplicantUser? user;
   ProfileScreen({Key? key, this.user}) : super(key: key);
   static const routeName = '/profile_Screen';
   @override
@@ -18,14 +11,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  int _gender = 1;
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _twitternameController = TextEditingController();
   final _streetController = TextEditingController();
   final _cityController = TextEditingController();
   final _countryController = TextEditingController();
-  final _passwordController = TextEditingController();
   final _birthdayController = TextEditingController();
   final _emailController = TextEditingController();
   final _tagsController = TextEditingController();
@@ -48,7 +39,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditProfilePage(user: widget.user)));
+                    builder: (context) =>
+                        EditProfilePage(user: widget.user)));
           },
         ),
       ],
@@ -60,23 +52,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     if (widget.user != null) {
       _educationController.text = widget.user!.educationLevel.name;
-      _tagsController.text = widget.user!.tags.toSet().toString();
+      _tagsController.text = widget.user!.tags
+          .toString()
+          .replaceFirst('[', '')
+          .replaceFirst(']', '');
       _nameController.text = widget.user!.name;
       _phoneController.text = widget.user!.phoneNumber;
-      _passwordController.text = widget.user!.password;
       _cityController.text = widget.user!.city;
       _streetController.text = widget.user!.street;
       _countryController.text = widget.user!.country;
       _birthdayController.text = widget.user!.birthDay;
-      _skillsController.text= widget.user!.Skills;
+      _skillsController.text = widget.user!.skills;
       if (widget.user!.isMale) {
-        _gender = 1;
         _genderController.text = 'Male';
       }
 
       if (!widget.user!.isMale) {
         _genderController.text = "Female";
-        _gender = 0;
       }
       _militaryStatusController.text = widget.user!.militaryStatus.name;
       _twitternameController.text = widget.user!.twitterUsername;
@@ -120,19 +112,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Text(
                         _emailController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Password : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _passwordController.text,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -258,7 +237,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Tags :',
+                        'Tags : ',
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
@@ -268,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ]),
                 const SizedBox(height: 15),
                 Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Skills : ',
@@ -280,7 +259,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ]),
                 const SizedBox(height: 15),
-
               ],
             ),
           ],

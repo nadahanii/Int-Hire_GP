@@ -1,27 +1,29 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
+import 'package:provider/provider.dart';
+import '../helpers/components.dart';
 import '../helpers/pair.dart';
 import '../models/job.dart';
 import 'package:intl/intl.dart';
 
+import '../providers/auth.dart';
+import 'navbar_screen.dart';
 
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
   static const routeName = '/edit_Screen';
   final ApplicantUser? user;
-  //final user = UserPreferences.myUser;
-  EditProfilePage({Key? key, this.user}) : super(key: key);
+  EditProfilePage({Key? key, required this.user}) : super(key: key);
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-  Education _education= Education.Bachelors;
+  Education _education = Education.Bachelors;
   MilitaryStatus _militaryStatus = MilitaryStatus.Postponed;
-  Set<String> _taggs = {};
-  int _gender=1;
-
+  int _gender = 1;
 
   final List<Pair<String, Education>> _educationList = const [
     Pair('High School', Education.High_School),
@@ -41,7 +43,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     Pair('Postponed', MilitaryStatus.Postponed),
   ];
 
-
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _twitternameController = TextEditingController();
@@ -55,14 +56,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _genderController = TextEditingController();
   final _skillsController = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
     if (widget.user != null) {
       _education = widget.user!.educationLevel;
-      _taggs = widget.user!.tags.toSet();
-      _tagsController.text =_taggs.toString();
+      _tagsController.text = widget.user!.tags.join(",");
       _nameController.text = widget.user!.name;
       _phoneController.text = widget.user!.phoneNumber;
       _passwordController.text = widget.user!.password;
@@ -73,21 +72,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
       _militaryStatus = widget.user!.militaryStatus;
       _twitternameController.text = widget.user!.twitterUsername;
       _emailController.text = widget.user!.email;
-       _skillsController.text= widget.user!.Skills;
-      if(widget.user!.isMale)
-        {
-          _gender = 1;
-          _genderController.text = 'Male';
-        }
+      _skillsController.text = widget.user!.skills;
+      if (widget.user!.isMale) {
+        _gender = 1;
+        _genderController.text = 'Male';
+      }
 
-      if(!widget.user!.isMale)
-        {
-          _genderController.text= "Female";
-          _gender =0;
-        }
-
+      if (!widget.user!.isMale) {
+        _genderController.text = "Female";
+        _gender = 0;
+      }
     }
   }
+
   void _presentDatePicker() {
     showDatePicker(
       context: context,
@@ -119,46 +116,44 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text("Edit Profile"),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              const SizedBox(height: 24),
-              Form(
-                key: _form,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _nameController,
-                      keyboardType: TextInputType.text,
-                  validator: (value) {
-
-                    if (value!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                      return "Enter correct name";
-                    else
-                      return null;
-                  },
-                      decoration: const InputDecoration(
-                        labelText: 'Name',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),  //name
-                    const SizedBox(
-                      height: 20.0,
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Edit Profile"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            const SizedBox(height: 24),
+            Form(
+              key: _form,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _nameController,
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                        return "Enter correct name";
+                      else
+                        return null;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Name',
+                      border: OutlineInputBorder(),
                     ),
+                  ), //name
+                  const SizedBox(
+                    height: 20.0,
+                  ),
 
-                    TextFormField(
+                  TextFormField(
                       controller: _phoneController,
                       keyboardType: TextInputType.phone,
                       decoration: const InputDecoration(
@@ -166,280 +161,292 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         alignLabelWithHint: true,
                         border: OutlineInputBorder(),
                       ),
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              !RegExp(r'^(01)[0-9]{9}$').hasMatch(value))
-                            return "Enter correct phone";
-                          else
-                            return null;
-                        }
-                    ),  //phone
-                    const SizedBox(
-                      height: 20.0,
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r'^(01)[0-9]{9}$').hasMatch(value))
+                          return "Enter correct phone";
+                        else
+                          return null;
+                      }), //phone
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      labelText: 'Email Address',
+                      alignLabelWithHint: true,
+                      border: OutlineInputBorder(),
                     ),
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(value)) {
+                        return 'Enter a valid email!';
+                      }
+                      return null;
+                    },
+                  ), //email
+                  const SizedBox(
+                    height: 20.0,
+                  ),
 
+                  TextFormField(
+                    controller: _birthdayController,
+                    readOnly: true,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'please enter a valid birthday';
+                      }
+                      return null;
+                    },
+                    onTap: _presentDatePicker,
+                    decoration: const InputDecoration(
+                      labelText: 'Birthday',
+                      border: OutlineInputBorder(),
+                    ),
+                  ), //birthday
+                  const SizedBox(
+                    height: 20.0,
+                  ),
 
-                    TextFormField(
-                      controller: _emailController,
+                  TextFormField(
+                    controller: _streetController,
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                        return "Enter correct Street name";
+                      else
+                        return null;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Street',
+                      border: OutlineInputBorder(),
+                    ),
+                  ), //street
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+
+                  TextFormField(
+                    controller: _cityController,
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                        return "Enter correct city name";
+                      else
+                        return null;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'City',
+                      border: OutlineInputBorder(),
+                    ),
+                  ), //city
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+
+                  TextFormField(
+                    controller: _countryController,
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty ||
+                          !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                        return "Enter correct country name";
+                      else
+                        return null;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Country',
+                      border: OutlineInputBorder(),
+                    ),
+                  ), //country
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+
+                  TextFormField(
+                    controller: _twitternameController,
+                    keyboardType: TextInputType.text,
+                    decoration: const InputDecoration(
+                      labelText: 'Twitter Username',
+                      border: OutlineInputBorder(),
+                    ),
+                  ), //twitter
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                    controller: _tagsController,
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      labelText: 'tags',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  TextFormField(
+                      controller: _skillsController,
                       keyboardType: TextInputType.text,
                       decoration: const InputDecoration(
-                        labelText: 'Email Address',
+                        labelText: 'Skills',
                         alignLabelWithHint: true,
                         border: OutlineInputBorder(),
-
                       ),
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                .hasMatch(value)) {
-                          return 'Enter a valid email!';
-                        }
-                        return null;
-                      },
-                    ), //email
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-
-                    TextFormField(
-                      controller: _birthdayController,
-                      readOnly: true,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'please enter a valid birthday';
-                        }
-                        return null;
-                      },
-                      onTap: _presentDatePicker,
-                      decoration: const InputDecoration(
-                        labelText: 'Birthday',
-                        border: OutlineInputBorder(),
-                      ),
-                    ), //birthday
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-
-                    TextFormField(
-                      controller: _streetController,
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                          return "Enter correct Street name";
+                        if (value!.isEmpty)
+                          return "Enter correct phone";
                         else
                           return null;
-                      },
-                      decoration: const InputDecoration(
-                        labelText: 'Street',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),  //street
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-
-                    TextFormField(
-                      controller: _cityController,
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                          return "Enter correct city name";
-                        else
-                          return null;
-                      },
-                      decoration: const InputDecoration(
-                        labelText: 'City',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),  //city
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-
-                    TextFormField(
-                      controller: _countryController,
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
-                          return "Enter correct country name";
-                        else
-                          return null;
-                      },
-                      decoration: const InputDecoration(
-                        labelText: 'Country',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),  //country
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-
-                    TextFormField(
-                      controller: _twitternameController,
-                      keyboardType: TextInputType.text,
-                      decoration: const InputDecoration(
-                        labelText: 'Twitter Username',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),  //twitter
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                      controller: _tagsController,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        labelText: 'tags',
-                        border: const OutlineInputBorder(),
-
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    TextFormField(
-                        controller: _skillsController,
-                        keyboardType: TextInputType.text,
-                        decoration: const InputDecoration(
-                          labelText: 'Skills',
-                          alignLabelWithHint: true,
-                          border: OutlineInputBorder(),
+                      }), //Skills
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  _radioButtonGroup(
+                    text: 'Education Level',
+                    list: _educationList.map((pair) {
+                      return ListTile(
+                        title: Text(pair.item1),
+                        leading: Radio<Education>(
+                          value: pair.item2,
+                          groupValue: _education,
+                          onChanged: (Education? value) {
+                            setState(() {
+                              _education = value!;
+                            });
+                          },
                         ),
-                        validator: (value) {
-                          if (value!.isEmpty)
-                            return "Enter correct phone";
-                          else
-                            return null;
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+
+                  _radioButtonGroup(
+                    text: 'Military Status',
+                    list: _militaryStatusList.map((pair) {
+                      return ListTile(
+                        title: Text(pair.item1),
+                        leading: Radio<MilitaryStatus>(
+                          value: pair.item2,
+                          groupValue: _militaryStatus,
+                          onChanged: (MilitaryStatus? value) {
+                            setState(() {
+                              _militaryStatus = value!;
+                            });
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+                  _radioButtonGroup(
+                    text: 'Gender',
+                    list: _genderList.map((pair) {
+                      return ListTile(
+                        title: Text(pair.item1),
+                        leading: Radio<int>(
+                          value: pair.item2,
+                          groupValue: _gender,
+                          onChanged: (int? value) {
+                            setState(() {
+                              _gender = value!;
+                            });
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  ),
+
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/edit_password_Screen');
+                    },
+                    child: Text(
+                      'Change Password',
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      if (_gender == 1) {
+                        widget.user!.isMale = true;
+                      } else {
+                        widget.user!.isMale = false;
+                      }
+                      widget.user!.email = _emailController.text;
+                      widget.user!.birthDay = _birthdayController.text;
+                      widget.user!.twitterUsername =
+                          _twitternameController.text;
+                      widget.user!.educationLevel = _education;
+                      widget.user!.name = _nameController.text;
+                      widget.user!.password = _passwordController.text;
+                      widget.user!.street = _streetController.text;
+                      widget.user!.city = _cityController.text;
+                      widget.user!.country = _countryController.text;
+                      widget.user!.city = _cityController.text;
+                      widget.user!.phoneNumber = _phoneController.text;
+                      widget.user!.militaryStatus = _militaryStatus;
+                      widget.user!.tags = _tagsController.text.split(',');
+                      widget.user!.skills = _skillsController.text;
+
+                      Provider.of<Auth>(context, listen: false)
+                          .updateApplicant(json.encode({
+                        "name": widget.user?.name,
+                        "email": widget.user?.email,
+                        "phoneNumber": widget.user?.phoneNumber,
+                        "password": widget.user?.password,
+                        "street": widget.user?.street,
+                        "city": widget.user?.city,
+                        "country": widget.user?.country,
+                        "birthDay": widget.user?.birthDay,
+                        "gender": widget.user?.isMale == true ? 1 : 0,
+                        "militaryStatus": _militaryStatus.index,
+                        "twitterUsername": _twitternameController.text,
+                        "educationLevel": _education.index,
+                        "tags": _tagsController.text.split(','),
+                        "skills": _skillsController.text
+                      }))
+                          .then((value) {
+                        if (value != 'update successfully') {
+                          showToast(text: value, state: ToastStates.ERROR);
+                        } else {
+                          showToast(text: value, state: ToastStates.SUCCESS);
+                          Navigator.of(context).pop();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  NavbarScreen(selected: 3,)));
                         }
-                    ),  //Skills
-                    const SizedBox(
-                      height: 20.0,
+                      });
+                    },
+                    child: Text(
+                      'Save New Changes',
+                      style: Theme.of(context).textTheme.bodyText2,
                     ),
-                    _radioButtonGroup(
-                      text: 'Education Level',
-                      list: _educationList.map((pair) {
-                        return ListTile(
-                          title: Text(pair.item1),
-                          leading: Radio<Education>(
-                            value: pair.item2,
-                            groupValue: _education,
-                            onChanged: (Education? value) {
-                              setState(() {
-                                _education = value!;
-                              });
-                            },
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
-
-                    _radioButtonGroup(
-                      text: 'Military Status',
-                      list: _militaryStatusList.map((pair) {
-                        return ListTile(
-                          title: Text(pair.item1),
-                          leading: Radio<MilitaryStatus>(
-                            value: pair.item2,
-                            groupValue: _militaryStatus,
-                            onChanged: (MilitaryStatus? value) {
-                              setState(() {
-                                _militaryStatus = value!;
-                              });
-                            },
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(
-                      height: 5.0,
-                    ),
-                    _radioButtonGroup(
-                      text: 'Gender',
-                      list: _genderList.map((pair) {
-                        return ListTile(
-                          title: Text(pair.item1),
-                          leading: Radio<int>
-                            (
-                            value: pair.item2,
-                            groupValue: _gender,
-                            onChanged: (int? value) {
-                              setState(() {
-                               _gender = value!;
-                              });
-                            },
-                          ),
-                        );
-                      }).toList(),
-                    ),
-
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                         Navigator.of(context).pushNamed('/edit_password_Screen');
-                      },
-                      child:
-                      Text(
-                        'Change Password',
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        if(_gender==1)
-                          {
-                            widget.user!.isMale=true;
-                          }
-                        else
-                          {
-                            widget.user!.isMale=false;
-                          }
-                        widget.user!.email=_emailController.text;
-                        widget.user!.birthDay= _birthdayController.text;
-                        widget.user!.twitterUsername = _twitternameController.text;
-                        widget.user!.educationLevel = _education;
-                        widget.user!.name = _nameController.text;
-                        widget.user!.password = _passwordController.text;
-                        widget.user!.street = _streetController.text;
-                        widget.user!.city= _cityController.text;
-                        widget.user!.country= _countryController.text;
-                        widget.user!.city= _cityController.text;
-                        widget.user!.phoneNumber= _phoneController.text;
-                        widget.user!.militaryStatus = _militaryStatus;
-                        _tagsController.text = _tagsController.text.replaceAll('{','');
-                        _tagsController.text = _tagsController.text.replaceAll('}','');
-                        widget.user!.tags = _tagsController.text.split(',');
-                            widget.user!.Skills = _skillsController.text;
-
-
-
-
-                        Navigator.of(context).pushNamed('/profile_Screen',arguments: widget.user);
-                      },
-                      child:
-                      Text(
-                        'Save New Changes',
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
+                  ),
+                ],
+              ),
+            )
+          ],
         ),
-      );
-    }
-
+      ),
+    );
   }
-
+}
