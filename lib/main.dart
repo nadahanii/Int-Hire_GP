@@ -10,6 +10,7 @@ import 'package:history_feature/screens/edit_password_screen.dart';
 import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/profile_screen_recruiter.dart';
+import 'package:history_feature/screens/recruiter_result_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
 import 'package:history_feature/screens/job_view.dart';
@@ -22,6 +23,7 @@ import 'package:history_feature/screens/forget_password_screen.dart';
 import 'package:history_feature/models/recruiter_user.dart';
 import 'package:history_feature/models/company.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
+import 'package:history_feature/models/applicant_data_for_result.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,11 +72,49 @@ class MyApp extends StatelessWidget {
       company: _companyy,
 
   );
+  late ApplicantResInfo infoApplicant1 = new ApplicantResInfo(
+    name: 'magda',
+    personality_type: 'ENFJ',
+    kindred_spirits: ['ahmed ', 'mohamed'],
+    intriguing_differences: ['ali ', 'youssef'],
+    challenging_opposites: ['omar ', 'saeed'],
+    potential_complements: ['hossam ', 'nada'],
+  );
+  late ApplicantResInfo infoApplicant2 = new ApplicantResInfo(
+    name: 'nada',
+    personality_type: 'MNBA',
+    kindred_spirits: ['Magda ', 'loa'],
+    intriguing_differences: ['alaa ', 'hello'],
+    challenging_opposites: ['eeee ', 'eeee'],
+    potential_complements: ['dddd ', 'dd'],
+  );
+  late ApplicantResInfo infoApplicant3 = new ApplicantResInfo(
+    name: 'hossam',
+    personality_type: 'eeeee',
+    kindred_spirits: ['eee ', 'ee'],
+    intriguing_differences: ['eee ', 'eeeeee'],
+    challenging_opposites: ['ppp ', 'opo'],
+    potential_complements: ['mxmmx ', 'ddd'],
+  );
+  late List <ApplicantResInfo> listt=<ApplicantResInfo>[];
+   void assignlist()
+   {
+     listt.add(infoApplicant1);
+     listt.add(infoApplicant2);
+     listt.add(infoApplicant3);
+
+   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
     //final ThemeData globalTheme = Provider.of<GlobalTheme>(context).globalTheme;
     final themeProvider = Provider.of<ThemeProvider>(context);
+    assignlist();
     return Consumer<Auth>(
       builder: (ctx, auth, _) => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -90,7 +130,7 @@ class MyApp extends StatelessWidget {
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
                         ? CircularProgressIndicator()
-                        : ProfileRecScreen(user: recruiter,)),
+                        : RecruiterResScreen(ListOfApplicants: listt,)),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),
@@ -111,6 +151,9 @@ class MyApp extends StatelessWidget {
            user: recruiter
           ),
           EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(),
+
+          RecruiterResScreen.routeName: (ctx) => RecruiterResScreen(  ListOfApplicants: listt,
+      )
         },
       ),
     );
