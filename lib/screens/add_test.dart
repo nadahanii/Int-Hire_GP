@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../models/PersonalityDataClass.dart';
-import '../models/testClass.dart';
-import '../models/test.dart';
+import '../models/question.dart';
+import '../providers/test.dart';
 import 'applicant_result_screen.dart';
 
 class AddTest extends StatefulWidget {
@@ -14,7 +14,6 @@ class AddTest extends StatefulWidget {
 }
 
 class _AddTestState extends State<AddTest> {
-  // dumy obj
   late PersonalityData personalityData = PersonalityData(
       "Architect",
       "Imaginative and strategic thinkers, with a plan for everything.",
@@ -24,7 +23,7 @@ class _AddTestState extends State<AddTest> {
       "What Architects (INTJs) want",
       "An Architect (INTJ) is a person with the Introverted.");
   //**************************************************************
-  late List<TestClass> _testData1 = Test().testData;
+  late List<Question> _testData1 = Test().testData;
   List<int> _answers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   late String _testType = "";
   void setType(int start, String labelA, String labelB, int rest) {

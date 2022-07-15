@@ -1,4 +1,4 @@
-import 'package:history_feature/models/test.dart';
+import 'package:history_feature/providers/test.dart';
 
 enum Education {
   High_School,

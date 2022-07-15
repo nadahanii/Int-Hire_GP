@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/pair.dart';
-import '../models/test.dart';
+import '../providers/test.dart';
 import '../providers/auth.dart';
 import '../providers/jobs.dart';
 

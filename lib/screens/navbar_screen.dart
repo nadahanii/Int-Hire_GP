@@ -49,7 +49,7 @@ class _NavbarScreenState extends State<NavbarScreen> {
       if (Provider.of<Auth>(context).userType == 'Admin')
         ProfileAdminScreen(
             user: Provider.of<Auth>(context).userObject as AdminUser),
-      SettingsPage(), ///profile btefta7 de 3ashan hwa wala user mn dool (kol el if be false)
+     // SettingsPage(), ///profile btefta7 de 3ashan hwa wala user mn dool (kol el if be false)
       SettingsPage()
     ];
 

@@ -24,12 +24,9 @@ import 'package:history_feature/screens/login_screen.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
 import 'package:history_feature/models/recruiter_user.dart';
 import 'package:history_feature/models/company.dart';
-import 'package:history_feature/screens/edit_profile_recruiter.dart';
 import 'package:history_feature/models/applicant_data_for_result.dart';
 import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/helpers/components.dart';
 import 'package:history_feature/screens/profile_screen_recruiter.dart';
-import 'package:history_feature/screens/applicant_result_screen.dart';
 import 'package:history_feature/screens/view_applicant_profile_screen.dart';
 
 void main() async {
@@ -164,7 +161,7 @@ class MyApp extends StatelessWidget {
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
                         ? CircularProgressIndicator()
-                        : RecruiterResScreen(ListOfApplicants: ApplicantInfoList,)),
+                        : SplashScreen()),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),
