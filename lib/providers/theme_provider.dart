@@ -52,16 +52,17 @@ class MyThemes {
         //fontFamily: 'Allison',
       ),
       headline3: TextStyle(
-          color: Color.fromRGBO(64, 191, 197, 1),
+          color: /*Colors.white*/Color.fromRGBO(126, 209, 181, 1),
           fontSize: 20,
           fontWeight: FontWeight.bold),
       headline4: TextStyle(
-        color: Color.fromRGBO(199, 193, 255,1),
+        color: Colors.white,
+        //Color.fromRGBO(199, 193, 255,1),
         fontSize: 17,
       ),
     ),
   );
-
+///***************************************************************************************
   static final lightTheme = ThemeData(
     backgroundColor: Colors.white,
     primaryColor: Color.fromRGBO(4, 88, 125, 1),
@@ -83,6 +84,8 @@ class MyThemes {
           fontStyle: FontStyle.normal,
           color: Colors.red,
           fontSize: 15),
+
+      ///register now in login screen
       bodyText2: TextStyle(
           color: Color.fromRGBO(4, 88, 125, 1),
           fontSize: 15,
@@ -101,7 +104,7 @@ class MyThemes {
           fontWeight: FontWeight.bold),
       ///details in profile
       headline4: TextStyle(
-        color: Color.fromRGBO(64, 191, 197, 1),
+        color: Color.fromRGBO(103, 186, 158, 1),
         fontSize: 17,
       ),
     ),

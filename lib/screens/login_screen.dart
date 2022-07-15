@@ -59,147 +59,148 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         body: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 30),
+          padding:
+              const EdgeInsets.only(left: 20, right: 20, bottom: 20, top: 30),
           child: Form(
               key: _form,
               child: SingleChildScrollView(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 20.0,
-                        ),
-                        Text('LOGIN',
-                            style: GoogleFonts.sourceCodePro(
-                                fontSize: 35,
-                                fontWeight: FontWeight.w800,
-                                color: Color.fromRGBO(4, 88, 125, 4))),
-                        SizedBox(
-                          height: 30.0,
-                        ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    Text('LOGIN',
+                        style: GoogleFonts.sourceCodePro(
+                            fontSize: 35,
+                            fontWeight: FontWeight.w800,
+                            color: Color.fromRGBO(4, 88, 125, 1))),
+                    SizedBox(
+                      height: 30.0,
+                    ),
 
-                        TextFormField(
-                          controller: emailController,
-                          decoration: InputDecoration(
-                            labelText: 'Email Address',
-                            prefixIcon: Icon(
-                              Icons.email,
+                    TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        labelText: 'Email Address',
+                        prefixIcon: Icon(
+                          Icons.email,
+                        ),
+                      ),
+
+                      //style: widget.loginTheme.textTheme.labelMedium,
+                      keyboardType: TextInputType.emailAddress,
+                      onFieldSubmitted: (value) {
+                        //Validator
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty ||
+                            !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                .hasMatch(value)) {
+                          return 'Enter a valid email!';
+                        }
+                        return null;
+                      },
+                    ), //mail
+                    SizedBox(
+                      height: 20.0,
+                    ),
+
+                    TextFormField(
+                      controller: passwordController,
+                      obscureText: _isObscure,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                             ),
-                          ),
-
-                          //style: widget.loginTheme.textTheme.labelMedium,
-                          keyboardType: TextInputType.emailAddress,
-                          onFieldSubmitted: (value) {
-                            //Validator
-                          },
-                          validator: (value) {
-                            if (value!.isEmpty ||
-                                !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                    .hasMatch(value)) {
-                              return 'Enter a valid email!';
-                            }
-                            return null;
-                          },
-                        ), //mail
-                        SizedBox(
-                          height: 20.0,
-                        ),
-
-                        TextFormField(
-                          controller: passwordController,
-                          obscureText: _isObscure,
-                          decoration: InputDecoration(
-                            labelText: 'Password',
-                            suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isObscure
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isObscure = !_isObscure;
-                                  });
-                                }),
-                            prefixIcon: Icon(
-                              Icons.lock,
-                            ),
-                          ),
-                          //style: widget.loginTheme.textTheme.labelMedium,
-                          keyboardType: TextInputType.visiblePassword,
-                          onFieldSubmitted: (password) {
-                            //Validator
-                          },
-                          validator: (password) {
-                            if (password!.isEmpty ||
-                                !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                                    .hasMatch(password)) {
-                              return 'Enter a valid Password!';
-                            }
-                            return null;
-                          },
-                        ), //pass
-
-                        SizedBox(
-                          height: 30.0,
-                        ),
-
-                        TextButton.icon(
-                          onPressed: (() {
-                            if (_form.currentState!.validate()) {
-                              Provider.of<Auth>(context, listen: false)
-                                  .login(json.encode({
-                                "email": emailController.text,
-                                "password": passwordController.text,
-                              }))
-                                  .then((value) {
-                                if (value != 'login successfully') {
-                                  showToast(text: value, state: ToastStates.ERROR);
-                                } else {
-                                  showToast(
-                                      text: value, state: ToastStates.SUCCESS);
-                                  Navigator.of(context)
-                                      .pushReplacementNamed('/navbar_screen');
-                                }
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
                               });
-                            }
-                          }),
-                          icon: const Icon(
-                            Icons.login,
-                            size: 28,
-                          ),
-                          label: Container(
-                            alignment: Alignment.center,
-                            width: 150,
-                            height: 35,
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
-                              ),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(4, 88, 125, 1),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                          ),
+                            }),
+                        prefixIcon: Icon(
+                          Icons.lock,
                         ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed('/ForgetPassword_Screen');
-                          },
-                          child: Text(
-                            'Forgot My Password',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        ),
+                      ),
+                      //style: widget.loginTheme.textTheme.labelMedium,
+                      keyboardType: TextInputType.visiblePassword,
+                      onFieldSubmitted: (password) {
+                        //Validator
+                      },
+                      validator: (password) {
+                        if (password!.isEmpty ||
+                            !RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                                .hasMatch(password)) {
+                          return 'Enter a valid Password!';
+                        }
+                        return null;
+                      },
+                    ), //pass
 
-                        /*Padding(
+                    SizedBox(
+                      height: 30.0,
+                    ),
+
+                    TextButton.icon(
+                      onPressed: (() {
+                        if (_form.currentState!.validate()) {
+                          Provider.of<Auth>(context, listen: false)
+                              .login(json.encode({
+                            "email": emailController.text,
+                            "password": passwordController.text,
+                          }))
+                              .then((value) {
+                            if (value != 'login successfully') {
+                              showToast(text: value, state: ToastStates.ERROR);
+                            } else {
+                              showToast(
+                                  text: value, state: ToastStates.SUCCESS);
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/navbar_screen');
+                            }
+                          });
+                        }
+                      }),
+                      icon: const Icon(
+                        Icons.login,
+                        size: 28,
+                      ),
+                      label: Container(
+                        alignment: Alignment.center,
+                        width: 150,
+                        height: 35,
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                          ),
+                        ),
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(4, 88, 125, 1),
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed('/ForgetPassword_Screen');
+                      },
+                      child: Text(
+                        'Forgot My Password',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ),
+
+                    /*Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -212,31 +213,31 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         ),*/
-                        SizedBox(
-                          height: 20.0,
-                        ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Don\'t have an account?',
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/Register_Screen');
-                              },
-                              child: Text(
-                                'Register Now',
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                            ),
-                            /*  TextButton.icon(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Don\'t have an account?',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed('/Register_Screen');
+                          },
+                          child: Text(
+                            'Register Now',
+                            style: Theme.of(context).textTheme.bodyText2,
+                          ),
+                        ),
+                        /*  TextButton.icon(
                             onPressed: (() {
                               Navigator.of(context).pushReplacementNamed('/Register_Screen');
                             }),
@@ -261,7 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),*/
-                            /* TextButton.icon(
+                        /* TextButton.icon(
                             onPressed: (() {
                               Navigator.pushNamed(context, '/ForgetPassword_Screen');
                             }),
@@ -286,9 +287,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),*/
-                          ],
-                        ),
-                      ]))),
+                      ],
+                    ),
+                  ]))),
         ));
   }
 }

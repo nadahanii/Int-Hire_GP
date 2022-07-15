@@ -118,7 +118,7 @@ class MyApp extends StatelessWidget {
     kindred_spirits: ['ahmed ', 'mohamed'],
     intriguing_differences: ['ali ', 'youssef'],
     challenging_opposites: ['omar ', 'saeed'],
-    potential_complements: ['hossam ', 'nada'],
+    potential_complements: ['hossam ', 'nada','mohamed','ayman','hussein','medhat','hiiii','helloooo','testttttttt'],
   );
   late ApplicantResInfo infoApplicant2 = new ApplicantResInfo(
     name: 'nada',
@@ -143,6 +143,7 @@ class MyApp extends StatelessWidget {
 
   void assignlist()
   {
+    ApplicantInfoList.clear();
     ApplicantInfoList.add(Pair(applicant,infoApplicant1));
     ApplicantInfoList.add(Pair(applicant2,infoApplicant2));
     ApplicantInfoList.add(Pair(applicant3,infoApplicant3));
@@ -159,7 +160,7 @@ class MyApp extends StatelessWidget {
         themeMode: themeProvider.themeMode,
         theme: MyThemes.lightTheme,
         darkTheme: MyThemes.darkTheme,
-        home: ///NavbarScreen()
+        home:
         auth.isAuth
             ? NavbarScreen()
             : FutureBuilder(

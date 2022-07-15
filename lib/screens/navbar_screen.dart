@@ -9,21 +9,34 @@ import 'package:history_feature/screens/profile_screen_admin.dart';
 import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:provider/provider.dart';
+import '../models/job.dart';
 import '../providers/auth.dart';
 
 class NavbarScreen extends StatefulWidget {
   static const routeName = '/navbar_screen';
   int selected;
-  NavbarScreen({
-    Key? key, this.selected = 0
-  }) : super(key: key);
+  NavbarScreen({Key? key, this.selected = 0}) : super(key: key);
 
   @override
   State<NavbarScreen> createState() => _NavbarScreenState();
 }
 
 class _NavbarScreenState extends State<NavbarScreen> {
-
+  /*final ApplicantUser applicant3 = new ApplicantUser(
+      name: 'Nada Hani',
+      email: 'nadahani24@gmail.com',
+      phoneNumber: '01112334556',
+      password: 'Helloworld0@',
+      street: 'Ahmed Orabi st.',
+      city: 'Giza',
+      country: 'Egypt',
+      educationLevel: Education.Bachelors,
+      militaryStatus: MilitaryStatus.NotApplicable,
+      birthDay: '05/12/2000',
+      isMale: false,
+      skills: 'competitive programming \n, problem solving',
+      twitterUsername: 'Nadahanii',
+      tags: ['C++', 'Java','Python']);*/
 
   void IconTap(int index) {
     setState(() {
@@ -36,6 +49,9 @@ class _NavbarScreenState extends State<NavbarScreen> {
     List<Widget> _pages = <Widget>[
       JobView(history: false),
       NotificationPage(),
+      /*JobView(history: true,),
+      ProfileScreen(user: applicant3,),*/
+
       if (Provider.of<Auth>(context).userType != 'Admin')
         JobView(
           history: true,
@@ -58,7 +74,6 @@ class _NavbarScreenState extends State<NavbarScreen> {
         child: _pages.elementAt(widget.selected),
       ),
       bottomNavigationBar: BottomNavigationBar(
-
         type: BottomNavigationBarType.fixed,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         iconSize: 10,
