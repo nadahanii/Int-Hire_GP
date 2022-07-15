@@ -29,6 +29,8 @@ import 'package:history_feature/models/applicant_user.dart';
 import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/screens/view_applicant_profile_screen.dart';
 
+import 'providers/test.dart';
+
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +41,11 @@ void main() async {
       update: (context, value, previous) => Notifications(value),
       create: (context) =>
           Notifications(Provider.of<Auth>(context, listen: false)),
+    ),
+    ChangeNotifierProxyProvider<Auth, Test>(
+      update: (context, value, previous) => Test(value),
+      create: (context) =>
+          Test(Provider.of<Auth>(context, listen: false)),
     ),
     ChangeNotifierProxyProvider<Auth, Jobs>(
       update: (context, value, previous) => Jobs(value),

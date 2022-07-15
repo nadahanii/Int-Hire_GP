@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/PersonalityDataClass.dart';
-
-import 'job_view.dart';
+import 'navbar_screen.dart';
 
 class ApplicantResult extends StatefulWidget {
   static String routeName = '/applicant_result';
@@ -116,7 +115,7 @@ class _ApplicantResultState extends State<ApplicantResult> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => JobView(history: false)));
+                          builder: (context) => NavbarScreen(selected: 3,)));
                 }),
                 icon: const Icon(
                   Icons.home,

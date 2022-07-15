@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:history_feature/screens/add_test.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/pair.dart';
 import '../models/job.dart';
+import '../providers/auth.dart';
 import '../providers/jobs.dart';
 import 'job_operations_screen.dart';
 
@@ -75,48 +76,50 @@ class _JobDetailsState extends State<JobDetails> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-                return JobOperations(job: widget.job);
-              })).then((value) {
-                setState(() {
-                  widget.job = value as Job;
+          if (Provider.of<Auth>(context).userType != 'Applicant')
+            IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                  return JobOperations(job: widget.job);
+                })).then((value) {
+                  setState(() {
+                    widget.job = value as Job;
+                  });
                 });
-              });
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons.delete),
-            onPressed: () async {
-              await showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text("Delete Confirmation"),
-                    content: const Text(
-                        "Are you sure you want to delete this item?"),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Provider.of<Jobs>(context, listen: false)
-                                .removeJob(widget.job);
-                            Navigator.of(context)
-                              ..pop()
-                              ..pop();
-                          },
-                          child: const Text("Delete")),
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text("Cancel"),
-                      ),
-                    ],
-                  );
-                },
-              ).then((value) {});
-            },
-          )
+              },
+            ),
+          if (Provider.of<Auth>(context).userType != 'Applicant')
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () async {
+                await showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Delete Confirmation"),
+                      content: const Text(
+                          "Are you sure you want to delete this item?"),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Provider.of<Jobs>(context, listen: false)
+                                  .removeJob(widget.job);
+                              Navigator.of(context)
+                                ..pop()
+                                ..pop();
+                            },
+                            child: const Text("Delete")),
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text("Cancel"),
+                        ),
+                      ],
+                    );
+                  },
+                ).then((value) {});
+              },
+            )
         ],
         title: Text('Job details'),
       ),
@@ -142,15 +145,6 @@ class _JobDetailsState extends State<JobDetails> {
                   const SizedBox(
                     width: 6,
                   ),
-                  if (widget.job.isNeedCV)
-                    Container(
-                      padding: const EdgeInsets.all(2),
-                      child: const FaIcon(
-                        FontAwesomeIcons.fileLines,
-                        color: Colors.cyan,
-                        size: 18.0,
-                      ),
-                    ),
                   const Spacer(),
                   Text(
                     formatDate(widget.job.publishDate),
@@ -375,10 +369,30 @@ class _JobDetailsState extends State<JobDetails> {
               SizedBox(
                 height: 20,
               ),
-              /*ElevatedButton(
-                onPressed: () {},
-                child: Text('Apply'),
-              ),*/
+              if (Provider.of<Auth>(context).userType == "Applicant")
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddTest(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(4, 88, 125, 1),
+                        fixedSize: Size(150, 35)),
+                    child: Text(
+                      'Apply',
+                      style: TextStyle(
+                        fontSize: 17,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
             ],
           ),
         ),

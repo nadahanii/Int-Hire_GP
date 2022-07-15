@@ -1,45 +1,53 @@
 class PersonalityData {
-  final String _nickname;
-  final String _definition;
-  final String _introduction;
-  final String _strenAndweak;
-  final String _careerPaths;
-  final String _workplaceHabit;
-  final String _description;
+  final String nickname;
+  final String definition;
+  final String introduction;
+  final String strenAndweak;
+  final String careerPaths;
+  final String workplaceHabit;
+  final String description;
 
   PersonalityData(
-      this._nickname,
-      this._definition,
-      this._introduction,
-      this._strenAndweak,
-      this._careerPaths,
-      this._workplaceHabit,
-      this._description);
+      {required this.nickname,
+      required this.definition,
+      required this.introduction,
+      required this.strenAndweak,
+      required this.careerPaths,
+      required this.workplaceHabit,
+      required this.description});
+  PersonalityData.notByName(
+      this.nickname,
+      this.definition,
+      this.introduction,
+      this.strenAndweak,
+      this.careerPaths,
+      this.workplaceHabit,
+      this.description);
   String getNickname() {
-    return _nickname;
+    return nickname;
   }
 
   String getDefinition() {
-    return _definition;
+    return definition;
   }
 
   String getIntroduction() {
-    return _introduction;
+    return introduction;
   }
 
   String getStrenAndWeak() {
-    return _strenAndweak;
+    return strenAndweak;
   }
 
   String getCareerPaths() {
-    return _careerPaths;
+    return careerPaths;
   }
 
   String getWorkplaceHabit() {
-    return _workplaceHabit;
+    return workplaceHabit;
   }
 
   String getDescription() {
-    return _description;
+    return description;
   }
 }

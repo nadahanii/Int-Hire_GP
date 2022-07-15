@@ -1,5 +1,3 @@
-import 'package:history_feature/providers/test.dart';
-
 enum Education {
   High_School,
   Bachelors,
@@ -33,8 +31,6 @@ class Job {
   late String publishDate;
   late List<String> tags;
   late bool isEnded;
-  late bool isNeedCV;
-  late Test test;
   late Education educationLevel;
   late Career careerLevel;
   late JobType typeOfJob;
@@ -49,8 +45,6 @@ class Job {
       required this.endDate,
       required this.publishDate,
       this.isEnded = false,
-      this.isNeedCV = false,
-      required this.test,
       required this.experience,
       required this.educationLevel,
       required this.careerLevel,
@@ -69,8 +63,6 @@ class Job {
     publishDate = json['postingTime'];
     tags = json['tags'].cast<String>();
     isEnded = json['active'] as bool;
-    isNeedCV = false;
-    test = Test();
     educationLevel = Education.values[json['educationLevel']];
     careerLevel = Career.values[json['career']];
     typeOfJob = JobType.values[json['jobType']];

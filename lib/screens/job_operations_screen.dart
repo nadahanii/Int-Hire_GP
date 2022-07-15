@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/pair.dart';
-import '../providers/test.dart';
 import '../providers/auth.dart';
 import '../providers/jobs.dart';
 
@@ -18,8 +17,6 @@ class JobOperations extends StatefulWidget {
 }
 
 class _JobOperationsState extends State<JobOperations> {
-  bool _isAddCV = false;
-
   JobType _jobType = JobType.Full_Time;
   Career _career = Career.Fresh_Junior;
   Education _education = Education.Bachelors;
@@ -68,7 +65,6 @@ class _JobOperationsState extends State<JobOperations> {
       _career = widget.job!.careerLevel;
       _descriptionController.text = widget.job!.description;
       _endDateController.text = widget.job!.endDate;
-      _isAddCV = widget.job!.isNeedCV;
       _requirementsController.text = widget.job!.requirements;
     }
   }
@@ -355,7 +351,6 @@ class _JobOperationsState extends State<JobOperations> {
                     onPressed: () {
                       final job = Job(
                         id: widget.job != null ? widget.job!.id : 0,
-                        isNeedCV: _isAddCV,
                         careerLevel: _career,
                         educationLevel: _education,
                         requirements: _requirementsController.text,
@@ -368,7 +363,6 @@ class _JobOperationsState extends State<JobOperations> {
                         salary: _salaryController.text,
                         title: _titleController.text,
                         typeOfJob: _jobType,
-                        test: Test(),
                       );
                       if (widget.job == null) {
                         Provider.of<Jobs>(

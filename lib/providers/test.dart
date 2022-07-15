@@ -4,13 +4,17 @@ import 'dart:convert';
 import 'dart:async';import 'package:flutter/material.dart';
 import 'package:history_feature/models/question.dart';
 
+import 'auth.dart';
+
 class Test with ChangeNotifier {
   List<Question> _items = [];
-  late List<Question> testData;
+  late String? token;
+  late String? userType;
 
-  Test()
-  {
-    testData = <Question>[
+  Test(Auth auth) {
+      token = auth.token;
+      userType = auth.userType;
+      _items = <Question>[
         Question(
           question: "When you meet new people, do you",
           answerA: "talk as much as you listen?",

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../helpers/components.dart';
 import '../models/PersonalityDataClass.dart';
 import '../models/question.dart';
 import '../providers/test.dart';
@@ -14,7 +16,7 @@ class AddTest extends StatefulWidget {
 }
 
 class _AddTestState extends State<AddTest> {
-  late PersonalityData personalityData = PersonalityData(
+  late PersonalityData personalityData = PersonalityData.notByName(
       "Architect",
       "Imaginative and strategic thinkers, with a plan for everything.",
       "WHO IS AN ARCHITECT (INTJ)?",
@@ -22,18 +24,116 @@ class _AddTestState extends State<AddTest> {
       "Professional know-how is often where Architects (INTJs) shine most brilliantly.",
       "What Architects (INTJs) want",
       "An Architect (INTJ) is a person with the Introverted.");
-  //**************************************************************
-  late List<Question> _testData1 = Test().testData;
-  List<int> _answers = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  late List<Question> _testData = Provider.of<Test>(context).items;
+  List<int> _answers = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ];
   late String _testType = "";
-  void setType(int start, String labelA, String labelB, int rest) {
-    if (rest == 1) _testType = "";
-    int labelACount = 0;
-    for (int i = start; i < _answers.length; i += 4) {
-      if (_answers[i] == 0) labelACount++;
+
+  void setType() {
+    int label1 = 0;
+    int label2 = 0;
+    int label3 = 0;
+    int label4 = 0;
+    int inc = 1;
+
+    for (int i = 0; i < _answers.length; i += 4) {
+      inc = 1;
+      if (_answers[i] == 1) {
+        inc = -1;
+      }
+
+      if (_testData[i].labelA == "J") {
+        label4 += inc;
+      } else if (_testData[i].labelA == "T") {
+        label3 += inc;
+      } else if (_testData[i].labelA == "S") {
+        label2 += inc;
+      } else {
+        label1 += inc;
+      }
     }
-    if (labelACount > 1) _testType += labelA;
-    //print(_testType);
+
+    if (label1 > 0) {
+      _testType += "E";
+    } else {
+      _testType += "I";
+    }
+
+    if (label2 > 0) {
+      _testType += "S";
+    } else {
+      _testType += "N";
+    }
+
+    if (label3 > 0) {
+      _testType += "T";
+    } else {
+      _testType += "F";
+    }
+
+    if (label4 > 0) {
+      _testType += "J";
+    } else {
+      _testType += "P";
+    }
+
+    print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz" + _testType);
   }
 
   Widget _radioButtonGroup({required String text, required List<Widget> list}) {
@@ -53,6 +153,7 @@ class _AddTestState extends State<AddTest> {
 
   @override
   Widget build(BuildContext context) {
+    print(_testData.length);
     return Scaffold(
       appBar: AppBar(
         title: Text("Personality Test"),
@@ -67,11 +168,11 @@ class _AddTestState extends State<AddTest> {
                 physics: const NeverScrollableScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: _testData1.length,
+                itemCount: _testData.length,
                 itemBuilder: (_, i) {
                   return _radioButtonGroup(
-                    text: _testData1[i].getQuestion(),
-                    list: _testData1[i].getAnswerList().map((pair) {
+                    text: _testData[i].getQuestion(),
+                    list: _testData[i].getAnswerList().map((pair) {
                       return ListTile(
                         title: Text(pair.item1),
                         leading: Radio<int>(
@@ -90,20 +191,14 @@ class _AddTestState extends State<AddTest> {
               ),
               TextButton.icon(
                 onPressed: (() {
-                  setType(0, _testData1[0].getLabelA(),
-                      _testData1[0].getLabelB(), 1);
-                  setType(1, _testData1[1].getLabelA(),
-                      _testData1[1].getLabelB(), 0);
-                  setType(2, _testData1[2].getLabelA(),
-                      _testData1[2].getLabelB(), 0);
-                  setType(3, _testData1[3].getLabelA(),
-                      _testData1[3].getLabelB(), 0);
+                  setType();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => ApplicantResult(
                                 personality_type: _testType,
-                                personalityData: personalityData,
+                                personalityData:
+                                    mapOfTypes[_testType] ?? personalityData,
                               )));
                 }),
                 icon: const Icon(
@@ -132,7 +227,7 @@ class _AddTestState extends State<AddTest> {
               )
             ],
           ),
-       ),
+        ),
       ),
     );
   }
