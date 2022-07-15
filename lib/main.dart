@@ -13,7 +13,6 @@ import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
 import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
-import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/screens/recruiter_result_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
@@ -34,7 +33,6 @@ import 'package:history_feature/screens/view_applicant_profile_screen.dart';
 import 'providers/test.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => ThemeProvider()),
@@ -46,8 +44,7 @@ void main() async {
     ),
     ChangeNotifierProxyProvider<Auth, Test>(
       update: (context, value, previous) => Test(value),
-      create: (context) =>
-          Test(Provider.of<Auth>(context, listen: false)),
+      create: (context) => Test(Provider.of<Auth>(context, listen: false)),
     ),
     ChangeNotifierProxyProvider<Auth, Jobs>(
       update: (context, value, previous) => Jobs(value),
@@ -57,7 +54,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  late PersonalityData _personalityData = PersonalityData(
+  late PersonalityData _personalityData = PersonalityData.notByName(
       "Architect",
       "Imaginative and strategic thinkers, with a plan for everything.",
       "WHO IS AN ARCHITECT (INTJ)?",
@@ -65,7 +62,13 @@ class MyApp extends StatelessWidget {
       "Professional know-how is often where Architects (INTJs) shine most brilliantly.",
       "What Architects (INTJs) want",
       "An Architect (INTJ) is a person with the Introverted.");
-  final Company _companyy = new Company(id: 1, name: 'Valeo', description: 'hello world ana asmy magda', street: 'ahmed', city: 'alex', country: 'egypt');
+  final Company _companyy = new Company(
+      id: 1,
+      name: 'Valeo',
+      description: 'hello world ana asmy magda',
+      street: 'ahmed',
+      city: 'alex',
+      country: 'egypt');
   final ApplicantUser applicant = new ApplicantUser(
       name: 'magda',
       email: 'magda@yaho.com',
@@ -74,7 +77,7 @@ class MyApp extends StatelessWidget {
       street: 'shhh',
       city: 'giza',
       country: 'cairo',
-        educationLevel: Education.Bachelors,
+      educationLevel: Education.Bachelors,
       militaryStatus: MilitaryStatus.Postponed,
       birthDay: '08/12/2000',
       isMale: false,
@@ -108,7 +111,7 @@ class MyApp extends StatelessWidget {
       isMale: false,
       skills: 'i can read and write',
       tags: ['popo', 'hello']);
-  late  RecruiterUser recruiter = new RecruiterUser(
+  late RecruiterUser recruiter = new RecruiterUser(
     name: 'magda',
     email: 'magda@yaho.com',
     phoneNumber: '01159502557',
@@ -127,7 +130,17 @@ class MyApp extends StatelessWidget {
     kindred_spirits: ['ahmed ', 'mohamed'],
     intriguing_differences: ['ali ', 'youssef'],
     challenging_opposites: ['omar ', 'saeed'],
-    potential_complements: ['hossam ', 'nada','mohamed','ayman','hussein','medhat','hiiii','helloooo','testttttttt'],
+    potential_complements: [
+      'hossam ',
+      'nada',
+      'mohamed',
+      'ayman',
+      'hussein',
+      'medhat',
+      'hiiii',
+      'helloooo',
+      'testttttttt'
+    ],
   );
   late ApplicantResInfo infoApplicant2 = new ApplicantResInfo(
     name: 'nada',
@@ -145,19 +158,19 @@ class MyApp extends StatelessWidget {
     challenging_opposites: ['ppp ', 'opo'],
     potential_complements: ['mxmmx ', 'ddd'],
   );
-  late List <ApplicantResInfo> listt=<ApplicantResInfo>[];
-  late List <Pair<ApplicantUser,ApplicantResInfo>> ApplicantInfoList= <Pair<ApplicantUser,ApplicantResInfo>>[];
-  late Pair <ApplicantUser,ApplicantResInfo> userinfo = Pair<ApplicantUser, ApplicantResInfo>(applicant,infoApplicant1);
+  late List<ApplicantResInfo> listt = <ApplicantResInfo>[];
+  late List<Pair<ApplicantUser, ApplicantResInfo>> ApplicantInfoList =
+      <Pair<ApplicantUser, ApplicantResInfo>>[];
+  late Pair<ApplicantUser, ApplicantResInfo> userinfo =
+      Pair<ApplicantUser, ApplicantResInfo>(applicant, infoApplicant1);
 
-
-  void assignlist()
-  {
+  void assignlist() {
     ApplicantInfoList.clear();
-    ApplicantInfoList.add(Pair(applicant,infoApplicant1));
-    ApplicantInfoList.add(Pair(applicant2,infoApplicant2));
-    ApplicantInfoList.add(Pair(applicant3,infoApplicant3));
-
+    ApplicantInfoList.add(Pair(applicant, infoApplicant1));
+    ApplicantInfoList.add(Pair(applicant2, infoApplicant2));
+    ApplicantInfoList.add(Pair(applicant3, infoApplicant3));
   }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -169,8 +182,7 @@ class MyApp extends StatelessWidget {
         themeMode: themeProvider.themeMode,
         theme: MyThemes.lightTheme,
         darkTheme: MyThemes.darkTheme,
-        home:
-        auth.isAuth
+        home: auth.isAuth
             ? NavbarScreen()
             : FutureBuilder(
                 future: auth.tryAutoLogin(),
@@ -191,26 +203,31 @@ class MyApp extends StatelessWidget {
           NotificationPage.routeName: (ctx) => NotificationPage(),
           ForgotPassword.routeName: (ctx) => ForgotPassword(),
           NavbarScreen.routeName: (ctx) => NavbarScreen(),
-          EditPasswordScreen.routeName : (ctx) => EditPasswordScreen(),
+          EditPasswordScreen.routeName: (ctx) => EditPasswordScreen(),
           EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(),
-          ApplicantResult.routeName: (ctx) => ApplicantResult(personality_type: 'null',personalityData:_personalityData ,),
+          ApplicantResult.routeName: (ctx) => ApplicantResult(
+                personality_type: 'null',
+                personalityData: _personalityData,
+              ),
           //ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
           EditProfilePage.routeName: (ctx) => EditProfilePage(
-            user: applicant,
-          ),
-          EditPasswordScreen.routeName : (ctx) => EditPasswordScreen(),
-          ProfileRecScreen.routeName: (ctx) => ProfileRecScreen(
-              user: recruiter
-          ),
-          EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(
-          ),
+                user: applicant,
+              ),
+          EditPasswordScreen.routeName: (ctx) => EditPasswordScreen(),
+          ProfileRecScreen.routeName: (ctx) =>
+              ProfileRecScreen(user: recruiter),
+          EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(),
 
-          RecruiterResScreen.routeName: (ctx) => RecruiterResScreen(  ListOfApplicants: ApplicantInfoList , personalityData: _personalityData,
-          ),
+          RecruiterResScreen.routeName: (ctx) => RecruiterResScreen(
+                ListOfApplicants: ApplicantInfoList,
+                personalityData: _personalityData,
+              ),
 
-          ProfileViewScreen.routeName: (ctx) => ProfileViewScreen( user: userinfo,),
-          ProfileViewRecScreen.routeName: (ctx) => ProfileViewRecScreen(user: recruiter),
-          
+          ProfileViewScreen.routeName: (ctx) => ProfileViewScreen(
+                user: userinfo,
+              ),
+          ProfileViewRecScreen.routeName: (ctx) =>
+              ProfileViewRecScreen(user: recruiter),
         },
       ),
     );
