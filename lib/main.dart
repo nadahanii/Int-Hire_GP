@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/helpers/pair.dart';
+import 'package:history_feature/models/PersonalityDataClass.dart';
 import 'package:history_feature/models/job.dart';
 import 'package:history_feature/providers/auth.dart';
 import 'package:history_feature/providers/jobs.dart';
@@ -32,6 +33,7 @@ import 'package:history_feature/screens/applicant_result_screen.dart';
 import 'package:history_feature/screens/view_applicant_profile_screen.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => ThemeProvider()),
@@ -49,6 +51,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  late PersonalityData _personalityData ;
   final Company _companyy = new Company(id: 1, name: 'Valeo', description: 'hello world ana asmy magda', street: 'ahmed', city: 'alex', country: 'egypt');
   final ApplicantUser applicant = new ApplicantUser(
       name: 'magda',
@@ -176,7 +179,7 @@ class MyApp extends StatelessWidget {
           NavbarScreen.routeName: (ctx) => NavbarScreen(),
           EditPasswordScreen.routeName : (ctx) => EditPasswordScreen(),
           EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(),
-          ApplicantResult.routeName: (ctx) => ApplicantResult(personality_type: 'null',),
+          ApplicantResult.routeName: (ctx) => ApplicantResult(personality_type: 'null',personalityData:_personalityData ,),
           //ProfileScreen.routeName: (ctx) => ProfileScreen(isApplicant: true,),
           EditProfilePage.routeName: (ctx) => EditProfilePage(
             user: applicant,
