@@ -18,6 +18,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
           child: ListView(

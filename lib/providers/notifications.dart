@@ -109,4 +109,26 @@ class Notifications with ChangeNotifier {
       return error.toString();
     }
   }
+
+  Future<String> viewNotification(n.Notification notification) async {
+    var url = Uri.parse('${baseUrl}Notification/NotificationViewed?id=${notification.id}');
+    notifyListeners();
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $token',
+          "Accept": "application/json",
+        },
+      );
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body) as String;
+      }
+      return 'view notification successfully';
+    } catch (error) {
+      print("view notification :" + error.toString());
+      return error.toString();
+    }
+  }
 }

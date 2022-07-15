@@ -38,6 +38,6 @@ class RecruiterUser {
     birthDay = json['birthDay'];
     isMale = ((json['gender'] as int) == 1) ? true : false;
     position = json['position'];
-  //  company = Company.fromJson(json['company'] as Map<String, dynamic>);
+    company = Company.fromJson(json['company'] as Map<String, dynamic>);
   }
 }

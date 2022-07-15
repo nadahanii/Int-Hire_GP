@@ -30,7 +30,7 @@ class MyThemes {
       // This will control the "back" icon
       iconTheme: IconThemeData(color: Colors.white/*Color.fromRGBO(98, 94, 215, 1)*/),
       // This will control action icon buttons that locates on the right
-      actionsIconTheme: IconThemeData(color: Color.fromRGBO(4, 88, 125, 1)),
+      actionsIconTheme: IconThemeData(color: Colors.white/*Color.fromRGBO(4, 88, 125, 1)*/),
       centerTitle: false,
       elevation: 15,
     ),

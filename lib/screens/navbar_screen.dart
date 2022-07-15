@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:history_feature/models/admin_user.dart';
 import 'package:history_feature/models/applicant_user.dart';
 import 'package:history_feature/models/recruiter_user.dart';
 import 'package:history_feature/screens/job_view.dart';
 import 'package:history_feature/screens/notification_page.dart';
 import 'package:history_feature/screens/profile_screen.dart';
+import 'package:history_feature/screens/profile_screen_admin.dart';
 import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +46,11 @@ class _NavbarScreenState extends State<NavbarScreen> {
       if (Provider.of<Auth>(context).userType == 'Recruiter')
         ProfileRecScreen(
             user: Provider.of<Auth>(context).userObject as RecruiterUser),
-      SettingsPage(),
+      if (Provider.of<Auth>(context).userType == 'Admin')
+        ProfileAdminScreen(
+            user: Provider.of<Auth>(context).userObject as AdminUser),
+      SettingsPage(), ///profile btefta7 de 3ashan hwa wala user mn dool (kol el if be false)
+      SettingsPage()
     ];
 
     return Scaffold(

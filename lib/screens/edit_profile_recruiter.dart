@@ -1,20 +1,21 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:history_feature/models/applicant_user.dart';
+import 'package:provider/provider.dart';
+import '../helpers/components.dart';
 import '../helpers/pair.dart';
-import '../models/job.dart';
 import 'package:intl/intl.dart';
-import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/models/recruiter_user.dart';
+
+import '../providers/auth.dart';
+import 'navbar_screen.dart';
 
 
 class EditProfileRecPage extends StatefulWidget {
-  @override
-
-  static const routeName = '/edit_Screen';
-  final RecruiterUser? user;
-  //final user = UserPreferences.myUser;
   EditProfileRecPage({Key? key, this.user}) : super(key: key);
+  static const routeName = '/edit_screen_rec';
+  final RecruiterUser? user;
+  @override
   _EditProfileRecPageState createState() => _EditProfileRecPageState();
 }
 class _EditProfileRecPageState extends State<EditProfileRecPage> {
@@ -84,7 +85,7 @@ class _EditProfileRecPageState extends State<EditProfileRecPage> {
         }
         setState(() {
           _birthdayController.text =
-              DateFormat('dd-MM-yyyy hh:mm a').format(pickedDate);
+              DateFormat('dd-MM-yyyy').format(pickedDate);
         });
       });
     }
@@ -421,8 +422,41 @@ class _EditProfileRecPageState extends State<EditProfileRecPage> {
                             _companyCountryController.text;
                         widget.user!.company!.description =
                             _companyDescriptionController.text;
-                        Navigator.of(context).pushNamed(
-                            '/profileRec_Screen', arguments: widget.user);
+
+                        Provider.of<Auth>(context, listen: false)
+                            .updateRecruiter(json.encode({
+                          "name": widget.user?.name,
+                          "email": widget.user?.email,
+                          "phoneNumber": widget.user?.phoneNumber,
+                          "password": widget.user?.password,
+                          "street": widget.user?.street,
+                          "city": widget.user?.city,
+                          "country": widget.user?.country,
+                          "birthDay": widget.user?.birthDay,
+                          "gender": widget.user?.isMale == true ? 1 : 0,
+                          "position": widget.user?.position,
+                          "company": {
+                            "id": widget.user?.company?.id,
+                            "name": widget.user?.company?.name,
+                            "description": widget.user?.company?.description,
+                            "street": widget.user?.company?.street,
+                            "city": widget.user?.company?.city,
+                            "country": widget.user?.company?.country,
+                          }
+                        }))
+                            .then((value) {
+                          if (value != 'update successfully') {
+                            showToast(text: value, state: ToastStates.ERROR);
+                          } else {
+                            showToast(text: value, state: ToastStates.SUCCESS);
+                            Navigator.of(context).pop();
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        NavbarScreen(selected: 3,)));
+                          }
+                        });
                       }
                     },
                     child:
