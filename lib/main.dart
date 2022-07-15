@@ -13,12 +13,14 @@ import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
 import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
+import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/screens/recruiter_result_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
 import 'package:history_feature/screens/job_view.dart';
 import 'package:history_feature/screens/register_screen.dart';
 import 'package:history_feature/screens/splash_screen.dart';
+import 'package:history_feature/screens/view_profile_recruiter.dart';
 import 'package:provider/provider.dart';
 import 'package:history_feature/screens/login_screen.dart';
 import 'package:history_feature/screens/forget_password_screen.dart';
@@ -55,7 +57,14 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  late PersonalityData _personalityData ;
+  late PersonalityData _personalityData = PersonalityData(
+      "Architect",
+      "Imaginative and strategic thinkers, with a plan for everything.",
+      "WHO IS AN ARCHITECT (INTJ)?",
+      "Architect (INTJ) Strengths",
+      "Professional know-how is often where Architects (INTJs) shine most brilliantly.",
+      "What Architects (INTJs) want",
+      "An Architect (INTJ) is a person with the Introverted.");
   final Company _companyy = new Company(id: 1, name: 'Valeo', description: 'hello world ana asmy magda', street: 'ahmed', city: 'alex', country: 'egypt');
   final ApplicantUser applicant = new ApplicantUser(
       name: 'magda',
@@ -69,8 +78,8 @@ class MyApp extends StatelessWidget {
       militaryStatus: MilitaryStatus.Postponed,
       birthDay: '08/12/2000',
       isMale: false,
-      skills: 'i can read and write',
-      tags: ['hi', 'hello']);
+      skills: 'problemsolving , heel ssss , kddkkdkdkkd',
+      tags: ['hi', 'hello', 'heelloo']);
   final ApplicantUser applicant2 = new ApplicantUser(
       name: 'nada',
       email: 'nada@yaho.com',
@@ -196,10 +205,12 @@ class MyApp extends StatelessWidget {
           EditProfileRecPage.routeName: (ctx) => EditProfileRecPage(
           ),
 
-          RecruiterResScreen.routeName: (ctx) => RecruiterResScreen(  ListOfApplicants: ApplicantInfoList
+          RecruiterResScreen.routeName: (ctx) => RecruiterResScreen(  ListOfApplicants: ApplicantInfoList , personalityData: _personalityData,
           ),
 
-          ProfileViewScreen.routeName: (ctx) => ProfileViewScreen( user: userinfo,)
+          ProfileViewScreen.routeName: (ctx) => ProfileViewScreen( user: userinfo,),
+          ProfileViewRecScreen.routeName: (ctx) => ProfileViewRecScreen(user: recruiter),
+          
         },
       ),
     );

@@ -48,6 +48,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<String> _authenticate(String encode, String method) async {
+
     final url = Uri.parse('${baseUrl}account/$method');
     try {
       final response = await http.post(
