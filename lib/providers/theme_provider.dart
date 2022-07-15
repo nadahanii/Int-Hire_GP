@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.dark;
+  ThemeMode themeMode = ThemeMode.light;
 
   bool get isDarkMode => themeMode == ThemeMode.dark;
   void toggleTheme(bool isOn) async {
@@ -70,10 +70,10 @@ class MyThemes {
     appBarTheme: const AppBarTheme(
       backgroundColor: Color.fromRGBO(4, 88, 125, 1),
       // This will control the "back" icon
-      iconTheme: IconThemeData(color: Color.fromRGBO(4, 88, 125, 1)),
+      iconTheme: IconThemeData(color: Colors.white),
 
       // This will control action icon buttons that 111111111locates on the right
-      actionsIconTheme: IconThemeData(color: Color.fromRGBO(4, 88, 125, 1)),
+      actionsIconTheme: IconThemeData(color: Colors.white),
       centerTitle: false,
       elevation: 15,
     ),
