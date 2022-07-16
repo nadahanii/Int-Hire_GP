@@ -13,6 +13,7 @@ import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
 import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
+import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/screens/recruiter_result_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
   final Company _companyy = new Company(
       id: 1,
       name: 'Valeo',
-      description: 'hello world ana asmy magda',
+      description: 'hello world ana asmy magda i am so many feel like hhhh osk jj jjk nkk nn huu pm kmk njk bjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj',
       street: 'ahmed',
       city: 'alex',
       country: 'egypt');
@@ -82,7 +83,13 @@ class MyApp extends StatelessWidget {
       birthDay: '08/12/2000',
       isMale: false,
       skills: 'problemsolving , heel ssss , kddkkdkdkkd',
-      tags: ['hi', 'hello', 'heelloo']);
+      tags: ['hi', 'hello', 'heelloo'],
+      testPersonalityType: 'ENTJ',
+      socialMediaPersonalityType: 'ENTJ',
+    twitterUsername: 'magdaosama23'
+
+  );
+
   final ApplicantUser applicant2 = new ApplicantUser(
       name: 'nada',
       email: 'nada@yaho.com',
@@ -95,6 +102,7 @@ class MyApp extends StatelessWidget {
       militaryStatus: MilitaryStatus.Completed,
       birthDay: '08/11/2000',
       isMale: true,
+      testPersonalityType: 'APCD',
       skills: 'i can swim',
       tags: ['hi', 'hey']);
   final ApplicantUser applicant3 = new ApplicantUser(
@@ -104,6 +112,7 @@ class MyApp extends StatelessWidget {
       password: 'Helloworld0@',
       street: 'qqqqqqqqq',
       city: 'wwwwwwwwww',
+      testPersonalityType: 'ENSS',
       country: 'wwwwwwwwwwwwwwwwwwww',
       educationLevel: Education.Bachelors,
       militaryStatus: MilitaryStatus.Postponed,
@@ -189,8 +198,12 @@ class MyApp extends StatelessWidget {
                 builder: (ctx, authResultSnapshot) =>
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
-                        ? CircularProgressIndicator()
-                        : SplashScreen()),
+                        ? CircularProgressIndicator():
+                       // ProfileViewScreen(user: userinfo)),
+                      //  ProfileScreen(user: applicant,)),
+                       // ProfileViewRecScreen(user: recruiter)),
+                   // ProfileRecScreen(user: recruiter)),
+                        RecruiterResScreen(ListOfApplicants: ApplicantInfoList, personalityData: _personalityData)),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),

@@ -17,6 +17,8 @@ class ApplicantUser {
   late bool isMale;
   late String skills;
   late List<String> tags;
+  late String socialMediaPersonalityType;
+  late String testPersonalityType;
 
   ApplicantUser(
       {required this.name,
@@ -32,6 +34,8 @@ class ApplicantUser {
       required this.birthDay,
       required this.isMale,
         required this.skills,
+        this.socialMediaPersonalityType="",
+        this.testPersonalityType="",
       this.tags = const []});
 
   ApplicantUser.fromJson(Map<String, dynamic> json) {
