@@ -85,35 +85,7 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                 children: [
                   Card(
                     child: ListTile(
-                        leading:
-                        TextButton(
-                          onPressed: (() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProfileViewScreen(
-                                        user: widget.ListOfApplicants[i])));
-                          }),
-                          child: Text(
-                            'Name : '+widget.ListOfApplicants[i].item2.name ,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                decoration: TextDecoration.underline),
-                          ),
-                        ),
-                        trailing:Image.asset(
-                          'assets/' +
-                              widget.ListOfApplicants[i].item2.personality_type
-                                  .toLowerCase() +
-                              '.png',
-                        ),
-
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      leading:
-                      TextButton(
+                      leading: TextButton(
                         onPressed: (() {
                           Navigator.push(
                               context,
@@ -122,7 +94,33 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                                       user: widget.ListOfApplicants[i])));
                         }),
                         child: Text(
-                          'Personality Type : '+widget.ListOfApplicants[i].item2.personality_type ,
+                          'Name : ' + widget.ListOfApplicants[i].item2.name,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                      trailing: Image.asset(
+                        'assets/' +
+                            widget.ListOfApplicants[i].item2.personality_type
+                                .toLowerCase() +
+                            '.png',
+                      ),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      leading: TextButton(
+                        onPressed: (() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileViewScreen(
+                                      user: widget.ListOfApplicants[i])));
+                        }),
+                        child: Text(
+                          'Personality Type : ' +
+                              widget.ListOfApplicants[i].item2.personality_type,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline),
@@ -137,10 +135,11 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                              widget.ListOfApplicants[i].item2.kindred_spirits
-                                  .toString().replaceAll('[', '')
-                                  .replaceAll(']', '')
-                                  .replaceAll(',', ' -'),
+                          widget.ListOfApplicants[i].item2.kindred_spirits
+                              .toString()
+                              .replaceAll('[', '')
+                              .replaceAll(']', '')
+                              .replaceAll(',', ' -'),
                           style: TextStyle(fontWeight: FontWeight.normal)),
                     ),
                   ),
@@ -151,13 +150,11 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-
-                              widget.ListOfApplicants[i].item2
-                                  .potential_complements
-                                  .toString().replaceAll('[', '')
-                                  .replaceAll(']', '')
-                                  .replaceAll(',', ' -'),
-
+                          widget.ListOfApplicants[i].item2.potential_complements
+                              .toString()
+                              .replaceAll('[', '')
+                              .replaceAll(']', '')
+                              .replaceAll(',', ' -'),
                           style: TextStyle(fontWeight: FontWeight.normal)),
                     ),
                   ),
@@ -168,15 +165,12 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-
-                              widget.ListOfApplicants[i].item2
-                                  .challenging_opposites
-                                  .toString().replaceAll('[', '')
-        .replaceAll(']', '')
-        .replaceAll(',', ' -'),
-
+                          widget.ListOfApplicants[i].item2.challenging_opposites
+                              .toString()
+                              .replaceAll('[', '')
+                              .replaceAll(']', '')
+                              .replaceAll(',', ' -'),
                           style: TextStyle(fontWeight: FontWeight.normal)),
-
                     ),
                   ),
                   Card(
@@ -186,12 +180,12 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       subtitle: Text(
-                              widget.ListOfApplicants[i].item2
-                                  .intriguing_differences
-                                  .toString()
-                                  .replaceAll('[', '')
-                                  .replaceAll(']', '')
-                                  .replaceAll(',', ' -'),
+                          widget
+                              .ListOfApplicants[i].item2.intriguing_differences
+                              .toString()
+                              .replaceAll('[', '')
+                              .replaceAll(']', '')
+                              .replaceAll(',', ' -'),
                           style: TextStyle(fontWeight: FontWeight.normal)),
                     ),
                   ),

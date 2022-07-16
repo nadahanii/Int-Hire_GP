@@ -123,7 +123,7 @@ class _JobOperationsState extends State<JobOperations> {
                     keyboardType: TextInputType.text,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'please enter product price';
+                        return 'please enter valid job title';
                       }
                       return null;
                     },
@@ -140,6 +140,12 @@ class _JobOperationsState extends State<JobOperations> {
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
                     maxLines: 5,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter a valid job description';
+                      }
+                      return null;
+                    },
                     decoration: const InputDecoration(
                       labelText: 'description',
                       alignLabelWithHint: true,
@@ -154,6 +160,12 @@ class _JobOperationsState extends State<JobOperations> {
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
                     maxLines: 5,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter valid requirements ';
+                      }
+                      return null;
+                    },
                     decoration: const InputDecoration(
                       labelText: 'requirements',
                       alignLabelWithHint: true,
@@ -168,7 +180,7 @@ class _JobOperationsState extends State<JobOperations> {
                     readOnly: true,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return 'please enter product price';
+                        return 'please enter an end date to the job';
                       }
                       return null;
                     },
@@ -187,6 +199,12 @@ class _JobOperationsState extends State<JobOperations> {
                         child: TextFormField(
                           controller: _experienceController,
                           keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a valid experience value';
+                            }
+                            return null;
+                          },
                           decoration: const InputDecoration(
                             labelText: 'experience',
                             border: OutlineInputBorder(),
@@ -201,6 +219,12 @@ class _JobOperationsState extends State<JobOperations> {
                         child: TextFormField(
                           controller: _salaryController,
                           keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a valid salary value';
+                            }
+                            return null;
+                          },
                           decoration: const InputDecoration(
                             labelText: 'salary',
                             border: OutlineInputBorder(),
@@ -215,6 +239,12 @@ class _JobOperationsState extends State<JobOperations> {
                   TextFormField(
                     controller: _tagsController,
                     keyboardType: TextInputType.text,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter tags for the job';
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                       labelText: 'tag',
                       border: const OutlineInputBorder(),
@@ -330,54 +360,41 @@ class _JobOperationsState extends State<JobOperations> {
                   const SizedBox(
                     height: 5.0,
                   ),
-                  /*const Divider(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Applicant must add CV'),
-                        Switch(
-                            value: _isAddCV,
-                            onChanged: (value) {
-                              setState(() {
-                                _isAddCV = value;
-                              });
-                            }),
-                      ],
-                    ),
-                  ),*/
+
                   ElevatedButton(
                     onPressed: () {
-                      final job = Job(
-                        id: widget.job != null ? widget.job!.id : 0,
-                        careerLevel: _career,
-                        educationLevel: _education,
-                        requirements: _requirementsController.text,
-                        description: _descriptionController.text,
-                        publishDate: DateFormat('dd-MM-yyyy hh:mm a')
-                            .format(DateTime.now()),
-                        endDate: _endDateController.text,
-                        experience: _experienceController.text,
-                        tags: _tags.toList(),
-                        salary: _salaryController.text,
-                        title: _titleController.text,
-                        typeOfJob: _jobType,
-                      );
-                      if (widget.job == null) {
-                        Provider.of<Jobs>(
-                          context,
-                          listen: false,
-                        ).addJob(job,
-                            Provider.of<Auth>(context, listen: false).token);
-                      } else {
-                        Provider.of<Jobs>(
-                          context,
-                          listen: false,
-                        ).updateJob(job,
-                            Provider.of<Auth>(context, listen: false).token);
+                      if (_formKey.currentState!.validate()){
+                        final job = Job(
+                          id: widget.job != null ? widget.job!.id : 0,
+                          careerLevel: _career,
+                          educationLevel: _education,
+                          requirements: _requirementsController.text,
+                          description: _descriptionController.text,
+                          publishDate: DateFormat('dd-MM-yyyy hh:mm a')
+                              .format(DateTime.now()),
+                          endDate: _endDateController.text,
+                          experience: _experienceController.text,
+                          tags: _tags.toList(),
+                          salary: _salaryController.text,
+                          title: _titleController.text,
+                          typeOfJob: _jobType,
+                        );
+                        if (widget.job == null) {
+                          Provider.of<Jobs>(
+                            context,
+                            listen: false,
+                          ).addJob(job,
+                              Provider.of<Auth>(context, listen: false).token);
+                        } else {
+                          Provider.of<Jobs>(
+                            context,
+                            listen: false,
+                          ).updateJob(job,
+                              Provider.of<Auth>(context, listen: false).token);
+                        }
+                        Navigator.of(context).pop(job);
                       }
-                      Navigator.of(context).pop(job);
+
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context).appBarTheme.backgroundColor,
