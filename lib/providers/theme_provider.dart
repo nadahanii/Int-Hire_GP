@@ -41,7 +41,7 @@ class MyThemes {
           color: Colors.red,
           fontSize: 15),
       bodyText2: TextStyle(
-          color: Color.fromRGBO(4, 88, 125, 1),
+          color: Color.fromRGBO(126, 209, 181, 1)/*Color.fromRGBO(4, 88, 125, 1)*/,
           fontSize: 15,
           fontWeight: FontWeight.w700),
       headline1: TextStyle(

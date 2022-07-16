@@ -32,11 +32,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       SizedBox(
                         height: 20.0,
                       ),
-                      Text('Enter your email to send an reset link',
+                      Text('Enter your email to send a reset link',
                           style: GoogleFonts.montserrat(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(4, 88, 125, 4))),
+                              color: Theme.of(context).appBarTheme.backgroundColor)),
                       SizedBox(
                         height: 40.0,
                       ),
@@ -88,7 +88,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 fontSize: 15),
                           ),
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(4, 88, 125, 1),
+                            color: Theme.of(context).appBarTheme.backgroundColor/*Color.fromRGBO(4, 88, 125, 1)*/,
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),
@@ -118,7 +118,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 fontSize: 15),
                           ),
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(4, 88, 125, 1),
+                            color: Theme.of(context).appBarTheme.backgroundColor,
                             borderRadius: BorderRadius.circular(25),
                           ),
                         ),

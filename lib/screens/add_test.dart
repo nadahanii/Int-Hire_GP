@@ -87,6 +87,7 @@ class _AddTestState extends State<AddTest> {
   late String _testType = "";
 
   void setType() {
+    _testType = "";
     int label1 = 0;
     int label2 = 0;
     int label3 = 0;
@@ -137,15 +138,14 @@ class _AddTestState extends State<AddTest> {
     print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz" + _testType);
   }
 
-  Widget _radioButtonGroup({required String text, required List<Widget> list}) {
+  Widget _radioButtonGroup({required String text, required List<Widget> list,required BuildContext context}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(),
         Text(
           text,
-          style: const TextStyle(
-              fontSize: 20, color: Color.fromRGBO(4, 88, 125, 1)),
+          style:  Theme.of(context).textTheme.headline3,
         ),
         ...list,
       ],
@@ -159,6 +159,7 @@ class _AddTestState extends State<AddTest> {
       appBar: AppBar(
         title: Text("Personality Test"),
         centerTitle: true,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -172,6 +173,7 @@ class _AddTestState extends State<AddTest> {
                 itemCount: _testData.length,
                 itemBuilder: (_, i) {
                   return _radioButtonGroup(
+                    context: context,
                     text: _testData[i].getQuestion(),
                     list: _testData[i].getAnswerList().map((pair) {
                       return ListTile(
@@ -218,7 +220,7 @@ class _AddTestState extends State<AddTest> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                    color: Color.fromRGBO(4, 88, 125, 1),
+                    color: Theme.of(context).appBarTheme.backgroundColor/*Color.fromRGBO(4, 88, 125, 1)*/,
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),
