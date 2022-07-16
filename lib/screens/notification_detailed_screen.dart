@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/notification.dart' as n;
+import '../providers/auth.dart';
 import 'navbar_screen.dart';
 
 class NotificationDetailedScreen extends StatelessWidget {
@@ -20,8 +22,9 @@ class NotificationDetailedScreen extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        NavbarScreen(selected: 1,)));
+                    builder: (context) => NavbarScreen(
+                          selected: 1,
+                        )));
           },
         ),
         title: Text(
@@ -33,18 +36,19 @@ class NotificationDetailedScreen extends StatelessWidget {
         padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 10),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  'Sent to:  ',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                Text(
-                  this.notification.receiverEmail,
-                  style: Theme.of(context).textTheme.headline4,
-                )
-              ],
-            ),
+            if (Provider.of<Auth>(context).userType == "Admin")
+              Row(
+                children: [
+                  Text(
+                    'Sent from:  ',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  Text(
+                    this.notification.receiverEmail,
+                    style: Theme.of(context).textTheme.headline4,
+                  )
+                ],
+              ),
             SizedBox(
               height: 20,
             ),
@@ -66,7 +70,7 @@ class NotificationDetailedScreen extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  'Sent from a(n):  ',
+                  'Sender role:  ',
                   style: Theme.of(context).textTheme.headline3,
                 ),
                 Text(
