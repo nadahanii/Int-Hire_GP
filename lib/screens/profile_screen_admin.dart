@@ -10,10 +10,6 @@ class ProfileAdminScreen extends StatefulWidget {
 }
 
 class _ProfileAdminScreenState extends State<ProfileAdminScreen> {
-  final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _birthdayController = TextEditingController();
-  final _emailController = TextEditingController();
   final _genderController = TextEditingController();
 
   AppBar buildAppBar(BuildContext context) {
@@ -30,16 +26,14 @@ class _ProfileAdminScreenState extends State<ProfileAdminScreen> {
   void initState() {
     super.initState();
     if (widget.user != null) {
-      _nameController.text = widget.user!.name;
-      _phoneController.text = widget.user!.phoneNumber;
-      _birthdayController.text = widget.user!.birthDay;
+
       if (widget.user!.isMale) {
         _genderController.text = 'Male';
       }
       if (!widget.user!.isMale) {
         _genderController.text = "Female";
       }
-      _emailController.text = widget.user!.email;
+
     }
   }
 
@@ -64,7 +58,7 @@ class _ProfileAdminScreenState extends State<ProfileAdminScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                        _nameController.text,
+                        widget.user!.name,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -75,7 +69,7 @@ class _ProfileAdminScreenState extends State<ProfileAdminScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                        _emailController.text,
+                        widget.user!.email,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -86,7 +80,7 @@ class _ProfileAdminScreenState extends State<ProfileAdminScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                        _phoneController.text,
+                        widget.user!.phoneNumber,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -97,7 +91,7 @@ class _ProfileAdminScreenState extends State<ProfileAdminScreen> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(
-                        _birthdayController.text,
+                        widget.user!.birthDay,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
