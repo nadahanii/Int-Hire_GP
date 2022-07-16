@@ -10,15 +10,17 @@ import '../helpers/pair.dart';
 import '../models/job.dart';
 import 'package:history_feature/models/applicant_data_for_result.dart';
 
-class ProfileViewScreen extends StatefulWidget {
-  final Pair<ApplicantUser,ApplicantResInfo> user;
-  ProfileViewScreen({Key? key, required this.user}) : super(key: key);
-  static const routeName = '/viewprofileApplicant_Screen';
+import '../models/recruiter_user.dart';
+
+class ProfileViewRecScreen extends StatefulWidget {
+  final  RecruiterUser  user;
+  ProfileViewRecScreen({Key? key, required this.user}) : super(key: key);
+  static const routeName = '/viewprofileRecruiter_Screen';
   @override
-  State<ProfileViewScreen> createState() => _ProfileViewScreenState();
+  State<ProfileViewRecScreen> createState() => _ProfileViewScreenRecState();
 }
 
-class _ProfileViewScreenState extends State<ProfileViewScreen> {
+class _ProfileViewScreenRecState extends State<ProfileViewRecScreen> {
   int _gender=1;
   var genderController= TextEditingController();
 
@@ -31,16 +33,16 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       title: Text("Profile", style: Theme.of(context).textTheme.headline1),
     );
   }
-    void assignGender()
-    {
-      if(widget.user.item1.isMale)
-        genderController.text='Male';
-      else
-        genderController.text='Female';
+  void assignGender()
+  {
+    if(widget.user.isMale!)
+      genderController.text='Male';
+    else
+      genderController.text='Female';
 
 
-    }
-    @override
+  }
+  @override
   Widget build(BuildContext context) {
     assignGender();
     return Scaffold(
@@ -63,7 +65,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.name,
+                        widget.user.name!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -76,7 +78,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.email,
+                        widget.user.email!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -89,7 +91,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.phoneNumber,
+                        widget.user.phoneNumber!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -102,7 +104,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.street,
+                        widget.user.street!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -115,7 +117,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.city,
+                        widget.user.city!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -128,33 +130,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.country,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Educational Level : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.item1.educationLevel.name,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'militaryStatus : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.item1.militaryStatus.name,
+                        widget.user.country!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -167,20 +143,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.birthDay,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Twitter Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.item1.twitterUsername,
+                        widget.user.birthDay!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -202,11 +165,11 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                   //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Tags :',
+                        'Position :',
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.tags.toString(),
+                        widget.user.position!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
@@ -215,11 +178,63 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                   //  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Skills : ',
+                        'Company Name : ',
                         style: Theme.of(context).textTheme.headline3,
                       ),
                       Text(
-                        widget.user.item1.skills,
+                        widget.user.company!.name!,
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ]),
+                const SizedBox(height: 15),
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Company Description : ',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                      Text(
+                        widget.user.company!.description!,
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ]),
+                const SizedBox(height: 15),
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Company Street Name : ',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                      Text(
+                        widget.user.company!.street!,
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ]),
+                const SizedBox(height: 15),
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Company City Name : ',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                      Text(
+                        widget.user.company!.city!,
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ]),
+                const SizedBox(height: 15),
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Company Country Name : ',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                      Text(
+                        widget.user.company!.country!,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),

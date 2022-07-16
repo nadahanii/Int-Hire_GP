@@ -28,11 +28,15 @@ import 'package:history_feature/models/applicant_data_for_result.dart';
 
 import 'package:history_feature/screens/view_applicant_profile_screen.dart';
 
+import '../models/PersonalityDataClass.dart';
+import 'applicant_result_screen.dart';
+
 class RecruiterResScreen extends StatefulWidget {
   static const routeName = '/Recruiter_Res_Screen';
   //final ThemeData registerTheme;
+  late PersonalityData personalityData;
   List<Pair<ApplicantUser, ApplicantResInfo>> ListOfApplicants;
-  RecruiterResScreen({Key? key, required this.ListOfApplicants
+  RecruiterResScreen({Key? key, required this.ListOfApplicants, required this.personalityData
       /* required this.registerTheme*/
       })
       : super(key: key);
@@ -117,10 +121,9 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProfileViewScreen(
-                                                      user: widget
-                                                              .ListOfApplicants[
-                                                          i])));
+                                                  ApplicantResult(
+                                                      personality_type:  widget.ListOfApplicants[i].item2
+                                                          .personality_type, personalityData: widget.personalityData)));
                                     }),
                                     child: Text(
                                       widget.ListOfApplicants[i].item2
