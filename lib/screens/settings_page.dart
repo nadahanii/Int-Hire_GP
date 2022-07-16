@@ -38,8 +38,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   SizedBox(height: 10),
                   buildLogout(),
                   SizedBox(height: 10),
-                  buildDeleteAccount(),
-                  SizedBox(height: 10),
+                  //buildDeleteAccount(),
+                  //SizedBox(height: 10),
                 ],
               ),
             ],
@@ -79,7 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
           Provider.of<Auth>(context, listen: false).logout();
         },
       );
-  Widget buildDeleteAccount() => SimpleSettingsTile(
+  /*Widget buildDeleteAccount() => SimpleSettingsTile(
         title: 'Delete Account',
         subtitle: '',
         leading: IconWidget(
@@ -87,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.pink,
         ),
         onTap: () => showSnackBar(context, 'Clicked logout'),
-      );
+      );*/
 }
 
 void showSnackBar(BuildContext context, String message) {
