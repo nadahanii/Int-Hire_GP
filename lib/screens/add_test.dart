@@ -86,6 +86,7 @@ class _AddTestState extends State<AddTest> {
   late String _testType = "";
 
   void setType() {
+    _testType = "";
     int label1 = 0;
     int label2 = 0;
     int label3 = 0;
