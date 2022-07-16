@@ -48,7 +48,6 @@ class Auth with ChangeNotifier {
   }
 
   Future<String> _authenticate(String encode, String method) async {
-
     final url = Uri.parse('${baseUrl}account/$method');
     try {
       final response = await http.post(
@@ -95,9 +94,9 @@ class Auth with ChangeNotifier {
   }
 
   Future<String> signup(String data, String userType) async {
-    if(userType == "Recruiter"){
+    if (userType == "Recruiter") {
       return _authenticate(data, "registerRecruiter");
-    }else {
+    } else {
       return _authenticate(data, "registerApplicant");
     }
   }
@@ -182,6 +181,143 @@ class Auth with ChangeNotifier {
       return 'update successfully';
     } catch (error) {
       print("update recruiter catch :" + error.toString());
+      return error.toString();
+    }
+  }
+
+  Future<String> updateApplicantTestType(String type) async {
+    final url = Uri.parse('${baseUrl}account/addTestPersonality');
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode(type),
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $_token',
+          "Accept": "application/json",
+        },
+      );
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body);
+      }
+      final responseData = json.decode(response.body);
+      notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      _applicant?.testPersonalityType = type;
+      int male;
+      if (_applicant!.isMale) {
+        male = 1;
+      } else {
+        male = 0;
+      }
+
+      final userData = json.encode({
+        'token': _token,
+        'expiration': _expiryDate!.toIso8601String(),
+        'userType': _userType,
+        'user': {
+          "userType": "applicant",
+          "email": _applicant?.email,
+          "name": _applicant?.name,
+          "phoneNumber": _applicant?.phoneNumber,
+          "birthDay": _applicant?.birthDay,
+          "gender": male,
+          "militaryStatus": _applicant?.militaryStatus.index,
+          "educationLevel": _applicant?.educationLevel.index,
+          "city": _applicant?.city,
+          "street": _applicant?.street,
+          "country": _applicant?.country,
+          "twitterUsername": _applicant?.twitterUsername,
+          "skills": _applicant?.skills,
+          "testPersonality": type,
+          "twitterPersonality": _applicant?.socialMediaPersonalityType,
+          "tags": _applicant?.tags,
+        },
+      });
+      prefs.setString('userData', userData);
+      return responseData;
+    } catch (error) {
+      print("update test type catch :" + error.toString());
+      return error.toString();
+    }
+  }
+
+  Future<String> updateApplicantTwitterType() async {
+    final url = Uri.parse('${baseUrl}account/addTwitterPersonality');
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $_token',
+          "Accept": "application/json",
+        },
+      );
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body);
+      }
+      final responseData = json.decode(response.body);
+      final prefs = await SharedPreferences.getInstance();
+      _applicant?.socialMediaPersonalityType = responseData['type'] as String;
+      int male;
+      if (_applicant!.isMale) {
+        male = 1;
+      } else {
+        male = 0;
+      }
+      notifyListeners();
+      final userData = json.encode({
+        'token': _token,
+        'expiration': _expiryDate!.toIso8601String(),
+        'userType': _userType,
+        'user': {
+          "userType": "applicant",
+          "email": _applicant?.email,
+          "name": _applicant?.name,
+          "phoneNumber": _applicant?.phoneNumber,
+          "birthDay": _applicant?.birthDay,
+          "gender": male,
+          "militaryStatus": _applicant?.militaryStatus.index,
+          "educationLevel": _applicant?.educationLevel.index,
+          "city": _applicant?.city,
+          "street": _applicant?.street,
+          "country": _applicant?.country,
+          "twitterUsername": _applicant?.twitterUsername,
+          "skills": _applicant?.skills,
+          "testPersonality": _applicant?.testPersonalityType,
+          "twitterPersonality": _applicant?.socialMediaPersonalityType,
+          "tags": _applicant?.tags,
+        },
+      });
+      prefs.setString('userData', userData);
+      return responseData["type"];
+    } catch (error) {
+      print("update social type catch :" + error.toString());
+      return error.toString();
+    }
+  }
+
+  Future<String> ChangePassword(String oldPassword, String newPassword) async {
+    final url = Uri.parse('${baseUrl}account/ChangePassword');
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          "oldPassword": oldPassword,
+          "newPassword": newPassword,
+        }),
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $_token',
+          "Accept": "application/json",
+        },
+      );
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body);
+      }
+      return "Password changed successfully";
+    } catch (error) {
+      print("change password catch :" + error.toString());
       return error.toString();
     }
   }

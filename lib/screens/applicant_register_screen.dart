@@ -200,7 +200,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                           showToast(
                               text: value, state: ToastStates.SUCCESS);
                           Navigator.of(context)
-                              .pushReplacementNamed('/navbar_screen');
+                              .pushReplacementNamed('/add_test');
                         }
                       });
                     }

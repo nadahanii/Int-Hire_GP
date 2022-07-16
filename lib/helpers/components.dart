@@ -36,7 +36,8 @@ Color chooseToastColor(ToastStates state) {
   return color;
 }
 
-final String baseUrl = "http://gpbackend-001-site1.itempurl.com/api/";
+// final String baseUrl = "http://gpbackend-001-site1.itempurl.com/api/";
+final String baseUrl = "https://localhost:44324/api/";
 
 Map<String, PersonalityData> mapOfTypes = {
   "ENFJ": PersonalityData(

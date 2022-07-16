@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../helpers/components.dart';
+import '../models/applicant_user.dart';
 import '../providers/auth.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -159,8 +160,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             } else {
                               showToast(
                                   text: value, state: ToastStates.SUCCESS);
-                              Navigator.of(context)
-                                  .pushReplacementNamed('/navbar_screen');
+                              if (Provider.of<Auth>(context, listen: false)
+                                          .userType ==
+                                      "Applicant" &&
+                                  (Provider.of<Auth>(context, listen: false)
+                                              .userObject as ApplicantUser)
+                                          .testPersonalityType ==
+                                      null) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/add_test');
+                              } else {
+                                Navigator.of(context)
+                                    .pushReplacementNamed('/navbar_screen');
+                              }
                             }
                           });
                         }

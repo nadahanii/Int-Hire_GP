@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
 import 'package:history_feature/screens/edit_profile.dart';
 
+import '../helpers/components.dart';
+import '../models/PersonalityDataClass.dart';
+import 'applicant_result_screen.dart';
+
 class ProfileScreen extends StatefulWidget {
   ApplicantUser? user;
   ProfileScreen({Key? key, this.user}) : super(key: key);
@@ -12,6 +16,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late PersonalityData personalityData = PersonalityData.notByName(
+      "Architect",
+      "Imaginative and strategic thinkers, with a plan for everything.",
+      "WHO IS AN ARCHITECT (INTJ)?",
+      "Architect (INTJ) Strengths",
+      "Professional know-how is often where Architects (INTJs) shine most brilliantly.",
+      "What Architects (INTJs) want",
+      "An Architect (INTJ) is a person with the Introverted.");
   final _nameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _twitternameController = TextEditingController();
@@ -27,14 +39,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _skillsController = TextEditingController();
   final _socialpersonalityController = TextEditingController();
   final _testpersonalityController = TextEditingController();
-  late List<String> tagss=[];
-  late List<String> skilss=[];
+  late List<String> tagss = [];
+  late List<String> skilss = [];
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
       automaticallyImplyLeading: false,
-
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       title: Text("Profile", style: Theme.of(context).textTheme.headline1),
@@ -46,8 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        EditProfilePage(user: widget.user)));
+                    builder: (context) => EditProfilePage(user: widget.user)));
           },
         ),
       ],
@@ -62,7 +72,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _tagsController.text = widget.user!.tags
           .toString()
           .replaceAll('[', '')
-          .replaceAll(']', '').replaceAll(',', ' -');
+          .replaceAll(']', '')
+          .replaceAll(',', ' -');
       _nameController.text = widget.user!.name;
       _phoneController.text = widget.user!.phoneNumber;
       _cityController.text = widget.user!.city;
@@ -70,8 +81,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _countryController.text = widget.user!.country;
       _birthdayController.text = widget.user!.birthDay;
       _skillsController.text = widget.user!.skills.replaceAll(',', '-');
-      _socialpersonalityController.text = widget.user!.socialMediaPersonalityType;
-      _testpersonalityController.text = widget.user!.testPersonalityType;
+      _socialpersonalityController.text =
+          widget.user!.socialMediaPersonalityType ?? "";
+      _testpersonalityController.text = widget.user!.testPersonalityType ?? "";
       if (widget.user!.isMale) {
         _genderController.text = 'Male';
       }
@@ -82,9 +94,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _militaryStatusController.text = widget.user!.militaryStatus.name;
       _twitternameController.text = widget.user!.twitterUsername;
       _emailController.text = widget.user!.email;
-
-
-
     }
   }
 
@@ -108,8 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _nameController.text,
+                    subtitle: Text(_nameController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -119,8 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Email',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _emailController.text,
+                    subtitle: Text(_emailController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -130,8 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Phone',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _phoneController.text,
+                    subtitle: Text(_phoneController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -141,8 +147,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Birthday',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _birthdayController.text,
+                    subtitle: Text(_birthdayController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -152,8 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Street',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _streetController.text,
+                    subtitle: Text(_streetController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -163,8 +167,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'City',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _cityController.text,
+                    subtitle: Text(_cityController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -174,8 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Country',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _countryController.text,
+                    subtitle: Text(_countryController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -185,41 +187,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Education Level',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _educationController.text,
+                    subtitle: Text(_educationController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
-                Card(
-                  child: ListTile(
-                    title: Text(
-                      'Social Personality Type',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                if (widget.user!.socialMediaPersonalityType != null)
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ApplicantResult(personality_type: _socialpersonalityController.text, personalityData: mapOfTypes[_socialpersonalityController.text] ?? personalityData,)));
+                    },
+                    child: Card(
+                      child: ListTile(
+                        title: Text(
+                          'Social Personality Type',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(_socialpersonalityController.text,
+                            style: TextStyle(fontWeight: FontWeight.normal)),
+                      ),
                     ),
-                    subtitle: Text(
-                        _socialpersonalityController.text,
-                        style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text(
-                      'Test Personality Type',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                if (widget.user!.testPersonalityType != null)
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ApplicantResult(personality_type: _testpersonalityController.text, personalityData: mapOfTypes[_testpersonalityController.text] ?? personalityData,)));
+                    },
+                    child: Card(
+                      child: ListTile(
+                        title: Text(
+                          'Test Personality Type',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(_testpersonalityController.text,
+                            style: TextStyle(fontWeight: FontWeight.normal)),
+                      ),
                     ),
-                    subtitle: Text(
-                        _testpersonalityController.text,
-                        style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
-                ),
                 Card(
                   child: ListTile(
                     title: Text(
                       'Military Status',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _militaryStatusController.text,
+                    subtitle: Text(_militaryStatusController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -229,43 +247,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Gender',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        _genderController.text,
+                    subtitle: Text(_genderController.text,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
-                Card(
-                  child: ListTile(
-                    title: Text(
-                      'Twitter name',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                        _twitternameController.text,
-                        style: TextStyle(fontWeight: FontWeight.normal)),
-                  ),
-                ),
-                Card(
-               child: ListTile(
-                 title: Text(
-                   'Tags',
-                   style: TextStyle(fontWeight: FontWeight.bold),
-                 ),
-                 subtitle:
-                   Text( _tagsController.text,)
-
-             )),
-                Card(
+                if (widget.user!.twitterUsername != "")
+                  Card(
                     child: ListTile(
                       title: Text(
-                        'Skills',
+                        'Twitter name',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      subtitle:
-                      Text(
-                         _skillsController.text,
-                      )
-                    )),
+                      subtitle: Text(_twitternameController.text,
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+                    ),
+                  ),
+                Card(
+                    child: ListTile(
+                        title: Text(
+                          'Tags',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          _tagsController.text,
+                        ))),
+                Card(
+                    child: ListTile(
+                        title: Text(
+                          'Skills',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          _skillsController.text,
+                        ))),
               ],
             ),
           ],

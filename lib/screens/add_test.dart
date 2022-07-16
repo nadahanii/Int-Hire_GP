@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import '../helpers/components.dart';
 import '../models/PersonalityDataClass.dart';
 import '../models/question.dart';
+import '../providers/auth.dart';
 import '../providers/test.dart';
 import 'applicant_result_screen.dart';
-import 'package:history_feature/helpers/components.dart';
 
 class AddTest extends StatefulWidget {
   const AddTest({Key? key}) : super(key: key);
@@ -195,6 +195,7 @@ class _AddTestState extends State<AddTest> {
               TextButton.icon(
                 onPressed: (() {
                   setType();
+                  Provider.of<Auth>(context, listen: false).updateApplicantTestType(_testType);
                   Navigator.push(
                       context,
                       MaterialPageRoute(

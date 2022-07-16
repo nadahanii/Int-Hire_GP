@@ -34,6 +34,7 @@ class JobItem extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
           return JobDetails(
             job: job,
+            history: history,
           );
         }));
       },

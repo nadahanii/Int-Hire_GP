@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:history_feature/screens/add_test.dart';
+import 'package:history_feature/models/applicant_user.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../helpers/components.dart';
 import '../helpers/pair.dart';
 import '../models/job.dart';
 import '../providers/auth.dart';
 import '../providers/jobs.dart';
 import 'job_operations_screen.dart';
+import 'navbar_screen.dart';
 
 class JobDetails extends StatefulWidget {
-  JobDetails({Key? key, required this.job}) : super(key: key);
+  JobDetails({Key? key, required this.job, required this.history}) : super(key: key);
   static const routeName = '/job_details';
 
+  bool history;
   Job job;
 
   @override
@@ -373,7 +376,7 @@ class _JobDetailsState extends State<JobDetails> {
               SizedBox(
                 height: 20,
               ),
-              if (Provider.of<Auth>(context).userType == "Applicant")
+              if (Provider.of<Auth>(context).userType == "Applicant" && widget.history == false)
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
@@ -381,9 +384,32 @@ class _JobDetailsState extends State<JobDetails> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AddTest(),
+                          builder: (context) => NavbarScreen(selected: 2,),
                         ),
                       );
+                      if((Provider.of<Auth>(context, listen: false).userObject as ApplicantUser).twitterUsername == "") {
+                        Provider.of<Jobs>(context, listen: false).applyJob(widget.job.id).then((value) {
+                          if (value == "apply successfully") {
+                            showToast(
+                                text: value, state: ToastStates.SUCCESS);
+                          } else {
+                            showToast(
+                                text: value, state: ToastStates.ERROR);
+                          }
+                        });
+                      } else {
+                        Provider.of<Auth>(context, listen: false).updateApplicantTwitterType().then((value) {
+                          Provider.of<Jobs>(context, listen: false).applyJob(widget.job.id).then((value) {
+                            if (value == "apply successfully") {
+                              showToast(
+                                  text: value, state: ToastStates.SUCCESS);
+                            } else {
+                              showToast(
+                                  text: value, state: ToastStates.ERROR);
+                            }
+                          });
+                        });
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                         primary: Theme.of(context)

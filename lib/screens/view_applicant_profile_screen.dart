@@ -1,13 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/screens/edit_profile.dart';
-import 'package:history_feature/widgets/profile_widget.dart';
-import 'package:history_feature/screens/settings_page.dart';
 import '../helpers/pair.dart';
-import '../models/applicant_user.dart';
-import '../helpers/pair.dart';
-import '../models/job.dart';
 import 'package:history_feature/models/applicant_data_for_result.dart';
 
 class ProfileViewScreen extends StatefulWidget {
@@ -19,7 +13,6 @@ class ProfileViewScreen extends StatefulWidget {
 }
 
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
-  int _gender = 1;
   var genderController = TextEditingController();
   late List<String> tagss;
   late List<String> skilss;
@@ -41,12 +34,12 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     _tagsController.text = widget.user.item1.tags
         .toString()
         .replaceFirst('[', '')
-        .replaceFirst(']', '').replaceAll(',', ' -');
+        .replaceFirst(']', '')
+        .replaceAll(',', ' -');
     if (widget.user.item1.isMale)
       genderController.text = 'Male';
     else
       genderController.text = 'Female';
-
   }
 
   @override
@@ -70,8 +63,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                       'Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        widget.user.item1.name,
+                    subtitle: Text(widget.user.item1.name,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -81,8 +73,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                       'Email',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        widget.user.item1.email,
+                    subtitle: Text(widget.user.item1.email,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -92,8 +83,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                       'Phone',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                    widget.user.item1.phoneNumber,
+                    subtitle: Text(widget.user.item1.phoneNumber,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -103,8 +93,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                       'Birthday',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(
-                        widget.user.item1.birthDay,
+                    subtitle: Text(widget.user.item1.birthDay,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -148,26 +137,30 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
-                Card(
-                  child: ListTile(
-                    title: Text(
-                      'Social Personality Type',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                if (widget.user.item1.socialMediaPersonalityType != null)
+                  Card(
+                    child: ListTile(
+                      title: Text(
+                        'Social Personality Type',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                          widget.user.item1.socialMediaPersonalityType ?? "",
+                          style: TextStyle(fontWeight: FontWeight.normal)),
                     ),
-                    subtitle: Text(widget.user.item1.socialMediaPersonalityType,
-                        style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
-                ),
-                Card(
-                  child: ListTile(
-                    title: Text(
-                      'Test Personality Type',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                if (widget.user.item1.testPersonalityType != null)
+                  Card(
+                    child: ListTile(
+                      title: Text(
+                        'Test Personality Type',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                          widget.user.item1.testPersonalityType ?? "",
+                          style: TextStyle(fontWeight: FontWeight.normal)),
                     ),
-                    subtitle: Text(widget.user.item1.testPersonalityType,
-                        style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
-                ),
                 Card(
                   child: ListTile(
                     title: Text(
@@ -180,13 +173,12 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                 ),
                 Card(
                   child: ListTile(
-                    title: Text(
-                      'Gender',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(genderController.text,
-                      style: TextStyle(fontWeight: FontWeight.normal))
-                  ),
+                      title: Text(
+                        'Gender',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(genderController.text,
+                          style: TextStyle(fontWeight: FontWeight.normal))),
                 ),
                 Card(
                   child: ListTile(
@@ -204,22 +196,18 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                           'Tags',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        subtitle:
-                        Text( _tagsController.text,)
-
-                    )),
+                        subtitle: Text(
+                          _tagsController.text,
+                        ))),
                 Card(
                     child: ListTile(
                         title: Text(
                           'Skills',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        subtitle:
-                        Text(
+                        subtitle: Text(
                           _skillsController.text,
-                        )
-                    )),
-
+                        ))),
               ],
             ),
           ],

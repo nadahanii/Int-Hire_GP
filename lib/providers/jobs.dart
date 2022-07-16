@@ -134,7 +134,7 @@ class Jobs with ChangeNotifier {
       if (response.statusCode == 400 || response.statusCode == 401) {
         _items.remove(job);
         notifyListeners();
-        return response.body;
+        return json.decode(response.body);
       }
       final responseData = json.decode(response.body) as Map<String, dynamic>;
       _items.where((element) => element.id == 0).first.id = (responseData['id'] as int);
@@ -206,6 +206,30 @@ class Jobs with ChangeNotifier {
       return 'update job successfully';
     } catch (error) {
       print("test2 :" + error.toString());
+      return error.toString();
+    }
+  }
+
+  Future<String> applyJob(int id) async {
+    final url = Uri.parse('${baseUrl}Job/applyToJob');
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode(id),
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $token',
+          "Accept": "application/json",
+        },
+      );
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body);
+      }
+      _items.where((element) => element.id == id).first.applicantsCount++;
+      notifyListeners();
+      return 'apply successfully';
+    } catch (error) {
+      print("apply :" + error.toString());
       return error.toString();
     }
   }

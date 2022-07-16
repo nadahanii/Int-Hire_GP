@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../helpers/components.dart';
+import '../providers/auth.dart';
 
 class EditPasswordScreen extends StatefulWidget {
   const EditPasswordScreen({Key? key}) : super(key: key);
@@ -148,8 +152,16 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                   TextButton.icon(
                     onPressed: (() {
                       if (_form.currentState!.validate()) {
-                        Navigator.of(context)
-                            .pushReplacementNamed('/Login_Screen');
+                        Provider.of<Auth>(context, listen: false)
+                            .ChangePassword(oldpasswordController.text, newpasswordController.text)
+                            .then((value) {
+                          if (value == "Password changed successfully") {
+                            Navigator.of(context).pop();
+                            showToast(text: value, state: ToastStates.SUCCESS);
+                          } else {
+                            showToast(text: value, state: ToastStates.ERROR);
+                          }
+                        });
                       }
                     }),
                     icon: const Icon(
@@ -168,7 +180,9 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                         ),
                       ),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).appBarTheme.backgroundColor/*Color.fromRGBO(4, 88, 125, 1)*/,
+                        color: Theme.of(context)
+                            .appBarTheme
+                            .backgroundColor /*Color.fromRGBO(4, 88, 125, 1)*/,
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),
