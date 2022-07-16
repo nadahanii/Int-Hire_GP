@@ -57,71 +57,61 @@ class _ProfileAdminScreenState extends State<ProfileAdminScreen> {
               crossAxisAlignment:
                   CrossAxisAlignment.center, //AxisAlignment.center,
               children: [
-                Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _nameController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Email : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Email',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _emailController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Phone number : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Phone',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _phoneController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //      mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Birthday : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Birthday',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _birthdayController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Gender : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Gender',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _genderController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
               ],
             ),
           ],

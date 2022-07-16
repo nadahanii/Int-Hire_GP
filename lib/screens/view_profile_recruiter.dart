@@ -57,188 +57,147 @@ class _ProfileViewScreenRecState extends State<ProfileViewRecScreen> {
               crossAxisAlignment:
               CrossAxisAlignment.center, //AxisAlignment.center,
               children: [
-                Row(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.name!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Email : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.email!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Phone number : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.phoneNumber!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Street : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.street!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'City : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.city!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Country : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.country!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //      mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Birthday : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.birthDay!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Gender : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        genderController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Position :',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.position!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Company Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.company!.name!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Company Description : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.company!.description!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Company Street Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.company!.street!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Company City Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.company!.city!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Company Country Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.company!.country!,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.name!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Email',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.email!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Phone',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.phoneNumber!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Position',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.position!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Birthday',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.birthDay!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Street',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.street!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'City',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.city!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Country',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.country!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Gender',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(genderController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Company Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.company!.name!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Description Of Company',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.company!.description!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Company Street Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.company!.street!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Company City Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.company!.city!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Company Country Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(widget.user.company!.country!,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+
 
               ],
             ),

@@ -25,8 +25,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _militaryStatusController = TextEditingController();
   final _genderController = TextEditingController();
   final _skillsController = TextEditingController();
-  late List<String> tagss;
-  late List<String> skilss;
+  final _socialpersonalityController = TextEditingController();
+  final _testpersonalityController = TextEditingController();
+  late List<String> tagss=[];
+  late List<String> skilss=[];
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -59,15 +61,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _educationController.text = widget.user!.educationLevel.name;
       _tagsController.text = widget.user!.tags
           .toString()
-          .replaceFirst('[', '')
-          .replaceFirst(']', '');
+          .replaceAll('[', '')
+          .replaceAll(']', '').replaceAll(',', ' -');
       _nameController.text = widget.user!.name;
       _phoneController.text = widget.user!.phoneNumber;
       _cityController.text = widget.user!.city;
       _streetController.text = widget.user!.street;
       _countryController.text = widget.user!.country;
       _birthdayController.text = widget.user!.birthDay;
-      _skillsController.text = widget.user!.skills;
+      _skillsController.text = widget.user!.skills.replaceAll(',', '-');
+      _socialpersonalityController.text = widget.user!.socialMediaPersonalityType;
+      _testpersonalityController.text = widget.user!.testPersonalityType;
       if (widget.user!.isMale) {
         _genderController.text = 'Male';
       }
@@ -78,8 +82,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _militaryStatusController.text = widget.user!.militaryStatus.name;
       _twitternameController.text = widget.user!.twitterUsername;
       _emailController.text = widget.user!.email;
-      tagss=  _tagsController.text.split(',');
-      skilss= _skillsController.text.split(',');
+
 
 
     }
@@ -99,223 +102,170 @@ class _ProfileScreenState extends State<ProfileScreen> {
               crossAxisAlignment:
                   CrossAxisAlignment.start, //AxisAlignment.center,
               children: [
-                Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _nameController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Email : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Email',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _emailController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Phone number : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Phone',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _phoneController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Street : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _streetController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'City : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _cityController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Country : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _countryController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Educational Level : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _educationController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'militaryStatus : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _militaryStatusController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //      mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Birthday : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Birthday',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _birthdayController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Twitter Name : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _twitternameController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                ///************************************************************************************
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Twitter-based personality type : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        'INFJ',
-                        /*_twitternameController.text,*/
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Test-based personality type : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        'INFJ',
-                        /*_twitternameController.text,*/
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                ///***************************************************************************
-                const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Gender : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Street',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _streetController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'City',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _cityController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Country',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _countryController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Education Level',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _educationController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Social Personality Type',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _socialpersonalityController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Test Personality Type',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _testpersonalityController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Military Status',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _militaryStatusController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Gender',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
                         _genderController.text,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    title: Text(
+                      'Twitter name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                        _twitternameController.text,
+                        style: TextStyle(fontWeight: FontWeight.normal)),
+                  ),
+                ),
+                Card(
+               child: ListTile(
+                 title: Text(
+                   'Tags',
+                   style: TextStyle(fontWeight: FontWeight.bold),
+                 ),
+                 subtitle:
+                   Text( _tagsController.text,)
+
+             )),
+                Card(
+                    child: ListTile(
+                      title: Text(
+                        'Skills',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ]),
-                const SizedBox(height: 15),
-             Text(
-               'Tags : ',
-               style: Theme.of(context).textTheme.headline3,
-             ),
-             SizedBox(
-               height: 2,
-             ),
-             ListView.builder(
-             physics: const NeverScrollableScrollPhysics(),
-             scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: tagss.length,
-          itemBuilder: (_, i) => Column(
-              crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
-              children: [
-                Text(
-                  '● '+tagss[i],
-                  style:Theme.of(context).textTheme.headline4,
-                )
-          ])
-            ),
-                const SizedBox(height: 15),
-                Text(
-                  'Skills : ',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: skilss.length,
-                    itemBuilder: (_, i) => Column(
-                       crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
-                        children: [
-                          Text(
-                            '● '+skilss[i],
-                            style:Theme.of(context).textTheme.headline4,
-                          )
-                        ])
-                ),
-                const SizedBox(height: 15),
+                      subtitle:
+                      Text(
+                         _skillsController.text,
+                      )
+                    )),
               ],
             ),
           ],

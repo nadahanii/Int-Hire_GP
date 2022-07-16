@@ -36,7 +36,8 @@ class RecruiterResScreen extends StatefulWidget {
   //final ThemeData registerTheme;
   late PersonalityData personalityData;
   List<Pair<ApplicantUser, ApplicantResInfo>> ListOfApplicants;
-  RecruiterResScreen({Key? key, required this.ListOfApplicants, required this.personalityData
+  RecruiterResScreen(
+      {Key? key, required this.ListOfApplicants, required this.personalityData
       /* required this.registerTheme*/
       })
       : super(key: key);
@@ -46,17 +47,6 @@ class RecruiterResScreen extends StatefulWidget {
 }
 
 class _RecruiterResScreenState extends State<RecruiterResScreen> {
-
-
-  late List<String> Kindredspirits=[];
-  late List<String> PotentialComplements=[];
-  late List<String> ChallengingOpposites=[];
-  late List<String> IntriguingDifferences=[];
-  final _KindredspiritsController = TextEditingController();
-  final _PotentialComplementsController = TextEditingController();
-  final _ChallengingOppositesController = TextEditingController();
-  final _IntriguingDifferencesController = TextEditingController();
-
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       leading: BackButton(),
@@ -66,15 +56,9 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
       title: Text("Results ", style: Theme.of(context).textTheme.headline1),
     );
   }
- List <String> assignkindred(int i)
- {
-   String kindred = widget.ListOfApplicants[i].item2.kindred_spirits.toString().replaceAll('[', '');
-   kindred= kindred.replaceAll(']', '');
-   print(kindred);
-   Kindredspirits = kindred.split(',');
-   return Kindredspirits;
- }
+
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,161 +67,137 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 10.0,
+            ),
             Text('Applicants', style: Theme.of(context).textTheme.headline3),
             SizedBox(
               height: 15.0,
             ),
             ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: widget.ListOfApplicants.length,
-                itemBuilder: (_, i) => Row(children: [
-                      Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start, //AxisAlignment.center,
-                        children: [
-                          Row(
-                              //mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '    Name : ',
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                                TextButton(
-                                    onPressed: (() {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfileViewScreen(
-                                                      user: widget
-                                                              .ListOfApplicants[
-                                                          i])));
-                                    }),
-                                    child: Text(
-                                      widget.ListOfApplicants[i].item2.name,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(64, 191, 197, 1),
-                                          fontSize: 17,
-                                          decoration: TextDecoration.underline),
-                                    ))
-                              ]),
-                          Row(
-                              //mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '    Personality Type : ',
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                                TextButton(
-                                    onPressed: (() {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ApplicantResult(
-                                                      personality_type:  widget.ListOfApplicants[i].item2
-                                                          .personality_type, personalityData: widget.personalityData)));
-                                    }),
-                                    child: Text(
-                                      widget.ListOfApplicants[i].item2
-                                          .personality_type,
-                                      style: TextStyle(
-                                          color:
-                                              Color.fromRGBO(64, 191, 197, 1),
-                                          fontSize: 17,
-                                          decoration: TextDecoration.underline),
-                                    ))
-                              ]),
-                          
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Kindredspirits=assignkindred(i);
-                                },
-                                child: Text(
-                                  'View Kindred Spirts ',
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                                
-                              )
-                              ]
+              physics: const NeverScrollableScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: widget.ListOfApplicants.length,
+              itemBuilder: (_, i) => Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, //AxisAlignment.center,
+                children: [
+                  Card(
+                    child: ListTile(
+                        leading:
+                        TextButton(
+                          onPressed: (() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfileViewScreen(
+                                        user: widget.ListOfApplicants[i])));
+                          }),
+                          child: Text(
+                            'Name : '+widget.ListOfApplicants[i].item2.name ,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline),
                           ),
-                              /*ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: Kindredspirits.length,
-                                  itemBuilder: (_, i) => Column(
-                                      crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          '● '+Kindredspirits[i],
-                                          style:Theme.of(context).textTheme.headline4,
-                                        )
-                                      ])
-                              ),*/
-                          const SizedBox(height: 15),
-                          Row(
-                              //mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '    Potential Complements : ',
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                                Text(
-                                  widget.ListOfApplicants[i].item2
-                                      .potential_complements
-                                      .toString(),
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ]),
-                          const SizedBox(height: 15),
-                          Row(
-                              //mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '    Challenging Opposites : ',
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                                Text(
-                                  widget.ListOfApplicants[i].item2
-                                      .challenging_opposites
-                                      .toString(),
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ]),
-                          const SizedBox(height: 15),
-                          Row(
-                              //mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '    Intriguing Differences : ',
-                                  style: Theme.of(context).textTheme.headline3,
-                                ),
-                                Text(
-                                  widget.ListOfApplicants[i].item2
-                                      .intriguing_differences
-                                      .toString(),
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ]),
-                          const SizedBox(height: 20),
-                        ],
+                        ),
+                        trailing:Image.asset(
+                          'assets/' +
+                              widget.ListOfApplicants[i].item2.personality_type
+                                  .toLowerCase() +
+                              '.png',
+                        ),
+
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      leading:
+                      TextButton(
+                        onPressed: (() {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileViewScreen(
+                                      user: widget.ListOfApplicants[i])));
+                        }),
+                        child: Text(
+                          'Personality Type : '+widget.ListOfApplicants[i].item2.personality_type ,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline),
+                        ),
                       ),
-                      Image.asset(
-                        'assets/' +
-                            widget.ListOfApplicants[i].item2.personality_type
-                                .toLowerCase() +
-                            '.png',
-                        width: 200.0,
-                        height: 150.0,
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      title: Text(
+                        'Kindred Spirits',
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ])),
+                      subtitle: Text(
+                              widget.ListOfApplicants[i].item2.kindred_spirits
+                                  .toString().replaceAll('[', '')
+                                  .replaceAll(']', '')
+                                  .replaceAll(',', ' -'),
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      title: Text(
+                        'Potential Complements',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+
+                              widget.ListOfApplicants[i].item2
+                                  .potential_complements
+                                  .toString().replaceAll('[', '')
+                                  .replaceAll(']', '')
+                                  .replaceAll(',', ' -'),
+
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      title: Text(
+                        'Challenging Opposites',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+
+                              widget.ListOfApplicants[i].item2
+                                  .challenging_opposites
+                                  .toString().replaceAll('[', '')
+        .replaceAll(']', '')
+        .replaceAll(',', ' -'),
+
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      title: Text(
+                        'Intriguing Differences',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                              widget.ListOfApplicants[i].item2
+                                  .intriguing_differences
+                                  .toString()
+                                  .replaceAll('[', '')
+                                  .replaceAll(']', '')
+                                  .replaceAll(',', ' -'),
+                          style: TextStyle(fontWeight: FontWeight.normal)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
