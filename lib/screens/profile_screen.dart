@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
 import 'package:history_feature/screens/edit_profile.dart';
+import 'package:provider/provider.dart';
 
 import '../helpers/components.dart';
 import '../models/PersonalityDataClass.dart';
+import '../providers/auth.dart';
 import 'applicant_result_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -33,21 +34,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: Provider.of<Auth>(context).userType != "Applicant" ? true : false,
       backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       elevation: 0,
       title: Text("Profile", style: Theme.of(context).textTheme.headline1),
       actions: [
-        IconButton(
-          icon: Icon(Icons.edit),
-          color: Colors.white,
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditProfilePage(user: widget.user)));
-          },
-        ),
+        if (Provider.of<Auth>(context).userType == "Applicant")
+          IconButton(
+            icon: Icon(Icons.edit),
+            color: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          EditProfilePage(user: widget.user)));
+            },
+          ),
       ],
     );
   }
@@ -72,7 +75,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (!widget.user!.isMale) {
         _genderController.text = "Female";
       }
-
     }
   }
 
@@ -96,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       'Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text( widget.user!.name,
+                    subtitle: Text(widget.user!.name,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -172,12 +174,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 if (widget.user!.socialMediaPersonalityType != null)
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ApplicantResult(personality_type: _socialpersonalityController.text, personalityData: mapOfTypes[_socialpersonalityController.text] ?? personalityData,)));
+                              builder: (context) => ApplicantResult(
+                                    personality_type:
+                                        _socialpersonalityController.text,
+                                    personalityData: mapOfTypes[
+                                            _socialpersonalityController
+                                                .text] ??
+                                        personalityData,
+                                  )));
                     },
                     child: Card(
                       child: ListTile(
@@ -192,12 +200,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 if (widget.user!.testPersonalityType != null)
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ApplicantResult(personality_type: _testpersonalityController.text, personalityData: mapOfTypes[_testpersonalityController.text] ?? personalityData,)));
+                              builder: (context) => ApplicantResult(
+                                    personality_type:
+                                        _testpersonalityController.text,
+                                    personalityData: mapOfTypes[
+                                            _testpersonalityController.text] ??
+                                        personalityData,
+                                  )));
                     },
                     child: Card(
                       child: ListTile(

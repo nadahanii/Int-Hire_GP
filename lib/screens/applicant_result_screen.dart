@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/PersonalityDataClass.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth.dart';
 import 'navbar_screen.dart';
 
 class ApplicantResult extends StatefulWidget {
@@ -110,34 +112,37 @@ class _ApplicantResultState extends State<ApplicantResult> {
                       style: TextStyle(fontWeight: FontWeight.normal)),
                 ),
               ),
-              TextButton.icon(
-                onPressed: (() {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NavbarScreen(selected: 3,)));
-                }),
-                icon: const Icon(
-                  Icons.home,
-                  size: 28,
-                ),
-                label: Container(
-                  alignment: Alignment.center,
-                  width: 150,
-                  height: 35,
-                  child: const Text(
-                    'Home',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Colors.white,
+              if (Provider.of<Auth>(context).userType == 'Applicant')
+                TextButton.icon(
+                  onPressed: (() {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => NavbarScreen(
+                                  selected: 3,
+                                )));
+                  }),
+                  icon: const Icon(
+                    Icons.home,
+                    size: 28,
+                  ),
+                  label: Container(
+                    alignment: Alignment.center,
+                    width: 150,
+                    height: 35,
+                    child: const Text(
+                      'Home',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(4, 88, 125, 1),
+                      borderRadius: BorderRadius.circular(25),
                     ),
                   ),
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(4, 88, 125, 1),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
                 ),
-              ),
             ],
           ),
         ),

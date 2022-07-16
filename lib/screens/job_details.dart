@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
+import 'package:history_feature/screens/recruiter_result_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +13,8 @@ import 'job_operations_screen.dart';
 import 'navbar_screen.dart';
 
 class JobDetails extends StatefulWidget {
-  JobDetails({Key? key, required this.job, required this.history}) : super(key: key);
+  JobDetails({Key? key, required this.job, required this.history})
+      : super(key: key);
   static const routeName = '/job_details';
 
   bool history;
@@ -163,14 +165,31 @@ class _JobDetailsState extends State<JobDetails> {
               ),
               Row(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.grey.shade200),
-                    child: Text(
-                      '${widget.job.applicantsCount} applicants',
-                      style: TextStyle(color: Colors.black, fontSize: 12.0),
+                  InkWell(
+                    onTap: () {
+                      if (widget.history) {
+                        Provider.of<Jobs>(context, listen: false)
+                            .getApplicantsDataForJob(widget.job.id)
+                            .then((value) {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (ctx) {
+                            return RecruiterResScreen(
+                              ListOfApplicants: value,
+                            );
+                          }));
+                        });
+                      }
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.grey.shade200),
+                      child: Text(
+                        '${widget.job.applicantsCount} applicants',
+                        style: TextStyle(color: Colors.black, fontSize: 12.0),
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -376,7 +395,8 @@ class _JobDetailsState extends State<JobDetails> {
               SizedBox(
                 height: 20,
               ),
-              if (Provider.of<Auth>(context).userType == "Applicant" && widget.history == false)
+              if (Provider.of<Auth>(context).userType == "Applicant" &&
+                  widget.history == false)
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
@@ -384,28 +404,36 @@ class _JobDetailsState extends State<JobDetails> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => NavbarScreen(selected: 2,),
+                          builder: (context) => NavbarScreen(
+                            selected: 2,
+                          ),
                         ),
                       );
-                      if((Provider.of<Auth>(context, listen: false).userObject as ApplicantUser).twitterUsername == "") {
-                        Provider.of<Jobs>(context, listen: false).applyJob(widget.job.id).then((value) {
+                      if ((Provider.of<Auth>(context, listen: false).userObject
+                                  as ApplicantUser)
+                              .twitterUsername ==
+                          "") {
+                        Provider.of<Jobs>(context, listen: false)
+                            .applyJob(widget.job.id)
+                            .then((value) {
                           if (value == "apply successfully") {
-                            showToast(
-                                text: value, state: ToastStates.SUCCESS);
+                            showToast(text: value, state: ToastStates.SUCCESS);
                           } else {
-                            showToast(
-                                text: value, state: ToastStates.ERROR);
+                            showToast(text: value, state: ToastStates.ERROR);
                           }
                         });
                       } else {
-                        Provider.of<Auth>(context, listen: false).updateApplicantTwitterType().then((value) {
-                          Provider.of<Jobs>(context, listen: false).applyJob(widget.job.id).then((value) {
+                        Provider.of<Auth>(context, listen: false)
+                            .updateApplicantTwitterType()
+                            .then((value) {
+                          Provider.of<Jobs>(context, listen: false)
+                              .applyJob(widget.job.id)
+                              .then((value) {
                             if (value == "apply successfully") {
                               showToast(
                                   text: value, state: ToastStates.SUCCESS);
                             } else {
-                              showToast(
-                                  text: value, state: ToastStates.ERROR);
+                              showToast(text: value, state: ToastStates.ERROR);
                             }
                           });
                         });

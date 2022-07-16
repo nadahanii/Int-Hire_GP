@@ -5,6 +5,7 @@ import 'package:history_feature/providers/auth.dart';
 import 'package:http/http.dart' as http;
 
 import '../helpers/components.dart';
+import '../models/applicant_user.dart';
 
 class Jobs with ChangeNotifier {
   List<Job> _items = [];
@@ -231,6 +232,33 @@ class Jobs with ChangeNotifier {
     } catch (error) {
       print("apply :" + error.toString());
       return error.toString();
+    }
+  }
+
+  Future<List<ApplicantUser>> getApplicantsDataForJob(int id) async {
+    final url = Uri.parse('${baseUrl}Job/getInformationByJobId?id=$id');
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          "content-type": "application/json",
+          'Authorization': 'Bearer $token',
+          "Accept": "application/json",
+        },
+      );
+      if (response.statusCode == 400 || response.statusCode == 401) {
+        return json.decode(response.body);
+      }
+      List<ApplicantUser> listOfApplicants = [];
+      var extractedData = json.decode(response.body) as List<dynamic>;
+      extractedData.forEach((element) {
+
+        listOfApplicants.add(ApplicantUser.fromJson(element as Map<String,dynamic>));
+      });
+      return listOfApplicants;
+    } catch (error) {
+      print("apply :" + error.toString());
+      return [];
     }
   }
 }
