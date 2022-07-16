@@ -77,7 +77,8 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                               'Name : ' + widget.ListOfApplicants[i].name,
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline),
+                                  //decoration: TextDecoration.underline
+                              ),
                             ),
                           ),
                           trailing: Image.asset(
@@ -103,8 +104,12 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                               'Personality Type : ' + (userType ?? ""),
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  decoration: TextDecoration.underline),
+                                  //decoration: TextDecoration.underline
+                              ),
                             ),
+                          ),
+                          trailing: Image.asset(
+                            'assets/white_image.png',
                           ),
                         ),
                       ),
