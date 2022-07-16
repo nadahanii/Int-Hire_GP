@@ -200,11 +200,12 @@ class MyApp extends StatelessWidget {
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
                         ? CircularProgressIndicator():
-                       // ProfileViewScreen(user: userinfo)),
-                      //  ProfileScreen(user: applicant,)),
-                       // ProfileViewRecScreen(user: recruiter)),
-                   // ProfileRecScreen(user: recruiter)),
-                        RecruiterResScreen(ListOfApplicants: ApplicantInfoList, personalityData: _personalityData)),
+                        SplashScreen()),
+                   //  ProfileViewScreen(user: userinfo)),
+                   //  ProfileScreen(user: applicant,)),
+                   // ProfileViewRecScreen(user: recruiter)),
+                   //  ProfileRecScreen(user: recruiter)),
+                   //      RecruiterResScreen(ListOfApplicants: ApplicantInfoList, personalityData: _personalityData)),
         routes: {
           LoginScreen.routeName: (ctx) => LoginScreen(),
           SplashScreen.routeName: (ctx) => SplashScreen(),
