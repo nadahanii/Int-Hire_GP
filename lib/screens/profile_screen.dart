@@ -228,6 +228,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: Theme.of(context).textTheme.headline4,
                       ),
                     ]),
+                ///************************************************************************************
+                const SizedBox(height: 15),
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Twitter-based personality type : ',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                      Text(
+                        'INFJ',
+                        /*_twitternameController.text,*/
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ]),
+                const SizedBox(height: 15),
+                Row(
+                  //  mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Test-based personality type : ',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                      Text(
+                        'INFJ',
+                        /*_twitternameController.text,*/
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                    ]),
+                ///***************************************************************************
                 const SizedBox(height: 15),
                 Row(
                     //  mainAxisAlignment: MainAxisAlignment.center,

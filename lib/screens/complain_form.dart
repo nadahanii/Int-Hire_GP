@@ -137,7 +137,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(4, 88, 125, 1),
+                      primary: Theme.of(context).appBarTheme.backgroundColor/*Color.fromRGBO(4, 88, 125, 1)*/,
                       fixedSize: Size(150, 35)),
                   /*style: ElevatedButtonTheme(
 

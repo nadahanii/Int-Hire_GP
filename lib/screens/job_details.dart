@@ -286,7 +286,11 @@ class _JobDetailsState extends State<JobDetails> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Tags:'),
+                              Text('Tags:',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blueGrey)),
                               const SizedBox(
                                 height: 8.0,
                               ),
@@ -322,9 +326,9 @@ class _JobDetailsState extends State<JobDetails> {
                     children: [
                       Text('Description:',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          )),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey)),
                       SizedBox(
                         height: 15,
                       ),
@@ -348,9 +352,9 @@ class _JobDetailsState extends State<JobDetails> {
                     children: [
                       Text('Requirements',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          )),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey)),
                       SizedBox(
                         height: 15,
                       ),
@@ -382,7 +386,9 @@ class _JobDetailsState extends State<JobDetails> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(4, 88, 125, 1),
+                        primary: Theme.of(context)
+                            .appBarTheme
+                            .backgroundColor /*Color.fromRGBO(4, 88, 125, 1)*/,
                         fixedSize: Size(150, 35)),
                     child: Text(
                       'Apply',

@@ -168,7 +168,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                         ),
                       ),
                       decoration: BoxDecoration(
-                        color: Color.fromRGBO(4, 88, 125, 1),
+                        color: Theme.of(context).appBarTheme.backgroundColor/*Color.fromRGBO(4, 88, 125, 1)*/,
                         borderRadius: BorderRadius.circular(25),
                       ),
                     ),

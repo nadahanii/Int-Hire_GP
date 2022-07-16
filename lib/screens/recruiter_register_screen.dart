@@ -154,8 +154,7 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                       ),
                       keyboardType: TextInputType.name,
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            !RegExp(r'^[a-z A-Z]+$').hasMatch(value))
+                        if (value!.isEmpty)
                           return "Enter correct description";
                         else
                           return null;
@@ -169,35 +168,41 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                       onPressed: (() {
                         if (_formKey.currentState!.validate()) {
                           Provider.of<Auth>(context, listen: false)
-                              .signup(json.encode({
-                            "name": widget.recruiterUser.name,
-                            "email": widget.recruiterUser.email,
-                            "phoneNumber": widget.recruiterUser.phoneNumber,
-                            "password": widget.recruiterUser.password,
-                            "street": widget.recruiterUser.street,
-                            "city": widget.recruiterUser.city,
-                            "country": widget.recruiterUser.country,
-                            "birthDay": widget.recruiterUser.birthDay,
-                            "gender":
-                                widget.recruiterUser.isMale == true ? 1 : 0,
-                            "position": positionController.text,
-                            "company": {
-                              "id": 0,
-                              "name": companyNameController.text,
-                              "description": companyDescriptionController.text,
-                              "street": streetController.text,
-                              "city": cityController.text,
-                              "country": countryController.text,
-                            }
-                          }),"Recruiter")
+                              .signup(
+                                  json.encode({
+                                    "name": widget.recruiterUser.name,
+                                    "email": widget.recruiterUser.email,
+                                    "phoneNumber":
+                                        widget.recruiterUser.phoneNumber,
+                                    "password": widget.recruiterUser.password,
+                                    "street": widget.recruiterUser.street,
+                                    "city": widget.recruiterUser.city,
+                                    "country": widget.recruiterUser.country,
+                                    "birthDay": widget.recruiterUser.birthDay,
+                                    "gender":
+                                        widget.recruiterUser.isMale == true
+                                            ? 1
+                                            : 0,
+                                    "position": positionController.text,
+                                    "company": {
+                                      "id": 0,
+                                      "name": companyNameController.text,
+                                      "description":
+                                          companyDescriptionController.text,
+                                      "street": streetController.text,
+                                      "city": cityController.text,
+                                      "country": countryController.text,
+                                    }
+                                  }),
+                                  "Recruiter")
                               .then((value) {
                             if (value != 'login successfully') {
                               showToast(text: value, state: ToastStates.ERROR);
                             } else {
                               showToast(
-                                    text: value, state: ToastStates.SUCCESS);
-                                Navigator.of(context)
-                                    .pushReplacementNamed('/navbar_screen');
+                                  text: value, state: ToastStates.SUCCESS);
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/navbar_screen');
                             }
                           });
                         }

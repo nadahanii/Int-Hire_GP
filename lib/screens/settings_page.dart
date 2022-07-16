@@ -24,7 +24,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
-
         backgroundColor: Theme.of(context).backgroundColor,
         body: SafeArea(
           child: ListView(
@@ -56,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.green,
         ),
         onTap: () {
-         /* if (Provider.of<Auth>(context).userType == 'Applicant')
+          /* if (Provider.of<Auth>(context).userType == 'Applicant')
             ProfileScreen(
                 user: Provider.of<Auth>(context).userObject as ApplicantUser);
           if (Provider.of<Auth>(context).userType == 'Recruiter')
@@ -104,89 +103,3 @@ void showSnackBar(BuildContext context, String message) {
     ),
   );
 }
-
-/*class SettingsPage extends StatefulWidget {
-  //final ThemeData settingsTheme;
-  SettingsPage({
-    Key? key,
-  }) : super(key: key);
-  static const routeName = '/Settings';
-
-  @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> {
-  bool isDarkTheme = false;
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Settings',
-          style: Theme.of(context).textTheme.headline1,
-        ),
-        //backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        // elevation: 1,
-        // leading: IconButton(
-        //     onPressed: () {
-        //       Navigator.of(context).pop();
-        //     },
-        //     icon: Icon(
-        //       Icons.arrow_back,
-        //       color: Colors.white,
-        //     )),
-      ),
-      body: Container(
-        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-        child: Center(
-          child: ListView(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Theme",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                  Transform.scale(
-                    scale: 0.7,
-                    child: CupertinoSwitch(
-                      value: isDarkTheme,
-                      onChanged: (bool val) {
-                        setState(() {
-                          isDarkTheme = val;
-                        });
-                      },
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context).pushReplacementNamed('/splash_screen');
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Logout",
-                      style: Theme.of(context).textTheme.caption,
-                    ),
-                    Icon(Icons.logout),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-*/
