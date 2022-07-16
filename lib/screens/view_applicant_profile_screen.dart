@@ -21,6 +21,10 @@ class ProfileViewScreen extends StatefulWidget {
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
   int _gender=1;
   var genderController= TextEditingController();
+  late List<String> tagss;
+  late List<String> skilss;
+  final _skillsController = TextEditingController();
+  final _tagsController = TextEditingController();
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -33,10 +37,19 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
   }
     void assignGender()
     {
+      _skillsController.text = widget.user.item1.skills;
+      _tagsController.text = widget.user.item1.tags
+          .toString()
+          .replaceFirst('[', '')
+          .replaceFirst(']', '');
       if(widget.user.item1.isMale)
         genderController.text='Male';
       else
         genderController.text='Female';
+
+      tagss=  _tagsController.text.split(',');
+      skilss= _skillsController.text.split(',');
+
 
 
     }
@@ -53,7 +66,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
           children: [
             Column(
               crossAxisAlignment:
-              CrossAxisAlignment.center, //AxisAlignment.center,
+              CrossAxisAlignment.start, //AxisAlignment.center,
               children: [
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.center,
@@ -198,32 +211,51 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                       ),
                     ]),
                 const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Tags :',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.item1.tags.toString(),
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
+                Text(
+                  'Tags : ',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: tagss.length,
+                    itemBuilder: (_, i) => Column(
+                        crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
+                        children: [
+                          Text(
+                            '● '+tagss[i],
+                            style:Theme.of(context).textTheme.headline4,
+                          )
+                        ])
+                ),
                 const SizedBox(height: 15),
-                Row(
-                  //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Skills : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        widget.user.item1.skills,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
-                const SizedBox(height: 15),
+                Text(
+                  'Skills : ',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: skilss.length,
+                    itemBuilder: (_, i) => Column(
+                        crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
+                        children: [
+                          Text(
+                            '● '+skilss[i],
+                            style:Theme.of(context).textTheme.headline4,
+                          )
+                        ])
+                ),
+                const SizedBox(height: 15)
+               ,
 
               ],
             ),

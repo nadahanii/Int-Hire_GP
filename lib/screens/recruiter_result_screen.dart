@@ -46,6 +46,17 @@ class RecruiterResScreen extends StatefulWidget {
 }
 
 class _RecruiterResScreenState extends State<RecruiterResScreen> {
+
+
+  late List<String> Kindredspirits=[];
+  late List<String> PotentialComplements=[];
+  late List<String> ChallengingOpposites=[];
+  late List<String> IntriguingDifferences=[];
+  final _KindredspiritsController = TextEditingController();
+  final _PotentialComplementsController = TextEditingController();
+  final _ChallengingOppositesController = TextEditingController();
+  final _IntriguingDifferencesController = TextEditingController();
+
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       leading: BackButton(),
@@ -55,12 +66,17 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
       title: Text("Results ", style: Theme.of(context).textTheme.headline1),
     );
   }
-
+ List <String> assignkindred(int i)
+ {
+   String kindred = widget.ListOfApplicants[i].item2.kindred_spirits.toString().replaceAll('[', '');
+   kindred= kindred.replaceAll(']', '');
+   print(kindred);
+   Kindredspirits = kindred.split(',');
+   return Kindredspirits;
+ }
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
-    print(widget.ListOfApplicants.length);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: buildAppBar(context),
@@ -135,20 +151,36 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                                           decoration: TextDecoration.underline),
                                     ))
                               ]),
-                          Row(
-                              //mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '    Kindred Spirits : ',
+                          
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Kindredspirits=assignkindred(i);
+                                },
+                                child: Text(
+                                  'View Kindred Spirts ',
                                   style: Theme.of(context).textTheme.headline3,
                                 ),
-                                Text(
-                                  widget
-                                      .ListOfApplicants[i].item2.kindred_spirits
-                                      .toString(),
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ]),
+                                
+                              )
+                              ]
+                          ),
+                              /*ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: Kindredspirits.length,
+                                  itemBuilder: (_, i) => Column(
+                                      crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '● '+Kindredspirits[i],
+                                          style:Theme.of(context).textTheme.headline4,
+                                        )
+                                      ])
+                              ),*/
                           const SizedBox(height: 15),
                           Row(
                               //mainAxisAlignment: MainAxisAlignment.center,

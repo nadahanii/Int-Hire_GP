@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:history_feature/models/applicant_user.dart';
 import 'package:history_feature/screens/edit_profile.dart';
@@ -24,6 +25,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _militaryStatusController = TextEditingController();
   final _genderController = TextEditingController();
   final _skillsController = TextEditingController();
+  late List<String> tagss;
+  late List<String> skilss;
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -75,6 +78,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _militaryStatusController.text = widget.user!.militaryStatus.name;
       _twitternameController.text = widget.user!.twitterUsername;
       _emailController.text = widget.user!.email;
+      tagss=  _tagsController.text.split(',');
+      skilss= _skillsController.text.split(',');
+
+
     }
   }
 
@@ -90,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Column(
               crossAxisAlignment:
-                  CrossAxisAlignment.center, //AxisAlignment.center,
+                  CrossAxisAlignment.start, //AxisAlignment.center,
               children: [
                 Row(
                     //mainAxisAlignment: MainAxisAlignment.center,
@@ -235,31 +242,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ]),
                 const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Tags : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _tagsController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
+             Text(
+               'Tags : ',
+               style: Theme.of(context).textTheme.headline3,
+             ),
+             SizedBox(
+               height: 2,
+             ),
+             ListView.builder(
+             physics: const NeverScrollableScrollPhysics(),
+             scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: tagss.length,
+          itemBuilder: (_, i) => Column(
+              crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
+              children: [
+                Text(
+                  '● '+tagss[i],
+                  style:Theme.of(context).textTheme.headline4,
+                )
+          ])
+            ),
                 const SizedBox(height: 15),
-                Row(
-                    //  mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Skills : ',
-                        style: Theme.of(context).textTheme.headline3,
-                      ),
-                      Text(
-                        _skillsController.text,
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ]),
+                Text(
+                  'Skills : ',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: skilss.length,
+                    itemBuilder: (_, i) => Column(
+                       crossAxisAlignment : CrossAxisAlignment.start, //AxisAlignment.center,
+                        children: [
+                          Text(
+                            '● '+skilss[i],
+                            style:Theme.of(context).textTheme.headline4,
+                          )
+                        ])
+                ),
                 const SizedBox(height: 15),
               ],
             ),

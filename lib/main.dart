@@ -13,6 +13,7 @@ import 'package:history_feature/screens/edit_profile.dart';
 import 'package:history_feature/screens/edit_profile_recruiter.dart';
 import 'package:history_feature/screens/navbar_screen.dart';
 import 'package:history_feature/screens/notification_page.dart';
+import 'package:history_feature/screens/profile_screen.dart';
 import 'package:history_feature/screens/recruiter_result_screen.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:history_feature/screens/job_operations_screen.dart';
@@ -73,8 +74,8 @@ class MyApp extends StatelessWidget {
       militaryStatus: MilitaryStatus.Postponed,
       birthDay: '08/12/2000',
       isMale: false,
-      skills: 'i can read and write',
-      tags: ['hi', 'hello']);
+      skills: 'problemsolving , heel ssss , kddkkdkdkkd',
+      tags: ['hi', 'hello', 'heelloo']);
   final ApplicantUser applicant2 = new ApplicantUser(
       name: 'nada',
       email: 'nada@yaho.com',
@@ -173,7 +174,9 @@ class MyApp extends StatelessWidget {
                     authResultSnapshot.connectionState ==
                             ConnectionState.waiting
                         ? CircularProgressIndicator()
-                        : ProfileViewRecScreen(user: recruiter)
+                        : RecruiterResScreen(ListOfApplicants: ApplicantInfoList, personalityData: _personalityData)
+                    //ProfileScreen(user: applicant,)
+                    //ProfileViewRecScreen(user: recruiter)
         
         ),
                     //RecruiterResScreen(ListOfApplicants: ApplicantInfoList,personalityData: _personalityData)),
