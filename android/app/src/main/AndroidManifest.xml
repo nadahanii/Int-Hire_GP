@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.history_feature">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="history_feature"
+        android:label="INT-HIRE"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

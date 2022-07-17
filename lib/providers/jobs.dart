@@ -226,8 +226,6 @@ class Jobs with ChangeNotifier {
       if (response.statusCode == 400 || response.statusCode == 401) {
         return json.decode(response.body);
       }
-      _items.where((element) => element.id == id).first.applicantsCount++;
-      notifyListeners();
       return 'apply successfully';
     } catch (error) {
       print("apply :" + error.toString());
@@ -246,18 +244,22 @@ class Jobs with ChangeNotifier {
           "Accept": "application/json",
         },
       );
+      print("iiiiiiiiii");
       if (response.statusCode == 400 || response.statusCode == 401) {
         return json.decode(response.body);
       }
+      print("hhhhhhhhhhhhhh");
       List<ApplicantUser> listOfApplicants = [];
+      print("rrrrrrrrrrrrr");
       var extractedData = json.decode(response.body) as List<dynamic>;
+      print("wwwwww");
       extractedData.forEach((element) {
-
         listOfApplicants.add(ApplicantUser.fromJson(element as Map<String,dynamic>));
       });
+      print("qqqqq");
       return listOfApplicants;
     } catch (error) {
-      print("apply :" + error.toString());
+      print("get all applicants :" + error.toString());
       return [];
     }
   }

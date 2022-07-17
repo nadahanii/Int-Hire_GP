@@ -239,12 +239,6 @@ class _JobOperationsState extends State<JobOperations> {
                   TextFormField(
                     controller: _tagsController,
                     keyboardType: TextInputType.text,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter tags for the job';
-                      }
-                      return null;
-                    },
                     decoration: InputDecoration(
                       labelText: 'tag',
                       border: const OutlineInputBorder(),

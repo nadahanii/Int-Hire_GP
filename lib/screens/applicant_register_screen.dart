@@ -195,7 +195,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                       }),"Applicant")
                           .then((value) {
                         if (value != 'login successfully') {
-                          showToast(text: value, state: ToastStates.ERROR);
+                          showToast(text: "register successfully", state: ToastStates.ERROR);
                         } else {
                           showToast(
                               text: value, state: ToastStates.SUCCESS);

@@ -11,6 +11,9 @@ import '../models/applicant_user.dart';
 import '../models/recruiter_user.dart';
 import '../providers/auth.dart';
 import '../widgets/icon_widget.dart';
+import 'edit_profile.dart';
+import 'edit_profile_recruiter.dart';
+import 'navbar_screen.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({
@@ -34,6 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsGroup(
                 title: 'GENERAL',
                 children: <Widget>[
+                  if(Provider.of<Auth>(context, listen: false).userType != 'Admin')
                   profile(),
                   SizedBox(height: 10),
                   buildLogout(),
@@ -64,7 +68,20 @@ class _SettingsPageState extends State<SettingsPage> {
           if (Provider.of<Auth>(context).userType == 'Admin')
           ProfileAdminScreen(
           user: Provider.of<Auth>(context).userObject as AdminUser);*/
-          showSnackBar(context, 'Clicked Edit Profile');
+          if(Provider.of<Auth>(context, listen: false).userType == 'Applicant')
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        EditProfilePage(user: (Provider.of<Auth>(context, listen: false).userObject as ApplicantUser))));
+          else if(Provider.of<Auth>(context, listen: false).userType == 'Recruiter')
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        EditProfileRecPage(user: (Provider.of<Auth>(context, listen: false).userObject as RecruiterUser))));
+
+
         },
       );
   Widget buildLogout() => SimpleSettingsTile(
