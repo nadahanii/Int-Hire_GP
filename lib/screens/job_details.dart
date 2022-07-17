@@ -81,7 +81,8 @@ class _JobDetailsState extends State<JobDetails> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          if (widget.history)
+          if (widget.history &&
+              Provider.of<Auth>(context, listen: false).userType == 'Recruiter')
             IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
@@ -94,7 +95,10 @@ class _JobDetailsState extends State<JobDetails> {
                 });
               },
             ),
-          if (widget.history || Provider.of<Auth>(context, listen: false).userType == 'Admin')
+          if ((widget.history &&
+                  Provider.of<Auth>(context, listen: false).userType ==
+                      'Recruiter') ||
+              Provider.of<Auth>(context, listen: false).userType == 'Admin')
             IconButton(
               icon: Icon(Icons.delete),
               onPressed: () async {
@@ -167,7 +171,9 @@ class _JobDetailsState extends State<JobDetails> {
                 children: [
                   InkWell(
                     onTap: () {
-                      if (widget.history && Provider.of<Auth>(context, listen: false).userType == "Recruiter") {
+                      if (widget.history &&
+                          Provider.of<Auth>(context, listen: false).userType ==
+                              "Recruiter") {
                         Provider.of<Jobs>(context, listen: false)
                             .getApplicantsDataForJob(widget.job.id)
                             .then((value) {

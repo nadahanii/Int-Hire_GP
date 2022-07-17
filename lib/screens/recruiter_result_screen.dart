@@ -65,7 +65,7 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                     children: [
                       Card(
                         child: ListTile(
-                          leading: TextButton(
+                          subtitle: TextButton(
                             onPressed: (() {
                               Navigator.push(
                                   context,
@@ -74,12 +74,16 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                                           user: widget.ListOfApplicants[i])));
                             }),
                             child: Text(
-                              'Name : ' + widget.ListOfApplicants[i].name,
+                              widget.ListOfApplicants[i].name,
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  //decoration: TextDecoration.underline
+                                fontWeight: FontWeight.normal,
+                                //decoration: TextDecoration.underline
                               ),
                             ),
+                          ),
+                          title: Text(
+                            "Name",
+                            style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           trailing: Image.asset(
                             'assets/' + (userType ?? "").toLowerCase() + '.png',
@@ -88,7 +92,7 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                       ),
                       Card(
                         child: ListTile(
-                          leading: TextButton(
+                          subtitle: TextButton(
                             onPressed: (() {
                               Navigator.push(
                                   context,
@@ -101,11 +105,16 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                                           ))); //csv file
                             }),
                             child: Text(
-                              'Personality Type : ' + (userType ?? ""),
+                              (userType ?? ""),
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  //decoration: TextDecoration.underline
+                                fontWeight: FontWeight.normal,
                               ),
+                            ),
+                          ),
+                          title: Text(
+                            "Personality Type",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           trailing: Image.asset(
@@ -120,7 +129,8 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                              (mapOfPersonality[userType]?.kindred_spirits ?? "")
+                              (mapOfPersonality[userType]?.kindred_spirits ??
+                                      "")
                                   .toString()
                                   .replaceAll('[', '')
                                   .replaceAll(']', '')
@@ -135,7 +145,9 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                              (mapOfPersonality[userType]?.potential_complements ?? "")
+                              (mapOfPersonality[userType]
+                                          ?.potential_complements ??
+                                      "")
                                   .toString()
                                   .replaceAll('[', '')
                                   .replaceAll(']', '')
@@ -150,7 +162,9 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                              (mapOfPersonality[userType]?.challenging_opposites ?? "")
+                              (mapOfPersonality[userType]
+                                          ?.challenging_opposites ??
+                                      "")
                                   .toString()
                                   .replaceAll('[', '')
                                   .replaceAll(']', '')
@@ -165,7 +179,9 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
-                              (mapOfPersonality[userType]?.intriguing_differences ?? "")
+                              (mapOfPersonality[userType]
+                                          ?.intriguing_differences ??
+                                      "")
                                   .toString()
                                   .replaceAll('[', '')
                                   .replaceAll(']', '')
@@ -173,6 +189,7 @@ class _RecruiterResScreenState extends State<RecruiterResScreen> {
                               style: TextStyle(fontWeight: FontWeight.normal)),
                         ),
                       ),
+                      SizedBox(height: 80,)
                     ],
                   );
                 }),
