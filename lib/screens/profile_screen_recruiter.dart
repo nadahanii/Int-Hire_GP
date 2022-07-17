@@ -11,20 +11,8 @@ class ProfileRecScreen extends StatefulWidget {
 }
 
 class _ProfileRecScreenState extends State<ProfileRecScreen> {
-  final _nameController = TextEditingController();
-  final _phoneController = TextEditingController();
-  final _streetController = TextEditingController();
-  final _cityController = TextEditingController();
-  final _countryController = TextEditingController();
-  final _birthdayController = TextEditingController();
-  final _emailController = TextEditingController();
+
   final _genderController = TextEditingController();
-  final _companyStreetController = TextEditingController();
-  final _companyCityController = TextEditingController();
-  final _companyCountryController = TextEditingController();
-  final _companyDescriptionController = TextEditingController();
-  final _positionController = TextEditingController();
-  final _companyNameController = TextEditingController();
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -53,25 +41,12 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
   void initState() {
     super.initState();
     if (widget.user != null) {
-      _nameController.text = widget.user.name!;
-      _phoneController.text = widget.user.phoneNumber!;
-      _emailController.text = widget.user.email!;
-      _cityController.text = widget.user.city!;
-      _streetController.text = widget.user.street!;
-      _countryController.text = widget.user.country!;
-      _birthdayController.text = widget.user.birthDay!;
-      _positionController.text = widget.user.position!;
       if (widget.user.isMale!) {
         _genderController.text = 'Male';
       }
       if (!widget.user.isMale!) {
         _genderController.text = "Female";
       }
-      _companyCityController.text = widget.user.company!.city!;
-      _companyCountryController.text = widget.user.company!.country!;
-      _companyStreetController.text = widget.user.company!.street!;
-      _companyDescriptionController.text = widget.user.company!.description!;
-      _companyNameController.text = widget.user.company!.name!;
 
     }
   }
@@ -96,7 +71,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_nameController.text,
+                    subtitle: Text(widget.user.name!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -106,7 +81,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Email',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_emailController.text,
+                    subtitle: Text(widget.user.email!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -116,7 +91,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Phone',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_phoneController.text,
+                    subtitle: Text(widget.user.phoneNumber!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -126,7 +101,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Position',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_positionController.text,
+                    subtitle: Text(widget.user.position!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -136,7 +111,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Birthday',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_birthdayController.text,
+                    subtitle: Text(widget.user.birthDay!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -146,7 +121,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Street',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_streetController.text,
+                    subtitle: Text(widget.user.street!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -156,7 +131,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'City',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_cityController.text,
+                    subtitle: Text(widget.user.city!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -166,7 +141,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Country',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_countryController.text,
+                    subtitle: Text(widget.user.country!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -186,7 +161,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Company Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_companyNameController.text,
+                    subtitle: Text(widget.user.company!.name!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -196,7 +171,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Company Street Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_companyStreetController.text,
+                    subtitle: Text(widget.user.company!.street!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -206,7 +181,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Company City Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_companyCityController.text,
+                    subtitle: Text(widget.user.company!.city!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -216,7 +191,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Company Country Name',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_companyCountryController.text,
+                    subtitle: Text(widget.user.company!.country!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),
@@ -226,7 +201,7 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
                       'Description Of Company',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    subtitle: Text(_companyDescriptionController.text,
+                    subtitle: Text(widget.user.company!.description!,
                         style: TextStyle(fontWeight: FontWeight.normal)),
                   ),
                 ),

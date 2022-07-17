@@ -35,83 +35,60 @@ class NotificationDetailedScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (Provider.of<Auth>(context).userType == "Admin")
-              Row(
-                children: [
-                  Text(
-                    'Sent from:  ',
-                    style: Theme.of(context).textTheme.headline3,
+              Card(
+                child: ListTile(
+                  title: Text(
+                    'Sent From',
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    this.notification.receiverEmail,
-                    style: Theme.of(context).textTheme.headline4,
-                  )
-                ],
+                  subtitle: Text(  this.notification.receiverEmail,
+                      style: TextStyle(fontWeight: FontWeight.normal)),
+                ),
               ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Date:  ',
-                  style: Theme.of(context).textTheme.headline3,
+            Card(
+              child: ListTile(
+                title: Text(
+                  'Date',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  this.notification.date,
-                  style: Theme.of(context).textTheme.headline4,
-                )
-              ],
+                subtitle: Text(  this.notification.date,
+                    style: TextStyle(fontWeight: FontWeight.normal)),
+              ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Sender role:  ',
-                  style: Theme.of(context).textTheme.headline3,
+            Card(
+              child: ListTile(
+                title: Text(
+                  'Sender role',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  this.notification.senderType,
-                  style: Theme.of(context).textTheme.headline4,
-                )
-              ],
+                subtitle: Text(  this.notification.senderType,
+                    style: TextStyle(fontWeight: FontWeight.normal)),
+              ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Title:  ',
-                  style: Theme.of(context).textTheme.headline3,
+            Card(
+              child: ListTile(
+                title: Text(
+                  'Title',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  this.notification.title,
-                  style: Theme.of(context).textTheme.headline4,
-                )
-              ],
+                subtitle: Text(  this.notification.title,
+                    style: TextStyle(fontWeight: FontWeight.normal)),
+              ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Body:  ',
-                  style: Theme.of(context).textTheme.headline3,
+            Card(
+              child: ListTile(
+                title: Text(
+                  'Body',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text(
-                  this.notification.description,
-                  style: Theme.of(context).textTheme.headline4,
-                )
-              ],
+                subtitle: Text(  this.notification.description,
+                    style: TextStyle(fontWeight: FontWeight.normal)),
+              ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+
           ],
         ),
       ),
