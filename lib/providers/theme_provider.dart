@@ -40,6 +40,19 @@ class MyThemes {
           fontStyle: FontStyle.normal,
           color: Colors.red,
           fontSize: 15),
+      caption: TextStyle
+        (
+          fontSize: 18,
+          color: Colors.blueGrey,
+         fontWeight: FontWeight.bold,
+
+      ),
+      ///description of job details
+      bodyText1: TextStyle
+        (
+        color: Colors.green,
+        fontSize: 15,
+      ),
       bodyText2: TextStyle(
           color: Color.fromRGBO(126, 209, 181, 1)/*Color.fromRGBO(4, 88, 125, 1)*/,
           fontSize: 15,
@@ -84,7 +97,19 @@ class MyThemes {
           fontStyle: FontStyle.normal,
           color: Colors.red,
           fontSize: 15),
-
+      ///text in job details (caption)
+      caption: TextStyle
+        (
+        color: Colors.black,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+     ///description of job details
+      bodyText1: TextStyle
+        (
+          color: Color.fromRGBO(4, 88, 125, 1),
+         fontSize: 15,
+       ),
       ///register now in login screen
       bodyText2: TextStyle(
           color: Color.fromRGBO(4, 88, 125, 1),

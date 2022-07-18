@@ -224,8 +224,7 @@ class _JobDetailsState extends State<JobDetails> {
                           children: [
                             Text(
                               'Experience: ',
-                              style: TextStyle(
-                                  fontSize: 18, color: Colors.blueGrey),
+                              style:Theme.of(context).textTheme.caption,
                             ),
                             Text('${widget.job.experience} year'),
                           ],
@@ -237,10 +236,7 @@ class _JobDetailsState extends State<JobDetails> {
                           children: [
                             Text(
                               'Job Type: ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.blueGrey,
-                              ),
+                                style:Theme.of(context).textTheme.caption
                             ),
                             Text(widget.job.typeOfJob
                                 .toString()
@@ -254,10 +250,7 @@ class _JobDetailsState extends State<JobDetails> {
                           children: [
                             Text(
                               'Career Level: ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.blueGrey,
-                              ),
+                                style:Theme.of(context).textTheme.caption
                             ),
                             Text(widget.job.careerLevel
                                 .toString()
@@ -271,10 +264,7 @@ class _JobDetailsState extends State<JobDetails> {
                           children: [
                             Text(
                               'Salary: ',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.blueGrey,
-                              ),
+                                style:Theme.of(context).textTheme.caption
                             ),
                             Text(widget.job.salary),
                           ],
@@ -286,9 +276,7 @@ class _JobDetailsState extends State<JobDetails> {
                           children: [
                             Text(
                               'Education Level: ',
-                              style: TextStyle(
-                                  fontSize: 18, color: Colors.blueGrey),
-                            ),
+                            style:Theme.of(context).textTheme.caption),
                             Text(
                               _educationList
                                   .singleWhere((element) =>
@@ -315,10 +303,7 @@ class _JobDetailsState extends State<JobDetails> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Tags:',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blueGrey)),
+                                  style:Theme.of(context).textTheme.caption),
                               const SizedBox(
                                 height: 8.0,
                               ),
@@ -353,10 +338,7 @@ class _JobDetailsState extends State<JobDetails> {
                   Column(
                     children: [
                       Text('Description:',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueGrey)),
+                        style:Theme.of(context).textTheme.caption),
                       SizedBox(
                         height: 15,
                       ),
@@ -379,10 +361,7 @@ class _JobDetailsState extends State<JobDetails> {
                   Column(
                     children: [
                       Text('Requirements',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueGrey)),
+                          style:Theme.of(context).textTheme.caption),
                       SizedBox(
                         height: 15,
                       ),
