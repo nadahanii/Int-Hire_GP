@@ -188,17 +188,17 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                         "gender":
                         widget.applicantUser.isMale == true ? 1 : 0,
                         "militaryStatus": _militaryStatus.index,
-                        "twitterUsername": _twitterUsernameController.text,
+                        "twitterUsername": _twitterUsernameController.text.isEmpty ? null : _twitterUsernameController.text,
                         "educationLevel": _education.index,
                         "tags": _interestedInController.text.split(','),
                         "skills": _skillsController.text
                       }),"Applicant")
                           .then((value) {
                         if (value != 'login successfully') {
-                          showToast(text: "register successfully", state: ToastStates.ERROR);
+                          showToast(text: value, state: ToastStates.ERROR);
                         } else {
                           showToast(
-                              text: value, state: ToastStates.SUCCESS);
+                              text: "register successfully", state: ToastStates.SUCCESS);
                           Navigator.of(context)
                               .pushReplacementNamed('/add_test');
                         }
