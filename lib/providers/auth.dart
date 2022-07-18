@@ -48,6 +48,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<String> _authenticate(String encode, String method) async {
+    print(encode);
     final url = Uri.parse('${baseUrl}account/$method');
     try {
       final response = await http.post(
@@ -58,6 +59,7 @@ class Auth with ChangeNotifier {
           "Accept": "application/json",
         },
       );
+      print(response.body + " " + response.statusCode.toString());
       if (response.statusCode == 400 || response.statusCode == 401) {
         return json.decode(response.body);
       }

@@ -1,14 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:history_feature/models/applicant_user.dart';
-import 'package:history_feature/screens/edit_profile.dart';
-import 'package:history_feature/widgets/profile_widget.dart';
-import 'package:history_feature/screens/settings_page.dart';
-import '../helpers/pair.dart';
-import '../models/applicant_user.dart';
-import '../helpers/pair.dart';
-import '../models/job.dart';
-import 'package:history_feature/models/applicant_data_for_result.dart';
 
 import '../models/recruiter_user.dart';
 
@@ -21,7 +11,6 @@ class ProfileViewRecScreen extends StatefulWidget {
 }
 
 class _ProfileViewScreenRecState extends State<ProfileViewRecScreen> {
-  int _gender=1;
   var genderController= TextEditingController();
 
   AppBar buildAppBar(BuildContext context) {

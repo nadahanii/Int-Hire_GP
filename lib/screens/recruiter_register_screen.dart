@@ -197,10 +197,10 @@ class RecruiterRegisterScreenState extends State<RecruiterRegisterScreen> {
                                   "Recruiter")
                               .then((value) {
                             if (value != 'login successfully') {
-                              showToast(text: "register successfully", state: ToastStates.ERROR);
+                              showToast(text: value, state: ToastStates.ERROR);
                             } else {
                               showToast(
-                                  text: value, state: ToastStates.SUCCESS);
+                                  text: "register successfully", state: ToastStates.SUCCESS);
                               Navigator.of(context)
                                   .pushReplacementNamed('/navbar_screen');
                             }

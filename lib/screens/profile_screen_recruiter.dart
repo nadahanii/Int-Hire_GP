@@ -40,14 +40,11 @@ class _ProfileRecScreenState extends State<ProfileRecScreen> {
   @override
   void initState() {
     super.initState();
-    if (widget.user != null) {
-      if (widget.user.isMale!) {
-        _genderController.text = 'Male';
-      }
-      if (!widget.user.isMale!) {
-        _genderController.text = "Female";
-      }
-
+    if (widget.user.isMale!) {
+      _genderController.text = 'Male';
+    }
+    if (!widget.user.isMale!) {
+      _genderController.text = "Female";
     }
   }
 

@@ -26,8 +26,8 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobs() async {
-    print("test");
     _items = [];
+    notifyListeners();
     final url = Uri.parse('${baseUrl}Job/getAllJobs');
     try {
       final response = await http.get(
@@ -56,8 +56,9 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetHistoryJobsOfApplicant() async {
-    final url = Uri.parse('${baseUrl}Job/getApplicantJobs');
     _items = [];
+    notifyListeners();
+    final url = Uri.parse('${baseUrl}Job/getApplicantJobs');
     final response = await http.get(
       url,
       headers: {
@@ -79,8 +80,8 @@ class Jobs with ChangeNotifier {
   }
 
   Future<void> fetchAndSetJobsOfRecruiter() async {
-    print("ssssssssss");
     _items = [];
+    notifyListeners();
     final url = Uri.parse('${baseUrl}Job/getRecruiterJobs');
     final response = await http.get(
       url,

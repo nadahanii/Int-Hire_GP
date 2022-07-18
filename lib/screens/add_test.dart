@@ -134,18 +134,19 @@ class _AddTestState extends State<AddTest> {
     } else {
       _testType += "P";
     }
-
-    print("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz" + _testType);
   }
 
-  Widget _radioButtonGroup({required String text, required List<Widget> list,required BuildContext context}) {
+  Widget _radioButtonGroup(
+      {required String text,
+      required List<Widget> list,
+      required BuildContext context}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Divider(),
         Text(
           text,
-          style:  Theme.of(context).textTheme.headline3,
+          style: Theme.of(context).textTheme.headline3,
         ),
         ...list,
       ],
@@ -157,6 +158,7 @@ class _AddTestState extends State<AddTest> {
     print(_testData.length);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Personality Test"),
         centerTitle: true,
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -195,7 +197,8 @@ class _AddTestState extends State<AddTest> {
               TextButton.icon(
                 onPressed: (() {
                   setType();
-                  Provider.of<Auth>(context, listen: false).updateApplicantTestType(_testType);
+                  Provider.of<Auth>(context, listen: false)
+                      .updateApplicantTestType(_testType);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -221,7 +224,9 @@ class _AddTestState extends State<AddTest> {
                     ),
                   ),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).appBarTheme.backgroundColor/*Color.fromRGBO(4, 88, 125, 1)*/,
+                    color: Theme.of(context)
+                        .appBarTheme
+                        .backgroundColor /*Color.fromRGBO(4, 88, 125, 1)*/,
                     borderRadius: BorderRadius.circular(25),
                   ),
                 ),

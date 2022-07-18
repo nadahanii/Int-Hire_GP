@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:history_feature/models/notification.dart' as n;
 import '../providers/notifications.dart';
 import 'notification_item.dart';
 

@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:history_feature/screens/header_page.dart';
-import 'package:history_feature/screens/profile_screen.dart';
-import 'package:history_feature/screens/profile_screen_admin.dart';
-import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:provider/provider.dart';
 
-import '../models/admin_user.dart';
 import '../models/applicant_user.dart';
 import '../models/recruiter_user.dart';
 import '../providers/auth.dart';
 import '../widgets/icon_widget.dart';
 import 'edit_profile.dart';
 import 'edit_profile_recruiter.dart';
-import 'navbar_screen.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({

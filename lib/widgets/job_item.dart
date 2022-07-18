@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:history_feature/screens/job_details.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -98,8 +97,7 @@ class JobItem extends StatelessWidget {
                   SizedBox(
                     width: 6.0,
                   ),
-                  true
-                      ? Row(
+                  Row(
                           children: [
                             if (history != false && Provider.of<Jobs>(context, listen: false).userType != "Applicant")
                               InkWell(
@@ -173,25 +171,6 @@ class JobItem extends StatelessWidget {
                                     ))),
                               ),
                           ],
-                        )
-                      : InkWell(
-                          onTap: () {
-                            print('2');
-                          },
-                          child: Container(
-                            height: 35,
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: Colors.black54.withAlpha(100),
-                              ),
-                            ),
-                            child: Center(
-                              child: FaIcon(FontAwesomeIcons.solidFaceAngry,
-                                  color: Colors.black54),
-                            ),
-                          ),
                         )
                 ],
               ),

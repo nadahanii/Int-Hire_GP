@@ -109,6 +109,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter valid skills';
                     }
+                    return null;
                   },
                 ), //skills
                 SizedBox(
@@ -126,6 +127,7 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter valid values of jobs you are interested in';
                     }
+                    return null;
                   },
                   controller: _interestedInController,
                 ), //interested
@@ -174,31 +176,35 @@ class _ApplicantRegisterScreenState extends State<ApplicantRegisterScreen> {
                 ),
                 TextButton.icon(
                   onPressed: (() {
+
+                    var encode = json.encode({
+                      "name": widget.applicantUser.name,
+                      "email": widget.applicantUser.email,
+                      "phoneNumber": widget.applicantUser.phoneNumber,
+                      "password": widget.applicantUser.password,
+                      "street": widget.applicantUser.street,
+                      "city": widget.applicantUser.city,
+                      "country": widget.applicantUser.country,
+                      "birthDay": widget.applicantUser.birthDay,
+                      "gender":
+                      widget.applicantUser.isMale == true ? 1 : 0,
+                      "militaryStatus": _militaryStatus.index,
+                      if(_twitterUsernameController.text.trim() != "")
+                        "twitterUsername": _twitterUsernameController.text,
+                      "educationLevel": _education.index,
+                      "tags": _interestedInController.text.split(','),
+                      "skills": _skillsController.text
+                    });
+
                     if (_formKey.currentState!.validate()) {
                       Provider.of<Auth>(context, listen: false)
-                          .signup(json.encode({
-                        "name": widget.applicantUser.name,
-                        "email": widget.applicantUser.email,
-                        "phoneNumber": widget.applicantUser.phoneNumber,
-                        "password": widget.applicantUser.password,
-                        "street": widget.applicantUser.street,
-                        "city": widget.applicantUser.city,
-                        "country": widget.applicantUser.country,
-                        "birthDay": widget.applicantUser.birthDay,
-                        "gender":
-                        widget.applicantUser.isMale == true ? 1 : 0,
-                        "militaryStatus": _militaryStatus.index,
-                        "twitterUsername": _twitterUsernameController.text,
-                        "educationLevel": _education.index,
-                        "tags": _interestedInController.text.split(','),
-                        "skills": _skillsController.text
-                      }),"Applicant")
+                          .signup(encode,"Applicant")
                           .then((value) {
                         if (value != 'login successfully') {
-                          showToast(text: "register successfully", state: ToastStates.ERROR);
+                          showToast(text: value, state: ToastStates.ERROR);
                         } else {
                           showToast(
-                              text: value, state: ToastStates.SUCCESS);
+                              text: "register successfully", state: ToastStates.SUCCESS);
                           Navigator.of(context)
                               .pushReplacementNamed('/add_test');
                         }

@@ -9,7 +9,6 @@ import 'package:history_feature/screens/profile_screen_admin.dart';
 import 'package:history_feature/screens/profile_screen_recruiter.dart';
 import 'package:history_feature/screens/settings_page.dart';
 import 'package:provider/provider.dart';
-import '../models/job.dart';
 import '../providers/auth.dart';
 
 class NavbarScreen extends StatefulWidget {

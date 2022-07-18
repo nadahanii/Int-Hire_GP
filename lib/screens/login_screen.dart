@@ -17,7 +17,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  static const routeName = '/login';
   final Color facebookColor = const Color(0xff39579A);
   final Color googleColor = const Color(0xffDF4A32);
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
